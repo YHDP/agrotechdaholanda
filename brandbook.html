@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marca · Agrotech da Holanda</title>
+<meta name="description" content="Guia de marca da Agrotech da Holanda: logotipo, cores, tipografia, voz e aplicações. Tecnologia da Dutch Flow Technology, Países Baixos.">
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+<style>
+  @font-face { font-family:'Poppins'; font-weight:400; font-display:swap; src:url('assets/fonts/poppins-400.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:600; font-display:swap; src:url('assets/fonts/poppins-600.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:700; font-display:swap; src:url('assets/fonts/poppins-700.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:800; font-display:swap; src:url('assets/fonts/poppins-800.woff2') format('woff2'); }
+  :root {
+    --orange: #FF914D;
+    --blue: #38B6FF;
+    --navy: #14263C;
+    --paper: #FBFAF7;
+    --soft: #55677D;
+    --line: #E8E4DB;
+    --card: #FFFFFF;
+    --no: #B23A3A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--paper);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+  img { max-width: 100%; }
+  a { color: var(--navy); }
+
+  /* ---------- header + nav ---------- */
+  .hero {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 28px 36px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .hero .mark-hero { width: 84px; height: 84px; flex: none; }
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+  .hero h1 { font-size: clamp(1.7rem, 4.4vw, 2.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; }
+  .hero-version { margin-top: 6px; font-size: 0.85rem; color: var(--soft); }
+  .hero-back { margin-left: auto; font-size: 0.85rem; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--orange); padding-bottom: 2px; }
+
+  nav.toc {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(251, 250, 247, 0.94);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  nav.toc .toc-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav.toc a {
+    display: block;
+    padding: 13px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+  }
+  nav.toc a:hover { border-bottom-color: var(--orange); }
+
+  /* ---------- sections ---------- */
+  section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 72px 28px 8px;
+    scroll-margin-top: 64px;
+  }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 10px; }
+  .sec-num { font-weight: 800; color: var(--soft); font-size: 0.95rem; }
+  h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); font-weight: 800; letter-spacing: -0.01em; }
+  h2::after { content: ""; display: block; width: 56px; height: 5px; background: var(--orange); border-radius: 3px; margin-top: 10px; }
+  h3 { font-size: 1.08rem; font-weight: 700; margin: 36px 0 12px; }
+  .lead { max-width: 46em; color: var(--navy); margin-top: 18px; }
+  .note { font-size: 0.85rem; color: var(--soft); max-width: 46em; margin-top: 10px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px;
+  }
+  .grid { display: grid; gap: 18px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 860px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } .grid-2 { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+  .caption { font-size: 0.82rem; color: var(--soft); margin-top: 10px; }
+
+  /* ---------- 1. a marca ---------- */
+  .marca-grid { display: grid; grid-template-columns: 320px 1fr; gap: 28px; margin-top: 32px; align-items: stretch; }
+  @media (max-width: 860px) { .marca-grid { grid-template-columns: 1fr; } }
+  .lockup-card { display: flex; align-items: center; justify-content: center; padding: 40px; }
+  .lockup-card img { width: 210px; }
+  .positioning-block { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+  .positioning-line { font-size: clamp(1.15rem, 2.6vw, 1.5rem); font-weight: 700; line-height: 1.35; max-width: 22em; }
+  .positioning-line span { display: block; font-weight: 400; color: var(--soft); font-size: 0.82em; margin-top: 8px; }
+
+  /* ---------- 2. logotipo ---------- */
+  .logo-card { display: flex; align-items: center; justify-content: center; min-height: 260px; padding: 36px; }
+  .logo-card img { width: 190px; }
+  .logo-card--dark { background: var(--navy); border-color: var(--navy); }
+  .logo-card--mark img { width: 120px; }
+
+  .clearspace-wrap { display: flex; gap: 28px; flex-wrap: wrap; align-items: center; margin-top: 16px; }
+  .cs-outer {
+    position: relative;
+    display: inline-block;
+    padding: 36px;
+    border: 2px dashed var(--blue);
+    border-radius: 8px;
+    background: var(--card);
+  }
+  .cs-outer img { display: block; height: 190px; width: auto; }
+  .cs-tick {
+    position: absolute;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cs-tick--top { top: 6px; left: 50%; transform: translateX(-50%); }
+  .cs-tick--left { left: 9px; top: 50%; transform: translateY(-50%); }
+  .cs-tick--right { right: 9px; top: 50%; transform: translateY(-50%); }
+  .cs-tick--bottom { bottom: 6px; left: 50%; transform: translateX(-50%); }
+  .cs-unit { display: flex; align-items: center; gap: 14px; }
+  .cs-unit svg { flex: none; }
+  .cs-unit p { font-size: 0.88rem; max-width: 24em; color: var(--navy); }
+
+  .minsize-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; }
+  .minsize-card { flex: 1 1 200px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 14px; padding: 26px 20px 20px; }
+  .minsize-card .demo { display: flex; align-items: flex-end; justify-content: center; flex: 1; }
+  .minsize-card .label { font-size: 0.8rem; color: var(--soft); text-align: center; }
+  .minsize-card .label strong { display: block; color: var(--navy); font-size: 0.9rem; }
+
+  ol.cascade { margin: 16px 0 0 1.2em; max-width: 44em; }
+  ol.cascade li { margin-bottom: 8px; }
+
+  /* misuse grid */
+  .dont-grid { margin-top: 16px; }
+  .dont { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); }
+  .dont-preview {
+    position: relative;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+  }
+  .dont-preview::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top right, transparent 47.6%, var(--no) 48.8%, var(--no) 51.2%, transparent 52.4%);
+    pointer-events: none;
+    z-index: 3;
+  }
+  .dont-preview img { width: 96px; }
+  .dont-label { padding: 12px 14px; font-size: 0.8rem; font-weight: 600; border-top: 1px solid var(--line); }
+  .dont-label::before { content: "Não"; display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--no); margin-right: 8px; }
+  .d-stretch img { transform: scaleX(1.65); }
+  .d-recolor img { filter: hue-rotate(130deg) saturate(1.3); }
+  .d-rotate img { transform: rotate(-21deg); }
+  .d-shadow img { filter: drop-shadow(4px 6px 3px rgba(20,38,60,0.55)); }
+  .d-retype .fake { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 1.05rem; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+  .d-retype .fake img { width: 34px; transform: none; }
+  .d-busy { background: repeating-linear-gradient(112deg, #4E7A3A 0 14px, #6FA04C 14px 26px, #8A6B42 26px 34px, #3E6330 34px 52px, #C2B08A 52px 60px); }
+  .d-lowcontrast { background: #3D5570; }
+  .d-dft .fake-dft { text-align: center; }
+  .d-dft .fake-dft .dft-word { font-weight: 800; font-size: 1.5rem; letter-spacing: 0.04em; }
+  .d-dft .fake-dft .dft-sub { font-weight: 600; font-size: 0.8rem; color: var(--navy); }
+
+  /* ---------- 3. cores ---------- */
+  .swatch-grid { margin-top: 24px; grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 960px) { .swatch-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 560px) { .swatch-grid { grid-template-columns: repeat(2, 1fr); } }
+  .swatch { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); }
+  .swatch .chipblock { height: 110px; }
+  .swatch .chipblock--border { border-bottom: 1px solid var(--line); }
+  .swatch .meta { padding: 14px; }
+  .swatch .meta .name { font-weight: 700; font-size: 0.95rem; }
+  .swatch .meta .role { font-size: 0.76rem; color: var(--soft); min-height: 2.4em; margin-top: 2px; }
+  .swatch button.hex {
+    margin-top: 10px;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--navy);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+  .swatch button.hex:hover { border-color: var(--navy); }
+  .swatch .rgb { font-size: 0.72rem; color: var(--soft); margin-top: 6px; }
+
+  .contrast-scroll { overflow-x: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+  table.contrast { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 0.85rem; }
+  table.contrast th, table.contrast td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  table.contrast tr:last-child td { border-bottom: none; }
+  table.contrast th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--soft); }
+  .pair-sample { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 32px; border-radius: 7px; font-weight: 700; font-size: 0.9rem; border: 1px solid var(--line); }
+  .ok { color: #1E6B45; font-weight: 700; }
+  .fail { color: var(--no); font-weight: 700; }
+  .rules-box { margin-top: 22px; border-left: 5px solid var(--orange); }
+  .rules-box ul { margin: 10px 0 0 1.15em; }
+  .rules-box li { margin-bottom: 10px; max-width: 52em; }
+
+  /* ---------- 4. tipografia ---------- */
+  .type-specimen { margin-top: 24px; display: flex; flex-direction: column; gap: 0; }
+  .type-row { display: grid; grid-template-columns: 170px 1fr; gap: 20px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  @media (max-width: 640px) { .type-row { grid-template-columns: 1fr; gap: 4px; } }
+  .type-row:last-child { border-bottom: none; }
+  .type-meta { font-size: 0.78rem; color: var(--soft); font-weight: 600; }
+  .type-meta strong { display: block; color: var(--navy); font-size: 0.9rem; }
+  .t-800 { font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -0.01em; }
+  .t-700 { font-weight: 700; font-size: clamp(1.2rem, 3vw, 1.6rem); line-height: 1.25; }
+  .t-600 { font-weight: 600; font-size: 1.05rem; }
+  .t-400 { font-weight: 400; font-size: 1rem; max-width: 42em; }
+  .t-num { font-weight: 600; font-size: clamp(1.1rem, 2.6vw, 1.5rem); letter-spacing: 0.02em; }
+
+  /* ---------- 5. voz ---------- */
+  .voice-grid { margin-top: 24px; }
+  .voice-card .aud { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--soft); }
+  .voice-card h4 { font-size: 1.05rem; font-weight: 700; margin: 4px 0 4px; }
+  .voice-card .reg { font-size: 0.82rem; color: var(--soft); margin-bottom: 14px; }
+  .voice-card ul { list-style: none; }
+  .voice-card li { padding: 8px 0; border-top: 1px solid var(--line); font-weight: 600; font-size: 0.92rem; }
+  .guard-box { margin-top: 22px; border-left: 5px solid var(--blue); }
+  .guard-box ul { margin: 10px 0 0 1.15em; }
+  .guard-box li { margin-bottom: 10px; max-width: 52em; }
+  .yes { color: #1E6B45; font-weight: 700; }
+  .no-word { color: var(--no); font-weight: 700; }
+
+  /* ---------- 6. aplicações ---------- */
+  .endorse-demo { display: flex; flex-direction: column; gap: 10px; align-items: center; padding: 34px 26px; text-align: center; }
+  .endorse-demo img { width: 150px; }
+  .endorse-line { font-size: 0.82rem; color: var(--soft); }
+  .c5-demo { display: flex; align-items: center; justify-content: center; padding: 44px 26px; }
+  .c5-word { font-weight: 700; font-size: clamp(1.4rem, 3.6vw, 2.1rem); letter-spacing: -0.01em; white-space: nowrap; }
+  .c5-word .c5-a { color: var(--blue); }
+  .c5-word .c5-h { color: var(--orange); }
+  .tiles-row { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .tile { width: 96px; height: 96px; border-radius: 22px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .tile svg { width: 62px; height: 62px; }
+  .tile--white { background: #fff; border: 1px solid var(--line); }
+  .tile--navy { background: var(--navy); }
+  .tile--orange { background: var(--orange); }
+  .ui-demo { display: flex; flex-direction: column; gap: 18px; }
+  .ui-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; padding: 22px; border-radius: 14px; }
+  .ui-row--light { background: var(--card); border: 1px solid var(--line); }
+  .ui-row--dark { background: var(--navy); }
+  .btn { font: inherit; font-weight: 700; font-size: 0.92rem; border: none; border-radius: 999px; padding: 11px 24px; color: var(--navy); cursor: default; }
+  .btn--orange { background: var(--orange); }
+  .btn--blue { background: var(--blue); }
+  .btn--outline { background: transparent; border: 2px solid var(--navy); }
+  .chip-dark { border-radius: 999px; padding: 8px 18px; font-size: 0.85rem; font-weight: 600; border: 1.5px solid; }
+  .chip-dark--blue { color: var(--blue); border-color: var(--blue); }
+  .chip-dark--orange { color: var(--orange); border-color: var(--orange); }
+  .ui-row--dark .stat { color: var(--blue); font-weight: 800; font-size: 1.3rem; }
+  .ui-row--dark .stat + .stat { color: var(--orange); }
+
+  /* ---------- 7. roteiro ---------- */
+  .roadmap { margin-top: 24px; border-left: 5px solid var(--soft); }
+  .roadmap ul { list-style: none; margin-top: 12px; }
+  .roadmap li { display: flex; gap: 14px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line); }
+  .roadmap li:first-child { border-top: none; }
+  .tag-pend { flex: none; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; background: var(--paper); }
+
+  footer {
+    margin-top: 88px;
+    border-top: 1px solid var(--line);
+    padding: 30px 28px 40px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--soft);
+  }
+  footer .version { margin-top: 6px; font-size: 0.74rem; }
+
+  .copied-toast {
+    position: fixed;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 999px;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    z-index: 50;
+  }
+  .copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg class="mark-hero" viewBox="0 0 1000 1000" role="img" aria-label="Marca Agrotech da Holanda">
+    <g fill="#FF914D">
+      <path transform="translate(500,500) rotate(-45) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+      <path transform="translate(500,500) rotate(135) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+    </g>
+    <g fill="#38B6FF">
+      <path transform="translate(500,500) rotate(45) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+      <path transform="translate(500,500) rotate(-135) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+    </g>
+  </svg>
+  <div>
+    <p class="hero-eyebrow">Guia de marca</p>
+    <h1>Agrotech da Holanda</h1>
+    <p class="hero-version">Marca v1 · julho de 2026</p>
+  </div>
+  <a class="hero-back" href="./">Voltar ao site</a>
+</header>
+
+<nav class="toc" aria-label="Seções do guia">
+  <div class="toc-inner">
+    <a href="#marca">A marca</a>
+    <a href="#logotipo">Logotipo</a>
+    <a href="#cores">Cores</a>
+    <a href="#tipografia">Tipografia</a>
+    <a href="#voz">Voz</a>
+    <a href="#aplicacoes">Aplicações</a>
+    <a href="#roteiro">Roteiro</a>
+  </div>
+</nav>
+
+<!-- ============ 1. A MARCA ============ -->
+<section id="marca">
+  <div class="sec-head"><span class="sec-num">01</span><h2>A marca</h2></div>
+  <p class="lead">
+    Agrotech da Holanda é a marca brasileira da <strong>Dutch Flow Technology</strong>, empresa
+    neerlandesa de irrigação solar e câmaras frias solares. O nome usa <em>da Holanda</em>, com o
+    artigo, porque em português o artigo força a leitura de país: um sobrenome pede <em>de</em>
+    (como em Sérgio Buarque de Holanda), o país pede <em>a Holanda</em>, logo <em>da Holanda</em>.
+    Essa construção afasta a ambiguidade com o sobrenome Holanda, comum em empresas familiares
+    brasileiras. A categoria fica na frase de posicionamento, não no nome.
+  </p>
+  <div class="marca-grid">
+    <div class="card lockup-card">
+      <img src="assets/brand/logo-stacked.svg" alt="Conjunto empilhado: marca de quatro pétalas sobre Agrotech em navy e da Holanda em laranja">
+    </div>
+    <div class="card positioning-block">
+      <p class="positioning-line">
+        Agricultura irrigada movida a energia solar.
+        <span>Segurança hídrica e energética, dentro e depois da fazenda.</span>
+      </p>
+      <p class="note">
+        A frase de posicionamento cobre as duas linhas de produto: irrigação solar (dentro da
+        fazenda) e câmara fria solar (depois da fazenda). Ela acompanha a marca em superfícies de
+        primeiro contato: site, propostas, banners.
+      </p>
+    </div>
+  </div>
+  <p class="note">
+    A marca de quatro pétalas e a paleta laranja e azul vêm da matriz. Essa continuidade visual é
+    intencional: quem conhece a Dutch Flow Technology reconhece a Agrotech da Holanda de imediato.
+  </p>
+</section>
+
+<!-- ============ 2. LOGOTIPO ============ -->
+<section id="logotipo">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Logotipo</h2></div>
+  <p class="lead">
+    O conjunto principal é empilhado: marca no topo, <em>Agrotech</em> em Poppins 800 navy,
+    <em>da Holanda</em> em Poppins 700 laranja, a 85% do tamanho. Use sempre os arquivos oficiais.
+    Nunca redesenhe nem redigite o conjunto.
+  </p>
+
+  <h3>Versões</h3>
+  <div class="grid grid-3">
+    <div>
+      <div class="card logo-card">
+        <img src="assets/brand/logo-stacked.svg" alt="Conjunto empilhado sobre fundo claro">
+      </div>
+      <p class="caption">Principal, sobre fundo claro (papel ou branco).</p>
+    </div>
+    <div>
+      <div class="card logo-card logo-card--dark">
+        <img src="assets/brand/logo-stacked-dark.svg" alt="Conjunto empilhado em versão escura, texto branco e laranja sobre navy">
+      </div>
+      <p class="caption">Versão escura, sobre navy ou fotografia escura.</p>
+    </div>
+    <div>
+      <div class="card logo-card logo-card--mark">
+        <img src="assets/brand/mark.svg" alt="Marca de quatro pétalas isolada">
+      </div>
+      <p class="caption">Marca isolada, para espaços pequenos e avatares.</p>
+    </div>
+  </div>
+
+  <h3>Espaço livre</h3>
+  <div class="clearspace-wrap">
+    <div class="cs-outer">
+      <img src="assets/brand/logo-stacked.svg" alt="Conjunto empilhado com zona de espaço livre de 1x em todos os lados">
+      <span class="cs-tick cs-tick--top">1x</span>
+      <span class="cs-tick cs-tick--left">1x</span>
+      <span class="cs-tick cs-tick--right">1x</span>
+      <span class="cs-tick cs-tick--bottom">1x</span>
+    </div>
+    <div class="cs-unit">
+      <svg width="40" height="110" viewBox="0 0 40 110" aria-label="Unidade x: a altura de uma pétala azul">
+        <path transform="translate(20,104) scale(96)" fill="#38B6FF" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+        <line x1="4" y1="8" x2="4" y2="104" stroke="#14263C" stroke-width="1.5"/>
+        <line x1="0" y1="8" x2="8" y2="8" stroke="#14263C" stroke-width="1.5"/>
+        <line x1="0" y1="104" x2="8" y2="104" stroke="#14263C" stroke-width="1.5"/>
+      </svg>
+      <p>
+        A unidade <strong>x</strong> é a altura da pétala azul da marca, cerca de um quinto da
+        altura do conjunto empilhado. O espaço livre mínimo é <strong>1x em todos os lados</strong>,
+        em qualquer tamanho: a regra é proporcional, nunca um valor fixo em pixels ou milímetros.
+        A mesma unidade governa a distância entre a marca e a linha de endosso.
+      </p>
+    </div>
+  </div>
+
+  <h3>Tamanhos mínimos</h3>
+  <div class="minsize-row">
+    <div class="card minsize-card">
+      <div class="demo"><img src="assets/brand/logo-stacked.svg" alt="Conjunto empilhado no tamanho mínimo de tela" style="height:80px;width:auto;"></div>
+      <p class="label"><strong>Conjunto empilhado</strong>tela: 80 px de altura · impressão: 20 mm</p>
+    </div>
+    <div class="card minsize-card">
+      <div class="demo"><img src="assets/brand/mark.svg" alt="Marca isolada no tamanho mínimo" style="height:24px;width:auto;"></div>
+      <p class="label"><strong>Marca isolada</strong>tela: 24 px de altura</p>
+    </div>
+    <div class="card minsize-card">
+      <div class="demo"><img src="assets/brand/favicon.svg" alt="Favicon no tamanho mínimo" style="height:16px;width:auto;"></div>
+      <p class="label"><strong>Favicon</strong>16 px, apenas a marca</p>
+    </div>
+  </div>
+  <p class="note">
+    Se a legibilidade falha no tamanho exigido, troque para a versão seguinte da cascata em vez de
+    reduzir mais.
+  </p>
+
+  <h3>Cascata de uso</h3>
+  <ol class="cascade">
+    <li><strong>Conjunto empilhado</strong>: padrão em todas as superfícies com espaço vertical.</li>
+    <li><strong>Marca isolada</strong>: cabeçalhos estreitos, avatares, favicon, carimbos pequenos.</li>
+  </ol>
+  <p class="note">
+    Ainda não existe conjunto horizontal. Enquanto ele não é desenhado (ver o roteiro, seção 07),
+    espaços largos e baixos usam a marca isolada ao lado do wordmark duotônico da seção 06.
+  </p>
+
+  <h3>Usos incorretos</h3>
+  <div class="grid grid-4 dont-grid">
+    <div class="dont">
+      <div class="dont-preview d-stretch"><img src="assets/brand/logo-stacked.svg" alt="Logotipo esticado horizontalmente"></div>
+      <p class="dont-label">distorça as proporções</p>
+    </div>
+    <div class="dont">
+      <div class="dont-preview d-recolor"><img src="assets/brand/logo-stacked.svg" alt="Logotipo com cores alteradas"></div>
+      <p class="dont-label">altere as cores</p>
+    </div>
+    <div class="dont">
+      <div class="dont-preview d-rotate"><img src="assets/brand/logo-stacked.svg" alt="Logotipo rotacionado"></div>
+      <p class="dont-label">rotacione ou incline</p>
+    </div>
+    <div class="dont">
+      <div class="dont-preview d-shadow"><img src="assets/brand/logo-stacked.svg" alt="Logotipo com sombra aplicada"></div>
+      <p class="dont-label">aplique sombras ou efeitos</p>
+    </div>
+    <div class="dont">
+      <div class="dont-preview d-retype">
+        <div class="fake"><img src="assets/brand/mark.svg" alt="">Agrotech da Holanda</div>
+      </div>
+      <p class="dont-label">redigite ou reorganize o conjunto</p>
+    </div>
+    <div class="dont">
+      <div class="dont-preview d-busy"><img src="assets/brand/logo-stacked.svg" alt="Logotipo sobre fotografia carregada sem véu"></div>
+      <p class="dont-label">use sobre foto carregada sem véu</p>
+    </div>
+    <div class="dont">
+      <div class="dont-preview d-lowcontrast"><img src="assets/brand/logo-stacked.svg" alt="Logotipo sobre fundo de baixo contraste"></div>
+      <p class="dont-label">use sobre fundo de baixo contraste</p>
+    </div>
+    <div class="dont">
+      <div class="dont-preview d-dft">
+        <div class="fake-dft">
+          <div class="dft-word"><span style="color:#FF914D">D</span><span style="color:#38B6FF">U</span><span style="color:#FF914D">T</span><span style="color:#38B6FF">C</span><span style="color:#FF914D">H</span></div>
+          <div class="dft-sub">Flow Technology</div>
+        </div>
+      </div>
+      <p class="dont-label">use o wordmark DFT no lugar do conjunto</p>
+    </div>
+  </div>
+  <p class="note">
+    Na fotografia, use a versão escura sobre áreas escuras ou aplique um véu (navy a 55% ou mais)
+    antes do conjunto claro. O wordmark da matriz identifica a Dutch Flow Technology, nunca a
+    Agrotech da Holanda.
+  </p>
+</section>
+
+<!-- ============ 3. CORES ============ -->
+<section id="cores">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Cores</h2></div>
+  <p class="lead">
+    A paleta vem da matriz: laranja e azul sobre navy e papel. Verde foi considerado e descartado,
+    a continuidade com a Dutch Flow Technology vale mais que o clichê do setor. Clique em um código
+    para copiá-lo.
+  </p>
+
+  <div class="grid swatch-grid">
+    <div class="swatch">
+      <div class="chipblock" style="background:#FF914D"></div>
+      <div class="meta">
+        <p class="name">Laranja</p>
+        <p class="role">Ação e destaque: botões, filetes, números em painéis escuros</p>
+        <button class="hex" type="button" data-hex="#FF914D">#FF914D</button>
+        <p class="rgb">RGB 255 · 145 · 77</p>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="chipblock" style="background:#38B6FF"></div>
+      <div class="meta">
+        <p class="name">Azul</p>
+        <p class="role">Água e produto: gráficos, chips, links em painéis escuros</p>
+        <button class="hex" type="button" data-hex="#38B6FF">#38B6FF</button>
+        <p class="rgb">RGB 56 · 182 · 255</p>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="chipblock" style="background:#14263C"></div>
+      <div class="meta">
+        <p class="name">Navy</p>
+        <p class="role">Cor de texto padrão e fundo de painéis escuros</p>
+        <button class="hex" type="button" data-hex="#14263C">#14263C</button>
+        <p class="rgb">RGB 20 · 38 · 60</p>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="chipblock chipblock--border" style="background:#FBFAF7"></div>
+      <div class="meta">
+        <p class="name">Papel</p>
+        <p class="role">Fundo padrão de páginas e documentos</p>
+        <button class="hex" type="button" data-hex="#FBFAF7">#FBFAF7</button>
+        <p class="rgb">RGB 251 · 250 · 247</p>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="chipblock" style="background:#55677D"></div>
+      <div class="meta">
+        <p class="name">Cinza-azulado</p>
+        <p class="role">Texto de apoio: legendas, notas, metadados</p>
+        <button class="hex" type="button" data-hex="#55677D">#55677D</button>
+        <p class="rgb">RGB 85 · 103 · 125</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Acessibilidade (WCAG 2.x)</h3>
+  <p class="note">
+    Razões de contraste calculadas com a fórmula de luminância relativa do WCAG. Limiares: texto
+    normal AA 4,5:1 · texto grande AA 3:1 · AAA 7:1.
+  </p>
+  <div class="contrast-scroll">
+    <table class="contrast">
+      <thead>
+        <tr>
+          <th>Par (texto sobre fundo)</th>
+          <th>Amostra</th>
+          <th>Contraste</th>
+          <th>AA normal (4,5:1)</th>
+          <th>AA grande (3:1)</th>
+          <th>AAA (7:1)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Navy sobre papel</td>
+          <td><span class="pair-sample" style="color:#14263C;background:#FBFAF7">Aa</span></td>
+          <td><strong>14,66:1</strong></td>
+          <td class="ok">passa</td><td class="ok">passa</td><td class="ok">passa</td>
+        </tr>
+        <tr>
+          <td>Navy sobre laranja</td>
+          <td><span class="pair-sample" style="color:#14263C;background:#FF914D">Aa</span></td>
+          <td><strong>6,86:1</strong></td>
+          <td class="ok">passa</td><td class="ok">passa</td><td class="fail">reprova</td>
+        </tr>
+        <tr>
+          <td>Laranja sobre navy</td>
+          <td><span class="pair-sample" style="color:#FF914D;background:#14263C">Aa</span></td>
+          <td><strong>6,86:1</strong></td>
+          <td class="ok">passa</td><td class="ok">passa</td><td class="fail">reprova</td>
+        </tr>
+        <tr>
+          <td>Azul sobre navy</td>
+          <td><span class="pair-sample" style="color:#38B6FF;background:#14263C">Aa</span></td>
+          <td><strong>6,78:1</strong></td>
+          <td class="ok">passa</td><td class="ok">passa</td><td class="fail">reprova</td>
+        </tr>
+        <tr>
+          <td>Laranja sobre branco</td>
+          <td><span class="pair-sample" style="color:#FF914D;background:#FFFFFF">Aa</span></td>
+          <td><strong>2,23:1</strong></td>
+          <td class="fail">reprova</td><td class="fail">reprova</td><td class="fail">reprova</td>
+        </tr>
+        <tr>
+          <td>Azul sobre branco</td>
+          <td><span class="pair-sample" style="color:#38B6FF;background:#FFFFFF">Aa</span></td>
+          <td><strong>2,26:1</strong></td>
+          <td class="fail">reprova</td><td class="fail">reprova</td><td class="fail">reprova</td>
+        </tr>
+        <tr>
+          <td>Branco sobre laranja</td>
+          <td><span class="pair-sample" style="color:#FFFFFF;background:#FF914D">Aa</span></td>
+          <td><strong>2,23:1</strong></td>
+          <td class="fail">reprova</td><td class="fail">reprova</td><td class="fail">reprova</td>
+        </tr>
+        <tr>
+          <td>Branco sobre azul</td>
+          <td><span class="pair-sample" style="color:#FFFFFF;background:#38B6FF">Aa</span></td>
+          <td><strong>2,26:1</strong></td>
+          <td class="fail">reprova</td><td class="fail">reprova</td><td class="fail">reprova</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card rules-box">
+    <h3 style="margin-top:0">Regras operativas</h3>
+    <ul>
+      <li><strong>Texto de corpo é navy sobre papel</strong> (14,66:1, AAA). Sempre.</li>
+      <li><strong>Botões laranja ou azuis levam texto navy, nunca branco.</strong> Branco sobre laranja fica em 2,23:1 e reprova em qualquer tamanho.</li>
+      <li><strong>Laranja e azul sobre fundo claro são decorativos</strong>: marca, wordmark, triângulos, filetes, fundos. Nunca texto informativo nem ícones com significado.</li>
+      <li><strong>Sobre navy, laranja e azul passam AA em qualquer tamanho</strong>: títulos, links e números em painéis escuros são seguros.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 4. TIPOGRAFIA ============ -->
+<section id="tipografia">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Tipografia</h2></div>
+  <p class="lead">
+    Uma família só: <strong>Poppins</strong>, nos pesos 400, 600, 700 e 800. A fonte é livre
+    (licença SIL OFL) e sempre auto-hospedada em <code>assets/fonts/</code>. Nunca carregue
+    tipografia de CDN externo: o site opera sem nenhuma requisição a terceiros.
+  </p>
+  <div class="card type-specimen">
+    <div class="type-row">
+      <p class="type-meta"><strong>Display · 800</strong>títulos de página e hero</p>
+      <p class="t-800">Agrotech da Holanda</p>
+    </div>
+    <div class="type-row">
+      <p class="type-meta"><strong>Título · 700</strong>títulos de seção e destaques</p>
+      <p class="t-700">Agricultura irrigada movida a energia solar</p>
+    </div>
+    <div class="type-row">
+      <p class="type-meta"><strong>Subtítulo · 600</strong>subtítulos, botões, chips, legendas fortes</p>
+      <p class="t-600">Segurança hídrica e energética, dentro e depois da fazenda</p>
+    </div>
+    <div class="type-row">
+      <p class="type-meta"><strong>Corpo · 400</strong>texto corrido</p>
+      <p class="t-400">A câmara fria solar reduz as perdas pós-colheita na propriedade: o produtor colhe, resfria e vende na hora certa. abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ áâãàçéêíóôõú</p>
+    </div>
+    <div class="type-row">
+      <p class="type-meta"><strong>Numerais</strong>tabelas e indicadores</p>
+      <p class="t-num">0123456789 · 10 ha · +10 °C a −5 °C · 2%</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. VOZ ============ -->
+<section id="voz">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Voz</h2></div>
+  <p class="lead">
+    Português brasileiro, tratamento <strong>você</strong> em todas as superfícies de marca. Em
+    conversa de campo com produtores mais velhos, abra com <em>o senhor</em> e deixe a pessoa
+    definir o registro. Nunca <em>tu</em> em texto de marca. O tom muda por público, a promessa é
+    a mesma.
+  </p>
+  <div class="grid grid-3 voice-grid">
+    <div class="card voice-card">
+      <p class="aud">Público 1</p>
+      <h4>Produtor</h4>
+      <p class="reg">Curto e direto. Resultado antes de tecnologia.</p>
+      <ul>
+        <li>Sua produção depende do clima?</li>
+        <li>Colheu? Guarde e venda na hora certa.</li>
+        <li>Off-grid. Sem diesel, sem conta de luz.</li>
+        <li>Visitamos sua propriedade. Sem custo.</li>
+      </ul>
+    </div>
+    <div class="card voice-card">
+      <p class="aud">Público 2</p>
+      <h4>Cooperativa</h4>
+      <p class="reg">Escala coletiva. Números que sobrevivem ao encaminhamento.</p>
+      <ul>
+        <li>A solução que funciona em escala.</li>
+        <li>Uma tela, todas as fazendas.</li>
+        <li>Tecnologia holandesa, modelo cooperativo.</li>
+      </ul>
+    </div>
+    <div class="card voice-card">
+      <p class="aud">Público 3</p>
+      <h4>Governo</h4>
+      <p class="reg">Registro formal e simples, sem superlativos de marketing.</p>
+      <ul>
+        <li>O Brasil precisa irrigar mais, e melhor.</li>
+        <li>Resultados mensuráveis por família.</li>
+        <li>Não é ajuda externa.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card guard-box">
+    <h3 style="margin-top:0">Termos: o que vale e o que fica de fora</h3>
+    <ul>
+      <li><span class="no-word">Nunca "Agroenergia".</span> No vocabulário da Embrapa e da política pública, agroenergia significa bioenergia (cana, biodiesel). Usar o termo posiciona a marca no setor errado.</li>
+      <li><span class="no-word">"Agtech" fora das superfícies de produtor, cooperativa e governo.</span> É vocabulário de ecossistema e investidores; só aparece em materiais estratégicos.</li>
+      <li><span class="no-word">"Solar" fica nos produtos, nunca no nome da empresa.</span> Escreva irrigação solar e câmara fria solar; a empresa chama-se Agrotech da Holanda.</li>
+      <li>Histórico: <span class="yes">pode</span> "desenvolvida e testada na Ásia", "introduzida nas Filipinas". <span class="no-word">Não pode</span> "comprovada", "proven", "track record". A promessa se apoia no que foi feito, sem inflar.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 6. APLICAÇÕES ============ -->
+<section id="aplicacoes">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Aplicações</h2></div>
+
+  <h3>Endosso da matriz</h3>
+  <p class="lead" style="margin-top:0">
+    A arquitetura é de marca endossada: a Agrotech da Holanda lidera, a Dutch Flow Technology
+    assina como origem da tecnologia. Regras:
+  </p>
+  <div class="grid grid-2" style="margin-top:16px">
+    <div class="card endorse-demo">
+      <img src="assets/brand/logo-stacked.svg" alt="Conjunto Agrotech da Holanda com linha de endosso abaixo">
+      <p class="endorse-line">Tecnologia da Dutch Flow Technology, Países Baixos</p>
+    </div>
+    <div class="card">
+      <ul style="list-style:none">
+        <li style="padding:8px 0;border-bottom:1px solid var(--line)">A marca Agrotech da Holanda sempre lidera a hierarquia visual.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--line)">A matriz aparece em texto ("tecnologia Dutch Flow Technology") ou, se com logotipo, a no máximo 50% do peso visual da marca AdH.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--line)">A distância entre marca e endosso usa a mesma unidade x do espaço livre.</li>
+        <li style="padding:8px 0">Abaixo dos tamanhos mínimos (avatares, favicon, brindes pequenos) o endosso é omitido.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">
+    O endosso aparece em superfícies de primeiro contato e formais: rodapé e hero do site,
+    propostas, contratos, adesivagem de contêiner, banners de feira.
+  </p>
+
+  <h3>Wordmark duotônico</h3>
+  <div class="grid grid-2">
+    <div class="card c5-demo">
+      <p class="c5-word"><span class="c5-a">Agrotech</span> <span class="c5-h">da Holanda</span></p>
+    </div>
+    <div class="card">
+      <p style="font-size:0.92rem;max-width:34em">
+        Para momentos sem logotipo: assinatura de e-mail, cabeçalhos de texto, linhas de co-marca.
+        Poppins 700, <em>Agrotech</em> em azul, <em>da Holanda</em> em laranja. É um elemento
+        gráfico em tamanho de destaque, sobre papel ou branco; para texto corrido valem as regras
+        de cor da seção 03.
+      </p>
+    </div>
+  </div>
+
+  <h3>Avatares</h3>
+  <div class="card">
+    <div class="tiles-row">
+      <div class="tile tile--white" role="img" aria-label="Avatar sobre branco, marca em cores plenas">
+        <svg viewBox="0 0 1000 1000">
+          <g fill="#FF914D">
+            <path transform="translate(500,500) rotate(-45) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+            <path transform="translate(500,500) rotate(135) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          </g>
+          <g fill="#38B6FF">
+            <path transform="translate(500,500) rotate(45) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+            <path transform="translate(500,500) rotate(-135) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="tile tile--navy" role="img" aria-label="Avatar sobre navy, marca em cores plenas">
+        <svg viewBox="0 0 1000 1000">
+          <g fill="#FF914D">
+            <path transform="translate(500,500) rotate(-45) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+            <path transform="translate(500,500) rotate(135) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          </g>
+          <g fill="#38B6FF">
+            <path transform="translate(500,500) rotate(45) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+            <path transform="translate(500,500) rotate(-135) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          </g>
+        </svg>
+      </div>
+      <div class="tile tile--orange" role="img" aria-label="Avatar sobre laranja, marca monocromática branca">
+        <svg viewBox="0 0 1000 1000">
+          <g fill="#FFFFFF">
+            <path transform="translate(500,500) rotate(-45) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+            <path transform="translate(500,500) rotate(135) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          </g>
+          <g fill="#FFFFFF" opacity="0.72">
+            <path transform="translate(500,500) rotate(45) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+            <path transform="translate(500,500) rotate(-135) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <p class="caption">
+      Três telhas aprovadas: branco (cores plenas), navy (cores plenas) e laranja (marca
+      monocromática branca, pétalas azuis convertidas em branco a 72% de opacidade). Use nos
+      perfis sociais, no WhatsApp Business e como apple-touch-icon.
+    </p>
+  </div>
+
+  <h3>Botões e chips</h3>
+  <div class="ui-demo">
+    <div class="ui-row ui-row--light">
+      <button class="btn btn--orange" type="button">Fale conosco</button>
+      <button class="btn btn--blue" type="button">Ver produtos</button>
+      <button class="btn btn--outline" type="button">Saiba mais</button>
+    </div>
+    <div class="ui-row ui-row--dark">
+      <span class="chip-dark chip-dark--blue">Irrigação solar</span>
+      <span class="chip-dark chip-dark--orange">Câmara fria solar</span>
+      <span class="stat">10 ha</span>
+      <span class="stat">2 safras</span>
+    </div>
+  </div>
+  <p class="caption">
+    Fundo claro: preenchimento laranja ou azul com texto navy, ou contorno navy. Fundo navy: texto
+    e contornos em laranja e azul. As combinações seguem a tabela de contraste da seção 03.
+  </p>
+</section>
+
+<!-- ============ 7. ROTEIRO ============ -->
+<section id="roteiro">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Roteiro</h2></div>
+  <p class="lead">
+    O que a marca ainda não tem. Lacunas conhecidas, em ordem de prioridade; até lá, valem as
+    soluções provisórias indicadas neste guia.
+  </p>
+  <div class="card roadmap">
+    <ul>
+      <li><span class="tag-pend">pendente</span><span>Conjunto horizontal, para cabeçalhos estreitos. Provisório: marca isolada + wordmark duotônico.</span></li>
+      <li><span class="tag-pend">pendente</span><span>Imagem OG para prévia de link no WhatsApp, o canal principal do produtor. Hoje a prévia fica em branco.</span></li>
+      <li><span class="tag-pend">pendente</span><span>favicon.ico e apple-touch-icon em PNG, derivados da telha de avatar.</span></li>
+      <li><span class="tag-pend">pendente</span><span>Exports independentes do wordmark duotônico e dos avatares (hoje só existem como especificação neste guia).</span></li>
+      <li><span class="tag-pend">pendente</span><span>Original vetorial da marca, a ser fornecido pela Dutch Flow Technology (a versão atual é uma recriação fiel a partir do PNG da matriz).</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Agrotech da Holanda · Tecnologia da Dutch Flow Technology, Países Baixos</p>
+  <p class="version">Marca v1 · 2026-07-16</p>
+</footer>
+
+<div class="copied-toast" id="toast" role="status" aria-live="polite">Copiado</div>
+
+<script>
+  (function () {
+    var toast = document.getElementById('toast');
+    var timer = null;
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('show');
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () { toast.classList.remove('show'); }, 1300);
+    }
+    function copyText(value) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(value);
+      }
+      var ta = document.createElement('textarea');
+      ta.value = value;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      return Promise.resolve();
+    }
+    document.querySelectorAll('button.hex').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var hex = btn.getAttribute('data-hex');
+        copyText(hex).then(function () { showToast(hex + ' copiado'); });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
