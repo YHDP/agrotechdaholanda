@@ -4,8 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agrotech da Holanda · irrigação solar e câmara fria solar</title>
-<meta name="description" content="Agricultura irrigada movida a energia solar. Irrigação solar inteligente e câmaras frias solares para o produtor brasileiro. Tecnologia holandesa da Dutch Flow Technology.">
+<meta name="description" content="Agricultura movida a energia solar. Irrigação solar inteligente e câmaras frias solares para o produtor brasileiro. Tecnologia holandesa da Dutch Flow Technology.">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+<link rel="icon" type="image/x-icon" href="assets/brand/favicon.ico">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Agrotech da Holanda">
+<meta property="og:title" content="Agrotech da Holanda · Agricultura movida a energia solar">
+<meta property="og:description" content="Irrigação solar inteligente e câmara fria solar para o produtor brasileiro. Irrigation & Cooling. Tecnologia holandesa da Dutch Flow Technology.">
+<meta property="og:url" content="https://agrotechdaholanda.com.br">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://agrotechdaholanda.com.br/assets/brand/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Agrotech da Holanda — Agricultura movida a energia solar">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agrotech da Holanda · Agricultura movida a energia solar">
+<meta name="twitter:description" content="Irrigação solar inteligente e câmara fria solar para o produtor brasileiro.">
+<meta name="twitter:image" content="https://agrotechdaholanda.com.br/assets/brand/og-image.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,15 +89,30 @@
     font-weight: 700;
     color: var(--orange);
   }
-  .positioning {
-    max-width: 34em;
-    margin-top: 18px;
-    font-size: clamp(1rem, 2.1vw, 1.2rem);
+  .tagline {
+    margin-top: 20px;
+    font-size: clamp(1.05rem, 2.3vw, 1.3rem);
     font-weight: 600;
     color: var(--navy);
-    animation: rise 0.9s 0.22s ease both;
+    animation: rise 0.9s 0.20s ease both;
   }
-  .positioning span { display: block; font-weight: 400; color: var(--soft); margin-top: 6px; font-size: 0.9em; }
+  .subtag {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--orange);
+    animation: rise 0.9s 0.28s ease both;
+  }
+  .subtitle {
+    max-width: 30em;
+    margin-top: 18px;
+    font-size: clamp(0.95rem, 2vw, 1.08rem);
+    font-weight: 400;
+    color: var(--soft);
+    animation: rise 0.9s 0.34s ease both;
+  }
   .lines {
     display: flex;
     gap: 12px;
@@ -116,7 +147,7 @@
     to { opacity: 1; transform: translateY(0); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .mark, h1, .positioning, .lines, .soon { animation: none; }
+    .mark, h1, .tagline, .subtag, .subtitle, .lines, .soon { animation: none; }
   }
 </style>
 </head>
@@ -135,10 +166,9 @@
 
   <h1><span class="h1-main">Agrotech</span><span class="h1-sub">da Holanda</span></h1>
 
-  <p class="positioning">
-    Agricultura irrigada movida a energia solar.
-    <span>Segurança hídrica e energética, dentro e depois da fazenda.</span>
-  </p>
+  <p class="tagline">Agricultura movida a energia solar</p>
+  <p class="subtag">Irrigation &amp; Cooling</p>
+  <p class="subtitle">Water your crops and protect your harvest with our solutions.</p>
 
   <div class="lines">
     <div class="chip chip--irrigacao">Irrigação solar inteligente</div>
