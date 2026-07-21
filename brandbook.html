@@ -307,7 +307,37 @@
   .ui-row--dark .stat { color: var(--blue); font-weight: 800; font-size: 1.3rem; }
   .ui-row--dark .stat + .stat { color: var(--orange); }
 
-  /* ---------- 7. roteiro ---------- */
+  /* ---------- 7. redes sociais ---------- */
+  .ig-mock { display: flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; max-width: 560px; }
+  .ig-mock .ava { width: 74px; height: 74px; border-radius: 50%; flex: none; overflow: hidden; }
+  .ig-mock .ava img { width: 100%; height: 100%; display: block; }
+  .ig-mock .who { flex: 1; min-width: 0; }
+  .ig-mock .handle { font-weight: 700; font-size: 1.02rem; }
+  .ig-mock .name { font-size: 0.88rem; color: var(--soft); }
+  .ig-mock .cta { flex: none; background: #0095F6; color: #fff; font-weight: 600; font-size: 0.82rem; padding: 9px 15px; border-radius: 9px; }
+  .ig-mock--no .ava img { border-radius: 0; }
+  .ig-flags { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 18px; }
+  .ig-flag { flex: 1 1 300px; }
+  .ig-flag .tag { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 6px; padding: 2px 9px; margin-bottom: 12px; }
+  .ig-flag .tag--yes { color: #1E6B45; border: 1px solid #B9DCC7; background: #EEF7F1; }
+  .ig-flag .tag--no { color: var(--no); border: 1px solid #E4B7B7; background: #FBF0F0; }
+  .crop-demo { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 16px; }
+  .crop-fig { text-align: center; font-size: 0.78rem; color: var(--soft); }
+  .crop-fig .sq, .crop-fig .ci { width: 116px; height: 116px; display: block; margin: 0 auto 10px; }
+  .crop-fig .ci { border-radius: 50%; overflow: hidden; }
+  .crop-fig img { width: 100%; height: 100%; display: block; }
+  .social-tiles { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+  .social-tile { text-align: center; font-size: 0.78rem; color: var(--soft); }
+  .social-tile .disc { display: block; width: 104px; height: 104px; border-radius: 50%; overflow: hidden; margin: 0 auto 10px; border: 1px solid var(--line); }
+  .social-tile .disc img { width: 100%; height: 100%; display: block; }
+  .social-tile strong { display: block; color: var(--navy); font-size: 0.85rem; }
+  .cover-list { display: flex; flex-direction: column; gap: 18px; margin-top: 8px; }
+  .cover-item { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); }
+  .cover-item img { width: 100%; display: block; }
+  .cover-item .cap { padding: 12px 16px; font-size: 0.82rem; color: var(--soft); border-top: 1px solid var(--line); }
+  .cover-item .cap strong { color: var(--navy); }
+
+  /* ---------- 8. roteiro ---------- */
   .roadmap { margin-top: 24px; border-left: 5px solid var(--soft); }
   .roadmap ul { list-style: none; margin-top: 12px; }
   .roadmap li { display: flex; gap: 14px; align-items: baseline; padding: 10px 0; border-top: 1px solid var(--line); }
@@ -361,7 +391,7 @@
   <div>
     <p class="hero-eyebrow">Guia de marca</p>
     <h1>Agrotech da Holanda</h1>
-    <p class="hero-version">Marca v2 · julho de 2026</p>
+    <p class="hero-version">Marca v3 · julho de 2026</p>
   </div>
   <a class="hero-back" href="./">Voltar ao site</a>
 </header>
@@ -374,6 +404,7 @@
     <a href="#tipografia">Tipografia</a>
     <a href="#voz">Voz</a>
     <a href="#aplicacoes">Aplicações</a>
+    <a href="#redes">Redes sociais</a>
     <a href="#roteiro">Roteiro</a>
   </div>
 </nav>
@@ -908,8 +939,10 @@
     <p class="caption">
       Três telhas aprovadas: branco e navy (cores plenas) e laranja (marca branca). Exportadas em
       <code>avatar-white.svg</code>, <code>avatar-navy.svg</code> e <code>avatar-orange.svg</code>.
-      Use nos perfis sociais e no WhatsApp Business. O <code>apple-touch-icon.png</code> (marca
-      colorida sobre navy) e o <code>favicon.ico</code> derivam da mesma marca.
+      Estas têm o canto arredondado embutido: são para onde <em>nós</em> controlamos a forma, o
+      <code>favicon.ico</code> e o <code>apple-touch-icon.png</code> (marca colorida sobre navy). Para
+      foto de perfil de rede social a plataforma aplica a própria máscara, então o arquivo certo é
+      o quadrado sangrado (sem cantos) da seção <a href="#redes">07, Redes sociais</a>.
     </p>
   </div>
 
@@ -933,9 +966,155 @@
   </p>
 </section>
 
-<!-- ============ 7. ROTEIRO ============ -->
+<!-- ============ 7. REDES SOCIAIS ============ -->
+<section id="redes">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Redes sociais</h2></div>
+  <p class="lead">
+    A foto de perfil é só a marca, nunca o conjunto com texto. A plataforma já mostra o @ e o nome
+    ao lado da foto, então repetir <em>Agrotech da Holanda</em> dentro do círculo é redundante, e no
+    recorte pequeno o texto vira um borrão ilegível. A marca de quatro pétalas sozinha aguenta 32 px
+    e mantém a identidade. O nome vive nas capas e banners, que são grandes e horizontais.
+  </p>
+
+  <h3>A regra, no Instagram</h3>
+  <div class="ig-flags">
+    <div class="ig-flag">
+      <span class="tag tag--yes">Sim</span>
+      <div class="ig-mock">
+        <div class="ava"><img src="assets/brand/avatar-social-navy.svg" alt="Foto de perfil só com a marca, sobre navy"></div>
+        <div class="who">
+          <p class="handle">agrotech_da_holanda</p>
+          <p class="name">Agrotech da Holanda</p>
+        </div>
+        <span class="cta">Alterar foto</span>
+      </div>
+    </div>
+    <div class="ig-flag">
+      <span class="tag tag--no">Não</span>
+      <div class="ig-mock ig-mock--no">
+        <div class="ava"><img src="assets/brand/logo-stacked.svg" alt="Conjunto com texto espremido no círculo, ilegível"></div>
+        <div class="who">
+          <p class="handle">agrotech_da_holanda</p>
+          <p class="name">Agrotech da Holanda</p>
+        </div>
+        <span class="cta">Alterar foto</span>
+      </div>
+    </div>
+  </div>
+  <p class="note">
+    À esquerda, a marca isolada respira e lê bem. À direita, o conjunto empilhado espremido no
+    círculo: o texto some, e o nome já estava logo acima, escrito pela própria plataforma.
+  </p>
+
+  <h3>O arquivo é um quadrado sangrado</h3>
+  <p class="note" style="margin-bottom:0">
+    Envie sempre o quadrado de cor cheia, sem cantos arredondados: cada plataforma aplica a própria
+    máscara (círculo no Instagram, WhatsApp, Facebook, X e TikTok; quadrado arredondado no LinkedIn).
+    A marca fica bem dentro do círculo inscrito, com folga de sobra, então nada é cortado.
+  </p>
+  <div class="crop-demo">
+    <figure class="crop-fig">
+      <span class="sq"><img src="assets/brand/avatar-social-navy.svg" alt="Arquivo quadrado sangrado"></span>
+      o arquivo (quadrado)
+    </figure>
+    <figure class="crop-fig">
+      <span class="ci"><img src="assets/brand/avatar-social-navy.svg" alt="Mesmo arquivo com máscara circular, sem corte da marca"></span>
+      no círculo (a máscara da rede)
+    </figure>
+    <figure class="crop-fig">
+      <span class="ci"><img src="assets/brand/avatar-social-orange.svg" alt="Variante laranja com máscara circular"></span>
+      variante laranja
+    </figure>
+    <figure class="crop-fig">
+      <span class="ci"><img src="assets/brand/avatar-social-paper.svg" alt="Variante papel com máscara circular"></span>
+      variante papel
+    </figure>
+  </div>
+
+  <h3>Fotos de perfil</h3>
+  <div class="card">
+    <div class="social-tiles">
+      <div class="social-tile">
+        <span class="disc"><img src="assets/brand/avatar-social-navy.svg" alt="Foto de perfil navy"></span>
+        <strong>Navy</strong>padrão
+      </div>
+      <div class="social-tile">
+        <span class="disc"><img src="assets/brand/avatar-social-orange.svg" alt="Foto de perfil laranja"></span>
+        <strong>Laranja</strong>campanha
+      </div>
+      <div class="social-tile">
+        <span class="disc"><img src="assets/brand/avatar-social-paper.svg" alt="Foto de perfil papel"></span>
+        <strong>Papel</strong>contexto claro
+      </div>
+    </div>
+    <p class="caption">
+      Três fundos: navy é o padrão (contraste mais forte no tamanho pequeno), laranja para campanha e
+      papel para contextos claros. Arquivos <code>avatar-social-navy.svg</code>,
+      <code>avatar-social-orange.svg</code> e <code>avatar-social-paper.svg</code>, com PNG em
+      1000, 400 e 200 px. Os PNG têm fundo sólido de propósito: o Instagram pinta transparência de
+      preto.
+    </p>
+  </div>
+
+  <h3>Especificações por plataforma</h3>
+  <div class="contrast-scroll">
+    <table class="contrast">
+      <thead>
+        <tr>
+          <th>Plataforma</th><th>Peça</th><th>Tamanho (px)</th><th>Máscara</th><th>Zona segura</th><th>Arquivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Instagram</td><td>Foto de perfil</td><td>1000×1000</td><td>círculo</td><td>livre</td><td><code>avatar-social-navy.png</code></td></tr>
+        <tr><td>WhatsApp Business</td><td>Foto de perfil</td><td>1000×1000</td><td>círculo</td><td>livre</td><td><code>avatar-social-navy.png</code></td></tr>
+        <tr><td>Threads</td><td>Foto de perfil</td><td>1000×1000</td><td>círculo</td><td>espelha o Instagram</td><td><code>avatar-social-navy.png</code></td></tr>
+        <tr><td>TikTok</td><td>Foto de perfil</td><td>200×200</td><td>círculo</td><td>livre</td><td><code>avatar-social-navy-200.png</code></td></tr>
+        <tr><td>Facebook (página)</td><td>Foto de perfil</td><td>1000×1000</td><td>círculo</td><td>livre</td><td><code>avatar-social-navy.png</code></td></tr>
+        <tr><td>Facebook (página)</td><td>Capa</td><td>820×312</td><td>retângulo</td><td>centro (o celular corta as laterais)</td><td><code>cover-facebook.png</code></td></tr>
+        <tr><td>LinkedIn (empresa)</td><td>Logo</td><td>400×400</td><td>quadrado arredondado</td><td>livre</td><td><code>avatar-social-navy-400.png</code></td></tr>
+        <tr><td>LinkedIn (empresa)</td><td>Capa</td><td>1128×191</td><td>retângulo</td><td>livre</td><td><code>cover-linkedin.png</code></td></tr>
+        <tr><td>YouTube</td><td>Ícone do canal</td><td>800×800</td><td>círculo</td><td>livre</td><td><code>avatar-social-navy.png</code></td></tr>
+        <tr><td>YouTube</td><td>Banner</td><td>2560×1440</td><td>retângulo</td><td>área de TV 1546×423 (tudo dentro)</td><td><code>cover-youtube.png</code></td></tr>
+        <tr><td>X (Twitter)</td><td>Foto de perfil</td><td>400×400</td><td>círculo</td><td>livre</td><td><code>avatar-social-navy-400.png</code></td></tr>
+        <tr><td>X (Twitter)</td><td>Cabeçalho</td><td>1500×500</td><td>retângulo</td><td>evite o canto inferior esquerdo (o avatar cobre)</td><td><code>cover-x.png</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">
+    Onde a plataforma pede um tamanho menor, envie o PNG maior: a rede reduz melhor do que amplia. A
+    prévia de link (WhatsApp, redes) continua a usar a <code>og-image.png</code> (1200×630) já ligada
+    ao site.
+  </p>
+
+  <h3>Capas e banners</h3>
+  <div class="cover-list">
+    <div class="cover-item">
+      <img src="assets/brand/cover-facebook.png" alt="Capa do Facebook: conjunto e frase-marca centrados sobre navy">
+      <p class="cap"><strong>Facebook, 820×312.</strong> Conjunto e frase centrados na faixa que o celular preserva.</p>
+    </div>
+    <div class="cover-item">
+      <img src="assets/brand/cover-linkedin.png" alt="Capa do LinkedIn: conjunto à esquerda e frase à direita sobre navy">
+      <p class="cap"><strong>LinkedIn, 1128×191.</strong> Faixa baixa: conjunto à esquerda, frase à direita, sem endosso por falta de espaço.</p>
+    </div>
+    <div class="cover-item">
+      <img src="assets/brand/cover-youtube.png" alt="Banner do YouTube: conjunto e frase dentro da área segura de TV">
+      <p class="cap"><strong>YouTube, 2560×1440.</strong> Tudo dentro da área segura de TV (1546×423); o resto é campo navy.</p>
+    </div>
+    <div class="cover-item">
+      <img src="assets/brand/cover-x.png" alt="Cabeçalho do X: conjunto, frase e endosso centrados sobre navy">
+      <p class="cap"><strong>X, 1500×500.</strong> Conjunto, frase e endosso centrados, longe do canto que o avatar cobre.</p>
+    </div>
+  </div>
+  <p class="note">
+    As capas usam o campo navy com o conjunto horizontal claro e a frase-marca. Sobre navy, laranja e
+    azul passam no contraste AA (seção 03). São os arquivos oficiais em <code>assets/brand/</code>
+    (<code>cover-*.svg</code> mestre, <code>cover-*.png</code> para enviar).
+  </p>
+</section>
+
+<!-- ============ 8. ROTEIRO ============ -->
 <section id="roteiro">
-  <div class="sec-head"><span class="sec-num">07</span><h2>Roteiro</h2></div>
+  <div class="sec-head"><span class="sec-num">08</span><h2>Roteiro</h2></div>
   <p class="lead">
     O kit está completo. Tudo que faltava na v1 foi entregue; resta um único item, que depende
     da matriz.
@@ -946,6 +1125,7 @@
       <li><span class="tag-done">entregue</span><span><s>Imagem OG</s> para prévia de link no WhatsApp: <code>og-image.png</code> (1200×630), já ligada ao site.</span></li>
       <li><span class="tag-done">entregue</span><span><s>favicon.ico e apple-touch-icon</s>: <code>favicon.ico</code> (16/32/48) e <code>apple-touch-icon.png</code> (180).</span></li>
       <li><span class="tag-done">entregue</span><span><s>Exports do wordmark duotônico e dos avatares</s>: <code>wordmark-duotone.svg</code>, <code>avatar-white/navy/orange.svg</code>.</span></li>
+      <li><span class="tag-done">entregue</span><span><s>Kit de redes sociais</s>: fotos de perfil só com a marca (<code>avatar-social-navy/orange/paper</code>) e capas por plataforma (<code>cover-facebook/linkedin/youtube/x</code>), com PNG nos tamanhos de cada rede. Seção 07.</span></li>
       <li><span class="tag-done">entregue</span><span><s>Versões de fundo de cor e monocromáticas</s>: laranja, azul, preto e branco (seção 02).</span></li>
       <li><span class="tag-pend">pendente</span><span>Original vetorial da marca, a ser fornecido pela Dutch Flow Technology. A versão atual é uma recriação fiel a 98,6% a partir do PNG da matriz, suficiente para tela e impressão; o vetor de origem fica como referência única para sinalização de grande porte.</span></li>
     </ul>
@@ -954,7 +1134,7 @@
 
 <footer>
   <p>© 2026 Agrotech da Holanda · Tecnologia da Dutch Flow Technology, Países Baixos</p>
-  <p class="version">Marca v2 · 2026-07-17</p>
+  <p class="version">Marca v3 · 2026-07-20</p>
 </footer>
 
 <div class="copied-toast" id="toast" role="status" aria-live="polite">Copiado</div>

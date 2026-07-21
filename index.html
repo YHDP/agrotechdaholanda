@@ -136,6 +136,40 @@
     color: var(--soft);
     animation: rise 0.9s 0.42s ease both;
   }
+  .contact {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    animation: rise 0.9s 0.42s ease both;
+  }
+  .contact-label { font-size: 0.9rem; color: var(--soft); max-width: 26em; }
+  .email-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .email {
+    font-size: clamp(0.98rem, 2.4vw, 1.15rem);
+    font-weight: 700;
+    color: var(--navy);
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #E8E4DB;
+    border-radius: 999px;
+    padding: 11px 20px;
+  }
+  .email:hover { border-color: var(--navy); }
+  .copy-btn {
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--navy);
+    background: var(--orange);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 22px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { filter: brightness(0.97); }
+  .copy-btn.copied { background: var(--blue); }
   footer {
     padding: 22px 24px;
     text-align: center;
@@ -175,11 +209,43 @@
     <div class="chip chip--camara">Câmara fria solar</div>
   </div>
 
-  <p class="soon">Site em construção. Em breve.</p>
+  <div class="contact">
+    <p class="contact-label">Site em construção. Enquanto isso, fale com a gente.</p>
+    <div class="email-row">
+      <a class="email" href="mailto:info@agrotechdaholanda.com.br">info@agrotechdaholanda.com.br</a>
+      <button class="copy-btn" id="copyEmail" type="button" data-email="info@agrotechdaholanda.com.br" aria-label="Copiar endereço de e-mail">Copiar</button>
+    </div>
+  </div>
 </main>
 
 <footer>
   © 2026 Agrotech da Holanda · Tecnologia da Dutch Flow Technology, Países Baixos
 </footer>
+<script>
+  (function () {
+    var btn = document.getElementById('copyEmail');
+    if (!btn) return;
+    var label = btn.textContent;
+    var timer = null;
+    function feedback() {
+      btn.textContent = 'Copiado!';
+      btn.classList.add('copied');
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () { btn.textContent = label; btn.classList.remove('copied'); }, 1600);
+    }
+    btn.addEventListener('click', function () {
+      var email = btn.getAttribute('data-email');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(feedback, feedback);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = email; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta); feedback();
+      }
+    });
+  })();
+</script>
 </body>
 </html>
