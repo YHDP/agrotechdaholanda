@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Guard: never commit internal work documents to this PUBLIC (GitHub Pages) repo.
+# The .gitignore blocks `git add .`; this hook also closes the `git add -f` loophole.
+# Only NOTICE.md (OFL-required) and README.md are allowed markdown. Everything else
+# .md, plus office source formats, is treated as a work document and refused.
+# Override (discouraged, be sure): git commit --no-verify
+
+allow_md='^(NOTICE|README)\.md$'
+blocked_ext='\.(docx|xlsx|pptx|rtf|pages|key|numbers)$'
+
+bad=""
+while IFS= read -r f; do
+  [ -z "$f" ] && continue
+  base=$(basename "$f")
+  if printf '%s' "$f" | grep -qiE "$blocked_ext"; then
+    bad="${bad}  $f  (office work-doc)"$'\n'
+  elif printf '%s' "$base" | grep -qiE '\.md$' && ! printf '%s' "$base" | grep -qEi "$allow_md"; then
+    bad="${bad}  $f  (work-doc markdown; only NOTICE.md / README.md allowed)"$'\n'
+  fi
+done < <(git diff --cached --name-only --diff-filter=AM)
+
+if [ -n "$bad" ]; then
+  echo "pre-commit BLOCKED: work documents must not enter this public repo:" >&2
+  printf '%s' "$bad" >&2
+  echo "They would be publicly served and browsable. Remove them from the commit." >&2
+  echo "Override (discouraged): git commit --no-verify" >&2
+  exit 1
+fi

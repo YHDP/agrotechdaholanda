@@ -3,7 +3,10 @@
 .venv/
 
 # Work documents / internal — never publish to the public site (repo is served by GitHub Pages)
-CLAUDE.md
+# All markdown is treated as a work doc (CLAUDE.md, notes) except the two public repo meta-files.
+*.md
+!NOTICE.md
+!README.md
 *.docx
 *.xlsx
 *.pptx
