@@ -1,3 +1,13 @@
 .DS_Store
 *.pyc
 .venv/
+
+# Work documents / internal — never publish to the public site (repo is served by GitHub Pages)
+CLAUDE.md
+*.docx
+*.xlsx
+*.pptx
+*.rtf
+*.pages
+*.key
+*.numbers
