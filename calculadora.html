@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de economia · Agrotech da Holanda</title>
+<meta name="description" content="Estime quanto de diesel a sua irrigação consome por ano e em quanto tempo a irrigação solar se paga.">
+<link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
+<link rel="icon" type="image/x-icon" href="assets/brand/favicon.ico">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<style>
+  @font-face { font-family:'Poppins'; font-weight:400; font-display:swap; src:url('assets/fonts/poppins-400.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:600; font-display:swap; src:url('assets/fonts/poppins-600.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:700; font-display:swap; src:url('assets/fonts/poppins-700.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:800; font-display:swap; src:url('assets/fonts/poppins-800.woff2') format('woff2'); }
+  :root {
+    --orange:#FF914D; --blue:#38B6FF; --navy:#14263C; --paper:#FBFAF7;
+    --soft:#55677D; --line:#E8E4DB; --card:#FFFFFF;
+    --panel:#14263C; --panel-line:rgba(255,255,255,0.12); --panel-soft:#9DB2C9;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--paper); color:var(--navy); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  /* hero */
+  header.hero { padding:40px 0 8px; }
+  .hero-top { display:flex; align-items:center; gap:14px; }
+  .hero-mark { width:44px; height:44px; flex:none; }
+  .hero-brand { font-weight:700; font-size:0.98rem; letter-spacing:-0.01em; }
+  .hero-brand span { color:var(--orange); }
+  .hero-back { margin-left:auto; font-size:0.85rem; font-weight:600; color:var(--navy); text-decoration:none; border-bottom:2px solid var(--orange); padding-bottom:2px; }
+  .hero-body { padding:34px 0 10px; max-width:22em; }
+  .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); }
+  .hero h1 { font-size:clamp(2rem,5.2vw,3.1rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-top:12px; }
+  .hero p.thesis { margin-top:16px; font-size:clamp(1rem,2.1vw,1.15rem); color:var(--soft); max-width:34em; }
+
+  /* shell */
+  .calc { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:36px; align-items:start; }
+  @media (max-width:900px){ .calc { grid-template-columns:1fr; } }
+
+  .field { margin-bottom:22px; }
+  .flabel { display:block; font-weight:700; font-size:0.9rem; margin-bottom:4px; }
+  .fhint { font-size:0.78rem; color:var(--soft); margin-bottom:10px; }
+  .row { display:flex; align-items:center; gap:14px; }
+  input[type="range"] { -webkit-appearance:none; appearance:none; flex:1 1 auto; min-width:0; width:100%; height:6px; border-radius:999px; background:linear-gradient(90deg,var(--orange) 0%,var(--orange) var(--pct,30%),#EBE7DE var(--pct,30%),#EBE7DE 100%); outline:none; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; height:22px; border-radius:50%; background:var(--navy); border:3px solid #fff; box-shadow:0 1px 4px rgba(20,38,60,.3); cursor:pointer; }
+  input[type="range"]::-moz-range-thumb { width:18px; height:18px; border-radius:50%; background:var(--navy); border:3px solid #fff; cursor:pointer; }
+  .numbox { display:inline-flex; align-items:baseline; gap:4px; background:var(--card); border:1.5px solid var(--line); border-radius:11px; padding:8px 12px; min-width:112px; }
+  .numbox input { font:inherit; font-weight:700; font-size:1.05rem; color:var(--navy); border:none; outline:none; width:100%; background:transparent; text-align:right; }
+  .numbox .unit { font-size:0.82rem; font-weight:600; color:var(--soft); flex:none; }
+  .numbox .pre { font-size:0.9rem; font-weight:700; color:var(--soft); flex:none; }
+  .numbox:focus-within { border-color:var(--blue); box-shadow:0 0 0 3px rgba(56,182,255,.16); }
+
+  select { font:inherit; font-weight:700; font-size:1rem; color:var(--navy); width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:11px; background:var(--card); cursor:pointer; }
+  select:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(56,182,255,.16); }
+
+  .seg { display:flex; gap:8px; }
+  .seg button { flex:1; font:inherit; font-weight:700; font-size:0.9rem; color:var(--navy); background:var(--card); border:1.5px solid var(--line); border-radius:11px; padding:12px 10px; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; transition:border-color .15s,background .15s; }
+  .seg button small { font-weight:500; font-size:0.72rem; color:var(--soft); }
+  .seg button[aria-pressed="true"] { border-color:var(--navy); background:#F3F6FA; }
+  .seg button[aria-pressed="true"] small { color:var(--navy); }
+
+  .unit-seg { display:inline-flex; border:1.5px solid var(--line); border-radius:10px; overflow:hidden; flex:none; }
+  .unit-seg button { font:inherit; font-weight:700; font-size:0.8rem; padding:9px 13px; background:var(--card); color:var(--soft); border:none; cursor:pointer; }
+  .unit-seg button[aria-pressed="true"] { background:var(--navy); color:#fff; }
+
+  .adv-toggle { font:inherit; font-weight:700; font-size:0.86rem; color:var(--navy); background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:7px; padding:6px 0; }
+  .adv-toggle .chev { transition:transform .2s; }
+  .adv-toggle[aria-expanded="true"] .chev { transform:rotate(90deg); }
+  .adv { display:none; margin-top:14px; padding:18px; background:#F5F2EB; border:1px solid var(--line); border-radius:14px; }
+  .adv.open { display:block; }
+  .adv .field { margin-bottom:16px; }
+  .adv .field:last-child { margin-bottom:0; }
+  .adv .flabel { font-size:0.86rem; }
+  .adv-divider { border-top:1px dashed var(--line); margin:4px 0 16px; padding-top:16px; }
+  .adv-known { background:#EEF6FC; border:1px solid #CFE7F7; border-radius:11px; padding:14px 15px; margin-bottom:16px; }
+  .adv-known .flabel { color:var(--navy); }
+
+  /* result */
+  .result { position:sticky; top:20px; background:var(--panel); color:#fff; border-radius:22px; padding:30px 28px; box-shadow:0 20px 50px -24px rgba(20,38,60,.55); overflow:hidden; }
+  @media (max-width:900px){ .result { position:static; } }
+  .r-eyebrow { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--panel-soft); }
+  .r-headline { margin-top:6px; font-size:1.05rem; font-weight:600; color:#E9F1F8; }
+  .r-big { font-weight:800; letter-spacing:-0.02em; line-height:1; margin-top:6px; }
+  .r-big .val { font-size:clamp(2.6rem,7vw,3.8rem); color:var(--orange); display:block; }
+  .r-big .per { font-size:1rem; font-weight:600; color:var(--panel-soft); }
+  .r-payback { margin-top:14px; font-size:1.02rem; font-weight:600; color:#E9F1F8; }
+  .r-payback b { color:var(--blue); font-weight:800; }
+
+  .cmp { margin-top:24px; display:flex; flex-direction:column; gap:14px; }
+  .cmp-head { display:flex; justify-content:space-between; align-items:baseline; font-size:0.82rem; font-weight:600; color:var(--panel-soft); margin-bottom:6px; }
+  .cmp-head b { color:#fff; font-weight:700; }
+  .cmp-track { height:16px; border-radius:999px; background:rgba(255,255,255,.09); overflow:hidden; }
+  .cmp-fill { height:100%; border-radius:999px; transition:width .6s cubic-bezier(.22,1,.36,1); }
+  .cmp-fill.diesel { background:linear-gradient(90deg,#FF7A2E,#FF914D); }
+  .cmp-fill.solar { background:linear-gradient(90deg,var(--blue),#7FD0FF); }
+  .cmp-sun { font-size:0.8rem; font-weight:700; color:var(--blue); }
+
+  .r-grid { margin-top:24px; padding-top:22px; border-top:1px solid var(--panel-line); display:grid; grid-template-columns:1fr 1fr; gap:20px 18px; }
+  .r-stat .k { font-size:0.76rem; color:var(--panel-soft); font-weight:600; }
+  .r-stat .v { font-size:1.4rem; font-weight:800; letter-spacing:-0.01em; margin-top:2px; }
+  .r-stat .v.blue { color:var(--blue); }
+  .r-stat .v.white { color:#fff; }
+  .r-stat .v .u { font-size:0.8rem; font-weight:600; color:var(--panel-soft); }
+
+  .r-note { margin-top:16px; font-size:0.76rem; color:var(--panel-soft); line-height:1.5; }
+  .estimativa-tag { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--blue); border:1px solid rgba(56,182,255,.4); border-radius:6px; padding:2px 8px; margin-bottom:14px; }
+  .estimativa-tag.exato { color:#8BE0B4; border-color:rgba(139,224,180,.5); }
+
+  .cta { margin-top:24px; padding-top:22px; border-top:1px solid var(--panel-line); }
+  .cta p { font-size:0.9rem; color:#E9F1F8; margin-bottom:12px; }
+  .cta a { display:inline-flex; align-items:center; gap:9px; font:inherit; font-weight:700; font-size:0.98rem; color:var(--navy); background:var(--orange); border-radius:999px; padding:14px 26px; text-decoration:none; transition:transform .15s; }
+  .cta a:hover { transform:translateY(-1px); }
+  .cta a:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+
+  /* method */
+  .method { margin:56px 0 20px; }
+  .method summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.05rem; padding:16px 0; border-top:1px solid var(--line); }
+  .method summary::-webkit-details-marker { display:none; }
+  .method summary .chev { transition:transform .2s; color:var(--orange); }
+  .method[open] summary .chev { transform:rotate(90deg); }
+  .method-body { padding:6px 0 20px; max-width:52em; color:var(--soft); font-size:0.92rem; }
+  .method-body h3 { color:var(--navy); font-size:0.95rem; margin:18px 0 6px; }
+  .method-body code { font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:0.85rem; background:#F0EDE6; padding:2px 6px; border-radius:5px; color:var(--navy); }
+  .method-body ul { margin:6px 0 0 1.2em; }
+  .method-body li { margin-bottom:4px; }
+  .disc { margin-top:18px; padding:16px 18px; background:#F5F2EB; border-left:4px solid var(--blue); border-radius:10px; font-size:0.86rem; color:var(--navy); }
+
+  footer { border-top:1px solid var(--line); padding:28px 0 46px; margin-top:20px; text-align:center; font-size:0.8rem; color:var(--soft); }
+
+  @media (max-width:900px){ .numbox { min-width:96px; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+  :focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-top">
+      <svg class="hero-mark" viewBox="0 0 1000 1000" role="img" aria-label="Agrotech da Holanda">
+        <g fill="#FF914D">
+          <path transform="translate(500,500) rotate(-45) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          <path transform="translate(500,500) rotate(135) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+        </g>
+        <g fill="#38B6FF">
+          <path transform="translate(500,500) rotate(45) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+          <path transform="translate(500,500) rotate(-135) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
+        </g>
+      </svg>
+      <span class="hero-brand">Agrotech <span>da Holanda</span></span>
+      <a class="hero-back" href="./">Voltar ao site</a>
+    </div>
+    <div class="hero-body">
+      <p class="eyebrow">Calculadora de economia</p>
+      <h1>Quanto o diesel custa à sua irrigação?</h1>
+      <p class="thesis">Estime quanto a sua bomba a diesel gasta por ano e em quanto tempo a irrigação solar se paga. Preencha a sua área, o resultado aparece na hora.</p>
+    </div>
+  </header>
+
+  <div class="calc">
+    <!-- ============ INPUTS ============ -->
+    <section class="inputs" aria-label="Dados da sua irrigação">
+      <div class="field">
+        <label class="flabel" for="haNum">Área irrigada</label>
+        <div class="row">
+          <input type="range" id="ha" min="1" max="300" step="1" value="50" aria-label="Hectares">
+          <span class="numbox"><input type="number" id="haNum" min="1" max="5000" value="50" aria-label="Hectares"><span class="unit">ha</span></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="flabel" for="cultura">Cultura</label>
+        <select id="cultura">
+          <option value="cafe" selected>Café irrigado</option>
+          <option value="manga">Manga</option>
+          <option value="uva">Uva</option>
+          <option value="melao">Melão</option>
+          <option value="banana">Banana</option>
+          <option value="hortalicas">Hortaliças</option>
+          <option value="cana">Cana-de-açúcar</option>
+          <option value="soja">Soja</option>
+          <option value="milho">Milho</option>
+          <option value="feijao">Feijão</option>
+          <option value="arroz">Arroz irrigado</option>
+          <option value="outro">Outra</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Fonte de água</span>
+        <div class="seg" id="fonte" role="group" aria-label="Fonte de água">
+          <button type="button" data-fonte="rio" aria-pressed="false">Rio ou superfície<small>bombeamento leve</small></button>
+          <button type="button" data-fonte="poco" aria-pressed="true">Poço<small>bombeamento profundo</small></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="flabel" for="dieselNum">Preço do diesel</label>
+        <div class="row">
+          <input type="range" id="diesel" min="5" max="9" step="0.05" value="6.97" aria-label="Preço do diesel">
+          <span class="numbox"><span class="pre">R$</span><input type="number" id="dieselNum" min="1" max="20" step="0.01" value="6.97" aria-label="Preço do diesel"><span class="unit">/L</span></span>
+        </div>
+        <p class="fhint">Média nacional em julho de 2026 (ANP). Ajuste para o seu posto.</p>
+      </div>
+
+      <button class="adv-toggle" id="advToggle" aria-expanded="false" aria-controls="adv">
+        <span class="chev">›</span> Opções avançadas
+      </button>
+      <div class="adv" id="adv">
+        <div class="adv-known">
+          <label class="flabel" for="consumo">Já sabe seu consumo real de diesel?</label>
+          <p class="fhint">Informe e o cálculo fica exato. Deixe em branco para estimarmos pela sua lavoura.</p>
+          <div class="row">
+            <span class="numbox" style="flex:1"><input type="number" id="consumo" min="0" step="100" placeholder="0" aria-label="Consumo real de diesel"></span>
+            <div class="unit-seg" id="consumoUnit" role="group" aria-label="Unidade do consumo">
+              <button type="button" data-u="litros" aria-pressed="true">L/ano</button>
+              <button type="button" data-u="reais" aria-pressed="false">R$/ano</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="adv-divider"></div>
+
+        <div class="field">
+          <label class="flabel" for="lamina">Lâmina de irrigação por ano</label>
+          <div class="row"><span class="numbox"><input type="number" id="lamina" min="50" max="2500" step="10" value="1000" aria-label="Lâmina em milímetros por ano"><span class="unit">mm/ano</span></span></div>
+          <p class="fhint">Água que você realmente bombeia. Depende da chuva na sua região.</p>
+        </div>
+        <div class="field">
+          <label class="flabel" for="head">Altura manométrica total</label>
+          <div class="row"><span class="numbox"><input type="number" id="head" min="5" max="200" step="1" value="40" aria-label="Altura manométrica em metros"><span class="unit">m</span></span></div>
+          <p class="fhint">Desnível + profundidade do poço + pressão. Poço ~40 m, rio ~20 m.</p>
+        </div>
+        <div class="field">
+          <label class="flabel" for="eta">Rendimento do conjunto motobomba</label>
+          <div class="row"><span class="numbox"><input type="number" id="eta" min="0.3" max="0.85" step="0.01" value="0.55" aria-label="Rendimento da bomba"></span></div>
+        </div>
+        <div class="field">
+          <label class="flabel" for="cec">Consumo do motor diesel</label>
+          <div class="row"><span class="numbox"><input type="number" id="cec" min="0.15" max="0.4" step="0.01" value="0.28" aria-label="Consumo específico"><span class="unit">L/kWh</span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESULT ============ -->
+    <aside class="result" aria-live="polite">
+      <span class="estimativa-tag" id="estTag">Estimativa</span>
+      <p class="r-eyebrow">Trocando o diesel pelo sol</p>
+      <p class="r-headline">Você deixa de gastar</p>
+      <div class="r-big"><span class="val" id="economiaVal">R$ 0</span><span class="per">por ano em diesel, todo ano</span></div>
+      <p class="r-payback">E o sistema solar se paga em <b id="paybackVal">–</b></p>
+
+      <div class="cmp">
+        <div>
+          <div class="cmp-head"><span>Diesel hoje</span><b id="cmpDiesel">R$ 0</b></div>
+          <div class="cmp-track"><div class="cmp-fill diesel" id="barDiesel" style="width:100%"></div></div>
+        </div>
+        <div>
+          <div class="cmp-head"><span>Com irrigação solar</span><b class="cmp-sun">o sol é grátis</b></div>
+          <div class="cmp-track"><div class="cmp-fill solar" id="barSolar" style="width:2%"></div></div>
+        </div>
+      </div>
+
+      <div class="r-grid">
+        <div class="r-stat"><div class="k">Diesel queimado hoje</div><div class="v white"><span id="litrosVal">0</span> <span class="u">L/ano</span></div></div>
+        <div class="r-stat"><div class="k">Por hectare</div><div class="v blue" id="perHaVal">R$ 0</div></div>
+        <div class="r-stat"><div class="k">Economia em 15 anos</div><div class="v white" id="economia15Val">R$ 0</div></div>
+        <div class="r-stat"><div class="k">CO₂ evitado</div><div class="v blue"><span id="co2Val">0</span> <span class="u">t/ano</span></div></div>
+      </div>
+
+      <p class="r-note" id="rNote">O retorno considera só a economia de diesel. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.</p>
+
+      <div class="cta">
+        <p>Quer saber o preço e montar seu projeto?</p>
+        <a id="ctaBtn" href="#">Peça um orçamento sem compromisso →</a>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ============ COMO CALCULAMOS ============ -->
+  <details class="method">
+    <summary><span class="chev">›</span> Como calculamos</summary>
+    <div class="method-body">
+      <p>A irrigação solar não queima combustível. Então o que você gasta hoje com diesel para bombear água vira economia, todo ano. A calculadora estima esse gasto a partir da sua lavoura, ou usa o consumo que você informar.</p>
+      <h3>Estimativa pela lavoura</h3>
+      <p>A partir da área, da cultura e da fonte de água, estimamos a energia de bombeamento e convertemos em litros de diesel:</p>
+      <ul>
+        <li>Volume de água: <code>ha × lâmina(mm) × 10</code> (1 mm = 10 m³/ha)</li>
+        <li>Energia hidráulica: <code>0,002725 × volume × altura manométrica</code></li>
+        <li>Diesel: energia ÷ rendimento da bomba × consumo do motor</li>
+        <li>Economia anual: litros × preço do diesel</li>
+      </ul>
+      <h3>Se você informa o consumo</h3>
+      <p>Em opções avançadas você pode informar seu consumo real, em litros por ano ou em reais por ano. O cálculo passa a usar esse número e o resultado fica exato.</p>
+      <h3>Retorno do investimento</h3>
+      <p>O tempo de retorno é o custo do sistema dividido pela economia anual de diesel. A conta considera só o combustível, sem contar o ganho de safra, então o retorno real tende a ser mais rápido.</p>
+      <h3>Fontes</h3>
+      <ul>
+        <li>Preço do diesel S-10: média nacional da ANP, julho de 2026.</li>
+        <li>Consumo do motor (0,28 L/kWh) e rendimento do conjunto motobomba (0,55): normas de engenharia de bombeamento.</li>
+        <li>Necessidade de água por cultura: Embrapa e FAO.</li>
+        <li>CO₂: 2,68 kg por litro de diesel.</li>
+      </ul>
+      <div class="disc">
+        Os valores pré-preenchidos são médias de referência e podem ser ajustados. O resultado é uma estimativa, não um orçamento. O dimensionamento exato do sistema solar é feito em uma visita técnica, sem custo.
+      </div>
+    </div>
+  </details>
+</div>
+
+<footer>
+  <div class="wrap">© 2026 Agrotech da Holanda · Tecnologia da Dutch Flow Technology, Países Baixos</div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var COEF = 0.002725, CO2_PER_L = 2.68, LANDED_BRL_POR_HA = 9200, LIFE_YEARS = 15;
+  var HEAD = { rio:20, poco:40 };
+  var LAMINA = { soja:400, milho:450, feijao:350, arroz:1200, cafe:1000, cana:1200, manga:1150, uva:700, melao:450, banana:1400, hortalicas:400, outro:600 };
+  var CULTURA_NOME = { soja:"Soja", milho:"Milho", feijao:"Feijão", arroz:"Arroz irrigado", cafe:"Café", cana:"Cana-de-açúcar", manga:"Manga", uva:"Uva", melao:"Melão", banana:"Banana", hortalicas:"Hortaliças", outro:"lavoura" };
+
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fmtR$ = new Intl.NumberFormat('pt-BR',{ style:'currency', currency:'BRL', maximumFractionDigits:0 });
+  var fmtN  = new Intl.NumberFormat('pt-BR',{ maximumFractionDigits:0 });
+  var fmtN1 = new Intl.NumberFormat('pt-BR',{ maximumFractionDigits:1 });
+  var $ = function(id){ return document.getElementById(id); };
+  var state = { fonte:'poco', consumoUnit:'litros' };
+
+  var ha=$('ha'), haNum=$('haNum'), cultura=$('cultura'), diesel=$('diesel'), dieselNum=$('dieselNum');
+  var lamina=$('lamina'), head=$('head'), eta=$('eta'), cec=$('cec'), consumo=$('consumo');
+
+  function num(el, dflt){ var v=parseFloat(String(el.value).replace(',','.')); return isNaN(v)?dflt:v; }
+  function rangeFill(el){ var min=+el.min,max=+el.max,v=+el.value; el.style.setProperty('--pct',((v-min)/(max-min))*100+'%'); }
+
+  function compute(){
+    var haV = Math.max(0, num(haNum, 50));
+    var preco = num(dieselNum, 6.97) || 6.97;
+    var conh = num(consumo, 0);
+    var litros, economia, exato=false;
+
+    if(conh > 0){
+      exato = true;
+      if(state.consumoUnit==='litros'){ litros = conh; economia = litros*preco; }
+      else { economia = conh; litros = economia/preco; }
+    } else {
+      var lam=num(lamina,1000), H=num(head,40), etaV=num(eta,0.55)||0.55, cecV=num(cec,0.28);
+      var V = haV*lam*10;
+      var Ehyd = COEF*V*H;
+      litros = (Ehyd/etaV)*cecV;
+      economia = litros*preco;
+    }
+
+    var co2 = litros*CO2_PER_L/1000;
+    var economia15 = economia*LIFE_YEARS;
+    var custo = haV*LANDED_BRL_POR_HA;
+    var payback = economia>0 ? custo/economia : Infinity;
+    var perHa = haV>0 ? economia/haV : 0;
+
+    render({ economia:economia, litros:litros, co2:co2, economia15:economia15, payback:payback, perHa:perHa, ha:haV, exato:exato });
+  }
+
+  function animateNumber(el, to, fmt, prefix){
+    prefix = prefix||'';
+    var from = el._cur||0;
+    if(prefersReduced || Math.abs(to-from)<1){ el._cur=to; el.textContent=prefix+fmt.format(to); return; }
+    var start=performance.now(), dur=500;
+    function step(now){ var t=Math.min(1,(now-start)/dur), e=1-Math.pow(1-t,3), v=from+(to-from)*e; el.textContent=prefix+fmt.format(v); if(t<1) requestAnimationFrame(step); else el._cur=to; }
+    requestAnimationFrame(step);
+  }
+
+  function paybackText(p){
+    if(!isFinite(p) || p<=0) return '–';
+    if(p<1) return 'menos de 1 ano';
+    return '~'+fmtN1.format(p)+(p<2?' ano':' anos');
+  }
+
+  function render(r){
+    animateNumber($('economiaVal'), r.economia, fmtR$);
+    $('cmpDiesel').textContent = fmtR$.format(r.economia);
+    animateNumber($('litrosVal'), r.litros, fmtN);
+    animateNumber($('economia15Val'), r.economia15, fmtR$);
+    $('perHaVal').textContent = fmtR$.format(r.perHa);
+    $('co2Val').textContent = fmtN1.format(r.co2);
+    $('paybackVal').textContent = paybackText(r.payback);
+
+    $('barDiesel').style.width = r.economia>0 ? '100%' : '4%';
+    $('barSolar').style.width = '2%';
+
+    var tag=$('estTag');
+    if(r.exato){ tag.textContent='Cálculo exato'; tag.classList.add('exato'); }
+    else { tag.textContent='Estimativa'; tag.classList.remove('exato'); }
+    document.querySelector('.r-payback').style.display = (isFinite(r.payback)&&r.payback>0)?'':'none';
+
+    var culNome = CULTURA_NOME[cultura.value]||'lavoura';
+    var subject = 'Orçamento irrigação solar - '+fmtN.format(r.ha)+' ha';
+    var body = 'Olá, quero um orçamento de irrigação solar.\n\n'
+      + 'Área: '+fmtN.format(r.ha)+' hectares\n'
+      + 'Cultura: '+culNome+'\n'
+      + 'Gasto com diesel hoje: '+fmtR$.format(r.economia)+' por ano\n'
+      + 'Retorno estimado: '+paybackText(r.payback)+'\n\n'
+      + 'Meu nome:\nMunicípio/Estado:\nTelefone:';
+    $('ctaBtn').setAttribute('href','mailto:info@agrotechdaholanda.com.br?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body));
+  }
+
+  function syncPair(rangeEl, numEl){
+    rangeEl.addEventListener('input', function(){ numEl.value=rangeEl.value; rangeFill(rangeEl); compute(); });
+    numEl.addEventListener('input', function(){ var v=num(numEl,+rangeEl.value); if(v>=+rangeEl.min && v<=+rangeEl.max){ rangeEl.value=v; rangeFill(rangeEl); } compute(); });
+  }
+  syncPair(ha, haNum);
+  syncPair(diesel, dieselNum);
+  [cultura,lamina,head,eta,cec,consumo].forEach(function(el){ el.addEventListener('input', compute); });
+  cultura.addEventListener('change', function(){ lamina.value = LAMINA[cultura.value]||600; compute(); });
+
+  Array.prototype.forEach.call(document.querySelectorAll('#fonte button'), function(b){
+    b.addEventListener('click', function(){
+      state.fonte=b.getAttribute('data-fonte');
+      Array.prototype.forEach.call(document.querySelectorAll('#fonte button'), function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
+      head.value=HEAD[state.fonte]; compute();
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#consumoUnit button'), function(b){
+    b.addEventListener('click', function(){
+      state.consumoUnit=b.getAttribute('data-u');
+      Array.prototype.forEach.call(document.querySelectorAll('#consumoUnit button'), function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
+      compute();
+    });
+  });
+
+  var advToggle=$('advToggle'), adv=$('adv');
+  advToggle.addEventListener('click', function(){ var o=adv.classList.toggle('open'); advToggle.setAttribute('aria-expanded', o?'true':'false'); });
+
+  rangeFill(ha); rangeFill(diesel);
+  compute();
+})();
+</script>
+
+</body>
+</html>
