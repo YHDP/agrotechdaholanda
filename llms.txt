@@ -1,0 +1,54 @@
+# Agrotech da Holanda
+
+> Marca brasileira que leva ao produtor a tecnologia da Dutch Flow Technology em duas linhas de
+> produto: irrigação solar inteligente e câmara fria solar. Agricultura movida a energia solar.
+
+Site: https://agrotechdaholanda.com.br
+Idioma: português do Brasil
+Área atendida: Brasil
+Contato: info@agrotechdaholanda.com.br
+
+## O que é a Agrotech da Holanda
+
+A Agrotech da Holanda representa no Brasil a tecnologia da Dutch Flow Technology. A tecnologia é
+de origem holandesa; a Agrotech da Holanda é a marca com que ela chega ao produtor brasileiro.
+
+## Linhas de produto
+
+### Irrigação solar inteligente
+Sistema de irrigação movido a energia solar. Uma bomba no poço, painéis na lavoura, válvulas por
+zona e um controlador que liga pela umidade do solo em vez de por um calendário fixo. O conjunto de
+sensores mede umidade do solo, pH do solo, nível da água, qualidade da água e o clima, este último
+para estimar a evapotranspiração. O produtor acompanha e comanda pelo celular. Atende de 10 a
+centenas de hectares. O layout é desenhado por propriedade.
+Página: https://agrotechdaholanda.com.br/irrigacao-solar/
+
+### Câmara fria solar
+Câmara fria movida a energia solar, instalada na própria propriedade, sem necessidade de rede
+elétrica. Opera de 10 °C a −5 °C. Chega pronta, transportada de caminhão, e pode mudar de lugar.
+Reduz a perda depois da colheita: o produtor colhe, resfria e vende na hora certa em vez de vender
+com pressa. Pode ser comprada por uma cooperativa e compartilhada entre os cooperados, já que a
+colheita de cada um cai em dias diferentes.
+Página: https://agrotechdaholanda.com.br/camara-fria-solar/
+
+## Ferramentas públicas
+
+- Calculadora do diesel — calcula quanto o diesel custa à irrigação, com os números do próprio
+  produtor: área, cultura, preço do diesel, consumo. https://agrotechdaholanda.com.br/calculadora.html
+- Mapa do clima — dados climáticos dos 5.570 municípios brasileiros, com fonte Lobelia Earth
+  ("Brasil in a +2ºC World"). Dados de nível de triagem. https://agrotechdaholanda.com.br/mapa-do-clima.html
+
+## O que não afirmamos
+
+Não publicamos preços, número de instalações, percentuais de desempenho nem especificações
+técnicas. Antes de dimensionar qualquer sistema, é feita medição local.
+
+## Páginas
+
+- https://agrotechdaholanda.com.br/ — início
+- https://agrotechdaholanda.com.br/camara-fria-solar/ — câmara fria solar
+- https://agrotechdaholanda.com.br/irrigacao-solar/ — irrigação solar inteligente
+- https://agrotechdaholanda.com.br/faq.html — perguntas frequentes
+- https://agrotechdaholanda.com.br/calculadora.html — calculadora do diesel
+- https://agrotechdaholanda.com.br/mapa-do-clima.html — mapa do clima
+- https://agrotechdaholanda.com.br/privacidade.html — privacidade

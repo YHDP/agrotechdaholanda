@@ -14,3 +14,6 @@
 *.pages
 *.key
 *.numbers
+
+# Intern merkdocument — hoort niet op de publieke site (Pages serveert de repo-root).
+brandbook.html
