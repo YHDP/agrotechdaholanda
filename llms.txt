@@ -33,7 +33,7 @@ Página: https://agrotechdaholanda.com.br/camara-fria-solar/
 
 ## Ferramentas públicas
 
-- Calculadora do diesel — calcula quanto o diesel custa à irrigação, com os números do próprio
+- Calculadora de economia — calcula quanto o diesel custa à irrigação hoje, com os números do próprio
   produtor: área, cultura, preço do diesel, consumo. https://agrotechdaholanda.com.br/calculadora.html
 - Risco hídrico por município — dados climáticos dos 5.570 municípios brasileiros, com fonte
   Lobelia Earth ("Brasil in a +2ºC World"). Dados de nível de triagem.
