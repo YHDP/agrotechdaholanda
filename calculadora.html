@@ -120,9 +120,29 @@
 
   .cta { margin-top:24px; padding-top:22px; border-top:1px solid var(--panel-line); }
   .cta p { font-size:0.9rem; color:#E9F1F8; margin-bottom:12px; }
-  .cta a { display:inline-flex; align-items:center; gap:9px; font:inherit; font-weight:700; font-size:0.98rem; color:var(--navy); background:var(--orange); border-radius:999px; padding:14px 26px; text-decoration:none; transition:transform .15s; }
-  .cta a:hover { transform:translateY(-1px); }
-  .cta a:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+  .cta .btn { display:inline-flex; align-items:center; gap:9px; font:inherit; font-weight:700; font-size:0.98rem; color:var(--navy); background:var(--orange); border-radius:999px; padding:14px 26px; text-decoration:none; transition:transform .15s; }
+  .cta .btn:hover { transform:translateY(-1px); }
+  .cta .btn:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+
+  /* The e-mail address in full, next to the button. The button opens a mail client with the
+     calculation already written out, which is useless to anyone who reads mail somewhere the
+     browser does not know about. The address itself, visible and copyable, is the fallback that
+     always works. It stays a mailto link as well, so one element serves both habits. */
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+            overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+  .cta-mail { margin-top:16px; font-size:0.86rem; color:var(--panel-soft); }
+  .cta-mail .row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:7px; }
+  .cta-mail a { color:var(--blue); font-weight:700; font-size:0.95rem; text-decoration:none;
+                border-bottom:1px solid rgba(56,182,255,.45); word-break:break-all; }
+  .cta-mail a:hover { border-bottom-color:var(--blue); }
+  .cta-mail a:focus-visible { outline:3px solid var(--blue); outline-offset:3px; border-radius:3px; }
+  .copybtn { display:inline-flex; align-items:center; gap:6px; font:inherit; font-size:0.78rem;
+          font-weight:700; color:#E9F1F8; background:rgba(255,255,255,.10);
+          border:1px solid var(--panel-line); border-radius:999px; padding:6px 13px;
+          cursor:pointer; transition:background .15s; }
+  .copybtn:hover { background:rgba(255,255,255,.18); }
+  .copybtn:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+  .copybtn[data-done] { background:var(--blue); color:var(--navy); border-color:var(--blue); }
 
   /* method */
   .method { margin:56px 0 20px; }
@@ -286,7 +306,20 @@
 
       <div class="cta">
         <p>Quer saber o preço e montar seu projeto?</p>
-        <a id="ctaBtn" href="#">Peça um orçamento sem compromisso →</a>
+        <a class="btn" id="ctaBtn" href="#">Peça um orçamento sem compromisso →</a>
+        <div class="cta-mail" data-copy-scope>
+          Ou escreva direto para:
+          <div class="row">
+            <a href="mailto:info@agrotechdaholanda.com.br">info@agrotechdaholanda.com.br</a>
+            <button type="button" class="copybtn"
+                    data-copy="info@agrotechdaholanda.com.br"
+                    data-track="copiar-email"
+                    aria-label="Copiar o endereço de e-mail">
+              <span data-copy-label>Copiar</span>
+            </button>
+          </div>
+          <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
+        </div>
       </div>
     </aside>
   </div>
@@ -449,6 +482,8 @@
   compute();
 })();
 </script>
+
+<script src="assets/js/copy.js" defer></script>
 
 </body>
 </html>

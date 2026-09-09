@@ -68,7 +68,24 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .bordered{border-top:1px solid var(--linha)}
 .muted{color:var(--cinza)}
 .small{font-size:14px}
-.ctarow{margin-top:22px}
+.ctarow{margin-top:22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+/* Copiar o e-mail. O botão laranja abre o cliente de e-mail que o navegador conhece; quem lê
+   e-mail no Gmail em outra aba ou no celular da empresa clica e não acontece nada de útil. Este
+   botão copia o endereço, que é o caminho que sempre funciona. Fica ao lado, nunca no lugar. */
+.copybtn{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;font-weight:700;
+  border-radius:999px;padding:9px 16px;cursor:pointer;transition:background .15s;
+  color:var(--navy);background:transparent;border:2px solid var(--navy)}
+.copybtn:hover{background:rgba(20,38,60,.08)}
+.copybtn:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+.copybtn[data-done]{background:var(--navy);color:var(--papel)}
+/* Na faixa escura o contorno navy desaparece no fundo, então inverte. */
+.dark .copybtn{color:var(--papel);border-color:rgba(251,250,247,.55)}
+.dark .copybtn:hover{background:rgba(251,250,247,.14)}
+.dark .copybtn[data-done]{background:var(--papel);color:var(--navy);border-color:var(--papel)}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .more{margin-top:20px;font-weight:600}
 .crumb{padding:16px 24px 0;font-size:14px;color:var(--cinza)}
 .crumb ol{list-style:none;display:flex;gap:8px;margin:0;padding:0}
