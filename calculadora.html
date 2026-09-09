@@ -15,6 +15,13 @@
   @font-face { font-family:'Poppins'; font-weight:800; font-display:swap; src:url('assets/fonts/poppins-800.woff2') format('woff2'); }
   :root {
     --orange:#FF914D; --blue:#38B6FF; --navy:#14263C; --paper:#FBFAF7;
+    /* Text-only variants. Same hue, dark enough to read: 4.5:1 on paper and on white.
+       As type on paper the bright pair lands at 2.13:1 and 2.16:1, which is also what the
+       brandbook already says about orange on a light field. Bright stays for fills,
+       borders and focus rings; these two are for type ON THE LIGHT HALF ONLY. Inside .result,
+       which is navy, the bright pair reaches 6.8:1 and these fall to 3.2:1, so the dark panel
+       keeps --orange and --blue. */
+    --orange-ink:#C74C00; --blue-ink:#0078BE;
     --soft:#55677D; --line:#E8E4DB; --card:#FFFFFF;
     --panel:#14263C; --panel-line:rgba(255,255,255,0.12); --panel-soft:#9DB2C9;
   }
@@ -31,10 +38,10 @@
   .hero-top { display:flex; align-items:center; gap:14px; }
   .hero-mark { width:44px; height:44px; flex:none; }
   .hero-brand { font-weight:700; font-size:0.98rem; letter-spacing:-0.01em; }
-  .hero-brand span { color:var(--orange); }
+  .hero-brand span { color:var(--orange-ink); }
   .hero-back { margin-left:auto; font-size:0.85rem; font-weight:600; color:var(--navy); text-decoration:none; border-bottom:2px solid var(--orange); padding-bottom:2px; }
   .hero-body { padding:34px 0 10px; max-width:22em; }
-  .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); }
+  .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange-ink); }
   .hero h1 { font-size:clamp(2rem,5.2vw,3.1rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-top:12px; }
   .hero p.thesis { margin-top:16px; font-size:clamp(1rem,2.1vw,1.15rem); color:var(--soft); max-width:34em; }
 
@@ -121,7 +128,7 @@
   .method { margin:56px 0 20px; }
   .method summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.05rem; padding:16px 0; border-top:1px solid var(--line); }
   .method summary::-webkit-details-marker { display:none; }
-  .method summary .chev { transition:transform .2s; color:var(--orange); }
+  .method summary .chev { transition:transform .2s; color:var(--orange-ink); }
   .method[open] summary .chev { transform:rotate(90deg); }
   .method-body { padding:6px 0 20px; max-width:52em; color:var(--soft); font-size:0.92rem; }
   .method-body h2 { color:var(--navy); font-size:0.95rem; margin:18px 0 6px; }
@@ -161,6 +168,8 @@
       <p class="thesis">Estime quanto a sua bomba a diesel gasta por ano e em quanto tempo a irrigação solar se paga. Preencha a sua área, o resultado aparece na hora.</p>
     </div>
   </header>
+
+<main>
 
   <div class="calc">
     <!-- ============ INPUTS ============ -->
@@ -311,6 +320,7 @@
       </div>
     </div>
   </details>
+  </main>
 </div>
 
 <footer>

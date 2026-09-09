@@ -22,6 +22,11 @@
   @font-face { font-family:'Poppins'; font-weight:800; font-display:swap; src:url('assets/fonts/poppins-800.woff2') format('woff2'); }
   :root {
     --orange:#FF914D; --blue:#38B6FF; --navy:#14263C; --paper:#FBFAF7;
+    /* Text-only variants. Same hue, dark enough to read: 4.5:1 on paper and on white.
+       As type the bright pair lands at 2.16:1, so the headline figures on this page were
+       the least readable thing on it. Bright stays for fills, borders, the map, and type on the
+       navy blocks (.posicao, .pop), where bright reaches 6.9:1 and the ink pair falls to 3.2:1. */
+    --orange-ink:#C74C00; --blue-ink:#0078BE; --tijolo-ink:#C9501D;
     --soft:#55677D; --line:#E8E4DB; --card:#FFFFFF; --panel:#14263C;
   }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -35,11 +40,11 @@
   .hero-top { display:flex; align-items:center; gap:14px; }
   .hero-mark { width:44px; height:44px; flex:none; }
   .hero-brand { font-weight:700; font-size:0.98rem; letter-spacing:-0.01em; }
-  .hero-brand span { color:var(--orange); }
+  .hero-brand span { color:var(--orange-ink); }
   .hero-back { margin-left:auto; font-size:0.85rem; font-weight:600; color:var(--navy);
                text-decoration:none; border-bottom:2px solid var(--orange); padding-bottom:2px; }
   .hero-body { padding:34px 0 10px; }
-  .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange); }
+  .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange-ink); }
   .hero h1 { font-size:clamp(2rem,5.2vw,3.1rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-top:12px; }
   .hero p.thesis { margin-top:16px; font-size:clamp(1.02rem,2.1vw,1.22rem); color:var(--soft); max-width:46em; }
 
@@ -64,8 +69,8 @@
   .kpi .rot { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--soft); line-height:1.35; }
   .kpi .val { font-size:1.9rem; font-weight:800; letter-spacing:-0.02em; margin-top:4px; }
   .kpi .val small { font-size:0.9rem; font-weight:600; color:var(--soft); }
-  .kpi.quente .val { color:var(--orange); }
-  .kpi.agua .val { color:var(--blue); }
+  .kpi.quente .val { color:var(--orange-ink); }
+  .kpi.agua .val { color:var(--blue-ink); }
   .posicao { margin-top:16px; padding:14px 16px; border-radius:14px; background:var(--panel); color:#fff;
              display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
   .posicao .rot { font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#9DB2C9; }
@@ -104,13 +109,13 @@
   .seg-card.hidrica { border-left-color:var(--blue); }
   .seg-card.nacional { border-left-color:#D4541E; }
   .numero { display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin:20px 0 6px; }
-  .numero .big { font-size:clamp(2.6rem,7vw,3.6rem); font-weight:800; color:var(--blue);
+  .numero .big { font-size:clamp(2.6rem,7vw,3.6rem); font-weight:800; color:var(--blue-ink);
                  letter-spacing:-0.03em; line-height:1; }
   .numero .glosa { font-size:1rem; color:var(--soft); max-width:34ch; }
   .caso { border-left:4px solid #D4541E; background:var(--card); border-radius:0 14px 14px 0;
           padding:16px 20px; margin:22px 0 6px; max-width:66ch; }
   .caso .quando { font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
-                  color:#D4541E; }
+                  color:var(--tijolo-ink); }
   .caso p { margin-top:6px; }
 
   .abas { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 14px; }
@@ -167,7 +172,7 @@
                 margin:20px 0 22px; }
   .numeros-br .cartao { border:1px solid var(--line); border-radius:16px; padding:18px 20px;
                         background:var(--card); }
-  .numeros-br .cifra { font-size:clamp(1.9rem,4.4vw,2.5rem); font-weight:800; color:var(--blue);
+  .numeros-br .cifra { font-size:clamp(1.9rem,4.4vw,2.5rem); font-weight:800; color:var(--blue-ink);
                        letter-spacing:-0.03em; line-height:1.05; }
   .numeros-br .glosa { font-size:0.88rem; color:var(--soft); margin-top:6px; }
   .escala { display:flex; align-items:center; gap:10px; margin-top:14px; font-size:0.78rem; color:var(--soft); }
@@ -213,6 +218,8 @@
       sua lavoura.</p>
     </div>
   </header>
+
+  <main>
 
   <section>
     <h2>Procure o seu município</h2>
@@ -368,6 +375,7 @@
     <a href="./" style="color:var(--navy);font-weight:600">fale com a gente</a> para receber a ficha
     completa do seu município.</p>
   </section>
+  </main>
 </div>
 
 <footer><div class="wrap">
