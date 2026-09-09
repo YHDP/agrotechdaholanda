@@ -1,0 +1,48 @@
+name: Link Check
+
+# Catches two different things. On push, a link that this build broke. Weekly, external link rot:
+# an ANP page moving, a Lobelia URL changing, an Embrapa reference disappearing. The site cites
+# sources rather than making claims of its own, so a dead citation costs more here than a dead
+# navigation link.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Mondays 08:00 UTC
+    - cron: "0 8 * * 1"
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 403 and 429 are accepted because several Brazilian government and press sites answer
+          # them to any datacentre IP; that is a bot policy, not a broken link.
+          args: >-
+            --root-dir .
+            --no-progress
+            --timeout 30
+            --max-retries 3
+            --user-agent 'Mozilla/5.0 (compatible; LycheeBot/0.x; +https://agrotechdaholanda.com.br) AgrotechLinkCheck/1.0'
+            --accept 200,202,204,301,302,307,308,403,415,429
+            './**/*.html'
+          fail: false
+          format: markdown
+          jobSummary: true
+
+      - name: Create issue on failure
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Broken links detected"
+          content-filepath: ./lychee/out.md
+          labels: broken-links
+          assignees: YHDP

@@ -1,0 +1,57 @@
+name: IndexNow
+
+# Submits the sitemap URLs to the IndexNow endpoint that Bing, Yandex and Seznam share, so a
+# change is crawled in hours instead of whenever the next crawl happens to come round. Google
+# does not participate; it still discovers through the sitemap in robots.txt.
+#
+# The key is deliberately public: IndexNow proves ownership by having the same string served from
+# the host itself, at /290f5c10b475776bdaa6a8c22cc10b25.txt. It is not a secret and must not be
+# treated as one.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # IndexNow fetches keyLocation at submission time. A push and its Pages deploy are not the
+      # same event, so submitting immediately can beat the key file to the server and the whole
+      # batch is rejected with nothing to show for it. Wait for the file to actually answer.
+      - name: Wait for the key file to be served
+        run: |
+          KEY="290f5c10b475776bdaa6a8c22cc10b25"
+          for i in $(seq 1 30); do
+            if curl -fsS "https://agrotechdaholanda.com.br/$KEY.txt" | grep -qx "$KEY"; then
+              echo "key file live after $((i * 10))s"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "key file did not appear within 5 minutes"
+          exit 1
+
+      - name: Submit sitemap URLs to IndexNow
+        run: |
+          KEY="290f5c10b475776bdaa6a8c22cc10b25"
+          HOST="agrotechdaholanda.com.br"
+
+          URLS=$(grep -oP '<loc>\K[^<]+' sitemap.xml)
+          URL_JSON=$(echo "$URLS" | jq -R -s 'split("\n") | map(select(length > 0))')
+
+          echo "Submitting $(echo "$URLS" | wc -l) URLs to IndexNow..."
+
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{
+              \"host\": \"$HOST\",
+              \"key\": \"$KEY\",
+              \"keyLocation\": \"https://$HOST/$KEY.txt\",
+              \"urlList\": $URL_JSON
+            }"
+
+          echo ""
+          echo "IndexNow submission complete."

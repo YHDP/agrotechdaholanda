@@ -57,7 +57,7 @@
 
   .painel { background:var(--card); border:1px solid var(--line); border-radius:20px;
             padding:26px; margin:22px 0 8px; }
-  .painel h2 { font-size:1.7rem; font-weight:800; letter-spacing:-0.02em; }
+  .painel h3 { font-size:1.7rem; font-weight:800; letter-spacing:-0.02em; }
   .painel .local { color:var(--soft); font-size:0.95rem; margin-bottom:18px; }
   .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:14px; }
   .kpi { border:1px solid var(--line); border-radius:14px; padding:14px 16px; background:var(--paper); }
@@ -73,7 +73,7 @@
   .posicao .de { font-size:0.9rem; color:#9DB2C9; }
 
   section { padding:34px 0; }
-  h3 { font-size:1.35rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px; }
+  h2 { font-size:1.35rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:8px; }
   p.texto { max-width:66ch; margin-bottom:12px; }
   p.texto.destaque { font-size:1.12rem; font-weight:600; color:var(--navy); }
 
@@ -133,8 +133,11 @@
   .dica { position:absolute; z-index:6; left:10px; bottom:10px; font-size:0.72rem; color:var(--soft);
           background:rgba(255,255,255,0.9); padding:5px 10px; border-radius:9px; pointer-events:none; }
   .mapa path { stroke:#fff; stroke-width:0.55; stroke-linejoin:round; cursor:pointer; }
-  /* constant on screen at any zoom, so the selection reads the same close up and far out */
-  .mapa path.on { stroke:var(--navy); stroke-width:2.5; vector-effect:non-scaling-stroke; }
+  /* Stroke width stays constant on screen at any zoom, so the selection reads the same close up
+     and far out. vector-effect lives on the element as a presentation attribute rather than here:
+     it is valid SVG 2 and works everywhere, but the W3C CSS checker does not know the property and
+     fails the whole stylesheet on it. Set and cleared alongside this class in selecionar(). */
+  .mapa path.on { stroke:var(--navy); stroke-width:2.5; }
   .pop { position:absolute; z-index:5; pointer-events:none; background:var(--panel); color:#fff;
          border-radius:12px; padding:9px 13px; box-shadow:0 10px 26px rgba(20,38,60,0.28);
          white-space:nowrap; transform:translate(-50%,-118%); }
@@ -156,7 +159,7 @@
   .coluna-dados .kpi { padding:11px 13px; }
   .coluna-dados .kpi .val { font-size:1.55rem; white-space:nowrap; }
   .coluna-dados .kpi .val small { font-size:0.78rem; }
-  .coluna-dados .painel h2 { font-size:1.45rem; }
+  .coluna-dados .painel h3 { font-size:1.45rem; }
   .painel.vazio { color:var(--soft); }
   .painel.vazio p { font-weight:600; color:var(--navy); }
   .painel.vazio p.menor { font-weight:400; font-size:0.88rem; color:var(--soft); margin-top:6px; }
@@ -212,14 +215,14 @@
   </header>
 
   <section>
-    <h3>Procure o seu município</h3>
+    <h2>Procure o seu município</h2>
     <p class="texto">Essa conta não cai igual no país inteiro. Busque pelo nome ou clique direto no
     mapa, e os números do lado mudam junto.</p>
 
     <div class="ferramenta">
       <div class="coluna-dados">
         <div class="busca">
-          <input id="q" type="search" autocomplete="off" placeholder="Digite o nome do município"
+          <input id="q" type="text" autocomplete="off" placeholder="Digite o nome do município"
                  aria-label="Buscar município" aria-controls="sug" role="combobox" aria-expanded="false">
           <div class="sugestoes" id="sug" role="listbox"></div>
         </div>
@@ -230,7 +233,7 @@
         </div>
 
         <div class="painel" id="painel" hidden>
-          <h2 id="pnome"></h2>
+          <h3 id="pnome">Selecione um município</h3>
           <p class="local" id="plocal"></p>
           <div class="kpis">
             <div class="kpi quente"><div class="rot">Dias acima de 35 °C</div>
@@ -278,7 +281,7 @@
   </section>
 
   <section>
-    <h3>A conta da água</h3>
+    <h2>A conta da água</h2>
     <div class="editorial">
       <div>
         <p class="texto">A agricultura responde por 72% de toda a água doce retirada no mundo. É o
@@ -325,7 +328,7 @@
   </section>
 
   <section>
-    <h3>No Brasil, isso já é medição, não previsão</h3>
+    <h2>No Brasil, isso já é medição, não previsão</h2>
     <div class="editorial">
       <div>
         <p class="texto">Os três números abaixo saem da série histórica, de 1980 a 2015. Já
@@ -351,7 +354,7 @@
   </section>
 
   <section>
-    <h3>Por que isto importa para quem planta</h3>
+    <h2>Por que isto importa para quem planta</h2>
     <div class="colunas-texto">
       <p class="texto">Chuva caindo e calor subindo empurram na mesma direção: a lavoura precisa de
       mais água justamente quando há menos. Bombear essa água com diesel amarra o custo por hectare ao
@@ -370,7 +373,7 @@
 <footer><div class="wrap">
   <div class="fontes">
   <p><strong>Fonte dos dados climáticos municipais:</strong> Lobelia Earth, Brasil in a +2ºC World,
-  consultado em 07/08/2026, <a href="https://portal.brasil2c.com/">portal.brasil2c.com</a>. Iniciativa da
+  consultado em 09/09/2026, <a href="https://portal.brasil2c.com/">portal.brasil2c.com</a>. Iniciativa da
   Lobelia e do Instituto Itaúsa.</p>
   <p><strong>Os números globais são da FAO</strong>, da página Agricultural Water Management: a
   agricultura responde por 72% da água doce retirada no mundo, e até 2050 precisa gerar 50% mais
@@ -584,11 +587,15 @@ function mostrar(code) {
   document.getElementById('prank').textContent = RANK.get(code) ? RANK.get(code) + 'º' : 'n/d';
   q.value = r[I_NOME];
   fechar();
-  if (selecionado) selecionado.classList.remove('on');
+  if (selecionado) {
+    selecionado.classList.remove('on');
+    selecionado.removeAttribute('vector-effect');
+  }
   selecionado = document.getElementById('m' + code);
   codigoSel = code;
   if (selecionado) {
     selecionado.classList.add('on');
+    selecionado.setAttribute('vector-effect', 'non-scaling-stroke');
     selecionado.parentNode.appendChild(selecionado);
   }
   rotular();
