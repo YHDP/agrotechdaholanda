@@ -94,10 +94,10 @@ with the files. It does not require attribution on the rendered page.
   it. Whether to show VIOLAGO openly with proper credit instead is still an open question with Tom
   (`dft-violago-logo-clearance-2026-07-26`).
 
-## Climate data (mapa-do-clima.html)
+## Climate data (risco-hidrico-por-municipio.html)
 
 - **Lobelia Earth, Brasil in a +2ºC World** — the municipal climate figures, the choropleth values and
-  the geometry behind `mapa-do-clima.html`. Initiative of **Lobelia** and **Instituto Itaúsa**,
+  the geometry behind `risco-hidrico-por-municipio.html`. Initiative of **Lobelia** and **Instituto Itaúsa**,
   <https://portal.brasil2c.com/>. No formal licence is published; the platform's About page asks for
   attribution in this exact form:
 

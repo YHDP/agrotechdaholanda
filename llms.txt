@@ -35,8 +35,9 @@ Página: https://agrotechdaholanda.com.br/camara-fria-solar/
 
 - Calculadora do diesel — calcula quanto o diesel custa à irrigação, com os números do próprio
   produtor: área, cultura, preço do diesel, consumo. https://agrotechdaholanda.com.br/calculadora.html
-- Mapa do clima — dados climáticos dos 5.570 municípios brasileiros, com fonte Lobelia Earth
-  ("Brasil in a +2ºC World"). Dados de nível de triagem. https://agrotechdaholanda.com.br/mapa-do-clima.html
+- Risco hídrico por município — dados climáticos dos 5.570 municípios brasileiros, com fonte
+  Lobelia Earth ("Brasil in a +2ºC World"). Dados de nível de triagem.
+  https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html
 
 ## O que não afirmamos
 
@@ -50,5 +51,5 @@ técnicas. Antes de dimensionar qualquer sistema, é feita medição local.
 - https://agrotechdaholanda.com.br/irrigacao-solar/ — irrigação solar inteligente
 - https://agrotechdaholanda.com.br/faq.html — perguntas frequentes
 - https://agrotechdaholanda.com.br/calculadora.html — calculadora do diesel
-- https://agrotechdaholanda.com.br/mapa-do-clima.html — mapa do clima
+- https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html — risco hídrico por município
 - https://agrotechdaholanda.com.br/privacidade.html — privacidade

@@ -105,6 +105,9 @@ a.pill{text-decoration:none}
 /* ── calculator call-out ─────────────────────────────────────────────────── */
 .calcbox{display:flex;gap:26px;align-items:center;justify-content:space-between;flex-wrap:wrap;
   background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:26px 28px}
+/* Twee kaders onder elkaar: de calculadora en het risicomapa staan als paar in dezelfde
+   sectie, dus het tweede heeft ruimte nodig die het als los blok niet had. */
+.calcbox+.calcbox{margin-top:16px}
 .calcbox h3{margin-bottom:4px}
 .calcbox p{margin:0;color:var(--cinza);max-width:52ch}
 /* ── faq ─────────────────────────────────────────────────────────────────── */
