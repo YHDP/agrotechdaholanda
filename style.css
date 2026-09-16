@@ -175,3 +175,21 @@ a.pill{text-decoration:none}
 .footer__bottom{border-top:1px solid var(--linha);margin-top:30px;padding:20px 24px;
   font-size:14px;color:var(--cinza)}
 .footer__bottom p{margin:0}
+
+/* ── Imagem de produto ─────────────────────────────────────────────────────
+   O corte do contêiner é uma arte técnica sobre fundo navy, não uma fotografia.
+   A legenda logo abaixo diz isso, e é obrigatória onde a imagem aparecer. */
+.shot{margin:26px 0 0;border-radius:16px;overflow:hidden;background:var(--navy);
+  box-shadow:0 18px 50px rgba(20,38,60,.16)}
+.shot img{display:block;width:100%;height:auto}
+.legenda{font-size:14px;color:var(--cinza);margin:10px 0 0;max-width:62ch}
+
+/* Números de destaque. Só entram aqui os que a ficha técnica da DFT confirma. */
+.specrow{display:flex;gap:28px;flex-wrap:wrap;margin-top:26px}
+.spec{flex:1 1 150px}
+.spec b{display:block;font-size:26px;font-weight:800;color:var(--navy);line-height:1.15}
+.spec span{display:block;font-size:14px;color:var(--cinza);margin-top:2px}
+
+/* Laranja é câmara fria, azul é irrigação. O texto fica navy sobre o azul:
+   azul #38B6FF com branco dá 1,9:1 e reprova; com navy dá cerca de 7:1. */
+.cta--azul{background:var(--azul);color:var(--navy);border:0}
