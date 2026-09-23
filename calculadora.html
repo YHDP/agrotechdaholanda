@@ -341,6 +341,7 @@
       <p>Em opções avançadas você pode informar seu consumo real, em litros por ano ou em reais por ano. O cálculo passa a usar esse número e o resultado fica exato.</p>
       <h2>Retorno do investimento</h2>
       <p>O tempo de retorno é o custo do sistema dividido pela economia anual de diesel. A conta considera só o combustível, sem contar o ganho de safra, então o retorno real tende a ser mais rápido.</p>
+      <p>Custo do sistema: US$ 1.200 por hectare na fábrica. Posto no Brasil, com frete e importação, fica em cerca de US$ 1.970 por hectare, ou R$ 10.050 ao câmbio de R$ 5,10. A instalação (poço, estruturas, reservatório) não está incluída.</p>
       <h2>Fontes</h2>
       <ul>
         <li>Preço do diesel S-10: média nacional da ANP, julho de 2026.</li>
@@ -363,7 +364,7 @@
 <script>
 (function(){
   "use strict";
-  var COEF = 0.002725, CO2_PER_L = 2.68, LANDED_BRL_POR_HA = 9200, LIFE_YEARS = 15;
+  var COEF = 0.002725, CO2_PER_L = 2.68, LANDED_BRL_POR_HA = 1970*5.10, LIFE_YEARS = 15;
   var HEAD = { rio:20, poco:40 };
   var LAMINA = { soja:400, milho:450, feijao:350, arroz:1200, cafe:1000, cana:1200, manga:1150, uva:700, melao:450, banana:1400, hortalicas:400, outro:600 };
   var CULTURA_NOME = { soja:"Soja", milho:"Milho", feijao:"Feijão", arroz:"Arroz irrigado", cafe:"Café", cana:"Cana-de-açúcar", manga:"Manga", uva:"Uva", melao:"Melão", banana:"Banana", hortalicas:"Hortaliças", outro:"lavoura" };
