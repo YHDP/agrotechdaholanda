@@ -139,3 +139,9 @@ with the files. It does not require attribution on the rendered page.
   <https://pixabay.com/service/license-summary/>: free for commercial use, no attribution required).
   Files: `alexzavesa` + `freesound_community` water-drop SFX. Only the composited reel is distributed;
   the raw SFX are not redistributed as-is.
+
+## Icons
+
+- **Lucide** (lucide-static v1.47.0). License: ISC <https://lucide.dev/license>.
+  Inlined as SVG paths by the site generator (`build_site.py`, from the deck pack `img/icons/`);
+  no icon font or CDN request. The Instagram glyph on the site is drawn by us, not a brand asset.

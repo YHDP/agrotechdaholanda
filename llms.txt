@@ -1,56 +1,93 @@
 # Agrotech da Holanda
 
-> Marca brasileira que leva ao produtor a tecnologia da Dutch Flow Technology em duas linhas de
-> produto: irrigação solar inteligente e câmara fria solar. Água e frio, movidos a energia solar:
-> soluções no nexo entre segurança hídrica, energética e alimentar.
+> Agrotech da Holanda é a marca brasileira da tecnologia Dutch Flow Technology para irrigação solar inteligente e câmara fria solar; a representação comercial no Brasil é da Regen Studio Consultoria LTDA.
 
 Site: https://agrotechdaholanda.com.br
-Idioma: português do Brasil
+Idiomas: português do Brasil; inglês nas páginas listadas em "Pages in English" (a calculadora e o
+  risco hídrico por município só em português)
 Área atendida: Brasil
 Contato: info@agrotechdaholanda.com.br
+Instagram: https://www.instagram.com/agrotech_da_holanda/
+Atualizado em 2026-09-24
 
-## O que é a Agrotech da Holanda
+## Quem é quem
 
-A Agrotech da Holanda representa no Brasil a tecnologia da Dutch Flow Technology. O sistema é
-projetado por holandeses, com mais de 20 anos de experiência no setor de água; a Agrotech da Holanda é a marca com que ela chega ao produtor brasileiro.
+- Agrotech da Holanda: a marca, no Brasil, das duas linhas de produto.
+- Dutch Flow Technology PTE LTD (Singapura): fabricante e fornecedora da tecnologia; equipamento fabricado e montado na
+  Tailândia.
+- Regen Studio Consultoria LTDA, CNPJ 57.579.114/0001-55, Av. Washington Luís, 1527, 174B, São Paulo/SP, CEP 04662-002: representante comercial da Dutch Flow
+  Technology no Brasil. Não é a fabricante nem a operadora dos sistemas.
+
+In English: Agrotech da Holanda is the Brazilian brand for Dutch Flow Technology's smart solar irrigation and solar cooling containers; the commercial agent in Brazil is Regen Studio Consultoria LTDA.
 
 ## Linhas de produto
 
 ### Irrigação solar inteligente
 Sistema de irrigação movido a energia solar. Uma bomba no poço, painéis na lavoura, válvulas por
-zona e um controlador que liga pela umidade do solo em vez de por um calendário fixo. O conjunto de
-sensores mede umidade do solo, pH do solo, nível da água, qualidade da água e o clima, este último
-para estimar a evapotranspiração. O produtor acompanha e comanda pelo celular. Atende de 10 a
-centenas de hectares. O layout é desenhado por propriedade.
+zona e um controlador que liga pela umidade do solo em vez de por um calendário fixo. O produtor
+acompanha e comanda pelo celular. O layout é desenhado por propriedade.
 Página: https://agrotechdaholanda.com.br/irrigacao-solar/
 
+Componentes (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026):
+- Painéis solares de 720 W com estrutura de fixação, de 3 a 12 painéis conforme o sistema.
+- Bomba solar para irrigação: submersa em aço inox (poço) ou de superfície, centrífuga monobloco
+  (rio ou açude); de 8 a 60 m³/h, com cerca de 30 m de altura manométrica.
+- Inversor para bombeamento solar, que aciona a bomba com a energia dos painéis; a partir de 4 ha,
+  com conexão celular (GPRS) e aplicativo.
+- Nos sistemas completos: sensor de solo multiparâmetro (umidade, temperatura, condutividade
+  elétrica, pH e NPK), sensor de pH da água em linha e estação meteorológica, com controlador de
+  irrigação e gateway.
+- Opcionais: válvulas solenoides, hidrociclone, fertirrigação de 4 canais, inversor para rede
+  elétrica, bateria para irrigar à noite.
+- Sistemas de referência de 1 a 10 ha; áreas maiores, até 30 ha por bomba, dimensionadas caso a caso.
+
 ### Câmara fria solar
-Câmara fria movida a energia solar, instalada na própria propriedade, sem necessidade de rede
-elétrica. Opera de 10 °C a −5 °C. Chega pronta, transportada de caminhão, e pode mudar de lugar.
-Reduz a perda depois da colheita: o produtor colhe, resfria e vende na hora certa em vez de vender
-com pressa. Pode ser comprada por uma cooperativa e compartilhada entre os cooperados, já que a
-colheita de cada um cai em dias diferentes.
+Câmara fria movida a energia solar, com bateria, num contêiner que chega pronto de caminhão e pode
+mudar de lugar. Reduz a perda pós-colheita: o produtor colhe, resfria e vende na hora certa em vez
+de vender com pressa. Pode ser comprada por uma cooperativa e compartilhada entre os cooperados.
 Página: https://agrotechdaholanda.com.br/camara-fria-solar/
+
+Especificações (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026):
+- Faixa de temperatura, as duas versões: de +10 °C a −5 °C; mantém −5 °C com 8 a 10 h de operação
+  por dia. Isolamento em painel de poliuretano de 100 mm. Degelo por gás quente. Compressor Copeland,
+  220 V, 50 Hz, monofásico. Fluido R-404A ou R-507. Gestão de energia: o sol vem primeiro; no
+  mínimo da bateria, comuta para gerador ou rede elétrica.
+- Contêiner de 40 pés: 12,192 × 2,438 × 2,591 m externos; refrigeração de 4 HP; 20 painéis de
+  580 W (cerca de 11,6 kWp); inversor de 10 kW; bateria LiFePO4 de 20 kWh.
+- Contêiner de 20 pés: 6,058 × 2,438 × 2,591 m externos; refrigeração de 3 HP; 12 painéis de
+  580 W (cerca de 7,0 kWp); inversor de 6 kW; bateria LiFePO4 de 15 kWh.
+- Produção em 6 a 8 semanas após o pedido, com saída da Tailândia.
 
 ## Ferramentas públicas
 
-- Calculadora de economia — calcula quanto o diesel custa à irrigação hoje, com os números do próprio
-  produtor: área, cultura, preço do diesel, consumo. https://agrotechdaholanda.com.br/calculadora.html
-- Risco hídrico por município — dados climáticos dos 5.570 municípios brasileiros, com fonte
+- Calculadora de retorno: calcula quanto o diesel custa à irrigação hoje, com os números do
+  próprio produtor: área, cultura, preço do diesel, consumo. https://agrotechdaholanda.com.br/calculadora.html
+- Risco hídrico por município: dados climáticos dos 5.570 municípios brasileiros, com fonte
   Lobelia Earth ("Brasil in a +2ºC World"). Dados de nível de triagem.
   https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html
 
 ## O que não afirmamos
 
-Não publicamos preços, número de instalações, percentuais de desempenho nem especificações
-técnicas. Antes de dimensionar qualquer sistema, é feita medição local.
+Publicamos as especificações técnicas da ficha do fabricante, acima. Não publicamos preços, número
+de instalações nem percentuais de desempenho próprio: o preço vem sempre numa proposta feita para a
+propriedade. Antes de dimensionar qualquer sistema, é feita medição local.
 
 ## Páginas
 
-- https://agrotechdaholanda.com.br/ — início
-- https://agrotechdaholanda.com.br/camara-fria-solar/ — câmara fria solar
-- https://agrotechdaholanda.com.br/irrigacao-solar/ — irrigação solar inteligente
-- https://agrotechdaholanda.com.br/faq.html — perguntas frequentes
-- https://agrotechdaholanda.com.br/calculadora.html — calculadora do diesel
-- https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html — risco hídrico por município
-- https://agrotechdaholanda.com.br/privacidade.html — privacidade
+- https://agrotechdaholanda.com.br/: início
+- https://agrotechdaholanda.com.br/camara-fria-solar/: câmara fria solar
+- https://agrotechdaholanda.com.br/irrigacao-solar/: irrigação solar inteligente
+- https://agrotechdaholanda.com.br/faq.html: perguntas frequentes
+- https://agrotechdaholanda.com.br/calculadora.html: calculadora do diesel
+- https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html: risco hídrico por município
+- https://agrotechdaholanda.com.br/privacidade.html: privacidade
+- https://agrotechdaholanda.com.br/acessibilidade.html: acessibilidade
+
+## Pages in English
+
+- https://agrotechdaholanda.com.br/en/: home
+- https://agrotechdaholanda.com.br/en/cooling-containers/: cooling containers
+- https://agrotechdaholanda.com.br/en/smart-solar-irrigation/: smart solar irrigation
+- https://agrotechdaholanda.com.br/en/faq/: FAQ
+- https://agrotechdaholanda.com.br/en/privacy/: privacy
+- https://agrotechdaholanda.com.br/en/accessibility/: accessibility

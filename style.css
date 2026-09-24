@@ -1,16 +1,23 @@
-/* Agrotech da Holanda — shared base for the homepage candidates.
-   Kept as one file so four drafts do not carry four copies of the same system. The WINNER gets
-   this inlined into index.html: the site's rule is zero external requests, and the live page
-   inlines its CSS today. */
+/* Agrotech da Holanda · the one stylesheet of agrotechdaholanda.com.br.
+   Linked by every generated page (build_site.py in Proton site-build/, PT and EN) and by the
+   hand-written calculadora and risco-hídrico pages. Served from this domain: zero external requests.
+   Colour rule: orange #FF914D and blue #38B6FF are fills, never text on a light background (2.3:1
+   and 2.1:1 on paper). Text in brand orange uses --orange-ink; everything else is navy. */
 @font-face{font-family:Poppins;src:url(assets/fonts/poppins-400.woff2)format('woff2');font-weight:400;font-display:swap}
 @font-face{font-family:Poppins;src:url(assets/fonts/poppins-600.woff2)format('woff2');font-weight:600;font-display:swap}
 @font-face{font-family:Poppins;src:url(assets/fonts/poppins-700.woff2)format('woff2');font-weight:700;font-display:swap}
 @font-face{font-family:Poppins;src:url(assets/fonts/poppins-800.woff2)format('woff2');font-weight:800;font-display:swap}
-:root{--laranja:#FF914D;--azul:#38B6FF;--navy:#14263C;--papel:#FBFAF7;--cinza:#55677D;--linha:#E8E4DB;--card:#fff}
+:root{--laranja:#FF914D;--azul:#38B6FF;--navy:#14263C;--papel:#FBFAF7;--cinza:#55677D;--linha:#E8E4DB;--card:#fff;
+  --orange-ink:#C74C00;--campo:#838FA0;
+  --verde:#5FBF7A;--legenda-ia:#627386;--orange-ink-tinta:#B84600;--gelo:#EEF7FD;--areia:#FDF3EC;--sombra:0 18px 50px rgba(20,38,60,.16)}
 *{box-sizing:border-box}
 body{margin:0;font-family:Poppins,system-ui,sans-serif;background:var(--papel);color:var(--navy);
   font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+/* Foco visível, um só para o site inteiro. Anel navy com halo branco: o halo separa o anel de um
+   botão laranja ou azul. Na faixa escura o anel vira azul (7:1 sobre navy) com halo navy. */
+:focus-visible{outline:3px solid var(--navy);outline-offset:2px;box-shadow:0 0 0 2px #fff}
+.dark :focus-visible{outline-color:var(--azul);box-shadow:0 0 0 2px var(--navy)}
 h1,h2,h3{margin:0;letter-spacing:-.4px}
 h1{font-weight:800;font-size:clamp(30px,4.4vw,50px);line-height:1.06}
 h2{font-weight:800;font-size:clamp(23px,2.7vw,31px);line-height:1.15}
@@ -18,18 +25,12 @@ h3{font-weight:700;font-size:20px}
 p{margin:.6em 0}
 .lead{font-size:clamp(17px,1.9vw,21px);color:var(--cinza);max-width:60ch}
 .logo{width:190px;height:auto;display:block}
-.pills{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 0;padding:0;list-style:none}
-.pill{font-weight:600;font-size:15px;padding:9px 18px;border-radius:999px;color:var(--navy)}
-.pill--azul{background:var(--azul)} .pill--laranja{background:var(--laranja)}
 .film{width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;display:block;background:var(--navy);box-shadow:0 18px 50px rgba(20,38,60,.16)}
 .filmcap{font-size:14px;color:var(--cinza);margin-top:10px}
 .card{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:26px 26px 28px}
 .card h3{margin-bottom:6px}
 .card ul{margin:12px 0 0;padding-left:18px;color:var(--cinza)}
 .card li{margin:5px 0}
-.rule{width:56px;height:6px;border-radius:3px;margin-bottom:18px}
-.rule--azul{background:var(--azul)} .rule--laranja{background:var(--laranja)}
-.grid2{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
 .cta{display:inline-block;font-weight:700;font-size:17px;padding:14px 26px;border-radius:999px;
   background:var(--laranja);color:var(--navy);text-decoration:none}
 .cta--ghost{background:transparent;border:2px solid var(--navy);color:var(--navy)}
@@ -72,7 +73,6 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .drop__btn::-webkit-details-marker{display:none}
 .drop__btn::marker{content:""}
 .drop__btn:hover{background:rgba(20,38,60,.07)}
-.drop__btn:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
 /* Sta je op een pagina die in de uitklap zit, dan zegt de knop dat ook als hij dicht is. */
 .drop__btn[data-here]{background:var(--navy);color:var(--papel)}
 .drop__btn svg{transition:transform .18s}
@@ -120,7 +120,6 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
   border-radius:999px;padding:9px 16px;cursor:pointer;transition:background .15s;
   color:var(--navy);background:transparent;border:2px solid var(--navy)}
 .copybtn:hover{background:rgba(20,38,60,.08)}
-.copybtn:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
 .copybtn[data-done]{background:var(--navy);color:var(--papel)}
 /* Na faixa escura o contorno navy desaparece no fundo, então inverte. */
 .dark .copybtn{color:var(--papel);border-color:rgba(251,250,247,.55)}
@@ -144,22 +143,13 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .prose ul{color:var(--cinza)}
 .card h3 a{color:inherit;text-decoration:none}
 .card h3 a:hover{text-decoration:underline}
-a.pill{text-decoration:none}
-/* ── calculator call-out ─────────────────────────────────────────────────── */
-.calcbox{display:flex;gap:26px;align-items:center;justify-content:space-between;flex-wrap:wrap;
-  background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:26px 28px}
-/* Twee kaders onder elkaar: de calculadora en het risicomapa staan als paar in dezelfde
-   sectie, dus het tweede heeft ruimte nodig die het als los blok niet had. */
-.calcbox+.calcbox{margin-top:16px}
-.calcbox h3{margin-bottom:4px}
-.calcbox p{margin:0;color:var(--cinza);max-width:52ch}
 /* ── faq ─────────────────────────────────────────────────────────────────── */
 .faq{margin-top:18px;border-top:1px solid var(--linha)}
 .faq__item{border-bottom:1px solid var(--linha)}
 .faq__q{cursor:pointer;font-weight:700;font-size:18px;padding:18px 34px 18px 0;position:relative;
   list-style:none}
 .faq__q::-webkit-details-marker{display:none}
-.faq__q::after{content:"+";position:absolute;right:6px;top:15px;font-size:24px;color:var(--laranja);
+.faq__q::after{content:"+";position:absolute;right:6px;top:15px;font-size:24px;color:var(--orange-ink);
   font-weight:700}
 .faq__item[open] .faq__q::after{content:"−"}
 .faq__a{padding:0 34px 20px 0;color:var(--cinza);max-width:70ch}
@@ -176,20 +166,576 @@ a.pill{text-decoration:none}
   font-size:14px;color:var(--cinza)}
 .footer__bottom p{margin:0}
 
-/* ── Imagem de produto ─────────────────────────────────────────────────────
-   O corte do contêiner é uma arte técnica sobre fundo navy, não uma fotografia.
-   A legenda logo abaixo diz isso, e é obrigatória onde a imagem aparecer. */
-.shot{margin:26px 0 0;border-radius:16px;overflow:hidden;background:var(--navy);
-  box-shadow:0 18px 50px rgba(20,38,60,.16)}
-.shot img{display:block;width:100%;height:auto}
-.legenda{font-size:14px;color:var(--cinza);margin:10px 0 0;max-width:62ch}
-
-/* Números de destaque. Só entram aqui os que a ficha técnica da DFT confirma. */
-.specrow{display:flex;gap:28px;flex-wrap:wrap;margin-top:26px}
-.spec{flex:1 1 150px}
-.spec b{display:block;font-size:26px;font-weight:800;color:var(--navy);line-height:1.15}
-.spec span{display:block;font-size:14px;color:var(--cinza);margin-top:2px}
-
 /* Laranja é câmara fria, azul é irrigação. O texto fica navy sobre o azul:
    azul #38B6FF com branco dá 1,9:1 e reprova; com navy dá cerca de 7:1. */
 .cta--azul{background:var(--azul);color:var(--navy);border:0}
+
+
+/* ── antibot ─────────────────────────────────────────────────────────────────
+   Portado de regenstudio-website/assets/css/antibot.css, com as cores da marca.
+   O honeypot fica FORA DA TELA, nunca display:none: um campo escondido desse jeito
+   é justamente o que o robô procura. Sem este bloco ele aparece como um campo de
+   texto solto no formulário, visível para gente de verdade. */
+.antibot-hp{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
+
+/* ── desafio do nexo (assets/js/agro-challenge.js) ─────────────────────────────
+   Aparece só quando as camadas invisíveis de antibot.js apontam risco. Bloco copiado intacto
+   do motor aprovado no design lab (n7b/n8, 24-09-2026), onde ele era injetado num <style>;
+   aqui é a única cópia e o motor não injeta nada. Prefixo .nx__, só tokens da marca. */
+.nx{margin:18px 0;padding:18px 18px 16px;border:1px solid var(--linha,#E8E4DB);border-radius:14px;background:var(--papel,#FBFAF7);color:var(--navy,#14263C)}
+.nx__title{margin:0 0 4px;font-size:14px;font-weight:700;color:var(--navy)}
+.nx__hint{margin:0 0 12px;font-size:15px;font-weight:600;color:var(--navy);max-width:46ch}
+.nx__hint svg{width:18px;height:18px;vertical-align:-4px;margin-right:4px}
+.nx__stage{max-width:420px;margin:0 auto}
+.nx--compact .nx__stage{max-width:none}
+.nx__scene{display:block;width:100%;height:auto;border-radius:12px;background:#fff;border:1px solid var(--linha,#E8E4DB);overflow:visible;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+.nx__scene text{font-family:inherit;font-weight:700;fill:var(--navy);font-variant-numeric:tabular-nums}
+.nx__soil{fill:var(--papel,#FBFAF7)}
+.nx__ground{stroke:var(--navy);stroke-width:2;stroke-linecap:round}
+.nx__sun{fill:var(--laranja,#FF914D)}
+.nx__rays{stroke:var(--laranja,#FF914D);stroke-width:2.5;stroke-linecap:round;fill:none}
+.nx__beam{opacity:.7;transition:opacity .25s}
+.nx--near .nx__beam,.nx--solved .nx__beam{opacity:1}
+.nx__pad{fill:var(--navy);fill-opacity:.07}
+.nx__foot{fill:var(--navy);fill-opacity:.16;stroke:var(--navy);stroke-width:1.5;stroke-linejoin:round}
+.nx__post{fill:var(--navy);fill-opacity:.18;stroke:var(--navy);stroke-width:2;stroke-linejoin:round}
+.nx__roof{fill:var(--navy);fill-opacity:.06;stroke:var(--navy);stroke-width:2;stroke-linejoin:round}
+.nx__purlin,.nx__brace{stroke:var(--navy);stroke-width:2;stroke-linecap:round;fill:none}
+.nx__slot{fill:var(--laranja,#FF914D);fill-opacity:.2;stroke:var(--laranja,#FF914D);stroke-width:2.5;stroke-dasharray:5 4;stroke-linejoin:round;opacity:0;transition:opacity .2s}
+.nx--near .nx__slot{opacity:1}
+.nx__casing{fill:#fff;stroke:var(--navy);stroke-width:1.5;stroke-dasharray:3 2}
+.nx__table{fill:var(--azul,#38B6FF);fill-opacity:.35}
+.nx__pumpb{fill:var(--navy)}
+.nx__arrow{fill:#fff;opacity:0}
+.nx__pipe{stroke:var(--navy);stroke-width:4.6;fill:none;stroke-linejoin:round;stroke-linecap:round}
+.nx__bore{stroke:#fff;stroke-width:2.4;fill:none;stroke-linejoin:round;stroke-linecap:round}
+.nx__water{stroke:var(--azul,#38B6FF);stroke-width:2.4;fill:none;stroke-linejoin:round;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.nx__head{fill:var(--navy);fill-opacity:.18;stroke:var(--navy);stroke-width:2}
+.nx__cable{stroke:var(--navy);stroke-opacity:.4;stroke-width:1.5;fill:none;stroke-linejoin:round}
+.nx__energy{stroke:var(--laranja,#FF914D);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:1;stroke-dashoffset:1}
+.nx__cab{fill:#fff;stroke:var(--navy);stroke-width:2}
+.nx__led{fill:var(--navy);fill-opacity:.22;transition:fill .15s,fill-opacity .15s}
+.nx__cabline{stroke:var(--navy);stroke-opacity:.35;stroke-width:1.2;stroke-linecap:round}
+.nx__pallet{fill:var(--navy);fill-opacity:.16;stroke:var(--navy);stroke-width:1.5;stroke-linejoin:round}
+.nx__shadow{fill:var(--navy);opacity:.16}
+.nx__mound{fill:var(--papel,#FBFAF7);stroke:var(--navy);stroke-width:1.5}
+.nx__emit{fill:var(--navy)}
+.nx__drop{fill:var(--azul,#38B6FF);opacity:0}
+.nx__wet{fill:var(--azul,#38B6FF);opacity:0;transition:opacity .35s}
+.nx__plant{transform-box:fill-box;transform-origin:50% 100%;transform:scale(.28)}
+.nx__stem{stroke:var(--navy);stroke-width:2;stroke-linecap:round;fill:none}
+.nx__leaf{fill:var(--verde,#5FBF7A);stroke:var(--navy);stroke-width:1.5;stroke-linejoin:round}
+.nx__end{fill:var(--navy);fill-opacity:.14;stroke:var(--navy);stroke-width:2;stroke-linejoin:round}
+.nx__rib{stroke:var(--navy);stroke-opacity:.3;stroke-width:1.2;stroke-linecap:round;fill:none}
+.nx__shell{fill:var(--navy);fill-opacity:.16;stroke:var(--navy);stroke-width:2;stroke-linejoin:round}
+.nx__inside{fill:#fff}
+.nx__evap{fill:var(--navy);fill-opacity:.18;stroke:var(--navy);stroke-width:2;stroke-linejoin:round}
+.nx__grille{fill:#fff;stroke:var(--navy);stroke-width:2}
+.nx__grille--s{stroke-width:1.3}
+.nx__blade{stroke:var(--navy);stroke-width:2;stroke-linecap:round;fill:none}
+.nx__blade--s{stroke-width:1.3}
+.nx__hub{fill:var(--navy)}
+.nx__fan{transform-box:fill-box;transform-origin:50% 50%}
+.nx__crate{fill:var(--papel,#FBFAF7);stroke:var(--navy);stroke-width:1.5;stroke-linejoin:round;transition:fill .6s}
+.nx__slat{stroke:var(--navy);stroke-opacity:.45;stroke-width:1.2;stroke-linecap:round}
+.nx__f{stroke:var(--navy);stroke-width:1.2}
+.nx__f--o{fill:var(--laranja,#FF914D)}
+.nx__f--g{fill:var(--verde,#5FBF7A)}
+.nx__cold{opacity:0;transition:opacity 1.2s}
+.nx__lcd{fill:var(--navy);fill-opacity:.08;stroke:var(--navy);stroke-opacity:.35;stroke-width:1;transition:fill .5s,fill-opacity .5s}
+.nx__temp{font-size:9.4px}
+.nx__panel{cursor:grab;outline:none;will-change:transform}
+.nx__panel:active{cursor:grabbing}
+.nx__panel--snap{transition:transform .4s cubic-bezier(.3,1.5,.45,1)}
+.nx__panel--back{transition:transform .3s ease-out}
+.nx__panel--key{transition:transform .14s ease-out}
+.nx--solved .nx__panel{cursor:default}
+.nx__hit{fill:#fff;fill-opacity:0}
+.nx__frame{fill:var(--navy);fill-opacity:.2;stroke:var(--navy);stroke-width:2;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.nx__cell{fill:var(--navy)}
+.nx__sheen{fill:#fff;opacity:.12}
+.nx__lit{fill:var(--azul,#38B6FF);opacity:0}
+.nx__glare{fill:#fff;opacity:.5;transform:translateX(-18px)}
+.nx__focus{opacity:0;fill:none}
+.nx__focus rect{vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.nx__focus rect:first-child{stroke:#fff;stroke-width:7}
+.nx__focus rect:last-child{stroke:var(--navy);stroke-width:3}
+.nx__panel:focus-visible .nx__focus,.nx__panel--kb:focus .nx__focus{opacity:1}
+.nx__nudge{animation:nxnudge 1.4s ease-in-out .8s 3}
+.nx--solved .nx__glare{transform:translateX(104px);transition:transform .5s ease-in-out}
+.nx--solved .nx__lit{opacity:.35;transition:opacity .3s .1s}
+.nx--solved .nx__energy{stroke-dashoffset:0;transition:stroke-dashoffset .35s linear .3s}
+.nx--solved .nx__led{fill:var(--laranja,#FF914D);fill-opacity:1;transition-delay:.62s}
+.nx--solved .nx__arrow{opacity:1;animation:nxflow .5s linear .6s infinite}
+.nx--solved .nx__water{stroke-dashoffset:0;transition:stroke-dashoffset .95s linear .6s}
+.nx--solved .nx__wet{opacity:.3;transition-delay:1.3s}
+.nx--solved .nx__drop{animation:nxdrip 1.1s ease-in 1.35s infinite}
+.nx--solved .nx__drop--b{animation-delay:1.7s}
+.nx--solved .nx__drop--c{animation-delay:2.05s}
+.nx--solved .nx__plant{transform:scale(1);transition:transform .32s cubic-bezier(.2,.9,.3,1.2) 1.15s}
+.nx--solved .nx__plant--b{transition-delay:1.22s}
+.nx--solved .nx__plant--c{transition-delay:1.29s}
+.nx--solved .nx__fan{animation:nxspin 1s linear .7s infinite}
+.nx--solved .nx__fan--s{animation-duration:.8s}
+.nx--solved .nx__cold{opacity:1;transition-delay:.9s}
+.nx--solved .nx__crate{fill:var(--gelo,#EEF7FD);transition-delay:1.4s}
+.nx--solved .nx__lcd{fill:var(--azul,#38B6FF);fill-opacity:.22;transition-delay:2.2s}
+.nx--solved .nx__scene,.nx--solved{border-color:var(--laranja,#FF914D)}
+@keyframes nxnudge{0%,100%{transform:translateX(0)}45%{transform:translateX(9px)}}
+@keyframes nxflow{from{transform:translateY(3px)}to{transform:translateY(-3px)}}
+@keyframes nxdrip{0%{opacity:0;transform:translateY(0)}15%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translateY(5.5px)}}
+@keyframes nxspin{to{transform:rotate(360deg)}}
+.nx__status{margin:12px 0 0;font-size:14px;line-height:1.5;font-weight:600;color:var(--navy);min-height:42px;text-align:center}
+.nx__status svg{width:18px;height:18px;vertical-align:-4px;margin-right:4px}
+.nx__kbd{margin:8px 0 0;font-size:13px;color:var(--cinza,#55677D);text-align:center}
+.nx__kbd kbd{font-family:inherit;border:1px solid var(--linha,#E8E4DB);border-radius:4px;padding:0 5px;background:#fff}
+.nx__sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:600px){
+  .nx{margin-left:-14px;margin-right:-14px;padding:14px 10px 12px}
+  .nx__hint{font-size:16px}
+}
+.nx--still *,.nx--still .nx__panel{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion:reduce){
+  .nx *,.nx--solved .nx__glare,.nx--solved .nx__lit,.nx--solved .nx__energy,.nx--solved .nx__led,.nx--solved .nx__water,.nx--solved .nx__wet,.nx--solved .nx__plant,.nx--solved .nx__cold,.nx--solved .nx__crate,.nx--solved .nx__lcd,.nx__panel--snap,.nx__panel--back,.nx__panel--key{transition:none!important}
+  .nx__nudge,.nx--solved .nx__arrow,.nx--solved .nx__drop,.nx--solved .nx__fan{animation:none}
+  .nx--solved .nx__drop{opacity:1;transform:translateY(3px)}
+}
+/* Contexto do site: o anel de foco do painel é o próprio contorno desenhado no SVG (.nx__focus).
+   Sem isto, .dark :focus-visible somaria um segundo anel azul ao redor do grupo. */
+.nx .nx__panel{outline:none;box-shadow:none}
+/* A dica de teclado aparece com o foco no painel e some no blur. Sem reservar o lugar dela, clicar
+   em "Enviar" logo depois de resolver pelo teclado tira o foco, a dica some, o botão sobe no meio do
+   clique e o clique se perde. Com mouse o lugar fica reservado e só a visibilidade muda; no toque não
+   há clique de mouse a perder, e a reserva seria só um vão vazio no cartão. */
+@media (hover:hover) and (pointer:fine){.nx .nx__kbd[hidden]{display:block;visibility:hidden}}
+
+/* ── formulários ─────────────────────────────────────────────────────────────
+   O pedido da ficha e o pedido de proposta. O sucesso acontece no lugar: os campos
+   somem e os links aparecem, sem trocar de página. */
+.formbox{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:26px 28px 28px}
+.formbox h2{margin-bottom:6px}
+.agro-form{margin-top:18px;max-width:520px}
+.agro-form__field{margin-bottom:14px}
+.agro-form__field label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+.agro-form__field input,.agro-form__field select,.agro-form__field textarea{
+  width:100%;font:inherit;font-size:16px;padding:13px 16px;border:1px solid var(--campo);
+  border-radius:12px;background:var(--papel);color:var(--navy)}
+.agro-form__check{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--cinza);
+  margin:14px 0 18px;max-width:60ch}
+.agro-form__check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--navy)}
+.agro-form--dark .agro-form__check input{accent-color:var(--laranja)}
+.agro-form__check a{color:var(--navy)}
+.agro-form__btn{border:0;cursor:pointer;font-family:inherit}
+.agro-form__btn:disabled{opacity:.7;cursor:default}
+.agro-form__err{margin-top:12px;color:#A3231B;font-weight:600;font-size:15px}
+.agro-form__ok{margin-top:14px;font-size:16px}
+.agro-form__ok ul{margin:10px 0 0;padding-left:18px}
+.agro-form__ok li{margin:6px 0}
+.agro-form__ok a{color:var(--navy);font-weight:700}
+
+/* O mesmo formulário na faixa escura: rótulo claro, campo legível, caixa visível.
+   Sem isto os rótulos ficam navy sobre navy, ou seja, invisíveis. */
+.agro-form--dark .agro-form__field label{color:var(--papel)}
+.agro-form--dark .agro-form__field input{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
+.agro-form--dark .agro-form__check{color:#B9C6D4}
+.agro-form--dark .agro-form__check a{color:var(--papel)}
+.agro-form--dark .agro-form__err{color:#FFB4AC}
+.agro-form--dark .agro-form__ok{color:var(--papel)}
+.agro-form--dark .agro-form__ok a{color:var(--laranja)}
+.dark .lead.small{font-size:15px;margin-top:18px}
+
+/* ── língua e rodapé legal ───────────────────────────────────────────────── */
+.nav__lang a{font-weight:600;text-decoration:underline;text-underline-offset:3px;border-bottom:0}
+.footer__bottom .footer__legal{margin-top:8px;font-size:13px;max-width:90ch}
+
+/* ── acessibilidade ──────────────────────────────────────────────────────────
+   Alvos de toque de 44px no celular (WCAG 2.5.5): links do menu, pílulas, botões e os <summary>. */
+@media (max-width:820px){
+  .nav__links a,.drop__btn,.jump a,.cta,.copybtn,.faq__q,.nav__toggle{min-height:44px}
+  .jump a,.copybtn{display:inline-flex;align-items:center}
+  .nav__toggle{min-width:44px;justify-content:center}
+  .footer li a{display:inline-block;padding:10px 0}
+}
+/* Quem pediu menos movimento ao sistema não recebe animação, transição nem rolagem suave. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  html{scroll-behavior:auto}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Rodada 2 do redesenho (24-09-2026): a página inicial "Campo" (h5) e o modelo
+   das páginas de produto "Ficha" (p3), aprovados no design lab. Verde (#5FBF7A)
+   é só preenchimento, nunca texto em fundo claro. Laranja e azul idem.
+   ═══════════════════════════════════════════════════════════════════════════ */
+html{scroll-padding-top:84px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{overflow-x:hidden}
+img,video,svg{max-width:100%}
+.ic{width:24px;height:24px;flex:none}
+.kicker{color:var(--orange-ink)}
+.dark .kicker{color:var(--laranja)}
+.cta{display:inline-flex;align-items:center;gap:10px;min-height:48px}
+.cta .ic{width:20px;height:20px}
+.cta--navy{background:var(--navy);color:var(--papel)}
+.cta--linha{background:transparent;border:2px solid var(--navy);color:var(--navy)}
+.cta--linha:hover{background:rgba(20,38,60,.06)}
+.dark .cta--ghost,.dark .cta--linha{border-color:var(--papel);color:var(--papel)}
+.link{color:var(--navy);font-weight:700;text-decoration:underline;text-underline-offset:3px;
+  min-height:44px;display:inline-flex;align-items:center}
+.link:hover{color:var(--orange-ink)}
+.sec-head{max-width:64ch;margin-bottom:26px}
+.sec-head .lead{margin-top:8px}
+.note,.fonte{font-size:14px;color:var(--cinza);margin-top:14px;max-width:80ch;line-height:1.5}
+.wrap--largo{max-width:1200px}
+.crumb a{display:inline-flex;align-items:center;min-height:44px}
+.crumb ol{align-items:center;flex-wrap:wrap}
+.crumb li{display:flex;align-items:center}
+.nav__logo{display:inline-flex;align-items:center;min-height:44px}
+.footer a{display:inline-flex;align-items:center;min-height:44px}
+.faq__a a,.prose a,.naficha a{color:var(--navy);font-weight:600}
+
+/* Imagem gerada por IA: legenda clara, 4,87:1 no branco e 4,66:1 no papel. Nunca sobre navy. */
+.fig{margin:0}
+.fig img{display:block;width:100%;height:auto}
+.fig figcaption{font-size:13px;line-height:1.4;color:var(--legenda-ia);margin-top:8px}
+
+/* ── Página inicial: herói sem imagem, só texto e as duas portas ───────────── */
+.hero-home{background:
+  radial-gradient(circle at 88% 12%,rgba(56,182,255,.20),transparent 42%),
+  radial-gradient(circle at 96% 96%,rgba(255,145,77,.18),transparent 40%),var(--navy);
+  color:var(--papel);padding:64px 0 60px}
+.hero-home .kicker{color:#FFB27A}
+.hero-home h1{color:#fff;max-width:14ch}
+.hero-home .lead{color:#DCE5EE;margin-top:16px;max-width:44ch}
+.dark :focus-visible,.hero-home :focus-visible{outline-color:var(--azul);box-shadow:0 0 0 2px var(--navy)}
+.portas{display:grid;gap:16px;grid-template-columns:1fr;margin:32px 0 0;padding:0;list-style:none;max-width:780px}
+@media (min-width:640px){.portas{grid-template-columns:1fr 1fr}}
+.porta{display:flex;flex-direction:column;gap:10px;height:100%;text-decoration:none;color:var(--navy);
+  background:var(--papel);border-radius:18px;padding:20px 22px 18px;border-top:8px solid var(--azul);
+  box-shadow:0 14px 40px rgba(0,0,0,.28);transition:transform .15s}
+.porta--laranja{border-top-color:var(--laranja)}
+.porta:hover{transform:translateY(-2px)}
+.porta__topo{display:flex;align-items:center;gap:12px}
+.porta__ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:var(--azul);color:var(--navy);flex:none}
+.porta--laranja .porta__ico{background:var(--laranja)}
+.porta b{font-size:19px;line-height:1.2}
+.porta p{margin:0;font-size:15px;color:var(--cinza)}
+.porta .seta{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:15px;margin-top:auto}
+.porta .seta .ic{width:18px;height:18px}
+
+/* Filme, logo abaixo do herói */
+.filme{padding:40px 0 8px}
+.filme-card{background:#fff;border-radius:18px;padding:10px;box-shadow:var(--sombra)}
+.filme-card .film{border-radius:12px;box-shadow:none}
+.filme-card .filmcap{margin:10px 6px 4px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* O ciclo: o slide 2 do deck, responsivo */
+.ciclo{background:linear-gradient(180deg,#fff 0%,var(--papel) 100%);padding-top:60px}
+.ciclo__grid{display:grid;gap:26px;grid-template-columns:1fr;align-items:center}
+@media (min-width:1100px){.ciclo__grid{grid-template-columns:360px 1fr;gap:30px}}
+.ciclo__texto .lead{max-width:44ch}
+.legenda-cor{display:grid;gap:6px;margin:22px 0 0;padding:0;list-style:none;font-size:15px;color:var(--cinza)}
+.legenda-cor i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:8px;vertical-align:-2px}
+.legenda-cor b{color:var(--navy)}
+.bg-laranja{background:var(--laranja)} .bg-azul{background:var(--azul)} .bg-verde{background:var(--verde)}
+.anel{display:block;width:100%;height:auto}
+.anel text,.nexo-svg text{font-family:Poppins,system-ui,sans-serif}
+.anel--celular,.ciclo-lista{display:none}
+.ciclo-lista{list-style:none;margin:18px 0 0;padding:0;counter-reset:passo}
+.ciclo-lista li{counter-increment:passo;display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;
+  padding:9px 0;border-top:1px solid var(--linha)}
+.ciclo-lista li::before{content:counter(passo);width:36px;height:36px;border-radius:50%;background:#fff;
+  border:4px solid var(--laranja);color:var(--navy);font-weight:800;display:flex;align-items:center;
+  justify-content:center;font-size:15px}
+.ciclo-lista li.azul::before{border-color:var(--azul)}
+.ciclo-lista li.verde::before{border-color:var(--verde)}
+.ciclo-lista li.navy::before{border-color:var(--navy)}
+.ciclo-lista b{display:block;font-size:17px;margin-top:6px}
+.ciclo-lista span{display:block;color:var(--cinza);font-size:15px}
+@media (max-width:719px){.anel--tela{display:none}.anel--celular{display:block;max-width:360px;margin:0 auto}
+  .ciclo-lista{display:block}}
+
+/* O nexo: o slide 13 do deck, responsivo */
+.nexo{background:var(--areia)}
+/* Nas faixas tingidas (areia, gelo) o #C74C00 cai para 4,3:1; o tom mais fundo dá 4,9:1. */
+.nexo .kicker,.insta .kicker{color:var(--orange-ink-tinta)}
+.nexo__grid{display:grid;gap:18px;grid-template-columns:1fr;align-items:center;margin-top:10px}
+@media (min-width:860px){.nexo__grid{grid-template-columns:330px 70px 1fr;gap:12px}}
+.nexo-svg{display:block;width:100%;height:auto}
+.nexo-antes{max-width:360px;margin:0 auto}
+.nexo-seta{display:block;width:70px;height:40px;margin:0 auto;color:var(--navy)}
+@media (max-width:859px){.nexo-seta{transform:rotate(90deg);height:60px;width:60px}}
+.nexo-svg .grande{font-size:16px} .nexo-svg .meio{font-size:13px} .nexo-svg .sub{font-size:12px}
+@media (max-width:719px){.nexo-depois .grande{font-size:20px}.nexo-depois .meio{font-size:18px}
+  .nexo-svg .sub{display:none}}
+.sobreposicoes{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.sobreposicoes li{background:#fff;border:1px solid var(--linha);border-radius:14px;padding:14px 16px;
+  display:flex;gap:12px;align-items:flex-start}
+.sobreposicoes .ic{margin-top:2px;color:var(--navy)}
+.sobreposicoes b{display:block}
+.sobreposicoes span{font-size:15px;color:var(--cinza)}
+
+/* Produtos na página inicial: teasers curtos */
+.produto{border-top:1px solid var(--linha)}
+.produto__grid{display:grid;gap:28px;grid-template-columns:1fr;align-items:center}
+@media (min-width:900px){.produto__grid{grid-template-columns:1fr 1fr}
+  .produto__grid--inv{align-items:start}.produto__grid--inv .produto__lado{order:2}}
+.produto__media img{border-radius:18px;box-shadow:var(--sombra)}
+.retorno{margin-top:22px;background:#fff;border:2px solid var(--laranja);border-radius:16px;padding:20px 22px}
+.retorno .grande{display:block;font-size:28px;font-weight:800;line-height:1.1}
+.retorno p{margin:6px 0 0;color:var(--cinza);font-size:15px}
+.retorno .ctarow{margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:600;padding:9px 14px;
+  border-radius:999px;background:#fff;border:1px solid var(--linha);color:var(--navy)}
+.chip .ic{width:18px;height:18px}
+.energia{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px;counter-reset:e}
+.energia li{counter-increment:e;display:flex;gap:10px;font-size:15px;align-items:flex-start}
+.energia li::before{content:counter(e);flex:none;width:26px;height:26px;border-radius:50%;background:var(--laranja);
+  color:var(--navy);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.tamanhos{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:18px;
+  padding:0;list-style:none}
+.tamanho{background:#fff;border:1px solid var(--linha);border-top:5px solid var(--laranja);border-radius:14px;padding:14px 16px}
+.tamanho b{display:block;font-size:19px}
+.tamanho span{font-size:14px;color:var(--cinza)}
+
+/* Ferramentas: calculadora de retorno e risco hídrico */
+.ferramentas{background:#fff;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.tools{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:860px){.tools{grid-template-columns:1fr 1fr}}
+.tool{display:flex;flex-direction:column;background:var(--papel);border:1px solid var(--linha);border-radius:18px;padding:22px}
+.tool--navy{background:var(--navy);color:var(--papel);border-color:var(--navy)}
+.tool--navy h3{color:var(--papel)}
+.tool--navy > p{color:#B9C6D4}
+.tool--navy :focus-visible{outline-color:var(--azul);box-shadow:0 0 0 2px var(--navy)}
+.tool h3{font-size:21px;margin:10px 0 6px}
+.tool > p{margin:0 0 14px;font-size:15.5px;color:var(--cinza)}
+.tool--navy > p{color:#B9C6D4}
+.tool .cta{margin-top:auto;justify-content:center;font-size:16px}
+.tool .ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  background:var(--azul);color:var(--navy)}
+.tool .ico--o{background:var(--laranja)}
+.inputs{display:grid;gap:8px;margin:0 0 18px;padding:0;list-style:none}
+.inputs li{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14.5px;
+  border:1px dashed rgba(251,250,247,.35);border-radius:10px;padding:9px 12px;color:#B9C6D4}
+.inputs b{color:var(--papel);font-weight:600}
+.bars{margin:0;padding:0;list-style:none}
+.bar{display:grid;grid-template-columns:84px 1fr 44px;gap:10px;align-items:center;font-size:14.5px;margin:6px 0}
+.bar i{display:block;height:12px;border-radius:6px;background:var(--navy)}
+.bar + .bar i{background:var(--laranja)}
+.bar em{font-style:normal;font-weight:700;text-align:right}
+.src{font-size:13px;color:var(--cinza);margin:6px 0 16px}
+
+/* Seja a primeira fazenda */
+.etapas{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:26px;position:relative;list-style:none;padding:0}
+.etapas::before{content:"";position:absolute;left:12%;right:12%;top:22px;height:3px;
+  background:linear-gradient(90deg,var(--azul),var(--verde),var(--laranja))}
+.etapas li{text-align:center;position:relative}
+.etapas .bola{width:46px;height:46px;border-radius:50%;margin:0 auto;background:var(--navy);border:3px solid var(--laranja);
+  color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:18px}
+.etapas li:last-child .bola{background:var(--laranja);color:var(--navy)}
+.etapas b{display:block;margin-top:8px;font-size:15px}
+@media (max-width:600px){.etapas{grid-template-columns:repeat(2,1fr);gap:16px 8px}.etapas::before{display:none}}
+.traz{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:24px}
+.traz > div{background:rgba(251,250,247,.07);border:1px solid rgba(251,250,247,.16);border-radius:16px;padding:16px 18px}
+.traz .kicker{margin-bottom:6px}
+.traz .kicker--azul{color:var(--azul)}
+.traz ul{margin:0;padding-left:18px;color:#fff;font-size:15px}
+.traz li{margin:6px 0}
+
+/* Fale com a gente */
+.contato__grid{display:grid;gap:22px;grid-template-columns:1fr}
+@media (min-width:900px){.contato__grid{grid-template-columns:1fr 1fr;align-items:start}}
+.formbox h3{font-size:21px}
+.formbox--ficha{border:2px solid var(--azul)}
+.formbox .agro-form{max-width:none}
+.contato__canais{margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;font-size:15px}
+.contato__canais a{display:inline-flex;align-items:center;gap:8px;color:var(--navy);font-weight:600;min-height:44px}
+
+/* ── Páginas de produto: "a página vende a ficha, não a substitui" ─────────── */
+.p3hero{padding:22px 0 8px}
+.p3hero .crumb{padding:0}
+.p3hero__grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:36px;align-items:center}
+.p3hero .lead{margin-top:12px}
+.p3hero .ctarow{margin-top:24px}
+.p3hero .fig img{border-radius:18px;box-shadow:0 18px 44px -24px rgba(20,38,60,.45)}
+@media (max-width:860px){.p3hero__grid{grid-template-columns:1fr;gap:20px}.p3hero .fig{order:-1}}
+.manchetes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;margin:28px 0 0;padding:0;
+  border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.manchetes li{display:flex;gap:12px;align-items:flex-start;padding:18px 14px 18px 0}
+.manchetes li+li{padding-left:16px;border-left:1px solid var(--linha)}
+.manchetes .ic{width:26px;height:26px;color:var(--orange-ink);margin-top:2px}
+.manchetes b{display:block;font-size:19px;font-weight:800;line-height:1.2}
+.manchetes span{display:block;font-size:14px;line-height:1.4;color:var(--cinza);margin-top:3px}
+@media (max-width:860px){.manchetes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .manchetes li:nth-child(3){padding-left:0;border-left:0}
+  .manchetes li:nth-child(n+3){border-top:1px solid var(--linha)}}
+@media (max-width:400px){.manchetes li{padding:14px 8px 14px 0}.manchetes li+li{padding-left:10px}
+  .manchetes li:nth-child(3){padding-left:0}.manchetes b{font-size:16px}.manchetes span{font-size:13px}}
+.fichaband{padding:18px 0 8px}
+.fichabox{border-top:6px solid var(--laranja);box-shadow:0 18px 44px -24px rgba(20,38,60,.35)}
+.fichabox > h2{font-size:24px}
+.fichabox__vem{list-style:none;margin:12px 0 4px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.fichabox__vem li{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;padding:6px 12px;
+  border-radius:999px;background:var(--gelo);color:var(--navy)}
+.fichabox__vem .ic{width:16px;height:16px}
+.naficha{display:flex;gap:10px;align-items:flex-start;margin:18px 0 0;font-weight:600;color:var(--navy)}
+.naficha .ic{color:var(--orange-ink);margin-top:1px}
+
+/* Três tamanhos: cada cartão fica debaixo da sua unidade na imagem */
+.tres__cards{display:grid;grid-template-columns:32fr 30fr 38fr;gap:14px;margin:18px 0 0;padding:0;list-style:none}
+.tres__card{background:var(--card);border:1px solid var(--linha);border-top:6px solid var(--laranja);border-radius:16px;
+  padding:16px 18px}
+.tres__card--projeto{border-top:6px dashed #9FB0C2}
+.tres__pos{display:none;font-size:13px;font-weight:600;color:var(--cinza);margin:0 0 4px}
+.tres__card h3{font-size:19px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.tres__card h3 small{font-size:14px;font-weight:600;color:var(--cinza)}
+.tres__card p{margin:6px 0 0;color:var(--cinza);font-size:15px}
+.selo{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;
+  background:var(--areia);color:var(--navy);border:1px solid #F3D2BC}
+@media (max-width:760px){.tres__cards{grid-template-columns:1fr}.tres__pos{display:block}}
+
+/* Primeiro o sol */
+.fontes3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.fontes3 li{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:20px 20px 22px;
+  border-top:6px solid var(--laranja)}
+.fontes3 li:nth-child(2){border-top-color:var(--azul)}
+.fontes3 li:nth-child(3){border-top:6px dashed #9FB0C2}
+.fontes3 .num{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
+.fontes3 .num .ic{width:26px;height:26px}
+.fontes3 p{margin:8px 0 0;color:var(--cinza);font-size:15.5px}
+@media (max-width:760px){.fontes3{grid-template-columns:1fr}}
+.dia{margin-top:26px}
+.dia__k{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cinza);margin:0 0 8px}
+.dia__bar{display:grid;grid-template-columns:1fr 2fr 1fr;border-radius:999px;overflow:hidden;min-height:44px}
+.dia__bar span{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:14px;
+  color:var(--navy);padding:6px 8px;line-height:1.2}
+.dia__bat{background:var(--azul)} .dia__sol{background:var(--laranja)}
+.dia__eixo{display:flex;justify-content:space-between;font-size:13px;color:var(--cinza);margin-top:6px}
+.dia__rede{margin-top:10px;border:2px dashed #9FB0C2;border-radius:14px;padding:8px 12px;text-align:center;
+  font-size:14px;color:var(--cinza)}
+
+/* Cada produto tem seu ajuste: quatro exemplos, borda verde (alimento) */
+.ajustes4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0}
+.ajuste{background:var(--card);border:1px solid var(--linha);border-top:6px solid var(--verde);border-radius:16px;padding:16px 18px 18px}
+.ajuste h3{font-size:17px}
+.ajuste__t{display:block;font-size:24px;font-weight:800;line-height:1.15;margin-top:8px}
+.ajuste__u{display:block;font-size:14px;color:var(--cinza);margin-top:2px}
+.ajuste p{margin:10px 0 0;font-size:14.5px;color:var(--cinza);border-top:1px solid var(--linha);padding-top:8px}
+@media (max-width:900px){.ajustes4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:400px){.ajuste{padding:14px 14px 16px}.ajuste__t{font-size:20px}}
+.limite{margin-top:14px;font-weight:600;display:flex;gap:10px;align-items:flex-start}
+.limite .ic{color:var(--orange-ink);margin-top:2px}
+.ficha2{margin-top:26px;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:24px;align-items:start;
+  background:var(--gelo);border-radius:18px;padding:24px 26px}
+.ficha2 h3{font-size:21px;margin:0 0 6px}
+.ficha2 h3 .ic{vertical-align:-4px;margin-right:6px;color:var(--orange-ink)}
+.ficha2 .agro-form{max-width:none;margin-top:0}
+@media (max-width:860px){.ficha2{grid-template-columns:1fr;gap:12px;padding:20px 18px}}
+
+/* Três jeitos de ter */
+.jeitos{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin:22px 0 0;padding:0;list-style:none}
+.jeito{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:22px 22px 24px;box-shadow:0 8px 24px rgba(20,38,60,.06)}
+.jeito--destaque{border:3px solid var(--laranja)}
+.jeito .ic{width:36px;height:36px}
+.jeito h3{margin-top:12px}
+.jeito p{color:var(--cinza);font-size:15px}
+.divide{margin-top:20px;background:#fff;border:2px solid var(--laranja);border-radius:18px;padding:20px 22px}
+.divide__grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:12px 0 0;padding:0;list-style:none}
+.divide__item{display:flex;gap:12px;align-items:flex-start}
+.divide__item .ic{width:40px;height:40px;padding:8px;border-radius:12px;background:rgba(56,182,255,.12);box-sizing:content-box}
+.divide__item b{display:block}
+.divide__item p{margin:2px 0 0;font-size:14px;color:var(--cinza)}
+@media (max-width:400px){.jeitos,.divide__grid{grid-template-columns:1fr}}
+
+/* Irrigação: o sistema, os sistemas de referência, as fases */
+.pecas{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0;padding:0;list-style:none}
+.pecas li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--linha);
+  border-top:6px solid var(--azul);border-radius:16px;padding:16px 18px}
+.pecas .ic{width:28px;height:28px;margin-top:2px}
+.pecas b{display:block;font-size:17px}
+.pecas span{display:block;font-size:14.5px;color:var(--cinza);margin-top:2px}
+.tabela-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:14px;background:var(--card)}
+.tabela{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+.tabela caption{text-align:left;padding:12px 16px 0;font-size:13px;color:var(--cinza)}
+.tabela th,.tabela td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--linha)}
+.tabela thead th{font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--cinza);font-weight:700}
+.tabela tbody tr:last-child th,.tabela tbody tr:last-child td{border-bottom:0}
+.tabela tbody th{font-weight:700}
+.preco{margin-top:14px;background:var(--gelo);border-radius:14px;padding:12px 16px;font-size:15px}
+.oito{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none;counter-reset:q}
+.oito li{counter-increment:q;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--linha);
+  border-radius:12px;padding:10px 12px;font-weight:600;font-size:15px}
+.oito li::before{content:counter(q);flex:none;width:28px;height:28px;border-radius:50%;background:var(--azul);color:var(--navy);
+  font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+@media (max-width:860px){.oito{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fases4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0 0;padding:0;list-style:none;counter-reset:f}
+.fases4 li{counter-increment:f;background:var(--card);border:1px solid var(--linha);border-top:6px solid var(--verde);
+  border-radius:16px;padding:16px 18px}
+.fases4 small{display:block;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--cinza)}
+.fases4 .ic{width:26px;height:26px;margin-bottom:6px}
+.fases4 b{display:block;font-size:17px}
+.fases4 span{display:block;font-size:14.5px;color:var(--cinza);margin-top:4px}
+@media (max-width:900px){.fases4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.fases4{grid-template-columns:1fr}}
+
+/* Cruzamento para o outro produto */
+.cross{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--gelo);
+  border-radius:16px;padding:22px 26px}
+.cross h2{font-size:22px}
+.cross p{margin:4px 0 0;color:var(--cinza);max-width:56ch}
+
+/* ── Formulários: consentimento, IA e a linha que tranquiliza ─────────────── */
+.agro-form__row{display:flex;gap:12px;flex-wrap:wrap}
+.agro-form__row > .agro-form__field{flex:1 1 220px}
+.agro-form select{appearance:auto}
+.agro-form__purpose{font-size:14.5px;color:var(--cinza);margin:6px 0 4px;max-width:62ch}
+.agro-form__purpose a{color:var(--navy)}
+.agro-form__check{min-height:44px;cursor:pointer;margin:10px 0}
+.agro-form__check + .agro-form__check{margin-top:0}
+.agro-form__check small{display:block;font-size:13.5px;margin-top:3px}
+.agro-form__check .req{font-weight:700;color:var(--navy)}
+.agro-form__btn{margin-top:8px}
+.agro-form__note{font-size:13.5px;color:var(--cinza);margin:12px 0 0;max-width:62ch}
+.agro-form__note a{color:var(--navy)}
+.agro-form__ok{background:rgba(56,182,255,.12);border-radius:12px;padding:12px 14px}
+.agro-form--dark{max-width:680px}
+.agro-form--dark .agro-form__field select{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
+.agro-form--dark .agro-form__purpose,.agro-form--dark .agro-form__note{color:#B9C6D4}
+.agro-form--dark .agro-form__purpose a,.agro-form--dark .agro-form__note a,
+.agro-form--dark .agro-form__check .req{color:var(--papel)}
+.agro-form--dark .agro-form__ok{background:rgba(56,182,255,.16)}
+.dark .direto{font-size:15px;color:#B9C6D4;margin-top:18px}
+.dark .direto a{color:var(--papel)}
+
+/* ── Convite para o Instagram, antes do rodapé ───────────────────────────── */
+.insta{background:var(--gelo);border-top:1px solid var(--linha)}
+.insta__box{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.insta__glyph{width:84px;height:84px;border-radius:24px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:var(--navy);color:var(--papel)}
+.insta__glyph .ic{width:46px;height:46px}
+.insta__txt{flex:1 1 360px}
+.insta__txt p{color:var(--cinza);max-width:58ch}
+.insta .cta .ic{width:22px;height:22px}
+
+/* Páginas de texto (privacidade, acessibilidade) e a FAQ: a trilha fica dentro do herói */
+.hero .crumb{padding:0 0 10px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;padding:0;list-style:none}
+.toc a{display:inline-flex;align-items:center;min-height:40px;font-size:14px;font-weight:600;padding:6px 14px;
+  border:1px solid var(--linha);border-radius:999px;color:var(--navy);text-decoration:none;background:var(--card)}
+.toc a:hover{border-color:var(--navy)}
+.prose h3{font-size:18px;margin-top:22px}
+.prose ol{color:var(--cinza)}
+.prose li{margin:6px 0}
+.prose code{font-size:.9em;background:var(--gelo);padding:1px 5px;border-radius:5px}
+
+@media (max-width:560px){
+  section{padding:40px 0}.wrap{padding:0 16px}.nav__inner{padding:10px 16px}
+  .formbox{padding:20px 18px 22px}.cta{width:100%;justify-content:center}.cross{padding:20px 18px}
+  .hero-home{padding:44px 0 44px}
+}
+.retorno .kicker{color:var(--orange-ink);margin-bottom:4px}
+@media (max-width:560px){.insta .cta{font-size:15px;padding:12px 16px}}

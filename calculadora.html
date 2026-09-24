@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de economia · Agrotech da Holanda</title>
+<title>Calculadora de retorno · Agrotech da Holanda</title>
 <meta name="description" content="Estime quanto de diesel a sua irrigação consome por ano e em quanto tempo a irrigação solar se paga.">
+<link rel="canonical" href="https://agrotechdaholanda.com.br/calculadora.html">
+<meta property="og:url" content="https://agrotechdaholanda.com.br/calculadora.html">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
 <link rel="icon" type="image/x-icon" href="assets/brand/favicon.ico">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
@@ -162,6 +164,17 @@
   @media (max-width:900px){ .numbox { min-width:96px; } }
   @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
   :focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+  /* Navegação compartilhada com o resto do site (build_site.py gera as outras páginas). */
+  .hero-top { flex-wrap:wrap; }
+  .tool-nav { margin-left:auto; display:flex; flex-wrap:wrap; align-items:center; gap:4px 18px; font-size:0.85rem; font-weight:600; }
+  .tool-nav a { color:var(--navy); text-decoration:none; min-height:44px; display:inline-flex; align-items:center; }
+  .tool-nav a:hover { text-decoration:underline; }
+  .tool-nav .hero-back { margin-left:0; min-height:0; padding-bottom:2px; }
+  .cta-forms { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  .cta-forms a { display:inline-flex; align-items:center; min-height:44px; padding:10px 18px; border-radius:999px; font-weight:700; font-size:0.92rem; text-decoration:none; }
+  .result .cta-forms a { color:var(--navy); background:var(--blue); }
+  .result .cta-forms a + a { color:#fff; background:transparent; border:2px solid rgba(255,255,255,.55); }
+  .result .cta-forms a:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
 </style>
 </head>
 <body>
@@ -180,10 +193,14 @@
         </g>
       </svg>
       <span class="hero-brand">Agrotech <span>da Holanda</span></span>
-      <a class="hero-back" href="./">Voltar ao site</a>
+      <nav class="tool-nav" aria-label="Site">
+        <a href="irrigacao-solar/">Irrigação solar inteligente</a>
+        <a href="camara-fria-solar/">Câmara fria solar</a>
+        <a class="hero-back" href="./">Voltar ao site</a>
+      </nav>
     </div>
     <div class="hero-body">
-      <p class="eyebrow">Calculadora de economia</p>
+      <p class="eyebrow">Calculadora de retorno</p>
       <h1>Quanto o diesel custa à sua irrigação?</h1>
       <p class="thesis">Estime quanto a sua bomba a diesel gasta por ano e em quanto tempo a irrigação solar se paga. Preencha a sua área, o resultado aparece na hora.</p>
     </div>
@@ -307,6 +324,10 @@
       <div class="cta">
         <p>Quer saber o preço e montar seu projeto?</p>
         <a class="btn" id="ctaBtn" href="#">Peça um orçamento sem compromisso →</a>
+        <p class="cta-forms">
+          <a href="irrigacao-solar/#proposta" data-track="calc-proposta">Pedir a proposta pelo formulário</a>
+          <a href="irrigacao-solar/#ficha" data-track="calc-ficha">Receber a ficha técnica</a>
+        </p>
         <div class="cta-mail" data-copy-scope>
           Ou escreva direto para:
           <div class="row">

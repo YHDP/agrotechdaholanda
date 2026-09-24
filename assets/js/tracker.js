@@ -14,7 +14,7 @@
  * RegenTracker — Privacy-preserving universal analytics tracker
  * ES5-compatible IIFE. Auto-initializes on load.
  *
- * Configured for: www.regenstudio.world (site: 'www')
+ * Configured for: agrotechdaholanda.com.br (site: 'agro')
  *
  * Features:
  * - page_view with referrer_domain + from_page (sessionStorage)
@@ -66,8 +66,9 @@
   var referrerDomain = null;
   try {
     if (document.referrer) {
+      // Internal navigation is not a referrer: it travels as from_page. Only another site counts.
       var rh = new URL(document.referrer).hostname;
-      if (rh !== 'www.regenstudio.world' && rh !== 'regenstudio.world' && rh !== 'demos.regenstudio.world' && rh !== 'www.regenstudio.space' && rh !== 'regenstudio.space' && rh !== 'demos.regenstudio.space') {
+      if (rh !== window.location.hostname && rh !== 'agrotechdaholanda.com.br' && rh !== 'www.agrotechdaholanda.com.br') {
         referrerDomain = rh;
       }
     }

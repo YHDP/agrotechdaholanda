@@ -1,5 +1,6 @@
-/* Menu do topo. Nada além disso — o site não tem lógica de layout em tempo de execução nem i18n:
-   é de uma língua só, então os rótulos ficam no HTML, onde um rastreador os lê. */
+/* Menu do topo. Nada além disso: o site não tem lógica de layout em tempo de execução nem i18n.
+   Os rótulos ficam no HTML (data-label-open / data-label-close, na língua da página), onde um
+   rastreador os lê; o JS só alterna entre eles. */
 (function () {
   var t = document.getElementById('navToggle');
   var l = document.getElementById('navLinks');
@@ -7,7 +8,8 @@
     t.addEventListener('click', function () {
       var open = l.classList.toggle('is-open');
       t.setAttribute('aria-expanded', open ? 'true' : 'false');
-      t.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      t.setAttribute('aria-label', open ? (t.getAttribute('data-label-close') || 'Fechar menu')
+                                         : (t.getAttribute('data-label-open') || 'Abrir menu'));
     });
   }
 

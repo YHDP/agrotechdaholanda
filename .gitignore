@@ -17,3 +17,6 @@
 
 # Intern merkdocument — hoort niet op de publieke site (Pages serveert de repo-root).
 brandbook.html
+
+# ui-screenshot artifacts (binary diffs — never commit)
+.screenshots/
