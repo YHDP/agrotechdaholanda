@@ -320,6 +320,10 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .agro-form__field input,.agro-form__field select,.agro-form__field textarea{
   width:100%;font:inherit;font-size:16px;padding:13px 16px;border:1px solid var(--campo);
   border-radius:12px;background:var(--papel);color:var(--navy)}
+.agro-form__field textarea{resize:vertical;min-height:112px;line-height:1.5}
+/* Hint between a label and its field (the free-text box), tied to the field by aria-describedby. */
+.agro-form__hint{margin:-2px 0 6px;font-size:14px;color:var(--cinza)}
+.agro-form--dark .agro-form__hint{color:#B9C6D4}
 .agro-form__check{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--cinza);
   margin:14px 0 18px;max-width:60ch}
 .agro-form__check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--navy)}
@@ -347,6 +351,8 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 /* ── língua e rodapé legal ───────────────────────────────────────────────── */
 .nav__lang a{font-weight:600;text-decoration:underline;text-underline-offset:3px;border-bottom:0}
 .footer__bottom .footer__legal{margin-top:8px;font-size:13px;max-width:90ch}
+/* AI transparency line, every page (Yvo 24-09). Muted like the legal line: --cinza on paper is 5.5:1. */
+.footer__bottom .footer__ia{margin-top:8px;font-size:13px;max-width:90ch}
 
 /* ── acessibilidade ──────────────────────────────────────────────────────────
    Alvos de toque de 44px no celular (WCAG 2.5.5): links do menu, pílulas, botões e os <summary>. */
@@ -547,13 +553,84 @@ img,video,svg{max-width:100%}
 .traz li{margin:6px 0}
 
 /* Fale com a gente */
-.contato__grid{display:grid;gap:22px;grid-template-columns:1fr}
-@media (min-width:900px){.contato__grid{grid-template-columns:1fr 1fr;align-items:start}}
+/* One panel, one form at a time (Yvo 24-09-2026). Without JS both forms stay visible, stacked.
+   The sticky nav offset for scrolling here comes from html{scroll-padding-top}. */
+.contato__painel{display:grid;gap:22px}
+.contato__painel.is-toggled{gap:0}
 .formbox h3{font-size:21px}
 .formbox--ficha{border:2px solid var(--azul)}
 .formbox .agro-form{max-width:none}
-.contato__canais{margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;font-size:15px}
-.contato__canais a{display:inline-flex;align-items:center;gap:8px;color:var(--navy);font-weight:600;min-height:44px}
+/* ── Form toggle: choice cards (design lab agrotech-toggle-2026-09, winner t2 "Cartões") ───────
+   Two cards side by side, icon, title and one line. The chosen card lifts and fills navy, with an
+   orange check badge and an arrow pointing at the form that opens below. On a phone the cards stack
+   compact and the arrow goes. Behaviour lives in agro-form.js (initToggle): .form-toggle,
+   .form-toggle__btn with aria-pressed/aria-controls, .form-toggle__panel, .is-toggled on the panel.
+   Contrast: paper on navy 13.5:1, #B9C6D4 on navy 8.6:1, navy on white 13.9:1, --cinza on white
+   5.9:1. Orange only in the badge and the icon tile, never as text. */
+.form-toggle{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-toggle[hidden],.form-toggle__panel[hidden]{display:none}
+.form-toggle__btn{position:relative;display:flex;align-items:center;gap:16px;min-height:88px;padding:18px 20px;
+  border:2px solid var(--linha);border-radius:18px;background:var(--card);color:var(--navy);
+  font:inherit;text-align:left;cursor:pointer;
+  transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s,background-color .25s,border-color .25s,color .25s}
+.form-toggle__btn:hover{border-color:var(--navy)}
+.form-toggle__ico{flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;
+  background:var(--gelo);color:var(--navy);transition:background-color .25s}
+.form-toggle__ico .ic{width:28px;height:28px}
+.form-toggle__txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.form-toggle__txt strong{font-size:17px;font-weight:700;line-height:1.25;letter-spacing:-.2px}
+.form-toggle__txt span{font-size:14.5px;line-height:1.4;color:var(--cinza);transition:color .25s}
+.form-toggle__selo{position:absolute;top:-10px;right:14px;display:grid;place-items:center;width:26px;height:26px;
+  border-radius:50%;background:var(--laranja);color:var(--navy);opacity:0;transform:scale(.6);
+  transition:opacity .2s,transform .25s cubic-bezier(.34,1.56,.64,1)}
+.form-toggle__selo .ic{width:16px;height:16px;stroke-width:3}
+.form-toggle__btn[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--papel);
+  transform:translateY(-4px);box-shadow:0 18px 34px -18px rgba(20,38,60,.6)}
+.form-toggle__btn[aria-pressed="true"] .form-toggle__ico{background:var(--laranja)}
+.form-toggle__btn[aria-pressed="true"] .form-toggle__txt span{color:#B9C6D4}
+.form-toggle__btn[aria-pressed="true"] .form-toggle__selo{opacity:1;transform:none}
+.form-toggle__btn[aria-pressed="true"]::after{content:"";position:absolute;left:50%;bottom:-14px;margin-left:-11px;
+  border:11px solid transparent;border-top-color:var(--navy);border-bottom:0}
+/* The global ring (navy, white halo) sits outside the card; the lifted card's shadow would drop the
+   halo, so the ring is restated here with a wider offset. */
+.form-toggle__btn:focus-visible{z-index:1;outline:3px solid var(--navy);outline-offset:3px}
+.is-toggled > .form-toggle__panel{margin-top:22px;border:2px solid var(--navy)}
+.is-toggled > .form-toggle__panel:not([hidden]){animation:painel-abre .32s cubic-bezier(.4,0,.2,1)}
+@keyframes painel-abre{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.is-toggled > .form-toggle__panel > h3{margin-bottom:4px}
+@media (max-width:640px){
+  .form-toggle{grid-template-columns:1fr;gap:10px}
+  .form-toggle__btn{min-height:64px;padding:12px 14px;gap:12px;border-radius:14px}
+  .form-toggle__ico{width:44px;height:44px;border-radius:12px}
+  .form-toggle__ico .ic{width:24px;height:24px}
+  .form-toggle__txt strong{font-size:16px}
+  .form-toggle__txt span{font-size:13.5px}
+  .form-toggle__txt{padding-right:30px}
+  .form-toggle__btn[aria-pressed="true"]{transform:none}
+  .form-toggle__btn[aria-pressed="true"]::after{display:none}
+  .form-toggle__selo{top:50%;right:12px;margin-top:-13px}
+  .is-toggled > .form-toggle__panel{margin-top:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .form-toggle__btn,.form-toggle__ico,.form-toggle__txt span,.form-toggle__selo{transition:none}
+  .form-toggle__btn[aria-pressed="true"]{transform:none}
+  .is-toggled > .form-toggle__panel:not([hidden]){animation:none}
+}
+/* The e-mail and Instagram line inside every form frame: body-text size and colour, links underlined.
+   A long address may break rather than push the frame wider on a phone. */
+.form-direto{margin:18px 0 0;font-size:14px;line-height:1.6;color:var(--cinza);max-width:62ch;overflow-wrap:anywhere}
+.form-direto a{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.dark .form-direto,.dark .form-direto a{color:var(--papel)}
+.ficha2 .form-direto{margin-top:12px}
+/* Bottom of the home: a compact band that links back up to the forms (they moved under the film). */
+.fim{padding:40px 0;border-top:1px solid var(--linha)}
+.fim__grid{display:grid;gap:18px;align-items:center}
+.fim h2{margin:0 0 4px;font-size:clamp(22px,2.6vw,28px)}
+.fim p{margin:0;color:var(--cinza)}
+.fim .fim__ctas{display:flex;flex-wrap:wrap;gap:12px}
+.fim .cta{min-height:48px}
+@media (min-width:860px){.fim__grid{grid-template-columns:1fr auto}}
+@media (max-width:560px){.fim .fim__ctas{flex-direction:column}}
 
 /* ── Páginas de produto: "a página vende a ficha, não a substitui" ─────────── */
 .p3hero{padding:22px 0 8px}
@@ -695,6 +772,8 @@ img,video,svg{max-width:100%}
 .agro-form__purpose{font-size:14.5px;color:var(--cinza);margin:6px 0 4px;max-width:62ch}
 .agro-form__purpose a{color:var(--navy)}
 .agro-form__check{min-height:44px;cursor:pointer;margin:10px 0}
+/* display:flex above would beat the hidden attribute: after a send, agro-form.js hides the box. */
+.agro-form__check[hidden]{display:none}
 .agro-form__check + .agro-form__check{margin-top:0}
 .agro-form__check small{display:block;font-size:13.5px;margin-top:3px}
 .agro-form__check .req{font-weight:700;color:var(--navy)}
@@ -703,13 +782,11 @@ img,video,svg{max-width:100%}
 .agro-form__note a{color:var(--navy)}
 .agro-form__ok{background:rgba(56,182,255,.12);border-radius:12px;padding:12px 14px}
 .agro-form--dark{max-width:680px}
-.agro-form--dark .agro-form__field select{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
+.agro-form--dark .agro-form__field select,.agro-form--dark .agro-form__field textarea{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
 .agro-form--dark .agro-form__purpose,.agro-form--dark .agro-form__note{color:#B9C6D4}
 .agro-form--dark .agro-form__purpose a,.agro-form--dark .agro-form__note a,
 .agro-form--dark .agro-form__check .req{color:var(--papel)}
 .agro-form--dark .agro-form__ok{background:rgba(56,182,255,.16)}
-.dark .direto{font-size:15px;color:#B9C6D4;margin-top:18px}
-.dark .direto a{color:var(--papel)}
 
 /* ── Convite para o Instagram, antes do rodapé ───────────────────────────── */
 .insta{background:var(--gelo);border-top:1px solid var(--linha)}

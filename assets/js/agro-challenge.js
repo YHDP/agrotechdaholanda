@@ -177,6 +177,9 @@
   }
 
   Challenge.prototype.fit = function (w) {
+    // Largura 0 = o formulário está escondido (o seletor da página inicial mostrou o outro lado).
+    // Não há cena para ajustar; reconstruir agora jogaria fora um arraste pela metade.
+    if (!w) return;
     var m = w < 440 ? 'compact' : 'wide';
     if (m === this.mode) return;
     this.mode = m; this.build();

@@ -13,7 +13,7 @@
  * levar o painel solar ao telhado. window.AgroChallenge.mount(el, {variant, lang}) devolve uma Promise
  * que resolve quando a pessoa encaixa o painel. A cena segue o produto do formulário: data-produto, ou
  * o <select name="produto"> no momento em que o desafio aparece ('camara-fria' mostra o contêiner,
- * qualquer outro valor o galpão da irrigação). Se a pessoa troca o produto com o desafio aberto, a
+ * qualquer outro valor o galpão da irrigação, inclusive 'ambos' e o select ainda vazio). Se a pessoa troca o produto com o desafio aberto, a
  * cena troca junto.
  *
  * O servidor (agro-lead) exige antibot_captcha === true. Aqui esse campo quer dizer "a
