@@ -597,7 +597,8 @@ img,video,svg{max-width:100%}
 .is-toggled > .form-toggle__panel{margin-top:22px;border:2px solid var(--navy)}
 .is-toggled > .form-toggle__panel:not([hidden]){animation:painel-abre .32s cubic-bezier(.4,0,.2,1)}
 @keyframes painel-abre{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.is-toggled > .form-toggle__panel > h3{margin-bottom:4px}
+/* The chosen card already names the panel: its h3 stays for screen readers and aria-labelledby. */
+.is-toggled > .form-toggle__panel > h3{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 @media (max-width:640px){
   .form-toggle{grid-template-columns:1fr;gap:10px}
   .form-toggle__btn{min-height:64px;padding:12px 14px;gap:12px;border-radius:14px}
