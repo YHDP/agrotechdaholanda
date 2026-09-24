@@ -18,6 +18,12 @@
  *
  * Na página inicial os dois formulários dividem um painel com um seletor em cima
  * (.form-toggle, dois cartões de escolha): só um aparece por vez. Ver initToggle, no fim deste arquivo.
+ *
+ * Pedido de proposta: os campos vêm de proposal-fields.json (o gerador do site), a mesma lista do
+ * modelo de resposta da função. Os essenciais são obrigatórios; os opcionais ficam num <fieldset
+ * data-mais> que só aparece depois que os essenciais estão preenchidos (initMais). Na página inicial
+ * o <select name="produto"> decide quais linhas aparecem (data-produtos); linha escondida fica
+ * desabilitada, nunca é obrigatória e nunca é enviada.
  */
 (function () {
   'use strict';
@@ -42,6 +48,7 @@
       errEmail: 'Informe um e-mail válido.',
       errConsent: 'É preciso aceitar a Política de Privacidade para continuar.',
       errProduto: 'Escolha o produto para receber a ficha.',
+      errRequired: 'Falta preencher: ',
       errSend: 'Não foi possível enviar agora.',
       errRetry: 'Não foi possível enviar agora. Verifique a conexão e tente de novo, ou escreva para info@agrotechdaholanda.com.br.',
       errVerify: 'A verificação falhou. Tente de novo.'
@@ -55,6 +62,7 @@
       errEmail: 'Please enter a valid e-mail address.',
       errConsent: 'Please accept the Privacy Policy to continue.',
       errProduto: 'Please choose a product to receive the sheet.',
+      errRequired: 'Please fill in: ',
       errSend: 'We could not send this right now.',
       errRetry: 'We could not send this right now. Check your connection and try again, or write to info@agrotechdaholanda.com.br.',
       errVerify: 'Verification failed. Please try again.'
@@ -87,6 +95,77 @@
   }
 
   var formSeq = 0;
+
+  // Os campos obrigatórios que a pessoa vê agora (e-mail, produto, essenciais). A caixa de
+  // consentimento fica de fora: ela vem depois do botão dos opcionais.
+  function requiredNow(form) {
+    return [].filter.call(form.querySelectorAll('.agro-form__field [required]'), function (el) {
+      return !el.disabled && !el.closest('[data-produtos][hidden]');
+    });
+  }
+
+  // O primeiro obrigatório inválido. Um opcional escondido nunca conta: nenhum é obrigatório.
+  function firstMissing(form) {
+    var req = requiredNow(form);
+    for (var i = 0; i < req.length; i++) {
+      if (req[i].name === 'email') continue;           // o e-mail tem mensagem própria
+      if (!(req[i].value || '').trim() || !req[i].checkValidity()) return req[i];
+    }
+    return null;
+  }
+
+  // ── Essenciais primeiro, opcionais depois (pedido de proposta) ──────────────────────────────
+  // Sem JS o <fieldset data-mais> aparece inteiro e o botão fica escondido. Com JS o fieldset some,
+  // e o botão "+ Adicionar detalhes" aparece quando todos os obrigatórios visíveis são válidos, com
+  // um aviso único numa região aria-live. O botão abre e fecha o fieldset (aria-expanded) sem mover o
+  // foco. Depois de aparecer, o botão fica, mesmo que a pessoa apague um essencial.
+  // Na página inicial, trocar o produto mostra só as linhas daquele produto e desabilita as outras.
+  function initMais(form) {
+    var box = form.querySelector('[data-mais]');
+    var btn = form.querySelector('[data-mais-btn]');
+    var live = form.querySelector('[data-mais-live]');
+    var sel = form.querySelector('select[name="produto"]');
+    var rows = [].slice.call(form.querySelectorAll('[data-produtos]'));
+
+    function applyProduto() {
+      var p = sel ? sel.value : '';
+      rows.forEach(function (row) {
+        var on = !!p && row.getAttribute('data-produtos').split(' ').indexOf(p) !== -1;
+        row.hidden = !on;
+        [].forEach.call(row.querySelectorAll('input, select, textarea'), function (c) { c.disabled = !on; });
+      });
+    }
+
+    if (sel && rows.length) {
+      applyProduto();
+      // 'input' chega ao <select> antes de subir até o formulário: as linhas do produto já estão
+      // no lugar quando check() conta os obrigatórios.
+      sel.addEventListener('input', applyProduto);
+      sel.addEventListener('change', applyProduto);
+    }
+    if (!box || !btn) return;
+
+    box.hidden = true;
+    var revealed = false;
+
+    function check() {
+      if (revealed || !btn) return;
+      var req = requiredNow(form);
+      if (!req.length || !req.every(function (el) { return (el.value || '').trim() && el.checkValidity(); })) return;
+      revealed = true;
+      btn.hidden = false;
+      if (live) live.textContent = live.getAttribute('data-mais-live');
+    }
+
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      box.hidden = !open;
+    });
+    form.addEventListener('input', check);
+    form.addEventListener('change', check);
+    check();
+  }
 
   function initForm(form) {
     var intent = form.getAttribute('data-intent') || 'ficha-tecnica';
@@ -129,7 +208,7 @@
 
     function succeed(links) {
       if (btn) { btn.disabled = true; btn.textContent = T.done; }
-      [].forEach.call(form.querySelectorAll('.agro-form__field, .agro-form__check, .nx'),
+      [].forEach.call(form.querySelectorAll('.agro-form__field, .agro-form__check, .nx, [data-mais], [data-mais-btn]'),
         function (el) { el.hidden = true; });
       if (err) err.hidden = true;
       if (!okBox) return;
@@ -160,6 +239,8 @@
       okBox.focus();
     }
 
+    initMais(form);
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (err) err.hidden = true;
@@ -180,6 +261,12 @@
         showErr(T.errProduto, produtoSel);
         return;
       }
+      var missing = firstMissing(form);
+      if (missing) {
+        var ml = missing.id ? form.querySelector('label[for="' + missing.id + '"]') : null;
+        showErr(T.errRequired + (ml ? ml.textContent.trim() : missing.name) + '.', missing);
+        return;
+      }
       if (pp && !pp.checked) {
         showErr(T.errConsent, pp);
         return;
@@ -188,15 +275,21 @@
       var label = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = T.sending; }
 
+      // Cada coluna vem do primeiro campo habilitado com aquele name. Campo desabilitado (linha de
+      // outro produto na página inicial) nunca conta.
       function val(name) {
-        var el = form.querySelector('[name="' + name + '"]');
-        return el ? (el.value || '').trim() : '';
+        var els = form.querySelectorAll('[name="' + name + '"]');
+        for (var i = 0; i < els.length; i++) {
+          if (!els[i].disabled) return (els[i].value || '').trim();
+        }
+        return '';
       }
 
-      // Campos sem coluna própria no servidor (tamanho, forma de uso, tipo de irrigação, e um
-      // interesse do <select name="produto"> fora da lista, como "Os dois" ou "Piloto") seguem
-      // dentro de `mensagem`, uma linha "Rótulo: valor" cada, para nada do que a pessoa escolheu
-      // se perder no caminho.
+      // Campos sem coluna própria no servidor (profundidade, tipo de irrigação, tamanho, quem vai
+      // ter, e um interesse do <select name="produto"> fora da lista, como "Os dois" ou "Piloto")
+      // seguem dentro de `mensagem`, uma linha "Rótulo: valor" cada, para nada do que a pessoa
+      // escolheu se perder no caminho. O mesmo vale para o segundo campo de uma coluna já ocupada:
+      // com "Os dois", "O que você planta" vai para `cultura` e "O que você colhe" vira uma linha.
       function extras() {
         var lines = [];
         function add(el, value) {
@@ -204,8 +297,13 @@
           var lab = el.id ? form.querySelector('label[for="' + el.id + '"]') : null;
           lines.push((lab ? lab.textContent.trim() : el.name) + ': ' + value);
         }
-        [].forEach.call(form.querySelectorAll('[data-extra]'), function (el) {
-          add(el, (el.value || '').trim());
+        var taken = {};
+        [].forEach.call(form.querySelectorAll('[data-key]'), function (el) {
+          if (el.disabled || el.name === 'mensagem') return;
+          var v = (el.value || '').trim();
+          if (el.hasAttribute('data-extra')) { add(el, v); return; }
+          if (taken[el.name]) add(el, v);
+          taken[el.name] = true;
         });
         if (produtoSel && produtoSel.value && allowed.indexOf(produtoSel.value) === -1) {
           add(produtoSel, produtoSel.options[produtoSel.selectedIndex].text);

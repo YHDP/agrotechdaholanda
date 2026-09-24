@@ -41,7 +41,7 @@
       "name": "Agrotech da Holanda",
       "url": "https://agrotechdaholanda.com.br",
       "logo": "https://agrotechdaholanda.com.br/assets/brand/logo-stacked.svg",
-      "description": "Agrotech da Holanda is the Brazilian brand for Dutch Flow Technology's smart solar irrigation and solar cooling containers; the commercial agent in Brazil is Regen Studio Consultoria LTDA.",
+      "description": "Agrotech da Holanda is the Brazilian brand for Dutch Flow Technology's smart solar irrigation and solar cold room; the commercial agent in Brazil is Regen Studio Consultoria LTDA.",
       "email": "info@agrotechdaholanda.com.br",
       "sameAs": [
         "https://www.instagram.com/agrotech_da_holanda/"
@@ -53,7 +53,7 @@
       "knowsAbout": [
         "Smart solar irrigation",
         "Solar pump for irrigation",
-        "Solar cooling containers",
+        "Solar cold room",
         "Post-harvest losses",
         "Water security"
       ]
@@ -63,7 +63,7 @@
       "@id": "https://agrotechdaholanda.com.br/#manufacturer",
       "name": "Dutch Flow Technology",
       "legalName": "Dutch Flow Technology PTE LTD",
-      "description": "Manufacturer and supplier of the smart solar irrigation and solar cooling container technology; equipment made and assembled in Thailand.",
+      "description": "Manufacturer and supplier of the smart solar irrigation and solar cold room technology; equipment made and assembled in Thailand.",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "SG"
@@ -215,7 +215,7 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav__links" id="navLinks">
-        <li><a class="prod prod--laranja" href="../../en/cooling-containers/">Cooling containers</a></li>
+        <li><a class="prod prod--laranja" href="../../en/cooling-containers/">Solar cold room</a></li>
         <li><a class="prod" aria-current="page" href="../../en/smart-solar-irrigation/">Smart solar irrigation</a></li>
         <li>
           <details class="drop" id="navDrop">
@@ -357,8 +357,8 @@
 
   <section class="tight"><div class="wrap">
     <div class="cross">
-      <div><h2>Need cold too?</h2><p>The cooling container chills the harvest on the farm, with the sun first.</p></div>
-      <a class="cta " href="../../en/cooling-containers/">See the cooling containers<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/> <path d="m12 5 7 7-7 7"/></svg></a>
+      <div><h2>Need cold too?</h2><p>The solar cold room chills the harvest on the farm, with the sun first.</p></div>
+      <a class="cta " href="../../en/cooling-containers/">See the solar cold room<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/> <path d="m12 5 7 7-7 7"/></svg></a>
     </div>
   </div></section>
 
@@ -367,11 +367,14 @@
     <h2 id="proposta-t">Tell us what you grow, how much and where.</h2>
     <p class="lead">We reply with a detailed proposal, with the price, with no obligation.</p>
       <form class="agro-form agro-form--dark" data-intent="proposta" data-produto="irrigacao" aria-labelledby="proposta-t" novalidate>
-        <div class="agro-form__row"><div class="agro-form__field"><label for="p-email">Your e-mail</label><input id="p-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com"></div><div class="agro-form__field"><label for="p-municipio">Municipality</label><input id="p-municipio" type="text" name="municipio" autocomplete="address-level2" placeholder="town and state"></div></div>
-        <div class="agro-form__row"><div class="agro-form__field"><label for="p-cultura">What you grow</label><input id="p-cultura" type="text" name="cultura" placeholder="coffee, mango, vegetables..."></div><div class="agro-form__field"><label for="p-area-ha">Irrigated area</label><input id="p-area-ha" type="text" name="area_ha" placeholder="in hectares"></div></div>
-        <div class="agro-form__row"><div class="agro-form__field"><label for="p-fonte-agua">Water source</label><input id="p-fonte-agua" type="text" name="fonte_agua" placeholder="borehole, river or pond, and its depth"></div><div class="agro-form__field"><label for="p-tipo-irrigacao">Irrigation type</label><select id="p-tipo-irrigacao" name="tipo_irrigacao" data-extra><option value="Not sure yet">Not sure yet</option><option value="Drip">Drip</option><option value="Sprinkler">Sprinkler</option><option value="Pivot">Pivot</option><option value="Channel">Channel</option></select></div></div>
-        <div class="agro-form__row"><div class="agro-form__field"><label for="p-energia-hoje">Energy on site today</label><select id="p-energia-hoje" name="energia_hoje"><option value="">Choose an option</option><option value="Diesel">Diesel</option><option value="Grid power">Grid power</option><option value="None">None</option><option value="Not sure">Not sure</option></select></div></div>
-        <div class="agro-form__row"><div class="agro-form__field"><label for="p-mensagem">Tell us more about your case (optional)</label><p class="agro-form__hint" id="p-mensagem-dica">Water source, energy you use today, timing...</p><textarea id="p-mensagem" name="mensagem" rows="4" maxlength="3500" aria-describedby="p-mensagem-dica"></textarea></div></div>
+        <div class="agro-form__row"><div class="agro-form__field"><label for="p-email">Your e-mail</label><input id="p-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com"></div></div>
+        <div class="agro-form__grid"><div class="agro-form__field"><label for="p-municipio">Municipality and state</label><input id="p-municipio" type="text" name="municipio" autocomplete="address-level2" required data-key="municipio" placeholder="city and state"></div><div class="agro-form__field"><label for="p-cultura">What you grow</label><input id="p-cultura" type="text" name="cultura" required data-key="cultura" placeholder="coffee, sugarcane, mango, vegetables..."></div><div class="agro-form__field"><label for="p-area-ha">Irrigated area (ha)</label><input id="p-area-ha" type="text" name="area_ha" inputmode="decimal" required data-key="area_ha" placeholder="in hectares"></div><div class="agro-form__field"><label for="p-fonte-agua">Water source</label><select id="p-fonte-agua" name="fonte_agua" required data-key="fonte_agua"><option value="">Choose an option</option><option value="Borehole">Borehole</option><option value="River">River</option><option value="Reservoir or pond">Reservoir or pond</option><option value="Not sure yet">Not sure yet</option></select></div></div>
+        <p class="sr-only" aria-live="polite" data-mais-live="Optional fields available."></p>
+        <button type="button" class="agro-form__mais-btn" aria-expanded="false" aria-controls="p-mais" data-mais-btn hidden><span class="agro-form__mais-plus" aria-hidden="true">+</span><span class="agro-form__mais-txt">Add details (optional)</span></button>
+        <fieldset class="agro-form__mais" id="p-mais" data-mais>
+          <legend>If you like, tell us more (optional)</legend>
+        <div class="agro-form__grid"><div class="agro-form__field"><label for="p-profundidade">Borehole depth or distance to the water</label><input id="p-profundidade" type="text" name="profundidade" data-extra data-key="profundidade" placeholder="in metres"></div><div class="agro-form__field"><label for="p-energia-hoje">Energy on site today</label><select id="p-energia-hoje" name="energia_hoje" data-key="energia_hoje"><option value="">Choose an option</option><option value="Diesel">Diesel</option><option value="Grid">Grid</option><option value="None">None</option><option value="Not sure">Not sure</option></select></div><div class="agro-form__field"><label for="p-tipo-irrigacao">Irrigation type</label><select id="p-tipo-irrigacao" name="tipo_irrigacao" data-extra data-key="tipo_irrigacao"><option value="">Choose an option</option><option value="Drip">Drip</option><option value="Sprinkler">Sprinkler</option><option value="Pivot">Pivot</option><option value="Canal">Canal</option><option value="Not sure yet">Not sure yet</option></select></div><div class="agro-form__field agro-form__field--wide"><label for="p-mensagem">Tell us more about your case</label><p class="agro-form__hint" id="p-mensagem-dica">timing, budget, what matters most to you...</p><textarea id="p-mensagem" name="mensagem" rows="4" maxlength="3500" aria-describedby="p-mensagem-dica" data-key="mensagem"></textarea></div></div>
+        </fieldset>
         <p class="agro-form__purpose">Regen Studio, the commercial agent in Brazil, uses your e-mail and your answers only to prepare the proposal and to reply to you. If the proposal is prepared with Dutch Flow Technology, in Singapore, your answers go to them for that single purpose (<a href="../../en/privacy/#transferencia">international transfer</a>). No mailing list.</p>
         <label class="agro-form__check"><input type="checkbox" name="privacy_policy_accepted" required>
           <span>I have read and agree to the <a href="../../en/privacy/">Privacy Policy</a> <span class="req">(required)</span></span></label>
@@ -427,7 +430,7 @@
     <div class="insta__txt">
       <p class="kicker">Instagram</p>
       <h2 id="h-insta">Follow the first pilot on Instagram</h2>
-      <p>In short videos, we show how solar irrigation and the cooling container work. And we will follow the first farm in Brazil from the first conversation to the first measured numbers.</p>
+      <p>In short videos, we show how solar irrigation and the solar cold room work. And we will follow the first farm in Brazil from the first conversation to the first measured numbers.</p>
     </div>
     <p><a class="cta" href="https://www.instagram.com/agrotech_da_holanda/" rel="noopener" data-track="instagram"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor" stroke="none"/></svg>Follow @agrotech_da_holanda<span class="sr-only"> (opens Instagram)</span></a></p>
   </div></section>
@@ -438,7 +441,7 @@
       <div>
         <h2>Products</h2>
         <ul>
-          <li><a href="../../en/cooling-containers/">Cooling containers</a></li>
+          <li><a href="../../en/cooling-containers/">Solar cold room</a></li>
           <li><a aria-current="page" href="../../en/smart-solar-irrigation/">Smart solar irrigation</a></li>
         </ul>
       </div>

@@ -18,7 +18,7 @@ Atualizado em 2026-09-24
 - Regen Studio Consultoria LTDA, CNPJ 57.579.114/0001-55, Av. Washington Luís, 1527, 174B, São Paulo/SP, CEP 04662-002: representante comercial da Dutch Flow
   Technology no Brasil. Não é a fabricante nem a operadora dos sistemas.
 
-In English: Agrotech da Holanda is the Brazilian brand for Dutch Flow Technology's smart solar irrigation and solar cooling containers; the commercial agent in Brazil is Regen Studio Consultoria LTDA.
+In English: Agrotech da Holanda is the Brazilian brand for Dutch Flow Technology's smart solar irrigation and solar cold room; the commercial agent in Brazil is Regen Studio Consultoria LTDA.
 
 ## Linhas de produto
 
@@ -99,7 +99,7 @@ propriedade. Antes de dimensionar qualquer sistema, é feita medição local.
 ## Pages in English
 
 - https://agrotechdaholanda.com.br/en/: home
-- https://agrotechdaholanda.com.br/en/cooling-containers/: cooling containers
+- https://agrotechdaholanda.com.br/en/cooling-containers/: solar cold room
 - https://agrotechdaholanda.com.br/en/smart-solar-irrigation/: smart solar irrigation
 - https://agrotechdaholanda.com.br/en/faq/: FAQ
 - https://agrotechdaholanda.com.br/en/privacy/: privacy

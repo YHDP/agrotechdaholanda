@@ -769,6 +769,28 @@ img,video,svg{max-width:100%}
 /* ── Formulários: consentimento, IA e a linha que tranquiliza ─────────────── */
 .agro-form__row{display:flex;gap:12px;flex-wrap:wrap}
 .agro-form__row > .agro-form__field{flex:1 1 220px}
+/* Proposal fields (proposal-fields.json): a grid of at most two columns that drops to one below
+   ~450px. A hidden row (another product on the home form) simply leaves the grid. The free text
+   spans the full width. */
+.agro-form__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(220px,calc(50% - 6px))),1fr));column-gap:12px}
+.agro-form__field--wide{grid-column:1/-1}
+/* "+ Adicionar detalhes (opcional)": a quiet text button, 44px target, navy on paper, paper on the
+   dark band. The plus turns into a cross while the optional fields are open. */
+.agro-form__mais-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0 0 8px;
+  padding:8px 4px;border:0;background:none;font:inherit;font-size:15px;font-weight:600;color:var(--navy);
+  cursor:pointer}
+.agro-form__mais-txt{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.agro-form__mais-btn:hover .agro-form__mais-txt{text-decoration-thickness:2px}
+.agro-form__mais-btn[hidden],.agro-form__mais[hidden]{display:none}
+.agro-form__mais-plus{display:inline-block;font-size:20px;line-height:1;text-decoration:none;transition:transform .15s}
+.agro-form__mais-btn[aria-expanded="true"] .agro-form__mais-plus{transform:rotate(45deg)}
+.agro-form__mais{margin:4px 0 0;padding:14px 0 0;border:0;border-top:1px solid var(--linha);min-width:0}
+.agro-form__mais legend{float:left;width:100%;padding:0;margin-bottom:12px;font-weight:600;font-size:15px;color:var(--cinza)}
+.agro-form__mais legend + *{clear:both}
+.agro-form--dark .agro-form__mais-btn{color:var(--papel)}
+.agro-form--dark .agro-form__mais{border-top-color:rgba(251,250,247,.25)}
+.agro-form--dark .agro-form__mais legend{color:#B9C6D4}
+@media (prefers-reduced-motion:reduce){.agro-form__mais-plus{transition:none}}
 .agro-form select{appearance:auto}
 .agro-form__purpose{font-size:14.5px;color:var(--cinza);margin:6px 0 4px;max-width:62ch}
 .agro-form__purpose a{color:var(--navy)}
