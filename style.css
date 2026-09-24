@@ -688,13 +688,13 @@ img,video,svg{max-width:100%}
 @media (max-width:760px){.fontes3{grid-template-columns:1fr}}
 .dia{margin-top:26px}
 .dia__k{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cinza);margin:0 0 8px}
-.dia__bar{display:grid;grid-template-columns:1fr 2fr 1fr;border-radius:999px;overflow:hidden;min-height:44px}
+.dia__bar{display:grid;grid-template-columns:2fr 1fr 1fr;border-radius:999px;overflow:hidden;min-height:44px}
 .dia__bar span{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:14px;
   color:var(--navy);padding:6px 8px;line-height:1.2}
 .dia__bat{background:var(--azul)} .dia__sol{background:var(--laranja)}
+.dia__bar .dia__redeseg{background:repeating-linear-gradient(135deg,#E6ECF2 0 8px,#F4F7FA 8px 16px);border-radius:0 999px 999px 0;box-shadow:inset 0 0 0 2px #9FB0C2}
 .dia__eixo{display:flex;justify-content:space-between;font-size:13px;color:var(--cinza);margin-top:6px}
-.dia__rede{margin-top:10px;border:2px dashed #9FB0C2;border-radius:14px;padding:8px 12px;text-align:center;
-  font-size:14px;color:var(--cinza)}
+.dia__rede{margin-top:10px;font-size:14px;color:var(--cinza)}
 
 /* Cada produto tem seu ajuste: quatro exemplos, borda verde (alimento) */
 .ajustes4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;list-style:none;margin:0;padding:0}

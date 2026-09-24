@@ -28,8 +28,10 @@ zona e um controlador que liga pela umidade do solo em vez de por um calendário
 acompanha e comanda pelo celular. O layout é desenhado por propriedade.
 Página: https://agrotechdaholanda.com.br/irrigacao-solar/
 
-Componentes (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026):
-- Painéis solares de 720 W com estrutura de fixação, de 3 a 12 painéis conforme o sistema.
+Componentes (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026, com respostas do
+fabricante de 24/09/2026):
+- Painéis solares de 720 W com estrutura de fixação (incluída), de 3 a 12 painéis conforme o
+  sistema.
 - Bomba solar para irrigação: submersa em aço inox (poço) ou de superfície, centrífuga monobloco
   (rio ou açude); de 8 a 60 m³/h, com cerca de 30 m de altura manométrica.
 - Inversor para bombeamento solar, que aciona a bomba com a energia dos painéis; a partir de 4 ha,
@@ -40,6 +42,10 @@ Componentes (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026):
 - Opcionais: válvulas solenoides, hidrociclone, fertirrigação de 4 canais, inversor para rede
   elétrica, bateria para irrigar à noite.
 - Sistemas de referência de 1 a 10 ha; áreas maiores, até 30 ha por bomba, dimensionadas caso a caso.
+- Prazo: 12 a 16 semanas até o porto no Brasil; o desembaraço aduaneiro vem à parte.
+- Custo: a calculadora usa uma estimativa de custo por hectare do sistema posto no Brasil, com frete
+  e importação, diferente para água de rio ou represa e para poço. Poço, reservatório e instalação
+  não estão incluídos. Sem valores publicados aqui; o preço vem na proposta.
 
 ### Câmara fria solar
 Câmara fria movida a energia solar, com bateria, num contêiner que chega pronto de caminhão e pode
@@ -47,11 +53,18 @@ mudar de lugar. Reduz a perda pós-colheita: o produtor colhe, resfria e vende n
 de vender com pressa. Pode ser comprada por uma cooperativa e compartilhada entre os cooperados.
 Página: https://agrotechdaholanda.com.br/camara-fria-solar/
 
-Especificações (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026):
+Especificações (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026, com respostas do
+fabricante de 24/09/2026):
 - Faixa de temperatura, as duas versões: de +10 °C a −5 °C; mantém −5 °C com 8 a 10 h de operação
   por dia. Isolamento em painel de poliuretano de 100 mm. Degelo por gás quente. Compressor Copeland,
-  220 V, 50 Hz, monofásico. Fluido R-404A ou R-507. Gestão de energia: o sol vem primeiro; no
-  mínimo da bateria, comuta para gerador ou rede elétrica.
+  220 V, 50 ou 60 Hz (60 Hz opcional; é a versão para a rede elétrica e os geradores do Brasil),
+  monofásico. Fluido R-404A ou R-507; opcional R-448A ou R-449A, de menor GWP. Bateria com
+  garantia de 5 anos.
+- Gestão de energia: o sol vem primeiro. De dia, os painéis resfriam a câmara e carregam a bateria.
+  À noite, a bateria segura o frio por algumas horas (cerca de 5 h no pior caso, numa noite de
+  40 °C; mais em noites normais). Depois, a rede elétrica ou o gerador assume sozinho, por isso a
+  instalação inclui uma conexão com a rede ou com um gerador como reserva.
+- Linha nova da Dutch Flow Technology: as primeiras unidades vão para os primeiros pilotos.
 - Contêiner de 40 pés: 12,192 × 2,438 × 2,591 m externos; refrigeração de 4 HP; 20 painéis de
   580 W (cerca de 11,6 kWp); inversor de 10 kW; bateria LiFePO4 de 20 kWh.
 - Contêiner de 20 pés: 6,058 × 2,438 × 2,591 m externos; refrigeração de 3 HP; 12 painéis de
