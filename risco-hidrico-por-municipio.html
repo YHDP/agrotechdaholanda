@@ -9,6 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
 <link rel="icon" type="image/x-icon" href="assets/brand/favicon.ico">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/rodape.css">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Agrotech da Holanda">
@@ -24,11 +25,11 @@
   @font-face { font-family:'Poppins'; font-weight:800; font-display:swap; src:url('assets/fonts/poppins-800.woff2') format('woff2'); }
   :root {
     --orange:#FF914D; --blue:#38B6FF; --navy:#14263C; --paper:#FBFAF7;
-    /* Text-only variants. Same hue, dark enough to read: 4.5:1 on paper and on white.
-       As type the bright pair lands at 2.16:1, so the headline figures on this page were
+    /* Text-only variants. Same hue, dark enough to read: 4.5:1 on paper and on white. Blue ink
+       is style.css --azul-ink: 4.80:1 on paper, 5.01:1 on white. As type the bright pair lands at 2.16:1, so the headline figures on this page were
        the least readable thing on it. Bright stays for fills, borders, the map, and type on the
        navy blocks (.posicao, .pop), where bright reaches 6.9:1 and the ink pair falls to 3.2:1. */
-    --orange-ink:#C74C00; --blue-ink:#0078BE; --tijolo-ink:#C9501D;
+    --orange-ink:#C74C00; --blue-ink:#0074B8; --tijolo-ink:#C9501D;
     --soft:#55677D; --line:#E8E4DB; --card:#FFFFFF; --panel:#14263C;
   }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -40,9 +41,10 @@
   /* site chrome, same shape as calculadora.html */
   header.hero { padding-top:34px; }
   .hero-top { display:flex; align-items:center; gap:14px; }
-  .hero-mark { width:44px; height:44px; flex:none; }
-  .hero-brand { font-weight:700; font-size:0.98rem; letter-spacing:-0.01em; }
-  .hero-brand span { color:var(--orange-ink); }
+  /* Same logo, same size and the same link home as the generated header (style.css .nav__logo). */
+  .nav__logo { display:inline-flex; align-items:center; min-height:44px; flex:none; }
+  .nav__logo img { display:block; height:40px; width:auto; }
+  @media (max-width:560px) { .nav__logo img { height:36px; } }
   .hero-back { margin-left:auto; font-size:0.85rem; font-weight:600; color:var(--navy);
                text-decoration:none; border-bottom:2px solid var(--orange); padding-bottom:2px; }
   .hero-body { padding:34px 0 10px; }
@@ -181,17 +183,17 @@
   .escala .barra { flex:1; height:9px; border-radius:99px; }
   .nota { font-size:0.8rem; color:var(--soft); margin-top:10px; max-width:70ch; }
 
-  footer { border-top:1px solid var(--line); padding:28px 0 46px; margin-top:20px;
+  /* Sources and caveats (attribution to Lobelia Earth is required). The site footer below it is
+     the shared one: HTML injected by build_site.py, CSS in assets/css/rodape.css. */
+  .fontes-bloco { border-top:1px solid var(--line); padding:28px 0 8px; margin-top:20px;
            font-size:0.8rem; color:var(--soft); }
-  footer .fontes { columns:2; column-gap:38px; }
-  footer .fontes p { max-width:none; break-inside:avoid; margin-bottom:10px; }
-  @media (max-width:860px) { footer .fontes { columns:1; } }
-  footer p { max-width:80ch; margin-bottom:8px; }
-  footer a { color:var(--soft); }
-  footer .assinatura { margin-top:16px; }
-  @media (max-width:640px) { .painel { padding:20px; } .pop { font-size:0.9rem; } }
-  @media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
-  :focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+  .fontes-bloco .fontes { columns:2; column-gap:38px; }
+  .fontes-bloco .fontes p { max-width:none; break-inside:avoid; margin-bottom:10px; }
+  @media (max-width:860px) { .fontes-bloco .fontes { columns:1; } }
+  /* Links in running text: blue ink, underlined; the underline thickens on hover and focus. */
+  .texto a, .fontes a { color:var(--blue-ink); font-weight:600; text-underline-offset:3px; }
+  .texto a:hover, .fontes a:hover, .texto a:focus-visible, .fontes a:focus-visible { text-decoration-thickness:2px; }
+
   /* Navegação compartilhada com o resto do site (build_site.py gera as outras páginas). */
   .hero-top { flex-wrap:wrap; }
   .tool-nav { margin-left:auto; display:flex; flex-wrap:wrap; align-items:center; gap:4px 18px; font-size:0.85rem; font-weight:600; }
@@ -203,6 +205,9 @@
   .cta-forms a { color:var(--navy); background:var(--orange); }
   .cta-forms a + a { background:var(--blue); }
   .cta-forms a + a + a { background:transparent; border:2px solid var(--navy); }
+  @media (max-width:640px) { .painel { padding:20px; } .pop { font-size:0.9rem; } }
+  @media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+  :focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
 </style>
 </head>
 <body>
@@ -210,17 +215,7 @@
 <div class="wrap">
   <header class="hero">
     <div class="hero-top">
-      <svg class="hero-mark" viewBox="0 0 1000 1000" role="img" aria-label="Agrotech da Holanda">
-        <g fill="#FF914D">
-          <path transform="translate(500,500) rotate(-45) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-          <path transform="translate(500,500) rotate(135) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-        </g>
-        <g fill="#38B6FF">
-          <path transform="translate(500,500) rotate(45) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-          <path transform="translate(500,500) rotate(-135) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-        </g>
-      </svg>
-      <span class="hero-brand">Agrotech <span>da Holanda</span></span>
+      <a class="nav__logo" href="./"><img src="assets/brand/logo-horizontal.svg" alt="Agrotech da Holanda, página inicial" width="165" height="40"></a>
       <nav class="tool-nav" aria-label="Site">
         <a href="irrigacao-solar/">Irrigação solar inteligente</a>
         <a href="camara-fria-solar/">Câmara fria solar</a>
@@ -387,7 +382,7 @@
       vender, e a estrada de saída nem sempre está aberta. Resfriar, lavar e embalar dentro da fazenda
       tira a colheita dessa corrida.</p>
     </div>
-    <p class="texto"><a href="calculadora.html" style="color:var(--navy);font-weight:600">Calcule
+    <p class="texto"><a href="calculadora.html">Calcule
     quanto o diesel custa à sua irrigação</a>, ou peça a ficha técnica e uma proposta para a sua área.</p>
     <p class="cta-forms">
       <a href="camara-fria-solar/#ficha" data-track="risco-ficha-camara">Ficha técnica da câmara fria</a>
@@ -398,7 +393,7 @@
   </main>
 </div>
 
-<footer><div class="wrap">
+<section class="fontes-bloco" aria-label="Fontes e ressalvas"><div class="wrap">
   <div class="fontes">
   <p><strong>Fonte dos dados climáticos municipais:</strong> Lobelia Earth, Brasil in a +2ºC World,
   consultado em 09/09/2026, <a href="https://portal.brasil2c.com/">portal.brasil2c.com</a>. Iniciativa da
@@ -412,15 +407,52 @@
   <p>O cenário de referência é 1986-2005. O cenário +2 °C representa um mundo 2 °C mais quente em
   relação ao período pré-industrial, sem data associada. A radiação solar é a média anual calculada
   sobre a área do município. Os dados são de nível de triagem e não substituem avaliação técnica em
-  campo, estudo de impacto ambiental ou parecer jurídico. Antes de dimensionar qualquer sistema,
-  fazemos medição local.</p>
+  campo, estudo de impacto ambiental ou parecer jurídico. O dimensionamento de cada sistema vem na
+  proposta detalhada, feita para a propriedade.</p>
   <p>A relevância Agrotech é cálculo nosso, não da fonte: combina em partes iguais a queda da chuva, o
   calor num mundo 2 °C mais quente, o déficit de umidade no solo e a radiação solar. Ela indica onde o
   problema climático é maior, não a capacidade de investimento de cada produtor.</p>
   </div>
-  <p class="assinatura">© 2026 Agrotech da Holanda · Tecnologia da Dutch Flow Technology</p>
-  <p>Textos e imagens deste site foram feitos com ajuda de inteligência artificial e sempre revisados por uma pessoa.</p>
-</div></footer>
+</div></section>
+
+<!-- rodape:inicio (build_site.py) -->
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <h2>Produtos</h2>
+        <ul>
+          <li><a href="camara-fria-solar/">Câmara fria solar</a></li>
+          <li><a href="irrigacao-solar/">Irrigação solar inteligente</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Ferramentas</h2>
+        <ul>
+          <li><a href="calculadora.html">Calculadora de retorno</a></li>
+          <li><a aria-current="page" href="risco-hidrico-por-municipio.html">Risco hídrico por município</a></li>
+          <li><a href="faq.html">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Fale com a gente</h2>
+        <ul>
+          <li><a href="mailto:info@agrotechdaholanda.com.br">info@agrotechdaholanda.com.br</a></li>
+          <li><a href="https://www.instagram.com/agrotech_da_holanda/" rel="noopener">Instagram @agrotech_da_holanda</a></li>
+          <li><a href="privacidade.html">Privacidade</a></li>
+          <li><a href="acessibilidade.html">Acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer__bottom assina">
+      <a class="assina__logo" href="./" aria-label="Agrotech da Holanda, voltar ao início"><img src="assets/brand/logo-horizontal.svg" alt="" width="149" height="36" loading="lazy"></a>
+      <div class="assina__txt">
+        <p>© 2026 Agrotech da Holanda</p>
+        <p class="footer__legal">Agrotech da Holanda · tecnologia da Dutch Flow Technology PTE LTD (Singapura) · representante comercial no Brasil: Regen Studio Consultoria LTDA, CNPJ 57.579.114/0001-55, Av. Washington Luís, 1527, 174B, São Paulo/SP, CEP 04662-002 · info@agrotechdaholanda.com.br</p>
+        <p class="footer__ia">Textos e imagens deste site foram feitos com ajuda de inteligência artificial e sempre revisados por uma pessoa.</p>
+      </div>
+    </div>
+  </footer>
+<!-- rodape:fim -->
 
 <script>
 const IND = [{"id": "chuva", "curto": "Chuva", "rot": "Tendência da chuva", "un": "mm/década", "inv": true, "casas": 0, "nota": "Tendência observada da chuva anual entre 1980 e 2015. Laranja é chuva caindo."}, {"id": "calor", "curto": "Calor a +2 °C", "rot": "Dias acima de 35 °C a +2 °C", "un": "dias/ano", "inv": false, "casas": 0, "nota": "Dias por ano acima de 35 °C num mundo 2 °C mais quente, sem data associada."}, {"id": "solo", "curto": "Déficit no solo", "rot": "Meses de déficit de umidade no solo", "un": "meses", "inv": false, "casas": 0, "nota": "Meses acumulados com déficit de umidade no solo na série histórica."}, {"id": "sol", "curto": "Sol", "rot": "Radiação solar", "un": "kWh/m²/dia", "inv": false, "casas": 2, "nota": "Média anual de radiação solar sobre a área do município."}, {"id": "agro", "curto": "Relevância Agrotech", "rot": "Relevância Agrotech", "un": "pontos", "inv": false, "casas": 0, "rampa": ["#FDEEE4", "#FAD2BB", "#F7B18C", "#F1885B", "#DD6130", "#A83C13"], "nota": "Combina em partes iguais os quatro indicadores ao lado: quanto a chuva caiu, quantos dias de calor extremo o município terá num mundo 2 °C mais quente, quantos meses o solo passa em déficit de umidade e quanta radiação solar recebe. Cada um vira um percentil dentro do Brasil, e a nota é a média dos quatro. É cálculo nosso, não da fonte, e indica onde o problema climático é maior, não a capacidade de investimento."}];

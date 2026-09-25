@@ -31,3 +31,20 @@
     if (btn && btn.focus) btn.focus();
   }, false);
 })();
+
+// Uma pergunta frequente aberta por link (faq.html#q-b3, ou #q-b3 na mesma página): o <details> com
+// esse id abre e vem para a tela, ao carregar e a cada mudança de hash. Sem JS, o link ainda leva à
+// pergunta, só que fechada.
+(function () {
+  if (!window.addEventListener) return;
+  function openFromHash() {
+    var id = decodeURIComponent((location.hash || '').slice(1));
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el || el.tagName !== 'DETAILS') return;
+    el.open = true;
+    el.scrollIntoView({ block: 'start' });
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash, false);
+})();

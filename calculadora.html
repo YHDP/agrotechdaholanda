@@ -10,6 +10,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
 <link rel="icon" type="image/x-icon" href="assets/brand/favicon.ico">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/rodape.css">
 <style>
   @font-face { font-family:'Poppins'; font-weight:400; font-display:swap; src:url('assets/fonts/poppins-400.woff2') format('woff2'); }
   @font-face { font-family:'Poppins'; font-weight:600; font-display:swap; src:url('assets/fonts/poppins-600.woff2') format('woff2'); }
@@ -18,12 +19,13 @@
   :root {
     --orange:#FF914D; --blue:#38B6FF; --navy:#14263C; --paper:#FBFAF7;
     /* Text-only variants. Same hue, dark enough to read: 4.5:1 on paper and on white.
+       Blue ink is style.css --azul-ink: 4.80:1 on paper, 5.01:1 on white.
        As type on paper the bright pair lands at 2.13:1 and 2.16:1, which is also what the
        brandbook already says about orange on a light field. Bright stays for fills,
        borders and focus rings; these two are for type ON THE LIGHT HALF ONLY. Inside .result,
        which is navy, the bright pair reaches 6.8:1 and these fall to 3.2:1, so the dark panel
        keeps --orange and --blue. */
-    --orange-ink:#C74C00; --blue-ink:#0078BE;
+    --orange-ink:#C74C00; --blue-ink:#0074B8;
     --soft:#55677D; --line:#E8E4DB; --card:#FFFFFF;
     --panel:#14263C; --panel-line:rgba(255,255,255,0.12); --panel-soft:#9DB2C9;
   }
@@ -38,17 +40,22 @@
   /* hero */
   header.hero { padding:40px 0 8px; }
   .hero-top { display:flex; align-items:center; gap:14px; }
-  .hero-mark { width:44px; height:44px; flex:none; }
-  .hero-brand { font-weight:700; font-size:0.98rem; letter-spacing:-0.01em; }
-  .hero-brand span { color:var(--orange-ink); }
+  /* Same logo, same size and the same link home as the generated header (style.css .nav__logo). */
+  .nav__logo { display:inline-flex; align-items:center; min-height:44px; flex:none; }
+  .nav__logo img { display:block; height:40px; width:auto; }
+  @media (max-width:560px){ .nav__logo img { height:36px; } }
   .hero-back { margin-left:auto; font-size:0.85rem; font-weight:600; color:var(--navy); text-decoration:none; border-bottom:2px solid var(--orange); padding-bottom:2px; }
-  .hero-body { padding:34px 0 10px; max-width:22em; }
+  /* Title wide and balanced over two lines, the intro beside it at a reading measure, so the form
+     and the result card start right under the hero instead of below a half-empty screen. */
+  .hero-body { padding:30px 0 4px; display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); column-gap:48px; align-items:end; }
+  .hero-body .eyebrow { grid-column:1 / -1; }
+  @media (max-width:900px){ .hero-body { grid-template-columns:1fr; } }
   .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange-ink); }
-  .hero h1 { font-size:clamp(2rem,5.2vw,3.1rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-top:12px; }
-  .hero p.thesis { margin-top:16px; font-size:clamp(1rem,2.1vw,1.15rem); color:var(--soft); max-width:34em; }
+  .hero h1 { font-size:clamp(2rem,5.2vw,3.1rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-top:12px; text-wrap:balance; }
+  .hero p.thesis { margin-top:16px; font-size:clamp(1rem,2.1vw,1.15rem); color:var(--soft); max-width:34em; text-wrap:pretty; }
 
   /* shell */
-  .calc { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:36px; align-items:start; }
+  .calc { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:28px; align-items:start; }
   @media (max-width:900px){ .calc { grid-template-columns:1fr; } }
 
   .field { margin-bottom:22px; }
@@ -60,6 +67,8 @@
   input[type="range"]::-moz-range-thumb { width:18px; height:18px; border-radius:50%; background:var(--navy); border:3px solid #fff; cursor:pointer; }
   .numbox { display:inline-flex; align-items:baseline; gap:4px; background:var(--card); border:1.5px solid var(--line); border-radius:11px; padding:8px 12px; min-width:112px; }
   .numbox input { font:inherit; font-weight:700; font-size:1.05rem; color:var(--navy); border:none; outline:none; width:100%; background:transparent; text-align:right; }
+  #dieselNum { min-width:3.4em; }  /* "6.97" was clipped to "6.9" in a 47 px box */
+  .row > .numbox { flex:none; }    /* the slider gives way on a phone, not the number */
   .numbox .unit { font-size:0.82rem; font-weight:600; color:var(--soft); flex:none; }
   .numbox .pre { font-size:0.9rem; font-weight:700; color:var(--soft); flex:none; }
   .numbox:focus-within { border-color:var(--blue); box-shadow:0 0 0 3px rgba(56,182,255,.16); }
@@ -159,8 +168,6 @@
   .method-body li { margin-bottom:4px; }
   .disc { margin-top:18px; padding:16px 18px; background:#F5F2EB; border-left:4px solid var(--blue); border-radius:10px; font-size:0.86rem; color:var(--navy); }
 
-  footer { border-top:1px solid var(--line); padding:28px 0 46px; margin-top:20px; text-align:center; font-size:0.8rem; color:var(--soft); }
-  footer .ia { margin:8px auto 0; max-width:60em; }
 
   @media (max-width:900px){ .numbox { min-width:96px; } }
   @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
@@ -183,17 +190,7 @@
 <div class="wrap">
   <header class="hero">
     <div class="hero-top">
-      <svg class="hero-mark" viewBox="0 0 1000 1000" role="img" aria-label="Agrotech da Holanda">
-        <g fill="#FF914D">
-          <path transform="translate(500,500) rotate(-45) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-          <path transform="translate(500,500) rotate(135) translate(0,-18) scale(581)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-        </g>
-        <g fill="#38B6FF">
-          <path transform="translate(500,500) rotate(45) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-          <path transform="translate(500,500) rotate(-135) translate(0,-18) scale(413)" d="M0,-1C0.175,-1 0.36,-0.84 0.36,-0.64C0.36,-0.44 0.095,-0.12 0,0C-0.095,-0.12 -0.36,-0.44 -0.36,-0.64C-0.36,-0.84 -0.175,-1 0,-1Z"/>
-        </g>
-      </svg>
-      <span class="hero-brand">Agrotech <span>da Holanda</span></span>
+      <a class="nav__logo" href="./"><img src="assets/brand/logo-horizontal.svg" alt="Agrotech da Holanda, página inicial" width="165" height="40"></a>
       <nav class="tool-nav" aria-label="Site">
         <a href="irrigacao-solar/">Irrigação solar inteligente</a>
         <a href="camara-fria-solar/">Câmara fria solar</a>
@@ -252,7 +249,7 @@
           <input type="range" id="diesel" min="5" max="9" step="0.05" value="6.97" aria-label="Preço do diesel">
           <span class="numbox"><span class="pre">R$</span><input type="number" id="dieselNum" min="1" max="20" step="0.01" value="6.97" aria-label="Preço do diesel"><span class="unit">/L</span></span>
         </div>
-        <p class="fhint">Média nacional em julho de 2026 (ANP). Ajuste para o seu posto.</p>
+        <p class="fhint">Diesel S-10, média nacional na pesquisa semanal da ANP, semana de 5 a 11 de julho de 2026. Ajuste para o seu posto.</p>
       </div>
 
       <button class="adv-toggle" id="advToggle" aria-expanded="false" aria-controls="adv">
@@ -281,11 +278,11 @@
         <div class="field">
           <label class="flabel" for="head">Altura manométrica total</label>
           <div class="row"><span class="numbox"><input type="number" id="head" min="5" max="200" step="1" value="40" aria-label="Altura manométrica em metros"><span class="unit">m</span></span></div>
-          <p class="fhint">Desnível + profundidade do poço + pressão. Poço ~40 m, rio ~20 m.</p>
+          <p class="fhint">Desnível + profundidade do poço + pressão. Poço ~40 m, rio ~20 m, para gotejamento; pivô e aspersão pedem mais pressão.</p>
         </div>
         <div class="field">
           <label class="flabel" for="eta">Rendimento do conjunto motobomba</label>
-          <div class="row"><span class="numbox"><input type="number" id="eta" min="0.3" max="0.85" step="0.01" value="0.55" aria-label="Rendimento da bomba"></span></div>
+          <div class="row"><span class="numbox"><input type="number" id="eta" min="0.3" max="0.85" step="0.01" value="0.60" aria-label="Rendimento da bomba"></span></div>
         </div>
         <div class="field">
           <label class="flabel" for="cec">Consumo do motor diesel</label>
@@ -366,31 +363,66 @@
       <p>Custo do sistema, posto no Brasil com frete e importação: cerca de US$ 2.000 por hectare com água de rio ou represa e US$ 2.450 por hectare com poço, ao câmbio de R$ 5,10. É uma estimativa. A estrutura dos painéis está incluída. O poço, o reservatório e a instalação não estão.</p>
       <h2>Fontes</h2>
       <ul>
-        <li>Preço do diesel S-10: média nacional da ANP, julho de 2026.</li>
-        <li>Consumo do motor (0,28 L/kWh) e rendimento do conjunto motobomba (0,55): normas de engenharia de bombeamento.</li>
+        <li>Preço do diesel S-10: média nacional na pesquisa semanal da ANP (Levantamento de Preços de Combustíveis), semana de 5 a 11 de julho de 2026.</li>
+        <li>Rendimento do conjunto motobomba (0,60): o manual de bombeamento para irrigação da FAO (Módulo 5, Savva e Frenken, 2001) dá cerca de 0,69 para uma boa bomba e até 5% de perda na transmissão. Em pivôs centrais no Brasil, a medição em campo achou de 59% a 63% (Lima e outros, Revista Brasileira de Engenharia Agrícola e Ambiental, 2009).</li>
+        <li>Consumo do motor diesel (0,28 L/kWh): FAO, Módulo 5, que usa 0,25 L/kWh como regra prática.</li>
+        <li>Altura manométrica: 40 m para poço e 20 m para rio são a base do gotejamento (FAO, Módulo 5). Pivô e aspersão pedem mais pressão, então o diesel real deles é maior.</li>
         <li>Necessidade de água por cultura: Embrapa e FAO.</li>
-        <li>CO₂: 2,68 kg por litro de diesel.</li>
+        <li>CO₂: 2,24 kg de CO₂ fóssil por litro do diesel vendido no posto, que leva 15% de biodiesel (B15). A conta usa a densidade e o poder calorífico do diesel publicados pela ANP (Anuário Estatístico 2023) e o fator de emissão do IPCC (2006). O biodiesel não entra como emissão fóssil.</li>
       </ul>
       <div class="disc">
-        Os valores pré-preenchidos são médias de referência e podem ser ajustados. O resultado é uma estimativa, não um orçamento. O dimensionamento exato do sistema solar é feito em uma visita técnica, sem custo.
+        Os valores pré-preenchidos são médias de referência e podem ser ajustados. O resultado é uma estimativa, não um orçamento. O dimensionamento exato do sistema solar vem na proposta detalhada, feita para a sua área.
       </div>
     </div>
   </details>
   </main>
 </div>
 
-<footer>
-  <div class="wrap">© 2026 Agrotech da Holanda · Tecnologia da Dutch Flow Technology
-    <p class="ia">Textos e imagens deste site foram feitos com ajuda de inteligência artificial e sempre revisados por uma pessoa.</p></div>
-</footer>
+<!-- rodape:inicio (build_site.py) -->
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <h2>Produtos</h2>
+        <ul>
+          <li><a href="camara-fria-solar/">Câmara fria solar</a></li>
+          <li><a href="irrigacao-solar/">Irrigação solar inteligente</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Ferramentas</h2>
+        <ul>
+          <li><a aria-current="page" href="calculadora.html">Calculadora de retorno</a></li>
+          <li><a href="risco-hidrico-por-municipio.html">Risco hídrico por município</a></li>
+          <li><a href="faq.html">Perguntas frequentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Fale com a gente</h2>
+        <ul>
+          <li><a href="mailto:info@agrotechdaholanda.com.br">info@agrotechdaholanda.com.br</a></li>
+          <li><a href="https://www.instagram.com/agrotech_da_holanda/" rel="noopener">Instagram @agrotech_da_holanda</a></li>
+          <li><a href="privacidade.html">Privacidade</a></li>
+          <li><a href="acessibilidade.html">Acessibilidade</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer__bottom assina">
+      <a class="assina__logo" href="./" aria-label="Agrotech da Holanda, voltar ao início"><img src="assets/brand/logo-horizontal.svg" alt="" width="149" height="36" loading="lazy"></a>
+      <div class="assina__txt">
+        <p>© 2026 Agrotech da Holanda</p>
+        <p class="footer__legal">Agrotech da Holanda · tecnologia da Dutch Flow Technology PTE LTD (Singapura) · representante comercial no Brasil: Regen Studio Consultoria LTDA, CNPJ 57.579.114/0001-55, Av. Washington Luís, 1527, 174B, São Paulo/SP, CEP 04662-002 · info@agrotechdaholanda.com.br</p>
+        <p class="footer__ia">Textos e imagens deste site foram feitos com ajuda de inteligência artificial e sempre revisados por uma pessoa.</p>
+      </div>
+    </div>
+  </footer><!-- rodape:fim -->
 
+<script src="assets/js/calc-core.js"></script>
 <script>
 (function(){
   "use strict";
-  var COEF = 0.002725, CO2_PER_L = 2.68, FX = 5.10, LIFE_YEARS = 15;
-  var CUSTO_USD_POR_HA = { rio:2000, poco:2450 };
-  var HEAD = { rio:20, poco:40 };
-  var LAMINA = { soja:400, milho:450, feijao:350, arroz:1200, cafe:1000, cana:1200, manga:1150, uva:700, melao:450, banana:1400, hortalicas:400, outro:600 };
+  /* Every number lives in assets/js/calc-core.js, shared with the mini calculator on the home page. */
+  var C = window.AgroCalc, K = C.K;
+  var HEAD = K.HEAD, LAMINA = K.LAMINA;
   var CULTURA_NOME = { soja:"Soja", milho:"Milho", feijao:"Feijão", arroz:"Arroz irrigado", cafe:"Café", cana:"Cana-de-açúcar", manga:"Manga", uva:"Uva", melao:"Melão", banana:"Banana", hortalicas:"Hortaliças", outro:"lavoura" };
 
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -407,8 +439,8 @@
   function rangeFill(el){ var min=+el.min,max=+el.max,v=+el.value; el.style.setProperty('--pct',((v-min)/(max-min))*100+'%'); }
 
   function compute(){
-    var haV = Math.max(0, num(haNum, 50));
-    var preco = num(dieselNum, 6.97) || 6.97;
+    var haV = Math.max(0, num(haNum, K.HA.padrao));
+    var preco = num(dieselNum, K.DIESEL) || K.DIESEL;
     var conh = num(consumo, 0);
     var litros, economia, exato=false;
 
@@ -417,17 +449,15 @@
       if(state.consumoUnit==='litros'){ litros = conh; economia = litros*preco; }
       else { economia = conh; litros = economia/preco; }
     } else {
-      var lam=num(lamina,1000), H=num(head,40), etaV=num(eta,0.55)||0.55, cecV=num(cec,0.28);
-      var V = haV*lam*10;
-      var Ehyd = COEF*V*H;
-      litros = (Ehyd/etaV)*cecV;
-      economia = litros*preco;
+      var lam=num(lamina,LAMINA.cafe), H=num(head,HEAD.poco), etaV=num(eta,K.ETA)||K.ETA, cecV=num(cec,K.CEC);
+      var est = C.estimar(haV, lam, H, etaV, cecV, preco);
+      litros = est.litros;
+      economia = est.economia;
     }
 
-    var co2 = litros*CO2_PER_L/1000;
-    var economia15 = economia*LIFE_YEARS;
-    var custo = haV*CUSTO_USD_POR_HA[state.fonte]*FX;
-    var payback = economia>0 ? custo/economia : Infinity;
+    var co2 = litros*K.CO2_PER_L/1000;
+    var economia15 = economia*K.LIFE_YEARS;
+    var payback = C.payback(C.custo(haV, state.fonte), economia);
     var perHa = haV>0 ? economia/haV : 0;
 
     render({ economia:economia, litros:litros, co2:co2, economia15:economia15, payback:payback, perHa:perHa, ha:haV, exato:exato });
@@ -485,12 +515,13 @@
   [cultura,lamina,head,eta,cec,consumo].forEach(function(el){ el.addEventListener('input', compute); });
   cultura.addEventListener('change', function(){ lamina.value = LAMINA[cultura.value]||600; compute(); });
 
+  function setFonte(f){
+    state.fonte=f;
+    Array.prototype.forEach.call(document.querySelectorAll('#fonte button'), function(x){ x.setAttribute('aria-pressed', x.getAttribute('data-fonte')===f?'true':'false'); });
+    head.value=HEAD[f];
+  }
   Array.prototype.forEach.call(document.querySelectorAll('#fonte button'), function(b){
-    b.addEventListener('click', function(){
-      state.fonte=b.getAttribute('data-fonte');
-      Array.prototype.forEach.call(document.querySelectorAll('#fonte button'), function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
-      head.value=HEAD[state.fonte]; compute();
-    });
+    b.addEventListener('click', function(){ setFonte(b.getAttribute('data-fonte')); compute(); });
   });
   Array.prototype.forEach.call(document.querySelectorAll('#consumoUnit button'), function(b){
     b.addEventListener('click', function(){
@@ -502,6 +533,15 @@
 
   var advToggle=$('advToggle'), adv=$('adv');
   advToggle.addEventListener('click', function(){ var o=adv.classList.toggle('open'); advToggle.setAttribute('aria-expanded', o?'true':'false'); });
+
+  /* Defaults from calc-core, then the home page's handoff (?ha=&cultura=&fonte=&diesel=), validated there. */
+  diesel.value = dieselNum.value = K.DIESEL; eta.value = K.ETA; cec.value = K.CEC;
+  lamina.value = LAMINA[cultura.value]; setFonte(state.fonte);
+  var q = C.lerParametros(location.search);
+  if(q.ha){ haNum.value = q.ha; ha.value = Math.min(+ha.max, q.ha); }
+  if(q.cultura && cultura.querySelector('option[value="'+q.cultura+'"]')){ cultura.value = q.cultura; lamina.value = LAMINA[q.cultura]; }
+  if(q.fonte) setFonte(q.fonte);
+  if(q.diesel){ dieselNum.value = q.diesel; diesel.value = q.diesel; }
 
   rangeFill(ha); rangeFill(diesel);
   compute();

@@ -9,6 +9,10 @@
 @font-face{font-family:Poppins;src:url(assets/fonts/poppins-800.woff2)format('woff2');font-weight:800;font-display:swap}
 :root{--laranja:#FF914D;--azul:#38B6FF;--navy:#14263C;--papel:#FBFAF7;--cinza:#55677D;--linha:#E8E4DB;--card:#fff;
   --orange-ink:#C74C00;--campo:#838FA0;
+  /* Azul de texto: o matiz de --azul (202°) no passo mais claro que passa 4,5:1 em todas as superfícies
+     claras do site: 4,80 no papel, 5,01 no branco, 4,62 no gelo, 4,58 na areia. --azul como texto fica
+     em 2,2:1 no claro; no navy é o --azul que vale (6,8:1). */
+  --azul-ink:#0074B8;
   --verde:#5FBF7A;--legenda-ia:#627386;--orange-ink-tinta:#B84600;--gelo:#EEF7FD;--areia:#FDF3EC;--sombra:0 18px 50px rgba(20,38,60,.16)}
 *{box-sizing:border-box}
 body{margin:0;font-family:Poppins,system-ui,sans-serif;background:var(--papel);color:var(--navy);
@@ -46,7 +50,8 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .skip-link:focus{left:0}
 .nav{border-bottom:1px solid var(--linha);background:var(--papel);position:sticky;top:0;z-index:50}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 24px}
-.nav__logo img{display:block;height:40px;width:auto}
+.nav__logo img{display:block;height:40px;width:auto}   /* o SVG é recortado no desenho (viewBox 46 24 590 143):
+   a altura é a do logo, a borda esquerda cai na borda da .wrap e align-items:center o alinha às pílulas */
 .nav__links{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
 .nav__links a{color:var(--navy);text-decoration:none;font-weight:600;font-size:15px;padding:6px 0;
   border-bottom:2px solid transparent}
@@ -154,17 +159,36 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .faq__item[open] .faq__q::after{content:"−"}
 .faq__a{padding:0 34px 20px 0;color:var(--cinza);max-width:70ch}
 .faq__a p{margin:0}
-/* ── footer ──────────────────────────────────────────────────────────────── */
-.footer{border-top:1px solid var(--linha);margin-top:10px;padding:40px 0 0}
+/* rodape:inicio ──────────────────────────────────────────────────────────────
+   Todo o rodapé mora aqui, e só aqui. build_site.py copia este bloco para assets/css/rodape.css,
+   que as duas páginas feitas à mão (calculadora, risco hídrico) carregam; não edite aquele arquivo.
+   A linha de baixo é o candidato f5 "Carimbo": o logo pequeno assina a linha legal, com um fio
+   vertical entre os dois; no celular empilha e o fio some. */
+.footer{border-top:1px solid var(--linha);margin-top:10px;padding:40px 0 0;font-size:14px;color:var(--cinza)}
 .footer__grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.footer h2{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--cinza);font-weight:600}
+.footer h2{font-size:14px;line-height:1.15;letter-spacing:2px;text-transform:uppercase;color:var(--cinza);font-weight:600;margin:0}
 .footer ul{list-style:none;margin:10px 0 0;padding:0}
 .footer li{margin:7px 0}
-.footer a{color:var(--navy);text-decoration:none;font-size:15px}
-.footer a:hover{text-decoration:underline}
-.footer__bottom{border-top:1px solid var(--linha);margin-top:30px;padding:20px 24px;
-  font-size:14px;color:var(--cinza)}
+.footer a{color:var(--azul-ink);text-decoration:none;font-size:15px;display:inline-flex;align-items:center;min-height:44px}
+.footer a:hover,.footer a:focus-visible{text-decoration:underline;text-underline-offset:3px}
+.footer .footer__bottom{border-top:1px solid var(--linha);margin-top:30px;padding:20px 24px;
+  font-size:14px;line-height:1.55;color:var(--cinza)}
 .footer__bottom p{margin:0}
+.footer__bottom .footer__legal{margin-top:8px;font-size:13px;max-width:90ch}
+/* AI transparency line, every page (Yvo 24-09). Muted like the legal line: --cinza on paper is 5.5:1. */
+.footer__bottom .footer__ia{margin-top:8px;font-size:13px;max-width:90ch}
+/* .footer à frente: as páginas feitas à mão têm .wrap{padding:0 24px} depois deste arquivo. */
+.footer .assina{display:grid;grid-template-columns:auto 1fr;column-gap:32px;align-items:center;padding-top:26px;padding-bottom:30px}
+.assina__logo img{display:block;height:36px;width:auto}
+.assina__txt{border-left:1px solid var(--linha);padding-left:32px}
+@media (max-width:820px){.footer li a{display:inline-block;padding:10px 0}}
+@media (max-width:700px){
+  .footer .assina{grid-template-columns:1fr;row-gap:18px}
+  .footer .assina__logo{justify-self:start}
+  .assina__logo img{height:32px}
+  .assina__txt{border-left:0;padding-left:0}
+}
+/* rodape:fim */
 
 /* Laranja é câmara fria, azul é irrigação. O texto fica navy sobre o azul:
    azul #38B6FF com branco dá 1,9:1 e reprova; com navy dá cerca de 7:1. */
@@ -328,7 +352,7 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
   margin:14px 0 18px;max-width:60ch}
 .agro-form__check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--navy)}
 .agro-form--dark .agro-form__check input{accent-color:var(--laranja)}
-.agro-form__check a{color:var(--navy)}
+.agro-form__check a{color:var(--azul-ink)}
 .agro-form__btn{border:0;cursor:pointer;font-family:inherit}
 .agro-form__btn:disabled{opacity:.7;cursor:default}
 .agro-form__err{margin-top:12px;color:#A3231B;font-weight:600;font-size:15px}
@@ -342,7 +366,7 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .agro-form--dark .agro-form__field label{color:var(--papel)}
 .agro-form--dark .agro-form__field input{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
 .agro-form--dark .agro-form__check{color:#B9C6D4}
-.agro-form--dark .agro-form__check a{color:var(--papel)}
+.agro-form--dark .agro-form__check a{color:var(--azul)}
 .agro-form--dark .agro-form__err{color:#FFB4AC}
 .agro-form--dark .agro-form__ok{color:var(--papel)}
 .agro-form--dark .agro-form__ok a{color:var(--laranja)}
@@ -350,9 +374,6 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 
 /* ── língua e rodapé legal ───────────────────────────────────────────────── */
 .nav__lang a{font-weight:600;text-decoration:underline;text-underline-offset:3px;border-bottom:0}
-.footer__bottom .footer__legal{margin-top:8px;font-size:13px;max-width:90ch}
-/* AI transparency line, every page (Yvo 24-09). Muted like the legal line: --cinza on paper is 5.5:1. */
-.footer__bottom .footer__ia{margin-top:8px;font-size:13px;max-width:90ch}
 
 /* ── acessibilidade ──────────────────────────────────────────────────────────
    Alvos de toque de 44px no celular (WCAG 2.5.5): links do menu, pílulas, botões e os <summary>. */
@@ -360,7 +381,6 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
   .nav__links a,.drop__btn,.jump a,.cta,.copybtn,.faq__q,.nav__toggle{min-height:44px}
   .jump a,.copybtn{display:inline-flex;align-items:center}
   .nav__toggle{min-width:44px;justify-content:center}
-  .footer li a{display:inline-block;padding:10px 0}
 }
 /* Quem pediu menos movimento ao sistema não recebe animação, transição nem rolagem suave. */
 @media (prefers-reduced-motion:reduce){
@@ -387,9 +407,9 @@ img,video,svg{max-width:100%}
 .cta--linha{background:transparent;border:2px solid var(--navy);color:var(--navy)}
 .cta--linha:hover{background:rgba(20,38,60,.06)}
 .dark .cta--ghost,.dark .cta--linha{border-color:var(--papel);color:var(--papel)}
-.link{color:var(--navy);font-weight:700;text-decoration:underline;text-underline-offset:3px;
+.link{color:var(--azul-ink);font-weight:700;text-decoration:underline;text-underline-offset:3px;
   min-height:44px;display:inline-flex;align-items:center}
-.link:hover{color:var(--orange-ink)}
+.link:hover,.link:focus-visible{text-decoration-thickness:2px}
 .sec-head{max-width:64ch;margin-bottom:26px}
 .sec-head .lead{margin-top:8px}
 .note,.fonte{font-size:14px;color:var(--cinza);margin-top:14px;max-width:80ch;line-height:1.5}
@@ -398,8 +418,10 @@ img,video,svg{max-width:100%}
 .crumb ol{align-items:center;flex-wrap:wrap}
 .crumb li{display:flex;align-items:center}
 .nav__logo{display:inline-flex;align-items:center;min-height:44px}
-.footer a{display:inline-flex;align-items:center;min-height:44px}
-.faq__a a,.prose a,.naficha a{color:var(--navy);font-weight:600}
+/* Links no meio do texto: azul de texto, sempre sublinhados; no hover e no foco o traço engrossa. */
+.faq__a a,.prose a,.naficha a,.sobreposicoes a{color:var(--azul-ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.faq__a a:hover,.prose a:hover,.naficha a:hover,.sobreposicoes a:hover,.sobreposicoes a:focus-visible,.faq__a a:focus-visible,.prose a:focus-visible,.naficha a:focus-visible,
+.form-direto a:hover,.agro-form a:hover,.form-direto a:focus-visible,.agro-form a:focus-visible{text-decoration-thickness:2px}
 
 /* Imagem gerada por IA: legenda clara, 4,87:1 no branco e 4,66:1 no papel. Nunca sobre navy. */
 .fig{margin:0}
@@ -466,7 +488,7 @@ img,video,svg{max-width:100%}
 /* O nexo: o slide 13 do deck, responsivo */
 .nexo{background:var(--areia)}
 /* Nas faixas tingidas (areia, gelo) o #C74C00 cai para 4,3:1; o tom mais fundo dá 4,9:1. */
-.nexo .kicker,.insta .kicker{color:var(--orange-ink-tinta)}
+.nexo .kicker{color:var(--orange-ink-tinta)}
 .nexo__grid{display:grid;gap:18px;grid-template-columns:1fr;align-items:center;margin-top:10px}
 @media (min-width:860px){.nexo__grid{grid-template-columns:330px 70px 1fr;gap:12px}}
 .nexo-svg{display:block;width:100%;height:auto}
@@ -483,6 +505,9 @@ img,video,svg{max-width:100%}
 .sobreposicoes .ic{margin-top:2px;color:var(--navy)}
 .sobreposicoes b{display:block}
 .sobreposicoes span{font-size:15px;color:var(--cinza)}
+/* A sobreposição de cada cartão, pequena, como o kicker da seção: #B84600 no branco dá 5,37:1. */
+.sobreposicoes .sobre__tag{display:block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--orange-ink-tinta);margin-bottom:2px}
 
 /* Produtos na página inicial: teasers curtos */
 .produto{border-top:1px solid var(--linha)}
@@ -511,7 +536,8 @@ img,video,svg{max-width:100%}
 /* Ferramentas: calculadora de retorno e risco hídrico */
 .ferramentas{background:#fff;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
 .tools{display:grid;gap:18px;grid-template-columns:1fr}
-@media (min-width:860px){.tools{grid-template-columns:1fr 1fr}}
+/* O cartão do mapa leva um pouco mais de largura: mapa de 270px e o quadro de números ao lado. */
+@media (min-width:860px){.tools{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
 .tool{display:flex;flex-direction:column;background:var(--papel);border:1px solid var(--linha);border-radius:18px;padding:22px}
 .tool--navy{background:var(--navy);color:var(--papel);border-color:var(--navy)}
 .tool--navy h3{color:var(--papel)}
@@ -520,20 +546,100 @@ img,video,svg{max-width:100%}
 .tool h3{font-size:21px;margin:10px 0 6px}
 .tool > p{margin:0 0 14px;font-size:15.5px;color:var(--cinza)}
 .tool--navy > p{color:#B9C6D4}
-.tool .cta{margin-top:auto;justify-content:center;font-size:16px}
+.tool .cta{display:inline-flex;align-items:center;gap:8px;min-height:48px;margin-top:auto;justify-content:center;font-size:16px}
 .tool .ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
   background:var(--azul);color:var(--navy)}
 .tool .ico--o{background:var(--laranja)}
-.inputs{display:grid;gap:8px;margin:0 0 18px;padding:0;list-style:none}
-.inputs li{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14.5px;
-  border:1px dashed rgba(251,250,247,.35);border-radius:10px;padding:9px 12px;color:#B9C6D4}
-.inputs b{color:var(--papel);font-weight:600}
-.bars{margin:0;padding:0;list-style:none}
-.bar{display:grid;grid-template-columns:84px 1fr 44px;gap:10px;align-items:center;font-size:14.5px;margin:6px 0}
-.bar i{display:block;height:12px;border-radius:6px;background:var(--navy)}
-.bar + .bar i{background:var(--laranja)}
-.bar em{font-style:normal;font-weight:700;text-align:right}
+
+/* Mini-calculadora no cartão navy (lab agrotech-tools-2026-09, c2). Números e conta: assets/js/calc-core.js */
+.mini{margin:2px 0 16px}
+.mini__grid{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 12px}
+@media (min-width:480px){.mini__grid{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}}
+.mini__campo{display:flex;flex-direction:column;gap:6px;min-width:0}
+.mini__rotulo{font-size:14px;font-weight:600;color:var(--papel)}
+.mini__caixa{display:flex;align-items:center;min-height:48px;background:#fff;border:1px solid #fff;border-radius:12px;color:var(--navy);overflow:hidden}
+.mini__caixa:focus-within{outline:3px solid var(--azul);outline-offset:2px;box-shadow:0 0 0 2px var(--navy)}
+.mini__caixa input,.mini__caixa select{flex:1 1 auto;min-width:0;width:100%;height:46px;padding:0 12px;border:0;background:transparent;
+  font:inherit;font-size:17px;font-weight:600;color:var(--navy);outline:none;-webkit-appearance:none;appearance:none}
+.mini__caixa input[type=number]{-moz-appearance:textfield}
+.mini__caixa input::-webkit-outer-spin-button,.mini__caixa input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.mini__caixa .unidade{padding:0 12px 0 0;font-size:14px;font-weight:600;color:var(--cinza);white-space:nowrap}
+.mini__caixa--sel{position:relative}
+.mini__caixa--sel select{padding-right:36px;cursor:pointer}
+.mini__caixa--sel .ic{position:absolute;right:10px;top:50%;width:18px;height:18px;transform:translateY(-50%);pointer-events:none;color:var(--cinza)}
+.mini__fonte{margin:0;padding:0;border:0;min-width:0}
+.mini__fonte legend{padding:0;margin:0 0 6px;font-size:14px;font-weight:600;color:var(--papel)}
+.mini__pilulas{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border-radius:14px;background:rgba(251,250,247,.10)}
+.mini__pilula{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:6px 10px;border-radius:10px;
+  font-size:15px;font-weight:600;line-height:1.25;text-align:center;color:var(--papel);cursor:pointer;user-select:none}
+.mini__pilula input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.mini__pilula .ic{width:18px;height:18px;flex:none}
+.mini__pilula:has(input:checked){background:#fff;color:var(--navy)}
+.mini__pilula:has(input:focus-visible){outline:3px solid var(--azul);outline-offset:2px;box-shadow:0 0 0 2px var(--navy)}
+.mini__res{margin:14px 0 0;padding:14px 16px;border-left:4px solid var(--laranja);border-radius:0 14px 14px 0;background:rgba(251,250,247,.07)}
+.mini__res-kicker{margin:0 0 4px;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--azul)}
+.mini__grande{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin:0}
+.mini__grande b{font-size:32px;font-weight:800;letter-spacing:-.8px;line-height:1.05;font-variant-numeric:tabular-nums;color:#fff}
+.mini__grande span{font-size:14.5px;color:#B9C6D4}
+.mini__retorno{display:flex;align-items:center;gap:10px;margin:10px 0 0;padding-top:10px;border-top:1px solid rgba(251,250,247,.16);font-size:16px;font-weight:600;color:var(--papel)}
+.mini__retorno .ic{width:22px;height:22px;flex:none;color:var(--azul)}
+.mini__retorno b{font-weight:800;color:#fff;white-space:nowrap}
+.mini__nota{margin:10px 0 0;font-size:13px;line-height:1.45;color:#B9C6D4}
+@media (max-width:420px){.mini__grande b{font-size:28px}}
+
+/* Risco hídrico: mapa da chuva com oito municípios para escolher (lab agrotech-tools-2026-09, m2 "Passe",
+   Yvo 24-09). Cada alfinete é um botão de 44px; o ponto fica no município e o botão em volta é deslocado
+   (--ox/--oy, calculado no gerador) para dois alvos nunca se sobreporem. O quadro de números fica ao lado
+   do mapa a partir de 440px de cartão e embaixo dele no celular: nunca por cima. */
+.risco{container-type:inline-size}
+.mapa__dica{margin:0 0 6px;font-size:13.5px;font-weight:600;color:var(--navy)}
+.mapa{margin:0}
+.mapa__corpo{display:grid;gap:14px}
+@container (min-width:440px){.mapa__corpo{grid-template-columns:270px minmax(0,1fr);align-items:center}}
+.mapa__img{position:relative;width:100%;max-width:360px;margin:0 auto}
+.mapa__img img{display:block;width:100%;height:auto}
+.mapa__pino{position:absolute;left:calc(var(--x) + var(--ox));top:calc(var(--y) + var(--oy));width:44px;height:44px;
+  margin:-22px 0 0 -22px;padding:0;border:0;border-radius:50%;background:transparent;cursor:pointer;font:inherit;
+  -webkit-tap-highlight-color:transparent}
+.mapa__pino i{position:absolute;left:calc(16px - var(--ox));top:calc(16px - var(--oy));width:12px;height:12px;border-radius:50%;
+  background:var(--navy);box-shadow:0 0 0 2px #fff;transition:transform .2s,box-shadow .2s}
+.mapa__pino:hover i{transform:scale(1.25)}
+.mapa__pino[aria-pressed="true"] i{background:var(--orange-ink);transform:scale(1.3);box-shadow:0 0 0 2px #fff,0 0 0 4px var(--navy)}
+.mapa__pino[aria-pressed="true"] i::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--navy);
+  animation:mapa-onda 1.8s ease-out infinite}
+@keyframes mapa-onda{from{transform:scale(.4);opacity:.9}to{transform:scale(1.25);opacity:0}}
+/* Foco no ponto, não no círculo de toque deslocado. */
+.mapa__pino:focus-visible{outline:none;box-shadow:none}
+.mapa__pino:focus-visible i{outline:3px solid var(--navy);outline-offset:3px}
+/* Nome só no hover e no foco, pequeno, acima do ponto; ele é também o nome acessível do botão. */
+.mapa__nome{position:absolute;left:calc(22px - var(--ox));bottom:calc(36px + var(--oy));transform:translateX(-50%);
+  white-space:nowrap;font-size:12px;font-weight:700;line-height:1;color:var(--navy);background:#fff;
+  border:1px solid var(--navy);border-radius:6px;padding:4px 6px;opacity:0;pointer-events:none;transition:opacity .15s}
+.mapa__pino:hover .mapa__nome,.mapa__pino:focus-visible .mapa__nome{opacity:1;z-index:2}
+.mapa__pino:hover,.mapa__pino:focus-visible{z-index:2}
+.mapa__painel{position:relative;background:#fff;border:1px solid var(--linha);border-radius:12px;padding:12px 14px}
+.mapa__cidade{margin:0 0 4px;font-size:16px;font-weight:800;line-height:1.25}
+.mapa__painel dl{margin:0}
+.mapa__painel dl > div{border-top:1px solid var(--linha);padding:5px 0 4px}
+.mapa__painel dt{font-size:12.5px;line-height:1.3;color:var(--cinza)}
+.mapa__painel dd{margin:0}
+.mapa__val{font-size:13px;line-height:1.35;color:var(--cinza)}
+.mapa__val b{font-size:17px;font-weight:800;color:var(--navy)}
+.mapa__med{font-size:12px;line-height:1.3;color:var(--cinza)}
+.mapa__vazio{position:absolute;inset:0;display:none;align-items:center;justify-content:center;margin:0;padding:16px;
+  text-align:center;font-size:14px;font-weight:600;color:var(--cinza)}
+.mapa__painel[data-vazio] .mapa__dados{visibility:hidden}
+.mapa__painel[data-vazio] .mapa__vazio{display:flex}
+.mapa .ic{width:15px;height:15px;margin-right:4px;vertical-align:-2px;color:var(--orange-ink)}
+.mapa__rampa{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:12.5px;color:var(--cinza)}
+.mapa__rampa span{flex:1;max-width:170px;height:8px;border-radius:4px;background:linear-gradient(90deg,#FDEEE4,#FAD2BB,#F7B18C,#F1885B,#DD6130,#A83C13)}
+.mapa__nota{margin:4px 0 0;font-size:12.5px;line-height:1.45;color:var(--cinza)}
+@media (prefers-reduced-motion:reduce){
+  .mapa__pino i,.mapa__nome{transition:none}
+  .mapa__pino[aria-pressed="true"] i::after{animation:none;display:none}
+}
 .src{font-size:13px;color:var(--cinza);margin:6px 0 16px}
+.tool > p.src{font-size:13px;margin:10px 0 16px}
 
 /* Seja a primeira fazenda */
 .etapas{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:26px;position:relative;list-style:none;padding:0}
@@ -620,8 +726,9 @@ img,video,svg{max-width:100%}
 /* The e-mail and Instagram line inside every form frame: body-text size and colour, links underlined.
    A long address may break rather than push the frame wider on a phone. */
 .form-direto{margin:18px 0 0;font-size:14px;line-height:1.6;color:var(--cinza);max-width:62ch;overflow-wrap:anywhere}
-.form-direto a{color:var(--navy);font-weight:600;text-decoration:underline;text-underline-offset:3px}
-.dark .form-direto,.dark .form-direto a{color:var(--papel)}
+.form-direto a{color:var(--azul-ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.dark .form-direto{color:var(--papel)}
+.dark .form-direto a{color:var(--azul)}
 .ficha2 .form-direto{margin-top:12px}
 /* Bottom of the home: a compact band that links back up to the forms (they moved under the film). */
 .fim{padding:40px 0;border-top:1px solid var(--linha)}
@@ -793,7 +900,7 @@ img,video,svg{max-width:100%}
 @media (prefers-reduced-motion:reduce){.agro-form__mais-plus{transition:none}}
 .agro-form select{appearance:auto}
 .agro-form__purpose{font-size:14.5px;color:var(--cinza);margin:6px 0 4px;max-width:62ch}
-.agro-form__purpose a{color:var(--navy)}
+.agro-form__purpose a{color:var(--azul-ink)}
 .agro-form__check{min-height:44px;cursor:pointer;margin:10px 0}
 /* display:flex above would beat the hidden attribute: after a send, agro-form.js hides the box. */
 .agro-form__check[hidden]{display:none}
@@ -802,24 +909,77 @@ img,video,svg{max-width:100%}
 .agro-form__check .req{font-weight:700;color:var(--navy)}
 .agro-form__btn{margin-top:8px}
 .agro-form__note{font-size:13.5px;color:var(--cinza);margin:12px 0 0;max-width:62ch}
-.agro-form__note a{color:var(--navy)}
+.agro-form__note a{color:var(--azul-ink)}
 .agro-form__ok{background:rgba(56,182,255,.12);border-radius:12px;padding:12px 14px}
 .agro-form--dark{max-width:680px}
 .agro-form--dark .agro-form__field select,.agro-form--dark .agro-form__field textarea{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
 .agro-form--dark .agro-form__purpose,.agro-form--dark .agro-form__note{color:#B9C6D4}
-.agro-form--dark .agro-form__purpose a,.agro-form--dark .agro-form__note a,
 .agro-form--dark .agro-form__check .req{color:var(--papel)}
+.agro-form--dark .agro-form__purpose a,.agro-form--dark .agro-form__note a{color:var(--azul)}
 .agro-form--dark .agro-form__ok{background:rgba(56,182,255,.16)}
 
-/* ── Convite para o Instagram, antes do rodapé ───────────────────────────── */
-.insta{background:var(--gelo);border-top:1px solid var(--linha)}
-.insta__box{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
-.insta__glyph{width:84px;height:84px;border-radius:24px;flex:none;display:flex;align-items:center;justify-content:center;
-  background:var(--navy);color:var(--papel)}
-.insta__glyph .ic{width:46px;height:46px}
-.insta__txt{flex:1 1 360px}
-.insta__txt p{color:var(--cinza);max-width:58ch}
-.insta .cta .ic{width:22px;height:22px}
+/* ── Instagram "Mosaico", antes do rodapé (lab agrotech-insta-2026-09, i4) ────────
+   Colunas: bloco navy flexível · capa grande · coluna de duas capas pequenas. A capa grande tem a
+   altura das duas pequenas mais o espaço entre elas. O bloco navy é o elemento mais forte: rótulo com
+   os pontos do nexo, título, uma linha e o botão laranja com o @. */
+.insta-mosaico{background:var(--papel);border-top:1px solid var(--linha)}
+.mosaico{display:grid;gap:14px;grid-template-columns:minmax(0,1fr) 328px 162px;grid-template-rows:auto auto}
+.mosaico__texto{grid-column:1;grid-row:1 / span 2}
+.mosaico__grande{grid-column:2;grid-row:1 / span 2}
+.mosaico__p1{grid-column:3;grid-row:1}
+.mosaico__p2{grid-column:3;grid-row:2}
+.mosaico__texto{background:linear-gradient(160deg,#1C3453 0%,var(--navy) 58%);color:var(--papel);border-radius:22px;
+  padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  box-shadow:0 14px 36px rgba(20,38,60,.22)}
+.mosaico__texto :focus-visible{outline:3px solid var(--azul);outline-offset:3px;box-shadow:0 0 0 2px var(--navy)}
+.mosaico__rotulo{display:flex;align-items:center;gap:10px;margin:0 0 16px;font-weight:600;font-size:13px;
+  letter-spacing:3px;text-transform:uppercase;color:#B9C6D4}
+.mosaico__rotulo i{display:inline-flex;gap:5px}
+.mosaico__rotulo b{width:8px;height:8px;border-radius:50%;display:block}
+.mosaico__rotulo b:nth-child(1){background:var(--azul)}
+.mosaico__rotulo b:nth-child(2){background:var(--verde)}
+.mosaico__rotulo b:nth-child(3){background:var(--laranja)}
+.mosaico__texto h2{color:var(--papel);font-size:clamp(30px,3.6vw,44px);line-height:1.06;letter-spacing:-.8px}
+.mosaico__linha{color:#B9C6D4;font-size:17px;line-height:1.55;margin:16px 0 30px;max-width:32ch}
+.mosaico__btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 28px;
+  border-radius:999px;background:var(--laranja);color:var(--navy);font-weight:800;font-size:18px;text-decoration:none;
+  max-width:100%;overflow-wrap:anywhere;box-shadow:0 6px 16px rgba(0,0,0,.22);transition:background-color .2s ease}
+.mosaico__btn:hover{background:#FFA36A}
+.mosaico__capa{display:block;position:relative;border-radius:16px;overflow:hidden;background:var(--navy);
+  box-shadow:0 10px 30px rgba(20,38,60,.14)}
+.mosaico__capa img{display:block;width:100%;height:100%;object-fit:cover;object-position:left top;transition:transform .4s ease}
+.mosaico__p1 .mosaico__capa,.mosaico__p2 .mosaico__capa{aspect-ratio:9/16}
+.mosaico__grande .mosaico__capa{height:100%}
+.mosaico__capa:hover img{transform:scale(1.03)}
+/* Marca de play: círculo claro com triângulo navy, para ver de relance que são vídeos */
+.mosaico__capa::after{content:"";position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;
+  background:rgba(251,250,247,.92) no-repeat 56% 50% / 13px 15px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 15'%3E%3Cpath d='M1 1.2v12.6c0 .6.7 1 1.2.7l10-6.3c.5-.3.5-1 0-1.3L2.2.5C1.7.2 1 .6 1 1.2z' fill='%2314263C'/%3E%3C/svg%3E")}
+.mosaico__grande .mosaico__capa::after{width:48px;height:48px;top:16px;right:16px;background-size:17px 19px}
+@media (prefers-reduced-motion:reduce){.mosaico__capa img,.mosaico__btn{transition:none}.mosaico__capa:hover img{transform:none}}
+@media (max-width:960px){
+  .mosaico{grid-template-columns:minmax(0,1fr) 220px 108px}
+  .mosaico__p1 .mosaico__capa,.mosaico__p2 .mosaico__capa{aspect-ratio:auto;height:100%;min-height:190px}
+}
+/* Telefone: duas colunas. O bloco navy em cima, a capa grande à esquerda, as pequenas empilhadas. */
+@media (max-width:720px){
+  .mosaico{gap:10px;grid-template-columns:minmax(0,2.08fr) minmax(0,1fr);grid-template-rows:auto auto auto}
+  .mosaico__texto{grid-column:1 / span 2;grid-row:1;padding:30px 24px 32px}
+  .mosaico__grande{grid-column:1;grid-row:2 / span 2}
+  .mosaico__p1{grid-column:2;grid-row:2}
+  .mosaico__p2{grid-column:2;grid-row:3}
+  .mosaico__linha{margin:12px 0 24px}
+  .mosaico__btn{width:100%}
+  .mosaico__capa{border-radius:12px}
+  .mosaico__capa::after{width:28px;height:28px;top:8px;right:8px;background-size:10px 12px}
+  .mosaico__grande .mosaico__capa::after{width:38px;height:38px;top:10px;right:10px;background-size:14px 16px}
+}
+@media (max-width:360px){.mosaico__btn{font-size:16px;padding:0 18px}}
+
+/* FAQ: o índice dos temas no herói (usa .jump) e o respiro entre os temas */
+.jump--faq{align-items:center}
+.jump__label{flex-basis:100%;margin:0 0 2px;font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--cinza)}
+.jump--faq a{display:inline-flex;align-items:center;min-height:44px}
 
 /* Páginas de texto (privacidade, acessibilidade) e a FAQ: a trilha fica dentro do herói */
 .hero .crumb{padding:0 0 10px}
@@ -833,9 +993,8 @@ img,video,svg{max-width:100%}
 .prose code{font-size:.9em;background:var(--gelo);padding:1px 5px;border-radius:5px}
 
 @media (max-width:560px){
-  section{padding:40px 0}.wrap{padding:0 16px}.nav__inner{padding:10px 16px}
+  section{padding:40px 0}.wrap{padding:0 16px}.nav__inner{padding:10px 16px}.nav__logo img{height:36px}
   .formbox{padding:20px 18px 22px}.cta{width:100%;justify-content:center}.cross{padding:20px 18px}
   .hero-home{padding:44px 0 44px}
 }
 .retorno .kicker{color:var(--orange-ink);margin-bottom:4px}
-@media (max-width:560px){.insta .cta{font-size:15px;padding:12px 16px}}

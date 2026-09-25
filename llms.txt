@@ -56,7 +56,7 @@ Página: https://agrotechdaholanda.com.br/camara-fria-solar/
 Especificações (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026, com respostas do
 fabricante de 24/09/2026):
 - Faixa de temperatura, as duas versões: de +10 °C a −5 °C; mantém −5 °C com 8 a 10 h de operação
-  por dia. Isolamento em painel de poliuretano de 100 mm. Degelo por gás quente. Compressor Copeland,
+  por dia. Isolamento em painel de poliuretano de 100 mm. Degelo por gás quente. Compressor de
   220 V, 50 ou 60 Hz (60 Hz opcional; é a versão para a rede elétrica e os geradores do Brasil),
   monofásico. Fluido R-404A ou R-507; opcional R-448A ou R-449A, de menor GWP. Bateria com
   garantia de 5 anos.
@@ -83,7 +83,7 @@ fabricante de 24/09/2026):
 
 Publicamos as especificações técnicas da ficha do fabricante, acima. Não publicamos preços, número
 de instalações nem percentuais de desempenho próprio: o preço vem sempre numa proposta feita para a
-propriedade. Antes de dimensionar qualquer sistema, é feita medição local.
+propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 
 ## Páginas
 
