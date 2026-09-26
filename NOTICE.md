@@ -61,6 +61,8 @@ with the files. It does not require attribution on the rendered page.
   - "Marcio Ribeiro", Pexels #38794864 (lettuce laid into a crate — giro reel + its cover)
   - "Amar Preciado", Pexels #8633309 (packhouse team on a sorting line — giro reel, the close)
   - "Elly Mar Tamayor", Pexels #33650192 (community leaders discussing outdoors — governança reel + its cover)
+  - "Charles Parker", Pexels #5825792 (UN Secretariat on the East River at golden hour — Jetten/ONU reel v2, the opening, + its cover)
+  - "Ben Garves", Pexels #18674362 (UN Secretariat at dusk — Jetten/ONU reel v2, the paraphrase beat)
 
 ## Product imagery (Instagram reels)
 

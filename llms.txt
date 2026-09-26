@@ -8,7 +8,7 @@ Idiomas: português do Brasil; inglês nas páginas listadas em "Pages in Englis
 Área atendida: Brasil
 Contato: info@agrotechdaholanda.com.br
 Instagram: https://www.instagram.com/agrotech_da_holanda/
-Atualizado em 2026-09-24
+Atualizado em 2026-09-25
 
 ## Quem é quem
 
@@ -64,7 +64,7 @@ fabricante de 24/09/2026):
   À noite, a bateria segura o frio por algumas horas (cerca de 5 h no pior caso, numa noite de
   40 °C; mais em noites normais). Depois, a rede elétrica ou o gerador assume sozinho, por isso a
   instalação inclui uma conexão com a rede ou com um gerador como reserva.
-- Linha nova da Dutch Flow Technology: as primeiras unidades vão para os primeiros pilotos.
+- Linha nova da Dutch Flow Technology.
 - Contêiner de 40 pés: 12,192 × 2,438 × 2,591 m externos; refrigeração de 4 HP; 20 painéis de
   580 W (cerca de 11,6 kWp); inversor de 10 kW; bateria LiFePO4 de 20 kWh.
 - Contêiner de 20 pés: 6,058 × 2,438 × 2,591 m externos; refrigeração de 3 HP; 12 painéis de
@@ -78,6 +78,14 @@ fabricante de 24/09/2026):
 - Risco hídrico por município: dados climáticos dos 5.570 municípios brasileiros, com fonte
   Lobelia Earth ("Brasil in a +2ºC World"). Dados de nível de triagem.
   https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html
+
+## Notícias
+
+Página de notícias: https://agrotechdaholanda.com.br/noticias/
+- 2026-09-25: Estamos na missão comercial holandesa ao Brasil. https://agrotechdaholanda.com.br/noticias/missao-comercial-brasil-2026/
+  De 27/09 a 02/10/2026, a Agrotech da Holanda participa como empresa da missão comercial holandesa sobre agricultura sustentável, água e biodiversidade, em São Paulo e Belém. Fonte: página oficial da missão, RVO (em holandês). A Agrotech da Holanda participa como empresa. Isso não constitui endosso do governo dos Países Baixos.
+- 2026-09-25: Na ONU, os Países Baixos falam de agricultura climaticamente inteligente e água. https://agrotechdaholanda.com.br/noticias/holanda-na-onu-agricultura-e-agua/
+  Rob Jetten falou de agricultura climaticamente inteligente e de água na Assembleia Geral da ONU. O trecho, o vídeo e o que isso tem a ver com água, energia e frio no campo. Fonte: government.nl (discurso público, tradução nossa). Não constitui endosso da Agrotech da Holanda.
 
 ## O que não afirmamos
 
@@ -95,6 +103,7 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html: risco hídrico por município
 - https://agrotechdaholanda.com.br/privacidade.html: privacidade
 - https://agrotechdaholanda.com.br/acessibilidade.html: acessibilidade
+- https://agrotechdaholanda.com.br/noticias/: notícias
 
 ## Pages in English
 
@@ -104,3 +113,6 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/en/faq/: FAQ
 - https://agrotechdaholanda.com.br/en/privacy/: privacy
 - https://agrotechdaholanda.com.br/en/accessibility/: accessibility
+- https://agrotechdaholanda.com.br/en/news/: news
+- https://agrotechdaholanda.com.br/en/news/netherlands-at-the-un-agriculture-and-water/: news: At the UN, the Netherlands speaks about climate-smart agriculture and water
+- https://agrotechdaholanda.com.br/en/news/trade-mission-brazil-2026/: news: We are on the Dutch trade mission to Brazil
