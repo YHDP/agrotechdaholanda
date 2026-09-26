@@ -63,6 +63,7 @@ with the files. It does not require attribution on the rendered page.
   - "Elly Mar Tamayor", Pexels #33650192 (community leaders discussing outdoors — governança reel + its cover)
   - "Charles Parker", Pexels #5825792 (UN Secretariat on the East River at golden hour — Jetten/ONU reel v2, the opening, + its cover)
   - "Ben Garves", Pexels #18674362 (UN Secretariat at dusk — Jetten/ONU reel v2, the paraphrase beat)
+  - Diesel reel v2 (2026-09-26): "K", Pexels #6160051 (exhaust pipe, two cuts); "Kawsar Ahamad", Pexels #36138910 (engine pump irrigating a paddy); "Fábio Rocha", Pexels #39736803 (sunrise over a misty field)
   - Music: "Modern Brazilian Groove Background Music" by mihailandrei, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/funk-modern-brazilian-groove-background-music-477810/ (Jetten/ONU reel soundtrack, edited)
 
 ## Product imagery (Instagram reels)
