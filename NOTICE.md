@@ -65,6 +65,8 @@ with the files. It does not require attribution on the rendered page.
   - "Ben Garves", Pexels #18674362 (UN Secretariat at dusk — Jetten/ONU reel v2, the paraphrase beat)
   - Diesel reel v2 (2026-09-26): "K", Pexels #6160051 (exhaust pipe, two cuts); "Kawsar Ahamad", Pexels #36138910 (engine pump irrigating a paddy); "Fábio Rocha", Pexels #39736803 (sunrise over a misty field)
   - Music: "Modern Brazilian Groove Background Music" by mihailandrei, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/funk-modern-brazilian-groove-background-music-477810/ (Jetten/ONU reel soundtrack, edited)
+  - Music: "Festa Boa" by InácioDantas, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/latin-festa-boa-552873/ (spec-card info reel soundtrack, edited)
+  - Music: "Sunlight Over The Tree" by Mohamed_hassan, Pixabay (Pixabay Content License), https://pixabay.com/music/samba-latin-sunlight-over-the-tree-548487/ (spec-card energia reel soundtrack, edited)
 
 ## Product imagery (Instagram reels)
 
