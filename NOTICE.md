@@ -65,6 +65,7 @@ with the files. It does not require attribution on the rendered page.
   - "Ben Garves", Pexels #18674362 (UN Secretariat at dusk — Jetten/ONU reel v2, the paraphrase beat)
   - Diesel reel v2 (2026-09-26): "K", Pexels #6160051 (exhaust pipe, two cuts); "Kawsar Ahamad", Pexels #36138910 (engine pump irrigating a paddy); "Fábio Rocha", Pexels #39736803 (sunrise over a misty field)
   - Music: "Modern Brazilian Groove Background Music" by mihailandrei, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/funk-modern-brazilian-groove-background-music-477810/ (Jetten/ONU reel soundtrack, edited)
+  - Music: "Emotional Cinematic Brazilian Background Music" by mihailandrei, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/bossa-nova-emotional-cinematic-brazilian-background-music-477800/ (manifesto reel soundtrack, edited)
   - Music: "Calm and sweet Documentary Background Music" by u_n4ukys2oxi, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/modern-classical-calm-and-sweet-documentary-background-music-275270/ (governanca reel soundtrack, edited)
   - Music: "Noite de Barzinho" by LunarBoomMusic, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/wedding-noite-de-barzinho-579617/ (credito reel soundtrack, edited)
   - Music: "Happy Documentary" by AudioDollar, Pixabay (Pixabay Content License), https://pixabay.com/music/corporate-happy-documentary-574930/ (camara-fria reel soundtrack, edited)
