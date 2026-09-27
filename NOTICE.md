@@ -65,6 +65,7 @@ with the files. It does not require attribution on the rendered page.
   - "Ben Garves", Pexels #18674362 (UN Secretariat at dusk — Jetten/ONU reel v2, the paraphrase beat)
   - Diesel reel v2 (2026-09-26): "K", Pexels #6160051 (exhaust pipe, two cuts); "Kawsar Ahamad", Pexels #36138910 (engine pump irrigating a paddy); "Fábio Rocha", Pexels #39736803 (sunrise over a misty field)
   - Music: "Modern Brazilian Groove Background Music" by mihailandrei, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/funk-modern-brazilian-groove-background-music-477810/ (Jetten/ONU reel soundtrack, edited)
+  - Music: "Technology - Tech Technology 90 Second" by BombinSound, Pixabay (Pixabay Content License), https://pixabay.com/music/electronic-technology-tech-technology-90-second-499581/ (sistema reel soundtrack, edited)
   - Music: "The sound of water drops" by Tomomi_Kato, Pixabay (Pixabay Content License), https://pixabay.com/music/solo-piano-the-sound-of-water-drops-21095/ (agua-desperdicio reel, first part, edited)
   - Music: "Inspiring Strings" by Universfield, Pixabay (Pixabay Content License), https://pixabay.com/music/build-up-scenes-inspiring-strings-143021/ (agua-desperdicio reel, from the logo, edited)
   - Music: "Funky - Funk" by Loksii, Pixabay (Pixabay Content License), https://pixabay.com/music/funk-funky-funk-295004/ (diesel reel soundtrack, edited)
