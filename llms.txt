@@ -73,8 +73,9 @@ fabricante de 24/09/2026):
 
 ## Ferramentas públicas
 
-- Calculadora de retorno: calcula quanto o diesel custa à irrigação hoje, com os números do
-  próprio produtor: área, cultura, preço do diesel, consumo. https://agrotechdaholanda.com.br/calculadora.html
+- Calculadora de retorno: calcula quanto a energia custa à irrigação hoje, a diesel, gasolina ou
+  na rede elétrica (tarifa, impostos e desconto de irrigação), com os números do próprio produtor:
+  área, cultura, preço, consumo. https://agrotechdaholanda.com.br/calculadora.html
 - Risco hídrico por município: dados climáticos dos 5.570 municípios brasileiros, com fonte
   Lobelia Earth ("Brasil in a +2ºC World"). Dados de nível de triagem.
   https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html
@@ -99,7 +100,7 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/camara-fria-solar/: câmara fria solar
 - https://agrotechdaholanda.com.br/irrigacao-solar/: irrigação solar inteligente
 - https://agrotechdaholanda.com.br/faq.html: perguntas frequentes
-- https://agrotechdaholanda.com.br/calculadora.html: calculadora do diesel
+- https://agrotechdaholanda.com.br/calculadora.html: calculadora de retorno (diesel, gasolina ou rede)
 - https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html: risco hídrico por município
 - https://agrotechdaholanda.com.br/privacidade.html: privacidade
 - https://agrotechdaholanda.com.br/acessibilidade.html: acessibilidade

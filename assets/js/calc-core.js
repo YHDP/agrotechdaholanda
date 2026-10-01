@@ -4,8 +4,9 @@
    arithmetic cannot drift apart. Keep K strict JSON between the two markers.
 
    Provenance (Proton 6-projects/dutch-flow-tech-brazil):
-   - DIESEL: diesel S-10, national average price in ANP's weekly survey, week of 5 to 11 July 2026
-     (calculadora-research.md, citing Jornal de Brasília and DGABC of 10 July 2026).
+   - DIESEL 7.33 and GASOLINA 6.55 R$/L: national average resale price of óleo diesel S10 and gasolina
+     comum in ANP's weekly survey, week of 20 to 26 September 2026 (resumo_semanal_lpc_2026-09-20_
+     2026-09-26.xlsx, sheet BRASIL; 3,147 and 4,480 stations). Was 6.97 (week of 5 to 11 July 2026).
    - CUSTO_USD_POR_HA: landed estimate per hectare, surface water 2,000 and well 2,450 (Tom's e-mail
      to Yvo, 24-09-2026; product-docs-pt/ficha-sistema-irrigacao-solar-fontes.md). Excludes well,
      reservoir and installation.
@@ -27,7 +28,26 @@
      operating pressure plus losses for localized irrigation, plus the lift). Pivot and sprinkler
      need more pressure (FAO Example 6: 30 m operating + 6 m friction), so for them these are floors.
    - LAMINA mm/year per crop: calculadora-research.md (Embrapa for soy, maize, beans, cane; FAO Kc
-     for fruit and vegetables, flagged there as an editable assumption). */
+     for fruit and vegetables, flagged there as an editable assumption).
+   - CEC_GASOLINA 0.50 L per kWh of engine output: FAO, Water lifting devices, 4.4 Internal combustion
+     engines: spark-ignition engines 25-30% efficient on paper, small ones far worse in the field.
+     Taken at 25% on Brazilian gasolina C (30% anhydrous ethanol since Aug 2025, about 28.9 MJ/L:
+     0.7 x 32.2 + 0.3 x 21.2), so 3.6 / (0.25 x 28.9) = 0.50. Derived, editable on the page.
+   - CO2_PER_L_GASOLINA 1.56 kg fossil CO2 per litre of gasolina C: 0.70 x 32.2 MJ/L x IPCC 2006
+     69,300 kg CO2/TJ. The ethanol share is biogenic and counts as zero. Derived.
+   - TARIFA 0.82 R$/kWh: median TE+TUSD of subgroup B2 rural, modality convencional, "Tarifa de
+     Aplicação", across the 81 distributors in ANEEL's open data (tarifas-distribuidoras-energia-
+     eletrica), rows valid on 30-09-2026. p10 0.73, p90 1.01. Before taxes.
+   - IMPOSTO multipliers: bill = tariff / (1 - ICMS - PIS/COFINS), PIS/COFINS ~5% (CPFL/RGE 2026).
+     1.05 rural ICMS exempt (SP defers 100%, SEFAZ-SP), 1.11 ICMS 5% (MS irrigation, SEFAZ-MS),
+     1.30 full ICMS ~18%. Other states not verified: the visitor picks.
+   - DESCONTO: irrigation and aquaculture discount on up to 8.5 h/day outside 17:00-21:30 (Lei 10.438/2002
+     art. 25, REN ANEEL 1.000/2021 art. 186, Portaria MME 137/2026), needs outorga. Grupo B: 60%
+     South/Southeast, 67% North/Centre-West/MG (Neoenergia SP page), 73% Nordeste (secondary sources).
+     Pumping within 8.5 h fits the window whole, so the discount applies to all of it.
+   - ETA_MOTOR 0.90: electric motor efficiency on top of ETA. Assumption, typical of IR3 motors in the
+     5 to 15 kW range; not verified at a source. Editable on the page.
+   Research: Proton research-packs/combustivel-irrigacao-brasil.md and calculadora-research.md. */
 (function (root) {
   "use strict";
   var K = /*K*/{
@@ -35,14 +55,22 @@
     "CO2_PER_L": 2.24,
     "FX": 5.10,
     "LIFE_YEARS": 15,
-    "DIESEL": 6.97,
-    "DIESEL_SEMANA": ["2026-07-05", "2026-07-11"],
+    "DIESEL": 7.33,
+    "DIESEL_SEMANA": ["2026-09-20", "2026-09-26"],
+    "GASOLINA": 6.55,
+    "CEC_GASOLINA": 0.50,
+    "CO2_PER_L_GASOLINA": 1.56,
     "ETA": 0.60,
     "CEC": 0.28,
     "HEAD": { "rio": 20, "poco": 40 },
     "CUSTO_USD_POR_HA": { "rio": 2000, "poco": 2450 },
     "LAMINA": { "soja": 400, "milho": 450, "feijao": 350, "arroz": 1200, "cafe": 1000, "cana": 1200, "manga": 1150,
                 "uva": 700, "melao": 450, "banana": 1400, "hortalicas": 400, "outro": 600 },
+    "TARIFA": 0.82,
+    "TARIFA_LIDA": "2026-09-30",
+    "IMPOSTO": { "isento": 1.05, "reduzido": 1.11, "cheio": 1.30 },
+    "DESCONTO": { "nenhum": 0, "sul": 0.60, "centro": 0.67, "nordeste": 0.73 },
+    "ETA_MOTOR": 0.90,
     "HA": { "min": 1, "max": 5000, "padrao": 50 },
     "DIESEL_FAIXA": { "min": 1, "max": 20 }
   }/*K*/;
@@ -56,10 +84,18 @@
     var litros = (Ehyd / eta) * cec;
     return { litros: litros, economia: litros * preco };
   }
+  /* Grid instead of diesel: the same hydraulic energy, through the pump set and the electric motor,
+     bought at the tariff with taxes, less the irrigation discount. */
+  function estimarRede(ha, lamina, head, eta, etaMotor, tarifa, imposto, desconto) {
+    var V = ha * lamina * 10;
+    var kwh = (K.COEF * V * head) / (eta * etaMotor);
+    var porKwh = tarifa * imposto * (1 - desconto);
+    return { kwh: kwh, porKwh: porKwh, economia: kwh * porKwh };
+  }
   function custo(ha, fonte) { return ha * K.CUSTO_USD_POR_HA[fonte] * K.FX; }
   function payback(custoBRL, economia) { return economia > 0 ? custoBRL / economia : Infinity; }
 
-  /* Handoff from the home page: ?ha=&cultura=&fonte=&diesel=. Anything outside the allowed values
+  /* Handoff from the home page: ?ha=&cultura=&fonte=&diesel=&energia= (diesel, gasolina or rede). Anything outside the allowed values
      is dropped, never clamped into something the visitor did not ask for. */
   function lerParametros(search) {
     var q = new URLSearchParams(search || ""), out = {};
@@ -68,8 +104,9 @@
     if (Object.prototype.hasOwnProperty.call(K.LAMINA, q.get("cultura"))) out.cultura = q.get("cultura");
     if (Object.prototype.hasOwnProperty.call(K.HEAD, q.get("fonte"))) out.fonte = q.get("fonte");
     if (isFinite(diesel) && diesel >= K.DIESEL_FAIXA.min && diesel <= K.DIESEL_FAIXA.max) out.diesel = diesel;
+    if (["diesel", "gasolina", "rede"].indexOf(q.get("energia")) >= 0) out.energia = q.get("energia");
     return out;
   }
 
-  root.AgroCalc = { K: K, estimar: estimar, custo: custo, payback: payback, lerParametros: lerParametros };
+  root.AgroCalc = { K: K, estimar: estimar, estimarRede: estimarRede, custo: custo, payback: payback, lerParametros: lerParametros };
 })(window);

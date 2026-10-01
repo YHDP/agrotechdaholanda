@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculadora de retorno · Agrotech da Holanda</title>
-<meta name="description" content="Estime quanto de diesel a sua irrigação consome por ano e em quanto tempo a irrigação solar se paga.">
+<meta name="description" content="Estime quanto a energia da sua irrigação custa por ano, a diesel ou na rede elétrica, e em quanto tempo a irrigação solar se paga.">
 <link rel="canonical" href="https://agrotechdaholanda.com.br/calculadora.html">
 <meta property="og:url" content="https://agrotechdaholanda.com.br/calculadora.html">
 <link rel="icon" type="image/svg+xml" href="assets/brand/favicon.svg">
@@ -58,6 +58,7 @@
   .calc { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:28px; align-items:start; }
   @media (max-width:900px){ .calc { grid-template-columns:1fr; } }
 
+  [hidden] { display:none !important; }
   .field { margin-bottom:22px; }
   .flabel { display:block; font-weight:700; font-size:0.9rem; margin-bottom:4px; }
   .fhint { font-size:0.78rem; color:var(--soft); margin-bottom:10px; }
@@ -199,8 +200,8 @@
     </div>
     <div class="hero-body">
       <p class="eyebrow">Calculadora de retorno</p>
-      <h1>Quanto o diesel custa à sua irrigação?</h1>
-      <p class="thesis">Estime quanto a sua bomba a diesel gasta por ano e em quanto tempo a irrigação solar se paga. Preencha a sua área, o resultado aparece na hora.</p>
+      <h1>Quanto a energia custa à sua irrigação?</h1>
+      <p class="thesis">Estime quanto a sua bomba gasta por ano, a diesel ou na rede elétrica, e em quanto tempo a irrigação solar se paga. Preencha a sua área, o resultado aparece na hora.</p>
     </div>
   </header>
 
@@ -244,12 +245,55 @@
       </div>
 
       <div class="field">
+        <span class="flabel">Energia da bomba hoje</span>
+        <div class="seg" id="energia" role="group" aria-label="Energia da bomba hoje">
+          <button type="button" data-energia="diesel" aria-pressed="true">Diesel<small>motobomba</small></button>
+          <button type="button" data-energia="gasolina" aria-pressed="false">Gasolina<small>motobomba pequena</small></button>
+          <button type="button" data-energia="rede" aria-pressed="false">Rede elétrica<small>conta de luz</small></button>
+        </div>
+      </div>
+      <div class="field so-diesel">
         <label class="flabel" for="dieselNum">Preço do diesel</label>
         <div class="row">
-          <input type="range" id="diesel" min="5" max="9" step="0.05" value="6.97" aria-label="Preço do diesel">
-          <span class="numbox"><span class="pre">R$</span><input type="number" id="dieselNum" min="1" max="20" step="0.01" value="6.97" aria-label="Preço do diesel"><span class="unit">/L</span></span>
+          <input type="range" id="diesel" min="5" max="10" step="0.05" value="7.33" aria-label="Preço do diesel">
+          <span class="numbox"><span class="pre">R$</span><input type="number" id="dieselNum" min="1" max="20" step="0.01" value="7.33" aria-label="Preço do diesel"><span class="unit">/L</span></span>
         </div>
-        <p class="fhint">Diesel S-10, média nacional na pesquisa semanal da ANP, semana de 5 a 11 de julho de 2026. Ajuste para o seu posto.</p>
+        <p class="fhint">Diesel S-10, média nacional na pesquisa semanal da ANP, semana de 20 a 26 de setembro de 2026. Ajuste para o seu posto.</p>
+      </div>
+      <div class="field so-gasolina" hidden>
+        <label class="flabel" for="gasolinaNum">Preço da gasolina</label>
+        <div class="row">
+          <input type="range" id="gasolina" min="5" max="10" step="0.05" value="6.55" aria-label="Preço da gasolina">
+          <span class="numbox"><span class="pre">R$</span><input type="number" id="gasolinaNum" min="1" max="20" step="0.01" value="6.55" aria-label="Preço da gasolina"><span class="unit">/L</span></span>
+        </div>
+        <p class="fhint">Gasolina comum, média nacional na pesquisa semanal da ANP, semana de 20 a 26 de setembro de 2026. Motobombas a gasolina são pequenas e atendem poucos hectares.</p>
+      </div>
+      <div class="field so-rede" hidden>
+        <label class="flabel" for="tarifaNum">Tarifa de energia</label>
+        <div class="row">
+          <input type="range" id="tarifa" min="0.5" max="1.6" step="0.01" value="0.82" aria-label="Tarifa de energia">
+          <span class="numbox"><span class="pre">R$</span><input type="number" id="tarifaNum" min="0.1" max="3" step="0.01" value="0.82" aria-label="Tarifa de energia"><span class="unit">/kWh</span></span>
+        </div>
+        <p class="fhint">Tarifa rural de baixa tensão (TE + TUSD), sem impostos: mediana das 81 distribuidoras nas tarifas da ANEEL, lidas em 30 de setembro de 2026. O valor da sua distribuidora está na conta de luz.</p>
+      </div>
+      <div class="field so-rede" hidden>
+        <label class="flabel" for="imposto">Impostos na conta</label>
+        <select id="imposto">
+          <option value="isento" selected>ICMS isento para o produtor rural (ex.: São Paulo)</option>
+          <option value="reduzido">ICMS reduzido na irrigação (ex.: 5%)</option>
+          <option value="cheio">ICMS cheio (cerca de 18%)</option>
+        </select>
+        <p class="fhint">PIS e Cofins entram sempre, cerca de 5%. O ICMS rural muda de estado para estado.</p>
+      </div>
+      <div class="field so-rede" hidden>
+        <label class="flabel" for="desconto">Desconto de irrigação na tarifa</label>
+        <select id="desconto">
+          <option value="sul" selected>60%, Sul e Sudeste</option>
+          <option value="centro">67%, Norte, Centro-Oeste e Minas Gerais</option>
+          <option value="nordeste">73%, Nordeste</option>
+          <option value="nenhum">Não tenho o desconto</option>
+        </select>
+        <p class="fhint">Vale para até 8,5 horas por dia, fora das 17h às 21h30, e exige outorga de água (Portaria MME 137/2026). Irrigando dentro dessas horas, o desconto cobre todo o bombeamento.</p>
       </div>
 
       <button class="adv-toggle" id="advToggle" aria-expanded="false" aria-controls="adv">
@@ -257,12 +301,12 @@
       </button>
       <div class="adv" id="adv">
         <div class="adv-known">
-          <label class="flabel" for="consumo">Já sabe seu consumo real de diesel?</label>
+          <label class="flabel" for="consumo" id="consumoLabel">Já sabe seu consumo real de diesel?</label>
           <p class="fhint">Informe e o cálculo fica exato. Deixe em branco para estimarmos pela sua lavoura.</p>
           <div class="row">
             <span class="numbox" style="flex:1"><input type="number" id="consumo" min="0" step="100" placeholder="0" aria-label="Consumo real de diesel"></span>
             <div class="unit-seg" id="consumoUnit" role="group" aria-label="Unidade do consumo">
-              <button type="button" data-u="litros" aria-pressed="true">L/ano</button>
+              <button type="button" data-u="litros" aria-pressed="true" id="uFisica">L/ano</button>
               <button type="button" data-u="reais" aria-pressed="false">R$/ano</button>
             </div>
           </div>
@@ -284,8 +328,12 @@
           <label class="flabel" for="eta">Rendimento do conjunto motobomba</label>
           <div class="row"><span class="numbox"><input type="number" id="eta" min="0.3" max="0.85" step="0.01" value="0.60" aria-label="Rendimento da bomba"></span></div>
         </div>
-        <div class="field">
-          <label class="flabel" for="cec">Consumo do motor diesel</label>
+        <div class="field so-rede" hidden>
+          <label class="flabel" for="etaMotor">Rendimento do motor elétrico</label>
+          <div class="row"><span class="numbox"><input type="number" id="etaMotor" min="0.6" max="0.97" step="0.01" value="0.90" aria-label="Rendimento do motor elétrico"></span></div>
+        </div>
+        <div class="field so-comb">
+          <label class="flabel" for="cec" id="cecLabel">Consumo do motor diesel</label>
           <div class="row"><span class="numbox"><input type="number" id="cec" min="0.15" max="0.4" step="0.01" value="0.28" aria-label="Consumo específico"><span class="unit">L/kWh</span></span></div>
         </div>
       </div>
@@ -294,14 +342,14 @@
     <!-- ============ RESULT ============ -->
     <aside class="result" aria-live="polite">
       <span class="estimativa-tag" id="estTag">Estimativa</span>
-      <p class="r-eyebrow">Trocando o diesel pelo sol</p>
+      <p class="r-eyebrow" id="rEyebrow">Trocando o diesel pelo sol</p>
       <p class="r-headline">Você deixa de gastar</p>
-      <div class="r-big"><span class="val" id="economiaVal">R$ 0</span><span class="per">por ano em diesel, todo ano</span></div>
+      <div class="r-big"><span class="val" id="economiaVal">R$ 0</span><span class="per" id="rPer">por ano em diesel, todo ano</span></div>
       <p class="r-payback">E o sistema solar se paga em <b id="paybackVal">–</b></p>
 
       <div class="cmp">
         <div>
-          <div class="cmp-head"><span>Diesel hoje</span><b id="cmpDiesel">R$ 0</b></div>
+          <div class="cmp-head"><span id="cmpLabel">Diesel hoje</span><b id="cmpDiesel">R$ 0</b></div>
           <div class="cmp-track"><div class="cmp-fill diesel" id="barDiesel" style="width:100%"></div></div>
         </div>
         <div>
@@ -311,10 +359,11 @@
       </div>
 
       <div class="r-grid">
-        <div class="r-stat"><div class="k">Diesel queimado hoje</div><div class="v white"><span id="litrosVal">0</span> <span class="u">L/ano</span></div></div>
+        <div class="r-stat"><div class="k" id="kFisica">Diesel queimado hoje</div><div class="v white"><span id="litrosVal">0</span> <span class="u" id="uFisicaVal">L/ano</span></div></div>
         <div class="r-stat"><div class="k">Por hectare</div><div class="v blue" id="perHaVal">R$ 0</div></div>
         <div class="r-stat"><div class="k">Economia em 15 anos</div><div class="v white" id="economia15Val">R$ 0</div></div>
-        <div class="r-stat"><div class="k">CO₂ evitado</div><div class="v blue"><span id="co2Val">0</span> <span class="u">t/ano</span></div></div>
+        <div class="r-stat so-comb"><div class="k">CO₂ evitado</div><div class="v blue"><span id="co2Val">0</span> <span class="u">t/ano</span></div></div>
+        <div class="r-stat so-rede" hidden><div class="k">Custo por kWh, já com desconto</div><div class="v blue" id="porKwhVal">R$ 0</div></div>
       </div>
 
       <p class="r-note" id="rNote">O retorno considera só a economia de diesel. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.</p>
@@ -347,28 +396,43 @@
   <details class="method">
     <summary><span class="chev">›</span> Como calculamos</summary>
     <div class="method-body">
-      <p>A irrigação solar não queima combustível. Então o que você gasta hoje com diesel para bombear água vira economia, todo ano. A calculadora estima esse gasto a partir da sua lavoura, ou usa o consumo que você informar.</p>
+      <p>A irrigação solar não queima combustível e não compra energia da rede. Então o que você gasta hoje com diesel, gasolina ou conta de luz para bombear água vira economia, todo ano. A calculadora estima esse gasto a partir da sua lavoura, ou usa o consumo que você informar.</p>
       <h2>Estimativa pela lavoura</h2>
       <p>A partir da área, da cultura e da fonte de água, estimamos a energia de bombeamento e convertemos em litros de diesel:</p>
       <ul>
         <li>Volume de água: <code>ha × lâmina(mm) × 10</code> (1 mm = 10 m³/ha)</li>
         <li>Energia hidráulica: <code>0,002725 × volume × altura manométrica</code></li>
-        <li>Diesel: energia ÷ rendimento da bomba × consumo do motor</li>
-        <li>Economia anual: litros × preço do diesel</li>
+        <li>Diesel ou gasolina: energia ÷ rendimento da bomba × consumo do motor</li>
+        <li>Economia anual: litros × preço do combustível</li>
       </ul>
+      <h2>Se a bomba hoje é elétrica</h2>
+      <p>A mesma energia hidráulica passa pelo rendimento da bomba e do motor elétrico e vira quilowatts-hora comprados da rede:</p>
+      <ul>
+        <li>Energia comprada: energia hidráulica ÷ (rendimento da bomba × rendimento do motor)</li>
+        <li>Preço por kWh: tarifa × impostos × (1 − desconto de irrigação)</li>
+        <li>Economia anual: kWh × preço por kWh</li>
+      </ul>
+      <p>O desconto de irrigação deixa a energia da rede bem mais barata que o diesel. Por isso, para quem já tem rede com desconto, a economia de energia sozinha costuma levar mais tempo que a vida útil do sistema para pagá-lo. Nesse caso o motivo para o sol é outro: irrigar onde a distribuidora não libera carga nova, ou onde a rede não chega.</p>
       <h2>Se você informa o consumo</h2>
       <p>Em opções avançadas você pode informar seu consumo real, em litros por ano ou em reais por ano. O cálculo passa a usar esse número e o resultado fica exato.</p>
       <h2>Retorno do investimento</h2>
-      <p>O tempo de retorno é o custo do sistema dividido pela economia anual de diesel. A conta considera só o combustível, sem contar o ganho de safra, então o retorno real tende a ser mais rápido.</p>
+      <p>O tempo de retorno é o custo do sistema dividido pela economia anual de combustível ou de energia elétrica. A conta considera só a energia, sem contar o ganho de safra, então o retorno real tende a ser mais rápido.</p>
       <p>Custo do sistema, posto no Brasil com frete e importação: cerca de US$ 2.000 por hectare com água de rio ou represa e US$ 2.450 por hectare com poço, ao câmbio de R$ 5,10. É uma estimativa. A estrutura dos painéis está incluída. O poço, o reservatório e a instalação não estão.</p>
       <h2>Fontes</h2>
       <ul>
-        <li>Preço do diesel S-10: média nacional na pesquisa semanal da ANP (Levantamento de Preços de Combustíveis), semana de 5 a 11 de julho de 2026.</li>
+        <li>Preço do diesel S-10 e da gasolina comum: média nacional na pesquisa semanal da ANP (Levantamento de Preços de Combustíveis), semana de 20 a 26 de setembro de 2026.</li>
         <li>Rendimento do conjunto motobomba (0,60): o manual de bombeamento para irrigação da FAO (Módulo 5, Savva e Frenken, 2001) dá cerca de 0,69 para uma boa bomba e até 5% de perda na transmissão. Em pivôs centrais no Brasil, a medição em campo achou de 59% a 63% (Lima e outros, Revista Brasileira de Engenharia Agrícola e Ambiental, 2009).</li>
         <li>Consumo do motor diesel (0,28 L/kWh): FAO, Módulo 5, que usa 0,25 L/kWh como regra prática.</li>
+        <li>Consumo do motor a gasolina (0,50 L/kWh): a FAO dá de 25% a 30% de rendimento para motores a gasolina, e bem menos para os pequenos no campo. Usamos 25% e a gasolina brasileira, que leva 30% de etanol e tem menos energia por litro. É uma estimativa: ajuste se souber o consumo real.</li>
         <li>Altura manométrica: 40 m para poço e 20 m para rio são a base do gotejamento (FAO, Módulo 5). Pivô e aspersão pedem mais pressão, então o diesel real deles é maior.</li>
         <li>Necessidade de água por cultura: Embrapa e FAO.</li>
-        <li>CO₂: 2,24 kg de CO₂ fóssil por litro do diesel vendido no posto, que leva 15% de biodiesel (B15). A conta usa a densidade e o poder calorífico do diesel publicados pela ANP (Anuário Estatístico 2023) e o fator de emissão do IPCC (2006). O biodiesel não entra como emissão fóssil.</li>
+        <li>Tarifa de energia (R$ 0,82/kWh): mediana da tarifa rural de baixa tensão (subgrupo B2, TE + TUSD, sem impostos) das 81 distribuidoras nos dados abertos da ANEEL, lidos em 30 de setembro de 2026. Oito em cada dez distribuidoras ficam entre R$ 0,73 e R$ 1,01.</li>
+        <li>Impostos: PIS e Cofins de cerca de 5% (CPFL, 2026). ICMS isento para o produtor rural em São Paulo (Sefaz-SP) e de 5% na irrigação em Mato Grosso do Sul (Sefaz-MS). Nos demais estados, confira na sua conta.</li>
+        <li>Desconto de irrigação e aquicultura: 60% no Sul e Sudeste e 67% no Norte, Centro-Oeste e Minas Gerais, na baixa tensão (Neoenergia), e 73% no Nordeste. Vale para até 8,5 horas por dia, fora das 17h às 21h30, com outorga de água (Lei 10.438/2002, Resolução Normativa ANEEL 1.000/2021 e Portaria MME 137/2026).</li>
+        <li>Rendimento do motor elétrico (0,90): valor típico de motores de 5 a 15 kW. É uma suposição, ajuste se souber o do seu motor.</li>
+        <li>Pivôs em média tensão (Grupo A) pagam demanda contratada e tarifa por horário. A calculadora não cobre esse caso: use o valor médio por kWh da sua fatura.</li>
+        <li>CO₂ da gasolina: 1,56 kg de CO₂ fóssil por litro de gasolina comum, contando só a parte fóssil (70%) e o fator do IPCC (2006).</li>
+        <li>CO₂ do diesel: 2,24 kg de CO₂ fóssil por litro do diesel vendido no posto, que leva 15% de biodiesel (B15). A conta usa a densidade e o poder calorífico do diesel publicados pela ANP (Anuário Estatístico 2023) e o fator de emissão do IPCC (2006). O biodiesel não entra como emissão fóssil.</li>
       </ul>
       <div class="disc">
         Os valores pré-preenchidos são médias de referência e podem ser ajustados. O resultado é uma estimativa, não um orçamento. O dimensionamento exato do sistema solar vem na proposta detalhada, feita para a sua área.
@@ -430,38 +494,56 @@
   var fmtR$ = new Intl.NumberFormat('pt-BR',{ style:'currency', currency:'BRL', maximumFractionDigits:0 });
   var fmtN  = new Intl.NumberFormat('pt-BR',{ maximumFractionDigits:0 });
   var fmtN1 = new Intl.NumberFormat('pt-BR',{ maximumFractionDigits:1 });
+  var fmtR$2 = new Intl.NumberFormat('pt-BR',{ style:'currency', currency:'BRL', minimumFractionDigits:2, maximumFractionDigits:2 });
   var $ = function(id){ return document.getElementById(id); };
-  var state = { fonte:'poco', consumoUnit:'litros' };
+  var state = { fonte:'poco', consumoUnit:'litros', energia:'diesel' };
 
   var ha=$('ha'), haNum=$('haNum'), cultura=$('cultura'), diesel=$('diesel'), dieselNum=$('dieselNum');
   var lamina=$('lamina'), head=$('head'), eta=$('eta'), cec=$('cec'), consumo=$('consumo');
+  var gasolina=$('gasolina'), gasolinaNum=$('gasolinaNum');
+  var tarifa=$('tarifa'), tarifaNum=$('tarifaNum'), imposto=$('imposto'), desconto=$('desconto'), etaMotor=$('etaMotor');
 
   function num(el, dflt){ var v=parseFloat(String(el.value).replace(',','.')); return isNaN(v)?dflt:v; }
   function rangeFill(el){ var min=+el.min,max=+el.max,v=+el.value; el.style.setProperty('--pct',((v-min)/(max-min))*100+'%'); }
 
   function compute(){
     var haV = Math.max(0, num(haNum, K.HA.padrao));
-    var preco = num(dieselNum, K.DIESEL) || K.DIESEL;
     var conh = num(consumo, 0);
-    var litros, economia, exato=false;
+    var lam=num(lamina,LAMINA.cafe), H=num(head,HEAD.poco), etaV=num(eta,K.ETA)||K.ETA;
+    var fisico, economia, porKwh=0, exato=false, rede = state.energia==='rede';
 
-    if(conh > 0){
-      exato = true;
-      if(state.consumoUnit==='litros'){ litros = conh; economia = litros*preco; }
-      else { economia = conh; litros = economia/preco; }
+    if(rede){
+      var tar = num(tarifaNum, K.TARIFA) || K.TARIFA;
+      var imp = K.IMPOSTO[imposto.value] || K.IMPOSTO.isento;
+      var desc = K.DESCONTO[desconto.value]; if(desc===undefined) desc = K.DESCONTO.sul;
+      porKwh = tar*imp*(1-desc);
+      if(conh > 0){
+        exato = true;
+        if(state.consumoUnit==='litros'){ fisico = conh; economia = fisico*porKwh; }
+        else { economia = conh; fisico = porKwh>0 ? economia/porKwh : 0; }
+      } else {
+        var r = C.estimarRede(haV, lam, H, etaV, num(etaMotor,K.ETA_MOTOR)||K.ETA_MOTOR, tar, imp, desc);
+        fisico = r.kwh; economia = r.economia;
+      }
     } else {
-      var lam=num(lamina,LAMINA.cafe), H=num(head,HEAD.poco), etaV=num(eta,K.ETA)||K.ETA, cecV=num(cec,K.CEC);
-      var est = C.estimar(haV, lam, H, etaV, cecV, preco);
-      litros = est.litros;
-      economia = est.economia;
+      var gas = state.energia==='gasolina';
+      var preco = gas ? (num(gasolinaNum, K.GASOLINA) || K.GASOLINA) : (num(dieselNum, K.DIESEL) || K.DIESEL);
+      if(conh > 0){
+        exato = true;
+        if(state.consumoUnit==='litros'){ fisico = conh; economia = fisico*preco; }
+        else { economia = conh; fisico = economia/preco; }
+      } else {
+        var est = C.estimar(haV, lam, H, etaV, num(cec, gas ? K.CEC_GASOLINA : K.CEC), preco);
+        fisico = est.litros; economia = est.economia;
+      }
     }
 
-    var co2 = litros*K.CO2_PER_L/1000;
+    var co2 = rede ? 0 : fisico*(state.energia==='gasolina' ? K.CO2_PER_L_GASOLINA : K.CO2_PER_L)/1000;
     var economia15 = economia*K.LIFE_YEARS;
     var payback = C.payback(C.custo(haV, state.fonte), economia);
     var perHa = haV>0 ? economia/haV : 0;
 
-    render({ economia:economia, litros:litros, co2:co2, economia15:economia15, payback:payback, perHa:perHa, ha:haV, exato:exato });
+    render({ economia:economia, fisico:fisico, co2:co2, economia15:economia15, payback:payback, perHa:perHa, ha:haV, exato:exato, rede:rede, porKwh:porKwh });
   }
 
   function animateNumber(el, to, fmt, prefix){
@@ -475,6 +557,7 @@
 
   function paybackText(p){
     if(!isFinite(p) || p<=0) return '–';
+    if(p>K.LIFE_YEARS) return 'mais de '+K.LIFE_YEARS+' anos, além da vida útil';
     if(p<1) return 'menos de 1 ano';
     return '~'+fmtN1.format(p)+(p<2?' ano':' anos');
   }
@@ -482,7 +565,8 @@
   function render(r){
     animateNumber($('economiaVal'), r.economia, fmtR$);
     $('cmpDiesel').textContent = fmtR$.format(r.economia);
-    animateNumber($('litrosVal'), r.litros, fmtN);
+    animateNumber($('litrosVal'), r.fisico, fmtN);
+    $('porKwhVal').textContent = fmtR$2.format(r.porKwh);
     animateNumber($('economia15Val'), r.economia15, fmtR$);
     $('perHaVal').textContent = fmtR$.format(r.perHa);
     $('co2Val').textContent = fmtN1.format(r.co2);
@@ -496,12 +580,18 @@
     else { tag.textContent='Estimativa'; tag.classList.remove('exato'); }
     document.querySelector('.r-payback').style.display = (isFinite(r.payback)&&r.payback>0)?'':'none';
 
+    $('rNote').textContent = r.rede
+      ? (r.payback>K.LIFE_YEARS
+          ? 'Com o desconto de irrigação, a energia da rede sai barata e a economia sozinha não paga o sistema. O motivo para o sol é outro: irrigar onde a distribuidora não libera carga nova, ou sem esperar a extensão da rede.'
+          : 'O retorno considera só a conta de energia que deixa de pagar. Onde a distribuidora não libera carga nova, o sol também é a forma de ampliar a irrigação sem esperar a rede. O equipamento dura mais de 15 anos.')
+      : 'O retorno considera só a economia de '+(state.energia==='gasolina'?'gasolina':'diesel')+'. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.';
+
     var culNome = CULTURA_NOME[cultura.value]||'lavoura';
     var subject = 'Orçamento irrigação solar - '+fmtN.format(r.ha)+' ha';
     var body = 'Olá, quero um orçamento de irrigação solar.\n\n'
       + 'Área: '+fmtN.format(r.ha)+' hectares\n'
       + 'Cultura: '+culNome+'\n'
-      + 'Gasto com diesel hoje: '+fmtR$.format(r.economia)+' por ano\n'
+      + (r.rede ? 'Gasto com energia elétrica hoje: ' : (state.energia==='gasolina' ? 'Gasto com gasolina hoje: ' : 'Gasto com diesel hoje: '))+fmtR$.format(r.economia)+' por ano\n'
       + 'Retorno estimado: '+paybackText(r.payback)+'\n\n'
       + 'Meu nome:\nMunicípio/Estado:\nTelefone:';
     $('ctaBtn').setAttribute('href','mailto:info@agrotechdaholanda.com.br?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body));
@@ -513,7 +603,35 @@
   }
   syncPair(ha, haNum);
   syncPair(diesel, dieselNum);
-  [cultura,lamina,head,eta,cec,consumo].forEach(function(el){ el.addEventListener('input', compute); });
+  syncPair(tarifa, tarifaNum);
+  syncPair(gasolina, gasolinaNum);
+  [cultura,lamina,head,eta,cec,consumo,imposto,desconto,etaMotor].forEach(function(el){ el.addEventListener('input', compute); });
+
+  var NOMES = { diesel:['o diesel','diesel','Diesel hoje','Diesel queimado hoje','L/ano'],
+                gasolina:['a gasolina','gasolina','Gasolina hoje','Gasolina queimada hoje','L/ano'],
+                rede:['a rede','energia elétrica','Rede hoje','Energia comprada hoje','kWh/ano'] };
+  function setEnergia(e){
+    if(!NOMES[e]) e='diesel';
+    var mudou = state.energia!==e;
+    state.energia=e; var rede = e==='rede', n = NOMES[e];
+    Array.prototype.forEach.call(document.querySelectorAll('#energia button'), function(x){ x.setAttribute('aria-pressed', x.getAttribute('data-energia')===e?'true':'false'); });
+    Array.prototype.forEach.call(document.querySelectorAll('.so-rede'), function(x){ x.hidden = !rede; });
+    Array.prototype.forEach.call(document.querySelectorAll('.so-comb'), function(x){ x.hidden = rede; });
+    Array.prototype.forEach.call(document.querySelectorAll('.so-diesel'), function(x){ x.hidden = e!=='diesel'; });
+    Array.prototype.forEach.call(document.querySelectorAll('.so-gasolina'), function(x){ x.hidden = e!=='gasolina'; });
+    $('rEyebrow').textContent = 'Trocando '+n[0]+' pelo sol';
+    $('rPer').textContent = 'por ano em '+n[1]+', todo ano';
+    $('cmpLabel').textContent = n[2];
+    $('kFisica').textContent = n[3];
+    $('uFisicaVal').textContent = n[4];
+    $('uFisica').textContent = n[4];
+    $('consumoLabel').textContent = rede ? 'Já sabe seu consumo real de energia?' : 'Já sabe seu consumo real de '+n[1]+'?';
+    $('cecLabel').textContent = e==='gasolina' ? 'Consumo do motor a gasolina' : 'Consumo do motor diesel';
+    if(mudou && !rede) cec.value = e==='gasolina' ? K.CEC_GASOLINA : K.CEC;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#energia button'), function(b){
+    b.addEventListener('click', function(){ setEnergia(b.getAttribute('data-energia')); compute(); });
+  });
   cultura.addEventListener('change', function(){ lamina.value = LAMINA[cultura.value]||600; compute(); });
 
   function setFonte(f){
@@ -537,14 +655,17 @@
 
   /* Defaults from calc-core, then the home page's handoff (?ha=&cultura=&fonte=&diesel=), validated there. */
   diesel.value = dieselNum.value = K.DIESEL; eta.value = K.ETA; cec.value = K.CEC;
+  tarifa.value = tarifaNum.value = K.TARIFA; etaMotor.value = K.ETA_MOTOR;
+  gasolina.value = gasolinaNum.value = K.GASOLINA;
   lamina.value = LAMINA[cultura.value]; setFonte(state.fonte);
   var q = C.lerParametros(location.search);
   if(q.ha){ haNum.value = q.ha; ha.value = Math.min(+ha.max, q.ha); }
   if(q.cultura && cultura.querySelector('option[value="'+q.cultura+'"]')){ cultura.value = q.cultura; lamina.value = LAMINA[q.cultura]; }
   if(q.fonte) setFonte(q.fonte);
   if(q.diesel){ dieselNum.value = q.diesel; diesel.value = q.diesel; }
+  setEnergia(q.energia || 'diesel');
 
-  rangeFill(ha); rangeFill(diesel);
+  rangeFill(ha); rangeFill(diesel); rangeFill(tarifa); rangeFill(gasolina);
   compute();
 })();
 </script>
