@@ -60,6 +60,12 @@
 
   [hidden] { display:none !important; }
   .field { margin-bottom:22px; }
+  .r-ganho { margin:18px 0 6px; padding:14px 16px; border-radius:14px; background:rgba(56,182,255,.12); }
+  .r-ganho .r-eyebrow { margin:0 0 4px; }
+  .r-ganho-big { margin:0; font-size:1.05rem; }
+  .r-ganho-big b { font-size:1.5rem; }
+  .r-ganho-val { margin:6px 0 0; }
+  .r-ganho-fonte { margin:8px 0 0; font-size:.8rem; opacity:.85; }
   .flabel { display:block; font-weight:700; font-size:0.9rem; margin-bottom:4px; }
   .fhint { font-size:0.78rem; color:var(--soft); margin-bottom:10px; }
   .row { display:flex; align-items:center; gap:14px; }
@@ -221,7 +227,9 @@
       <div class="field">
         <label class="flabel" for="cultura">Cultura</label>
         <select id="cultura">
-          <option value="cafe" selected>Café irrigado</option>
+          <option value="cacau" selected>Cacau</option>
+          <option value="acai">Açaí de terra firme</option>
+          <option value="cafe">Café irrigado</option>
           <option value="manga">Manga</option>
           <option value="uva">Uva</option>
           <option value="melao">Melão</option>
@@ -234,6 +242,12 @@
           <option value="arroz">Arroz irrigado</option>
           <option value="outro">Outra</option>
         </select>
+      </div>
+
+      <div class="field so-ganho">
+        <label class="flabel" for="precoKg" id="precoLabel">Preço que você recebe pelo cacau</label>
+        <div class="row"><span class="numbox"><span class="pre">R$</span><input type="number" id="precoKg" min="0" max="500" step="0.01" placeholder="0,00" aria-label="Preço que você recebe por quilo"><span class="unit">/kg</span></span></div>
+        <p class="fhint" id="precoHint">Opcional. Com o seu preço, a conta mostra quanto vale a colheita a mais. Nós não informamos preço.</p>
       </div>
 
       <div class="field">
@@ -366,6 +380,13 @@
         <div class="r-stat so-rede" hidden><div class="k">Custo por kWh, já com desconto</div><div class="v blue" id="porKwhVal">R$ 0</div></div>
       </div>
 
+      <div class="r-ganho so-ganho">
+        <p class="r-eyebrow">Para esta cultura, o ganho maior é a colheita</p>
+        <p class="r-ganho-big"><b id="ganhoKg">0</b> <span id="ganhoUn">kg</span> a mais por ano</p>
+        <p class="r-ganho-val" id="ganhoValLinha" hidden>Valem cerca de <b id="ganhoVal">R$ 0</b> por ano. Com esse ganho, o sistema se paga em <b id="paybackGanho">–</b>.</p>
+        <p class="r-ganho-fonte" id="ganhoFonte"></p>
+      </div>
+
       <p class="r-note" id="rNote">O retorno considera só a economia de diesel. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.</p>
 
       <div class="cta">
@@ -425,7 +446,8 @@
         <li>Consumo do motor diesel (0,28 L/kWh): FAO, Módulo 5, que usa 0,25 L/kWh como regra prática.</li>
         <li>Consumo do motor a gasolina (0,50 L/kWh): a FAO dá de 25% a 30% de rendimento para motores a gasolina, e bem menos para os pequenos no campo. Usamos 25% e a gasolina brasileira, que leva 30% de etanol e tem menos energia por litro. É uma estimativa: ajuste se souber o consumo real.</li>
         <li>Altura manométrica: 40 m para poço e 20 m para rio são a base do gotejamento (FAO, Módulo 5). Pivô e aspersão pedem mais pressão, então o diesel real deles é maior.</li>
-        <li>Necessidade de água por cultura: Embrapa e FAO.</li>
+        <li>Necessidade de água por cultura: Embrapa e FAO. Cacau: déficit hídrico médio de 275 mm no período seco da Transamazônica (Morais, Revista Brasileira de Ciência do Solo, 1998), com 90% de eficiência na microaspersão: 300 mm por ano. Açaí de terra firme: 120 litros por touceira por dia, 400 touceiras por hectare, de agosto a novembro (Embrapa, Comunicado Técnico 317, 2019): 580 mm por ano.</li>
+        <li>Ganho de colheita, só no cacau e no açaí: cacau na Bahia, 600 para 1.500 kg/ha com irrigação (Siqueira 2018, citado em Silva, UFRB 2020), contado pela metade, mais 450 kg/ha, porque o Pará já colhe em média 901 kg/ha (IBGE, 2025); açaí, 10 a 12 t/ha irrigado, mais de 50% acima da terra firme sem irrigação (Embrapa, 2025), usado pelo piso. O preço é o seu: a calculadora não traz preço de cacau nem de açaí.</li>
         <li>Tarifa de energia (R$ 0,82/kWh): mediana da tarifa rural de baixa tensão (subgrupo B2, TE + TUSD, sem impostos) das 81 distribuidoras nos dados abertos da ANEEL, lidos em 30 de setembro de 2026. Oito em cada dez distribuidoras ficam entre R$ 0,73 e R$ 1,01.</li>
         <li>Impostos: PIS e Cofins de cerca de 5% (CPFL, 2026). ICMS isento para o produtor rural em São Paulo (Sefaz-SP) e de 5% na irrigação em Mato Grosso do Sul (Sefaz-MS). Nos demais estados, confira na sua conta.</li>
         <li>Desconto de irrigação e aquicultura: 60% no Sul e Sudeste e 67% no Norte, Centro-Oeste e Minas Gerais, na baixa tensão (Neoenergia), e 73% no Nordeste. Vale para até 8,5 horas por dia, fora das 17h às 21h30, com outorga de água (Lei 10.438/2002, Resolução Normativa ANEEL 1.000/2021 e Portaria MME 137/2026).</li>
@@ -488,7 +510,12 @@
   /* Every number lives in assets/js/calc-core.js, shared with the mini calculator on the home page. */
   var C = window.AgroCalc, K = C.K;
   var HEAD = K.HEAD, LAMINA = K.LAMINA;
-  var CULTURA_NOME = { soja:"Soja", milho:"Milho", feijao:"Feijão", arroz:"Arroz irrigado", cafe:"Café", cana:"Cana-de-açúcar", manga:"Manga", uva:"Uva", melao:"Melão", banana:"Banana", hortalicas:"Hortaliças", outro:"lavoura" };
+  var CULTURA_NOME = { soja:"Soja", milho:"Milho", feijao:"Feijão", arroz:"Arroz irrigado", cafe:"Café", cana:"Cana-de-açúcar", manga:"Manga", uva:"Uva", melao:"Melão", banana:"Banana", hortalicas:"Hortaliças", cacau:"Cacau", acai:"Açaí", outro:"lavoura" };
+  var GANHO_TXT = {
+    cacau: { label:'Preço que você recebe pelo cacau', un:'kg de amêndoa',
+             fonte:'Na Bahia, cacau irrigado chegou a 1.500 kg/ha, contra 600 kg/ha sem irrigação (Siqueira 2018, citado em Silva, UFRB 2020). Contamos só metade desse ganho, 450 kg/ha, porque o Pará já colhe mais que a Bahia e ainda não há ensaio publicado no Pará. Referência, não promessa.' },
+    acai:  { label:'Preço que você recebe pelo açaí', un:'kg de fruto',
+             fonte:'Com irrigação, cultivares da Embrapa dão 10 a 12 t/ha, mais de 50% acima da terra firme sem irrigação (Embrapa, Cultivo do açaizeiro em terra firme, 2025). Usamos o piso: de 6,7 para 10 t/ha. Referência, não promessa.' } };
 
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fmtR$ = new Intl.NumberFormat('pt-BR',{ style:'currency', currency:'BRL', maximumFractionDigits:0 });
@@ -501,6 +528,7 @@
   var ha=$('ha'), haNum=$('haNum'), cultura=$('cultura'), diesel=$('diesel'), dieselNum=$('dieselNum');
   var lamina=$('lamina'), head=$('head'), eta=$('eta'), cec=$('cec'), consumo=$('consumo');
   var gasolina=$('gasolina'), gasolinaNum=$('gasolinaNum');
+  var precoKg=$('precoKg');
   var tarifa=$('tarifa'), tarifaNum=$('tarifaNum'), imposto=$('imposto'), desconto=$('desconto'), etaMotor=$('etaMotor');
 
   function num(el, dflt){ var v=parseFloat(String(el.value).replace(',','.')); return isNaN(v)?dflt:v; }
@@ -542,8 +570,12 @@
     var economia15 = economia*K.LIFE_YEARS;
     var payback = C.payback(C.custo(haV, state.fonte), economia);
     var perHa = haV>0 ? economia/haV : 0;
+    var g = K.GANHO[cultura.value], ganhoKg = g ? haV*(g.com-g.sem) : 0;
+    var preco = num(precoKg, 0), ganhoVal = ganhoKg*preco;
+    var paybackG = ganhoVal>0 ? C.payback(C.custo(haV, state.fonte), economia+ganhoVal) : Infinity;
 
-    render({ economia:economia, fisico:fisico, co2:co2, economia15:economia15, payback:payback, perHa:perHa, ha:haV, exato:exato, rede:rede, porKwh:porKwh });
+    render({ economia:economia, fisico:fisico, co2:co2, economia15:economia15, payback:payback, perHa:perHa, ha:haV, exato:exato, rede:rede, porKwh:porKwh,
+             ganho:!!g, ganhoKg:ganhoKg, ganhoVal:ganhoVal, paybackG:paybackG });
   }
 
   function animateNumber(el, to, fmt, prefix){
@@ -571,6 +603,17 @@
     $('perHaVal').textContent = fmtR$.format(r.perHa);
     $('co2Val').textContent = fmtN1.format(r.co2);
     $('paybackVal').textContent = paybackText(r.payback);
+    Array.prototype.forEach.call(document.querySelectorAll('.so-ganho'), function(x){ x.hidden = !r.ganho; });
+    if(r.ganho){
+      var gt = GANHO_TXT[cultura.value];
+      $('precoLabel').textContent = gt.label;
+      $('ganhoUn').textContent = gt.un;
+      $('ganhoFonte').textContent = gt.fonte;
+      $('ganhoKg').textContent = fmtN.format(r.ganhoKg);
+      $('ganhoValLinha').hidden = !(r.ganhoVal>0);
+      $('ganhoVal').textContent = fmtR$.format(r.ganhoVal);
+      $('paybackGanho').textContent = paybackText(r.paybackG);
+    }
 
     $('barDiesel').style.width = r.economia>0 ? '100%' : '4%';
     $('barSolar').style.width = '2%';
@@ -584,7 +627,9 @@
       ? (r.payback>K.LIFE_YEARS
           ? 'Com o desconto de irrigação, a energia da rede sai barata e a economia sozinha não paga o sistema. O motivo para o sol é outro: irrigar onde a distribuidora não libera carga nova, ou sem esperar a extensão da rede.'
           : 'O retorno considera só a conta de energia que deixa de pagar. Onde a distribuidora não libera carga nova, o sol também é a forma de ampliar a irrigação sem esperar a rede. O equipamento dura mais de 15 anos.')
-      : 'O retorno considera só a economia de '+(state.energia==='gasolina'?'gasolina':'diesel')+'. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.';
+      : (r.ganho
+          ? 'O primeiro retorno considera só a economia de '+(state.energia==='gasolina'?'gasolina':'diesel')+'. No cacau e no açaí, a água entra no período seco, e o que pesa é a colheita: veja o ganho acima. O equipamento dura mais de 15 anos.'
+          : 'O retorno considera só a economia de '+(state.energia==='gasolina'?'gasolina':'diesel')+'. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.');
 
     var culNome = CULTURA_NOME[cultura.value]||'lavoura';
     var subject = 'Orçamento irrigação solar - '+fmtN.format(r.ha)+' ha';
@@ -605,7 +650,7 @@
   syncPair(diesel, dieselNum);
   syncPair(tarifa, tarifaNum);
   syncPair(gasolina, gasolinaNum);
-  [cultura,lamina,head,eta,cec,consumo,imposto,desconto,etaMotor].forEach(function(el){ el.addEventListener('input', compute); });
+  [cultura,lamina,head,eta,cec,consumo,imposto,desconto,etaMotor,precoKg].forEach(function(el){ el.addEventListener('input', compute); });
 
   var NOMES = { diesel:['o diesel','diesel','Diesel hoje','Diesel queimado hoje','L/ano'],
                 gasolina:['a gasolina','gasolina','Gasolina hoje','Gasolina queimada hoje','L/ano'],

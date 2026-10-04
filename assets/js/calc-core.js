@@ -28,7 +28,17 @@
      operating pressure plus losses for localized irrigation, plus the lift). Pivot and sprinkler
      need more pressure (FAO Example 6: 30 m operating + 6 m friction), so for them these are floors.
    - LAMINA mm/year per crop: calculadora-research.md (Embrapa for soy, maize, beans, cane; FAO Kc
-     for fruit and vegetables, flagged there as an editable assumption).
+     for fruit and vegetables, flagged there as an editable assumption). cacau 300: the 275 mm mean
+     dry-season deficit of the Transamazonica (Morais, R. Bras. Ci. Solo 1998) / 0.9 microsprinkler
+     efficiency; upper bound 640 (3.5 mm/day, Leite 2013 CEPLAC, over June-November, no rain).
+     acai 580: 120 L per clump per day x 400 clumps/ha = 4.8 mm/day over August-November, 122 days
+     (Embrapa Comunicado Tecnico 317, 2019). Research: research-packs/cacau-para.md, acai-para.md.
+   - GANHO harvest gain per ha, cacau and acai only, where the value of irrigation is the harvest,
+     not the fuel. cacau 600 -> 1500 kg/ha dry beans: Bahia, Siqueira 2018 cited in Silva, UFRB 2020
+     thesis (no Para trial exists), counted at half that gain, 600 -> 1050, because Para already
+     averages 901 kg/ha (IBGE PAM 2025) where the Bahia baseline was 600. acai: irrigated BRS cultivars 10 to 12 t/ha, "more than 50%" above
+     rainfed terra firme (Embrapa, Cultivo do acaizeiro em terra firme, 2025, ch. 10); taken at the low
+     end, 10 t/ha against 10 / 1.5 = 6.7 t/ha. The visitor enters the price; the site never shows one.
    - CEC_GASOLINA 0.50 L per kWh of engine output: FAO, Water lifting devices, 4.4 Internal combustion
      engines: spark-ignition engines 25-30% efficient on paper, small ones far worse in the field.
      Taken at 25% on Brazilian gasolina C (30% anhydrous ethanol since Aug 2025, about 28.9 MJ/L:
@@ -65,7 +75,9 @@
     "HEAD": { "rio": 20, "poco": 40 },
     "CUSTO_USD_POR_HA": { "rio": 2000, "poco": 2450 },
     "LAMINA": { "soja": 400, "milho": 450, "feijao": 350, "arroz": 1200, "cafe": 1000, "cana": 1200, "manga": 1150,
-                "uva": 700, "melao": 450, "banana": 1400, "hortalicas": 400, "outro": 600 },
+                "uva": 700, "melao": 450, "banana": 1400, "hortalicas": 400, "outro": 600,
+                "cacau": 300, "acai": 580 },
+    "GANHO": { "cacau": { "sem": 600, "com": 1050 }, "acai": { "sem": 6700, "com": 10000 } },
     "TARIFA": 0.82,
     "TARIFA_LIDA": "2026-09-30",
     "IMPOSTO": { "isento": 1.05, "reduzido": 1.11, "cheio": 1.30 },

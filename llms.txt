@@ -8,7 +8,7 @@ Idiomas: português do Brasil; inglês nas páginas listadas em "Pages in Englis
 Área atendida: Brasil
 Contato: info@agrotechdaholanda.com.br
 Instagram: https://www.instagram.com/agrotech_da_holanda/
-Atualizado em 2026-09-25
+Atualizado em 2026-10-03
 
 ## Quem é quem
 
@@ -65,11 +65,22 @@ fabricante de 24/09/2026):
   40 °C; mais em noites normais). Depois, a rede elétrica ou o gerador assume sozinho, por isso a
   instalação inclui uma conexão com a rede ou com um gerador como reserva.
 - Linha nova da Dutch Flow Technology.
-- Contêiner de 40 pés: 12,192 × 2,438 × 2,591 m externos; refrigeração de 4 HP; 20 painéis de
+- Contêiner de 12 m (40 pés): 12,192 × 2,438 × 2,591 m externos; refrigeração de 4 HP; 20 painéis de
   580 W (cerca de 11,6 kWp); inversor de 10 kW; bateria LiFePO4 de 20 kWh.
-- Contêiner de 20 pés: 6,058 × 2,438 × 2,591 m externos; refrigeração de 3 HP; 12 painéis de
+- Contêiner de 6 m (20 pés): 6,058 × 2,438 × 2,591 m externos; refrigeração de 3 HP; 12 painéis de
   580 W (cerca de 7,0 kWp); inversor de 6 kW; bateria LiFePO4 de 15 kWh.
 - Produção em 6 a 8 semanas após o pedido, com saída da Tailândia.
+
+## Culturas
+
+Começamos pelo cacau e pelo açaí de terra firme do Pará. Fontes: IBGE (PAM 2025, Censo Agro 2017),
+Embrapa, CEPLAC.
+- Cacau: o Pará produz 48,9% do cacau do Brasil (IBGE, PAM 2025). Na Transamazônica, o período seco
+  vai de junho a novembro, e na estação seca a floração do cacaueiro é muito reduzida (Embrapa).
+  A amêndoa seca se guarda em armazém ventilado, sem frio. https://agrotechdaholanda.com.br/cacau/
+- Açaí de terra firme: o Pará responde por 92,9% do açaí cultivado no Brasil (IBGE, PAM 2025). Com
+  3 a 5 meses de estiagem, a Embrapa indica irrigação suplementar; o açaizeiro em produção não
+  tolera mais de duas semanas sem água. https://agrotechdaholanda.com.br/acai/
 
 ## Ferramentas públicas
 
@@ -99,6 +110,8 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/: início
 - https://agrotechdaholanda.com.br/camara-fria-solar/: câmara fria solar
 - https://agrotechdaholanda.com.br/irrigacao-solar/: irrigação solar inteligente
+- https://agrotechdaholanda.com.br/cacau/: cacau, irrigação no período seco
+- https://agrotechdaholanda.com.br/acai/: açaí de terra firme, irrigação no período seco
 - https://agrotechdaholanda.com.br/faq.html: perguntas frequentes
 - https://agrotechdaholanda.com.br/calculadora.html: calculadora de retorno (diesel, gasolina ou rede)
 - https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html: risco hídrico por município
@@ -111,6 +124,8 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/en/: home
 - https://agrotechdaholanda.com.br/en/cooling-containers/: solar cold room
 - https://agrotechdaholanda.com.br/en/smart-solar-irrigation/: smart solar irrigation
+- https://agrotechdaholanda.com.br/en/cocoa/: cocoa
+- https://agrotechdaholanda.com.br/en/acai/: upland açaí
 - https://agrotechdaholanda.com.br/en/faq/: FAQ
 - https://agrotechdaholanda.com.br/en/privacy/: privacy
 - https://agrotechdaholanda.com.br/en/accessibility/: accessibility

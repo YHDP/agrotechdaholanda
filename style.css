@@ -52,7 +52,7 @@ footer{border-top:1px solid var(--linha);padding:26px 0;font-size:14px;color:var
 .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 24px}
 .nav__logo img{display:block;height:40px;width:auto}   /* o SVG é recortado no desenho (viewBox 46 24 590 143):
    a altura é a do logo, a borda esquerda cai na borda da .wrap e align-items:center o alinha às pílulas */
-.nav__links{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.nav__links{display:flex;gap:12px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
 .nav__links a{color:var(--navy);text-decoration:none;font-weight:600;font-size:15px;padding:6px 0;
   border-bottom:2px solid transparent}
 .nav__links a:hover,.nav__links a:focus{border-bottom-color:var(--laranja)}
@@ -1067,3 +1067,21 @@ img,video,svg{max-width:100%}
 }
 @media (max-width:480px){.citacao{padding:16px 16px}.noticia{padding:18px 18px}}
 @media (prefers-reduced-motion:reduce){.video__bola{transition:none}.video__play:hover .video__bola{transform:none}}
+
+/* Crop section on the home and the crop pages (cacau, açaí; Yvo 03-10-2026) */
+.culturas__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:8px}
+.cultura{background:var(--card);border:1px solid var(--linha);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.cultura img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.cultura__corpo{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.cultura__corpo h3{font-size:22px;font-weight:800;margin:0}
+.cultura__corpo ul{margin:10px 0 14px;padding-left:18px;color:var(--cinza)}
+.cultura__corpo li{margin:5px 0}
+.cultura__corpo .ctarow{margin-top:auto}
+@media (max-width:760px){.culturas__grid{grid-template-columns:1fr}}
+.h3{font-size:20px;font-weight:700}
+.cuidado{border-left:5px solid var(--verde);background:var(--card)}
+.cuidado .h3{display:flex;gap:10px;align-items:center;margin:0 0 8px}
+.cuidado .ic{width:24px;height:24px;color:var(--verde);flex:none}
+.cuidado p{margin:0;color:var(--cinza);max-width:75ch}
+.fontes__lista{margin:8px 0 0;padding-left:18px;color:var(--cinza);font-size:14.5px}
+.fontes__lista li{margin:4px 0}

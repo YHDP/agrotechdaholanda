@@ -24,12 +24,20 @@
  * data-mais> que só aparece depois que os essenciais estão preenchidos (initMais). Na página inicial
  * o <select name="produto"> decide quais linhas aparecem (data-produtos); linha escondida fica
  * desabilitada, nunca é obrigatória e nunca é enviada.
+ *
+ * Mapa da fazenda (campo de arquivo, desde a v10 da função): até 3 arquivos KML, KMZ, JPG, PNG ou
+ * PDF. No envio, cada arquivo é lido com FileReader e vai em `anexos` ([{name, type, data}], data em
+ * base64) no mesmo JSON, só quando há arquivo. Foto JPG/PNG acima de 2 MB é reduzida num canvas para
+ * JPEG de até 2 MB; outro arquivo acima de 5 MB, ou mais de 3 arquivos, é recusado aqui com mensagem
+ * própria. Sem pré-visualização: a CSP não tem blob:, e createImageBitmap lê o arquivo sem URL. A
+ * função confere tudo de novo (tipo pelo conteúdo, tamanho, quantidade); esta checagem só poupa a
+ * pessoa de esperar um envio que seria recusado.
  */
 (function () {
   'use strict';
 
   var FN = 'https://uemspezaqxmkhenimwuf.supabase.co/functions/v1/agro-lead'; // supabase.co edge function
-  var CONSENT_VERSION = 'agro-2026-09-24';
+  var CONSENT_VERSION = 'agro-2026-10-03';
   var PRODUTOS = ['irrigacao', 'camara-fria'];
   // 'ambos' (as três fichas de uma vez) só existe no pedido de ficha. No pedido de proposta, o
   // "Os dois" do <select> continua indo como texto dentro de `mensagem`, como antes.
@@ -51,7 +59,12 @@
       errRequired: 'Falta preencher: ',
       errSend: 'Não foi possível enviar agora.',
       errRetry: 'Não foi possível enviar agora. Verifique a conexão e tente de novo, ou escreva para info@agrotechdaholanda.com.br.',
-      errVerify: 'A verificação falhou. Tente de novo.'
+      errVerify: 'A verificação falhou. Tente de novo.',
+      preparing: 'Preparando arquivos...',
+      errFilesMany: 'Envie no máximo 3 arquivos.',
+      errFileType: 'Este tipo de arquivo não é aceito: {n}. Envie KML, KMZ, JPG, PNG ou PDF.',
+      errFileBig: 'O arquivo {n} passa de 5 MB. Envie um arquivo menor.',
+      errFileRead: 'Não foi possível ler o arquivo {n}. Tente de novo ou escolha outro.'
     },
     en: {
       sending: 'Sending...',
@@ -65,7 +78,12 @@
       errRequired: 'Please fill in: ',
       errSend: 'We could not send this right now.',
       errRetry: 'We could not send this right now. Check your connection and try again, or write to info@agrotechdaholanda.com.br.',
-      errVerify: 'Verification failed. Please try again.'
+      errVerify: 'Verification failed. Please try again.',
+      preparing: 'Preparing files...',
+      errFilesMany: 'Please send at most 3 files.',
+      errFileType: 'This file type is not accepted: {n}. Please send KML, KMZ, JPG, PNG or PDF.',
+      errFileBig: 'The file {n} is over 5 MB. Please send a smaller file.',
+      errFileRead: 'We could not read the file {n}. Please try again or choose another file.'
     }
   };
   var T = UI[LANG];
@@ -95,6 +113,100 @@
   }
 
   var formSeq = 0;
+
+  // ── Anexos (mapa da fazenda) ─────────────────────────────────────────────────────────────
+  // Os mesmos limites da função agro-lead (anexos.ts). Foto acima de FOTO_MAX é reduzida.
+  var ANEXO_MAX_FILES = 3;
+  var ANEXO_MAX_BYTES = 5 * 1024 * 1024;
+  var FOTO_MAX = 2 * 1024 * 1024;
+  var ANEXO_EXT = ['kml', 'kmz', 'jpg', 'jpeg', 'png', 'pdf'];
+
+  function extOf(name) {
+    var m = /\.([a-z0-9]+)$/i.exec(name || '');
+    return m ? m[1].toLowerCase() : '';
+  }
+
+  function fileError(tpl, name) { var e = new Error(tpl.replace('{n}', name)); e.fileError = true; return e; }
+
+  // base64 de um Blob, sem o prefixo data:...;base64,
+  function toBase64(blob) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () { var s = String(r.result || ''); resolve(s.slice(s.indexOf(',') + 1)); };
+      r.onerror = function () { reject(r.error); };
+      r.readAsDataURL(blob);
+    });
+  }
+
+  function canvasJpeg(canvas, q) {
+    return new Promise(function (resolve) { canvas.toBlob(resolve, 'image/jpeg', q); });
+  }
+
+  // Foto grande → JPEG de até FOTO_MAX. Lado maior começa em 2560 px; baixa a qualidade e depois o
+  // tamanho até caber. Fundo branco, porque a transparência do PNG vira preto no JPEG.
+  function shrinkPhoto(file) {
+    if (!window.createImageBitmap) return Promise.reject(new Error('no createImageBitmap'));
+    return createImageBitmap(file).then(function (bmp) {
+      var side = Math.min(2560, Math.max(bmp.width, bmp.height));
+      var steps = [[1, 0.85], [1, 0.72], [0.75, 0.72], [0.56, 0.72], [0.42, 0.7], [0.3, 0.7]];
+      function attempt(i) {
+        var k = side * steps[i][0] / Math.max(bmp.width, bmp.height);
+        var c = document.createElement('canvas');
+        c.width = Math.max(1, Math.round(bmp.width * k));
+        c.height = Math.max(1, Math.round(bmp.height * k));
+        var ctx = c.getContext('2d');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.drawImage(bmp, 0, 0, c.width, c.height);
+        return canvasJpeg(c, steps[i][1]).then(function (b) {
+          if (b && b.size <= FOTO_MAX) return b;
+          if (i + 1 < steps.length) return attempt(i + 1);
+          throw new Error('still too big');
+        });
+      }
+      return attempt(0).then(function (b) { if (bmp.close) bmp.close(); return b; });
+    });
+  }
+
+  // Os arquivos escolhidos nos campos habilitados → [{name, type, data}]. Recusa com mensagem
+  // (erro com fileError = true) antes de qualquer envio.
+  function readAnexos(form) {
+    var files = [];
+    [].forEach.call(form.querySelectorAll('input[type="file"]'), function (el) {
+      if (el.disabled || !el.files) return;
+      for (var i = 0; i < el.files.length; i++) files.push({ file: el.files[i], el: el });
+    });
+    if (!files.length) return Promise.resolve({ anexos: [] });
+    if (files.length > ANEXO_MAX_FILES) return Promise.reject(Object.assign(fileError(T.errFilesMany, ''), { field: files[0].el }));
+    return files.reduce(function (chain, f) {
+      return chain.then(function (out) {
+        var file = f.file;
+        var ext = extOf(file.name);
+        var fail = function (tpl) { return Object.assign(fileError(tpl, file.name), { field: f.el }); };
+        if (ANEXO_EXT.indexOf(ext) === -1) throw fail(T.errFileType);
+        var photo = ext === 'jpg' || ext === 'jpeg' || ext === 'png';
+        var ready;
+        if (photo && file.size > FOTO_MAX) {
+          ready = shrinkPhoto(file).then(function (b) {
+            return { name: file.name.replace(/\.[^.]+$/, '') + '.jpg', type: 'image/jpeg', blob: b };
+          }, function () {
+            // Sem canvas ou sem redução possível: segue o original se couber no limite da função.
+            if (file.size > ANEXO_MAX_BYTES) throw fail(T.errFileBig);
+            return { name: file.name, type: file.type, blob: file };
+          });
+        } else {
+          if (file.size > ANEXO_MAX_BYTES) throw fail(T.errFileBig);
+          ready = Promise.resolve({ name: file.name, type: file.type, blob: file });
+        }
+        return ready.then(function (r) {
+          return toBase64(r.blob).then(function (data) {
+            out.push({ name: r.name, type: r.type || '', data: data });
+            return out;
+          }, function () { throw fail(T.errFileRead); });
+        });
+      });
+    }, Promise.resolve([])).then(function (anexos) { return { anexos: anexos }; });
+  }
 
   // Os campos obrigatórios que a pessoa vê agora (e-mail, produto, essenciais). A caixa de
   // consentimento fica de fora: ela vem depois do botão dos opcionais.
@@ -299,7 +411,8 @@
         }
         var taken = {};
         [].forEach.call(form.querySelectorAll('[data-key]'), function (el) {
-          if (el.disabled || el.name === 'mensagem') return;
+          // O campo de arquivo segue em `anexos`; o value dele é só "C:\\fakepath\\...".
+          if (el.disabled || el.name === 'mensagem' || el.type === 'file') return;
           var v = (el.value || '').trim();
           if (el.hasAttribute('data-extra')) { add(el, v); return; }
           if (taken[el.name]) add(el, v);
@@ -317,7 +430,7 @@
         return head ? head + '\n\n' + own : own;
       }
 
-      function send(antibot) {
+      function send(antibot, anexos) {
         var payload = {
           email: email,
           intent: intent,
@@ -333,6 +446,7 @@
           privacy_policy_accepted: true
         };
         if (produto) payload.produto = produto;
+        if (anexos && anexos.length) payload.anexos = anexos;
         if (antibot) {
           for (var k in antibot) {
             if (Object.prototype.hasOwnProperty.call(antibot, k)) payload[k] = antibot[k];
@@ -362,14 +476,25 @@
           });
       }
 
-      if (window.Antibot) {
-        window.Antibot.validate(form).then(send).catch(function (m) {
-          showErr(typeof m === 'string' ? m : T.errVerify);
-          if (btn) { btn.disabled = false; btn.textContent = label; }
-        });
-      } else {
-        send(null);
-      }
+      // Arquivos primeiro (pode levar um instante numa foto grande), depois a verificação e o envio.
+      var hasFiles = [].some.call(form.querySelectorAll('input[type="file"]'), function (el) {
+        return !el.disabled && el.files && el.files.length;
+      });
+      if (btn && hasFiles) btn.textContent = T.preparing;
+      readAnexos(form).then(function (r) {
+        if (btn) btn.textContent = T.sending;
+        if (window.Antibot) {
+          window.Antibot.validate(form).then(function (ab) { send(ab, r.anexos); }).catch(function (m) {
+            showErr(typeof m === 'string' ? m : T.errVerify);
+            if (btn) { btn.disabled = false; btn.textContent = label; }
+          });
+        } else {
+          send(null, r.anexos);
+        }
+      }, function (e3) {
+        showErr((e3 && e3.fileError && e3.message) || T.errRetry, e3 && e3.field);
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+      });
     });
   }
 

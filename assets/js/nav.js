@@ -14,21 +14,33 @@
   }
 
   // O <details> abre e fecha sozinho no próprio botão, e só isso. Um menu que não fecha ao clicar
-  // fora nem com Esc fica preso na frente da página, e é a primeira coisa que alguém tenta.
-  var drop = document.getElementById('navDrop');
-  if (!drop || !document.addEventListener) return;
+  // fora nem com Esc fica preso na frente da página, e é a primeira coisa que alguém tenta. São dois
+  // menus (culturas e ferramentas): abrir um fecha o outro.
+  var drops = document.querySelectorAll ? document.querySelectorAll('details.drop') : [];
+  if (!drops.length || !document.addEventListener) return;
+
+  Array.prototype.forEach.call(drops, function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      Array.prototype.forEach.call(drops, function (o) { if (o !== d) o.open = false; });
+    }, false);
+  });
 
   document.addEventListener('click', function (e) {
-    if (drop.open && !drop.contains(e.target)) drop.open = false;
+    Array.prototype.forEach.call(drops, function (d) {
+      if (d.open && !d.contains(e.target)) d.open = false;
+    });
   }, false);
 
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape' && e.keyCode !== 27) return;
-    if (!drop.open) return;
-    drop.open = false;
-    var btn = drop.querySelector('summary');
-    // Devolve o foco a quem abriu, senão ele fica num elemento que acabou de sumir.
-    if (btn && btn.focus) btn.focus();
+    Array.prototype.forEach.call(drops, function (d) {
+      if (!d.open) return;
+      d.open = false;
+      var btn = d.querySelector('summary');
+      // Devolve o foco a quem abriu, senão ele fica num elemento que acabou de sumir.
+      if (btn && btn.focus) btn.focus();
+    });
   }, false);
 })();
 
