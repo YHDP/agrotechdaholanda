@@ -38,7 +38,12 @@
      thesis (no Para trial exists), counted at half that gain, 600 -> 1050, because Para already
      averages 901 kg/ha (IBGE PAM 2025) where the Bahia baseline was 600. acai: irrigated BRS cultivars 10 to 12 t/ha, "more than 50%" above
      rainfed terra firme (Embrapa, Cultivo do acaizeiro em terra firme, 2025, ch. 10); taken at the low
-     end, 10 t/ha against 10 / 1.5 = 6.7 t/ha. The visitor enters the price; the site never shows one.
+     end, 10 t/ha against 10 / 1.5 = 6.7 t/ha.
+   - PRECO_KG the farmer's price, default the visitor can change. cacau 17.00 R$/kg dried beans: Para
+     convencional, Noticias Agricolas "Mercado do Cacau", 02/10/2026 (Sep-Oct 2026 range 15-19 after the
+     2026 collapse; IBGE PAM 2025 annual average was 40.09). Refresh monthly. acai 4.44 R$/kg fruit:
+     IBGE PAM 2025 implied price for Para, 8,334,100 thousand R$ / 1,875,043 t (SIDRA 1613, c82/45981,
+     published 17/09/2026); an annual average across safra and entressafra.
    - CEC_GASOLINA 0.50 L per kWh of engine output: FAO, Water lifting devices, 4.4 Internal combustion
      engines: spark-ignition engines 25-30% efficient on paper, small ones far worse in the field.
      Taken at 25% on Brazilian gasolina C (30% anhydrous ethanol since Aug 2025, about 28.9 MJ/L:
@@ -77,7 +82,25 @@
     "LAMINA": { "soja": 400, "milho": 450, "feijao": 350, "arroz": 1200, "cafe": 1000, "cana": 1200, "manga": 1150,
                 "uva": 700, "melao": 450, "banana": 1400, "hortalicas": 400, "outro": 600,
                 "cacau": 300, "acai": 580 },
-    "GANHO": { "cacau": { "sem": 600, "com": 1050 }, "acai": { "sem": 6700, "com": 10000 } },
+    "GANHO": { "cacau": { "sem": 600, "com": 1050 }, "acai": { "sem": 6700, "com": 10000 },
+               "soja": { "sem": 3470, "com": 3960 }, "milho": { "sem": 6376, "com": 7400 },
+               "feijao": { "sem": 1470, "com": 2090 }, "cafe": { "sem": 1620, "com": 2100 },
+               "cana": { "sem": 75000, "com": 90000 }, "banana": { "sem": 14200, "com": 19500 } },
+    "GANHO_MANEJO": { "cafe": { "sem": 2100, "com": 2310 } },
+    "GANHO_FONTE": {
+      "cacau": "Bahia: 600 kg/ha sem irrigação, 1.500 com (Siqueira 2018, em Silva, UFRB 2020); contamos metade do ganho.",
+      "acai": "Embrapa: 10 a 12 t/ha irrigado, mais de 50% acima da terra firme sem irrigação (2025); usamos o piso.",
+      "soja": "Metade do ganho de um ensaio no Rio Grande do Sul (2021). Na média nacional a irrigação é seguro contra veranico.",
+      "milho": "Metade da diferença entre lavouras irrigadas e não irrigadas no Censo Agropecuário (IBGE).",
+      "feijao": "CONAB: feijão de inverno sob pivô contra o feijão das águas, média de cinco anos em Goiás.",
+      "cafe": "Emater-MG: café irrigado contra sequeiro em Minas Gerais (2018), a menor das três fontes.",
+      "cana": "Metade do ganho de um ensaio de gotejamento em Jaú (SP).",
+      "banana": "Metade da diferença entre lavouras irrigadas e não irrigadas no Censo Agropecuário (IBGE).",
+      "cafe_manejo": "Embrapa Cerrados: +13 sacas/ha com manejo da irrigação; contamos cerca de 10%."
+    },
+    "PRECO_KG": { "cacau": 17.00, "acai": 4.44, "soja": 1.91, "milho": 0.86, "feijao": 3.36, "arroz": 1.55,
+                  "cafe": 26.20, "cana": 0.142, "manga": 1.93, "uva": 4.09, "melao": 1.90, "banana": 2.25 },
+    "PRECO_LIDO": { "cacau": "2026-10-02", "acai": "2026-09-17", "cafe": "2026-10-02", "outras": "2026-09-17" },
     "TARIFA": 0.82,
     "TARIFA_LIDA": "2026-09-30",
     "IMPOSTO": { "isento": 1.05, "reduzido": 1.11, "cheio": 1.30 },
@@ -107,18 +130,84 @@
   function custo(ha, fonte) { return ha * K.CUSTO_USD_POR_HA[fonte] * K.FX; }
   function payback(custoBRL, economia) { return economia > 0 ? custoBRL / economia : Infinity; }
 
-  /* Handoff from the home page: ?ha=&cultura=&fonte=&diesel=&energia= (diesel, gasolina or rede). Anything outside the allowed values
-     is dropped, never clamped into something the visitor did not ask for. */
+  /* Handoff from the home page and from the e-mailed report: ?ha=&cultura=&fonte=&energia=&irrigado=
+     &diesel=&gasolina=&tarifa=&imposto=&desconto=&sem=&com=&preco_kg=. Anything outside the allowed
+     values is dropped, never clamped into something the visitor did not ask for. */
   function lerParametros(search) {
     var q = new URLSearchParams(search || ""), out = {};
-    var ha = parseFloat(q.get("ha")), diesel = parseFloat(q.get("diesel"));
-    if (isFinite(ha) && ha >= K.HA.min && ha <= K.HA.max) out.ha = ha;
-    if (Object.prototype.hasOwnProperty.call(K.LAMINA, q.get("cultura"))) out.cultura = q.get("cultura");
-    if (Object.prototype.hasOwnProperty.call(K.HEAD, q.get("fonte"))) out.fonte = q.get("fonte");
-    if (isFinite(diesel) && diesel >= K.DIESEL_FAIXA.min && diesel <= K.DIESEL_FAIXA.max) out.diesel = diesel;
+    function num(k, min, max) { var v = parseFloat(q.get(k)); return isFinite(v) && v >= min && v <= max ? v : undefined; }
+    function key(k, obj) { var v = q.get(k); return Object.prototype.hasOwnProperty.call(obj, v) ? v : undefined; }
+    var v;
+    if ((v = num("ha", K.HA.min, K.HA.max)) !== undefined) out.ha = v;
+    if ((v = key("cultura", K.LAMINA)) !== undefined) out.cultura = v;
+    if ((v = key("fonte", K.HEAD)) !== undefined) out.fonte = v;
     if (["diesel", "gasolina", "rede"].indexOf(q.get("energia")) >= 0) out.energia = q.get("energia");
+    if (["sim", "nao", "1", "0"].indexOf(q.get("irrigado")) >= 0) out.irrigado = q.get("irrigado") === "sim" || q.get("irrigado") === "1";
+    if ((v = num("diesel", K.DIESEL_FAIXA.min, K.DIESEL_FAIXA.max)) !== undefined) out.diesel = v;
+    if ((v = num("gasolina", 1, 20)) !== undefined) out.gasolina = v;
+    if ((v = num("tarifa", 0.1, 3)) !== undefined) out.tarifa = v;
+    if ((v = key("imposto", K.IMPOSTO)) !== undefined) out.imposto = v;
+    if ((v = key("desconto", K.DESCONTO)) !== undefined) out.desconto = v;
+    if ((v = num("sem", 0, 100000)) !== undefined) out.semKg = v;
+    if ((v = num("com", 0, 100000)) !== undefined) out.comKg = v;
+    if ((v = num("preco_kg", 0, 1000)) !== undefined) out.precoKg = v;
+    if ((v = num("lamina", 50, 2500)) !== undefined) out.lamina = v;
+    if ((v = num("head", 5, 200)) !== undefined) out.head = v;
+    if ((v = num("eta", 0.3, 0.85)) !== undefined) out.eta = v;
+    if ((v = num("eta_motor", 0.6, 0.97)) !== undefined) out.etaMotor = v;
+    if ((v = num("cec", 0.15, 0.5)) !== undefined) out.cec = v;
+    if ((v = num("consumo", 0, 1e8)) !== undefined) out.consumo = v;
+    if (["litros", "reais"].indexOf(q.get("consumo_unit")) >= 0) out.consumoUnit = q.get("consumo_unit");
     return out;
   }
 
-  root.AgroCalc = { K: K, estimar: estimar, estimarRede: estimarRede, custo: custo, payback: payback, lerParametros: lerParametros };
+  /* The whole calculation from one set of answers, so the full calculator, the home mini calculator and
+     the server report (agro-lead, ported in calc.ts) give the same numbers. q: ha, cultura, fonte,
+     energia (diesel|gasolina|rede), preco (R$/L fuel), tarifa, imposto, desconto (keys), lamina, head,
+     eta, etaMotor, cec, consumo (exact use, optional), consumoUnit (litros|reais), precoKg. */
+  function calcular(q) {
+    var ha = q.ha, rede = q.energia === "rede", gas = q.energia === "gasolina", fisico, economia, porKwh = 0;
+    var exato = q.consumo > 0;
+    if (rede) {
+      porKwh = q.tarifa * K.IMPOSTO[q.imposto] * (1 - K.DESCONTO[q.desconto]);
+      if (exato) { if (q.consumoUnit === "reais") { economia = q.consumo; fisico = porKwh > 0 ? economia / porKwh : 0; } else { fisico = q.consumo; economia = fisico * porKwh; } }
+      else { var r = estimarRede(ha, q.lamina, q.head, q.eta, q.etaMotor, q.tarifa, K.IMPOSTO[q.imposto], K.DESCONTO[q.desconto]); fisico = r.kwh; economia = r.economia; }
+    } else {
+      if (exato) { if (q.consumoUnit === "reais") { economia = q.consumo; fisico = economia / q.preco; } else { fisico = q.consumo; economia = fisico * q.preco; } }
+      else { var e = estimar(ha, q.lamina, q.head, q.eta, q.cec, q.preco); fisico = e.litros; economia = e.economia; }
+    }
+    var co2 = rede ? 0 : fisico * (gas ? K.CO2_PER_L_GASOLINA : K.CO2_PER_L) / 1000;
+    var investimento = custo(ha, q.fonte);
+    // Harvest: the farmer's own yields (defaults from padroesColheita) and price. Gain only when both
+    // yields and the price are filled and "with" beats "without".
+    var semKg = q.semKg > 0 ? q.semKg : 0, comKg = q.comKg > 0 ? q.comKg : 0, precoKg = q.precoKg > 0 ? q.precoKg : 0;
+    var colheita = comKg > semKg && precoKg > 0;
+    var ganhoKg = colheita ? ha * (comKg - semKg) : 0, ganhoVal = ganhoKg * precoKg;
+    var total = economia + ganhoVal;
+    var out = { exato: exato, rede: rede, irrigado: !!q.irrigado, fisico: fisico, porKwh: porKwh, economia: economia, co2: co2,
+                investimento: investimento, paybackEnergia: payback(investimento, economia),
+                colheita: colheita, ganhoKg: ganhoKg, ganhoVal: ganhoVal, total: total,
+                payback: payback(investimento, total), economia15: economia * K.LIFE_YEARS, total15: total * K.LIFE_YEARS };
+    out.argumento = argumento(out);
+    return out;
+  }
+  /* Defaults for the three harvest fields of a crop. irrigado = the area is already irrigated today:
+     then the gain is only what soil-moisture-driven management adds (factor B); otherwise it is the
+     step from rainfed to irrigated (factor A). A crop without a researched default returns zeros, and
+     the harvest row stays hidden until the farmer fills in his own numbers. */
+  function padroesColheita(cultura, irrigado) {
+    var g = (irrigado ? K.GANHO_MANEJO : K.GANHO)[cultura];
+    return { semKg: g ? g.sem : 0, comKg: g ? g.com : 0, precoKg: K.PRECO_KG[cultura] || 0 };
+  }
+  /* The strongest selling argument, one per result: the harvest when it is worth more than the energy
+     saved; otherwise the energy; and on the grid, when the saving alone does not repay the system in its
+     lifetime, the reason that remains (irrigating where the distributor gives no new load). */
+  function argumento(r) {
+    if (r.colheita && r.ganhoVal >= r.economia) return "colheita";
+    if (r.rede && !(r.payback <= K.LIFE_YEARS)) return "rede";
+    return "energia";
+  }
+
+  root.AgroCalc = { K: K, estimar: estimar, estimarRede: estimarRede, custo: custo, payback: payback, lerParametros: lerParametros,
+                    calcular: calcular, argumento: argumento, padroesColheita: padroesColheita };
 })(window);

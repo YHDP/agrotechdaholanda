@@ -37,7 +37,7 @@
   'use strict';
 
   var FN = 'https://uemspezaqxmkhenimwuf.supabase.co/functions/v1/agro-lead'; // supabase.co edge function
-  var CONSENT_VERSION = 'agro-2026-10-03';
+  var CONSENT_VERSION = 'agro-2026-10-05';
   var PRODUTOS = ['irrigacao', 'camara-fria'];
   // 'ambos' (as três fichas de uma vez) só existe no pedido de ficha. No pedido de proposta, o
   // "Os dois" do <select> continua indo como texto dentro de `mensagem`, como antes.
@@ -53,6 +53,7 @@
       linksIntro: 'Prontas. Os links valem por 14 dias, e também foram para o seu e-mail.',
       linkIntro: 'Pronta. O link vale por 14 dias, e também foi para o seu e-mail.',
       proposalOk: 'Recebemos o seu pedido. Respondemos com uma proposta para a sua área.',
+      calcOk: 'Pronto. O cálculo completo está a caminho do seu e-mail, com um link para refazer a conta.',
       errEmail: 'Informe um e-mail válido.',
       errConsent: 'É preciso aceitar a Política de Privacidade para continuar.',
       errProduto: 'Escolha o produto para receber a ficha.',
@@ -72,6 +73,7 @@
       linksIntro: 'Ready. The links are valid for 14 days, and we have also sent them to your e-mail.',
       linkIntro: 'Ready. The link is valid for 14 days, and we have also sent it to your e-mail.',
       proposalOk: 'We received your request. We will reply with a proposal for your area.',
+      calcOk: 'Done. The full calculation is on its way to your inbox, with a link to redo it.',
       errEmail: 'Please enter a valid e-mail address.',
       errConsent: 'Please accept the Privacy Policy to continue.',
       errProduto: 'Please choose a product to receive the sheet.',
@@ -279,6 +281,24 @@
     check();
   }
 
+  // The e-mailed calculation links to the proposal form with the four answers it already has
+  // (?area_ha=&cultura=&fonte_agua=&energia_hoje=): fill them in so the farmer only adds the rest.
+  // A select takes the value only when it is one of its options; text is capped and set as value.
+  function prefill(form) {
+    if (!window.URLSearchParams) return;
+    var q = new URLSearchParams(window.location.search);
+    ['area_ha', 'cultura', 'fonte_agua', 'energia_hoje'].forEach(function (name) {
+      var v = (q.get(name) || '').trim().slice(0, 80);
+      if (!v) return;
+      [].forEach.call(form.querySelectorAll('[name="' + name + '"]'), function (el) {
+        if (el.disabled || el.value) return;
+        if (el.tagName === 'SELECT') {
+          if ([].some.call(el.options, function (o) { return o.value === v; })) el.value = v;
+        } else el.value = v;
+      });
+    });
+  }
+
   function initForm(form) {
     var intent = form.getAttribute('data-intent') || 'ficha-tecnica';
     var err = form.querySelector('.agro-form__err');
@@ -343,7 +363,7 @@
         });
         okBox.appendChild(ul);
       } else {
-        p.textContent = T.proposalOk;
+        p.textContent = intent === 'calculo' ? T.calcOk : T.proposalOk;
         okBox.appendChild(p);
       }
       okBox.hidden = false;
@@ -352,6 +372,7 @@
     }
 
     initMais(form);
+    if (intent === 'proposta') prefill(form);
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -447,6 +468,9 @@
         };
         if (produto) payload.produto = produto;
         if (anexos && anexos.length) payload.anexos = anexos;
+        // The calculator's e-mail gate (calculadora.html): its answers travel as `calculo`, and
+        // agro-lead recomputes the numbers itself; nothing the browser computed is trusted.
+        if (intent === 'calculo' && typeof window.AgroCalcPayload === 'function') payload.calculo = window.AgroCalcPayload();
         if (antibot) {
           for (var k in antibot) {
             if (Object.prototype.hasOwnProperty.call(antibot, k)) payload[k] = antibot[k];

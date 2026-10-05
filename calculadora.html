@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://uemspezaqxmkhenimwuf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'none'">
 <title>Calculadora de retorno · Agrotech da Holanda</title>
 <meta name="description" content="Estime quanto a energia da sua irrigação custa por ano, a diesel ou na rede elétrica, e em quanto tempo a irrigação solar se paga.">
 <link rel="canonical" href="https://agrotechdaholanda.com.br/calculadora.html">
@@ -11,6 +12,7 @@
 <link rel="icon" type="image/x-icon" href="assets/brand/favicon.ico">
 <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
 <link rel="stylesheet" href="assets/css/rodape.css">
+<link rel="stylesheet" href="assets/css/agro-form.css">
 <style>
   @font-face { font-family:'Poppins'; font-weight:400; font-display:swap; src:url('assets/fonts/poppins-400.woff2') format('woff2'); }
   @font-face { font-family:'Poppins'; font-weight:600; font-display:swap; src:url('assets/fonts/poppins-600.woff2') format('woff2'); }
@@ -108,60 +110,40 @@
   /* result */
   .result { position:sticky; top:20px; background:var(--panel); color:#fff; border-radius:22px; padding:30px 28px; box-shadow:0 20px 50px -24px rgba(20,38,60,.55); overflow:hidden; }
   @media (max-width:900px){ .result { position:static; } }
-  .r-eyebrow { font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--panel-soft); }
-  .r-headline { margin-top:6px; font-size:1.05rem; font-weight:600; color:#E9F1F8; }
-  .r-big { font-weight:800; letter-spacing:-0.02em; line-height:1; margin-top:6px; }
-  .r-big .val { font-size:clamp(2.6rem,7vw,3.8rem); color:var(--orange); display:block; }
-  .r-big .per { font-size:1rem; font-weight:600; color:var(--panel-soft); }
-  .r-payback { margin-top:14px; font-size:1.02rem; font-weight:600; color:#E9F1F8; }
-  .r-payback b { color:var(--blue); font-weight:800; }
+  .estimativa-tag { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--blue); border:1px solid rgba(56,182,255,.4); border-radius:6px; padding:2px 8px; }
+  /* Result card, lab calc-resultado r2 c6 (Yvo 04-10-2026): the title is always the combined
+     potential payback; the kicker names what weighs most; the receipt stars the winner. */
+  .r-kicker { margin:14px 0 4px; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); }
+  .r-label { margin:0; font-size:0.95rem; font-weight:600; color:#E9F1F8; }
+  .r-title { margin:2px 0 0; font-size:clamp(2.1rem,6vw,3rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; color:#fff; }
+  .r-sub { margin:8px 0 0; font-size:0.95rem; color:var(--panel-soft); }
+  .r-bar { margin:16px 0 4px; height:10px; border-radius:5px; background:rgba(255,255,255,.12); display:flex; overflow:hidden; }
+  .r-bar[hidden] { display:none; }
+  .r-bar i { display:block; height:100%; transition:width .5s cubic-bezier(.22,1,.36,1); }
+  .r-bar #barE { background:var(--blue); } .r-bar #barC { background:var(--orange); }
+  .r-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:0.95rem; }
+  .r-table td { padding:9px 0; border-top:1px dashed rgba(255,255,255,.2); vertical-align:top; }
+  .r-table td:last-child { text-align:right; font-weight:700; white-space:nowrap; padding-left:12px; }
+  .r-table tr.win td { font-weight:800; }
+  .r-table tr.win td:first-child::before { content:"★ "; color:var(--orange); }
+  .r-table tr.sum td { border-top:1px solid rgba(255,255,255,.5); }
+  .r-table tr.tot td { border-top:2px solid var(--blue); font-size:1.05rem; font-weight:800; color:var(--blue); }
+  .r-fontes { margin-top:12px; font-size:0.78rem; color:var(--panel-soft); }
+  .r-fontes summary { cursor:pointer; }
+  .r-fontes p { margin:6px 0 0; line-height:1.5; }
+  .gate { margin-top:20px; padding-top:18px; border-top:1px solid var(--panel-line); }
+  .gate h2 { font-size:1.1rem; margin:0; color:#fff; }
+  .gate > p { margin:4px 0 0; font-size:0.86rem; color:var(--panel-soft); }
+  .gate .agro-form { margin-top:12px; }
+  .r-links { margin-top:14px; font-size:0.85rem; }
+  .r-links a { color:var(--blue); font-weight:700; }
+  .trio { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+  .trio label { display:block; font-size:0.74rem; font-weight:600; color:var(--soft); margin-bottom:3px; }
+  .trio .numbox { min-width:0; width:100%; }
+  @media (max-width:520px){ .trio { grid-template-columns:1fr 1fr; } }
 
-  .cmp { margin-top:24px; display:flex; flex-direction:column; gap:14px; }
-  .cmp-head { display:flex; justify-content:space-between; align-items:baseline; font-size:0.82rem; font-weight:600; color:var(--panel-soft); margin-bottom:6px; }
-  .cmp-head b { color:#fff; font-weight:700; }
-  .cmp-track { height:16px; border-radius:999px; background:rgba(255,255,255,.09); overflow:hidden; }
-  .cmp-fill { height:100%; border-radius:999px; transition:width .6s cubic-bezier(.22,1,.36,1); }
-  .cmp-fill.diesel { background:linear-gradient(90deg,#FF7A2E,#FF914D); }
-  .cmp-fill.solar { background:linear-gradient(90deg,var(--blue),#7FD0FF); }
-  .cmp-sun { font-size:0.8rem; font-weight:700; color:var(--blue); }
-
-  .r-grid { margin-top:24px; padding-top:22px; border-top:1px solid var(--panel-line); display:grid; grid-template-columns:1fr 1fr; gap:20px 18px; }
-  .r-stat .k { font-size:0.76rem; color:var(--panel-soft); font-weight:600; }
-  .r-stat .v { font-size:1.4rem; font-weight:800; letter-spacing:-0.01em; margin-top:2px; }
-  .r-stat .v.blue { color:var(--blue); }
-  .r-stat .v.white { color:#fff; }
-  .r-stat .v .u { font-size:0.8rem; font-weight:600; color:var(--panel-soft); }
-
-  .r-note { margin-top:16px; font-size:0.76rem; color:var(--panel-soft); line-height:1.5; }
-  .estimativa-tag { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--blue); border:1px solid rgba(56,182,255,.4); border-radius:6px; padding:2px 8px; margin-bottom:14px; }
-  .estimativa-tag.exato { color:#8BE0B4; border-color:rgba(139,224,180,.5); }
-
-  .cta { margin-top:24px; padding-top:22px; border-top:1px solid var(--panel-line); }
-  .cta p { font-size:0.9rem; color:#E9F1F8; margin-bottom:12px; }
-  .cta .btn { display:inline-flex; align-items:center; gap:9px; font:inherit; font-weight:700; font-size:0.98rem; color:var(--navy); background:var(--orange); border-radius:999px; padding:14px 26px; text-decoration:none; transition:transform .15s; }
-  .cta .btn:hover { transform:translateY(-1px); }
-  .cta .btn:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
-
-  /* The e-mail address in full, next to the button. The button opens a mail client with the
-     calculation already written out, which is useless to anyone who reads mail somewhere the
-     browser does not know about. The address itself, visible and copyable, is the fallback that
-     always works. It stays a mailto link as well, so one element serves both habits. */
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px;
             overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
-  .cta-mail { margin-top:16px; font-size:0.86rem; color:var(--panel-soft); }
-  .cta-mail .row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:7px; }
-  .cta-mail a { color:var(--blue); font-weight:700; font-size:0.95rem; text-decoration:none;
-                border-bottom:1px solid rgba(56,182,255,.45); word-break:break-all; }
-  .cta-mail a:hover { border-bottom-color:var(--blue); }
-  .cta-mail a:focus-visible { outline:3px solid var(--blue); outline-offset:3px; border-radius:3px; }
-  .copybtn { display:inline-flex; align-items:center; gap:6px; font:inherit; font-size:0.78rem;
-          font-weight:700; color:#E9F1F8; background:rgba(255,255,255,.10);
-          border:1px solid var(--panel-line); border-radius:999px; padding:6px 13px;
-          cursor:pointer; transition:background .15s; }
-  .copybtn:hover { background:rgba(255,255,255,.18); }
-  .copybtn:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
-  .copybtn[data-done] { background:var(--blue); color:var(--navy); border-color:var(--blue); }
-
   /* method */
   .method { margin:56px 0 20px; }
   .method summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.05rem; padding:16px 0; border-top:1px solid var(--line); }
@@ -185,11 +167,6 @@
   .tool-nav a { color:var(--navy); text-decoration:none; min-height:44px; display:inline-flex; align-items:center; }
   .tool-nav a:hover { text-decoration:underline; }
   .tool-nav .hero-back { margin-left:0; min-height:0; padding-bottom:2px; }
-  .cta-forms { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
-  .cta-forms a { display:inline-flex; align-items:center; min-height:44px; padding:10px 18px; border-radius:999px; font-weight:700; font-size:0.92rem; text-decoration:none; }
-  .result .cta-forms a { color:var(--navy); background:var(--blue); }
-  .result .cta-forms a + a { color:#fff; background:transparent; border:2px solid rgba(255,255,255,.55); }
-  .result .cta-forms a:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
 </style>
 </head>
 <body>
@@ -244,10 +221,22 @@
         </select>
       </div>
 
-      <div class="field so-ganho">
-        <label class="flabel" for="precoKg" id="precoLabel">Preço que você recebe pelo cacau</label>
-        <div class="row"><span class="numbox"><span class="pre">R$</span><input type="number" id="precoKg" min="0" max="500" step="0.01" placeholder="0,00" aria-label="Preço que você recebe por quilo"><span class="unit">/kg</span></span></div>
-        <p class="fhint" id="precoHint">Opcional. Com o seu preço, a conta mostra quanto vale a colheita a mais. Nós não informamos preço.</p>
+      <div class="field">
+        <span class="flabel">Sua área já é irrigada hoje?</span>
+        <div class="seg" id="irrigado" role="group" aria-label="Sua área já é irrigada hoje?">
+          <button type="button" data-irrigado="nao" aria-pressed="true">Não<small>só a chuva</small></button>
+          <button type="button" data-irrigado="sim" aria-pressed="false">Sim<small>já bombeio água</small></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Colheita</span>
+        <div class="trio">
+          <div><label for="semKg">Hoje, kg/ha</label><span class="numbox"><input type="number" id="semKg" min="0" max="100000" step="10" inputmode="decimal"></span></div>
+          <div><label for="comKg">Com irrigação solar, kg/ha</label><span class="numbox"><input type="number" id="comKg" min="0" max="100000" step="10" inputmode="decimal"></span></div>
+          <div><label for="precoKg">Preço que recebe, R$/kg</label><span class="numbox"><input type="number" id="precoKg" min="0" max="1000" step="0.01" inputmode="decimal"></span></div>
+        </div>
+        <p class="fhint" id="colheitaHint"></p>
       </div>
 
       <div class="field">
@@ -354,62 +343,35 @@
     </section>
 
     <!-- ============ RESULT ============ -->
-    <aside class="result" aria-live="polite">
-      <span class="estimativa-tag" id="estTag">Estimativa</span>
-      <p class="r-eyebrow" id="rEyebrow">Trocando o diesel pelo sol</p>
-      <p class="r-headline">Você deixa de gastar</p>
-      <div class="r-big"><span class="val" id="economiaVal">R$ 0</span><span class="per" id="rPer">por ano em diesel, todo ano</span></div>
-      <p class="r-payback">E o sistema solar se paga em <b id="paybackVal">–</b></p>
-
-      <div class="cmp">
-        <div>
-          <div class="cmp-head"><span id="cmpLabel">Diesel hoje</span><b id="cmpDiesel">R$ 0</b></div>
-          <div class="cmp-track"><div class="cmp-fill diesel" id="barDiesel" style="width:100%"></div></div>
-        </div>
-        <div>
-          <div class="cmp-head"><span>Com irrigação solar</span><b class="cmp-sun">o sol é grátis</b></div>
-          <div class="cmp-track"><div class="cmp-fill solar" id="barSolar" style="width:2%"></div></div>
-        </div>
+    <aside class="result" aria-labelledby="rLabel">
+      <div aria-live="polite">
+        <span class="estimativa-tag" id="estTag">Estimativa</span>
+        <p class="r-kicker" id="rKicker"></p>
+        <p class="r-label" id="rLabel">Tempo de retorno potencial</p>
+        <p class="r-title" id="rTitle">–</p>
+        <p class="r-sub" id="rSub"></p>
+        <div class="r-bar" id="rBar" aria-hidden="true"><i id="barE"></i><i id="barC"></i></div>
+        <table class="r-table"><tbody id="rRows"></tbody></table>
       </div>
+      <details class="r-fontes"><summary>Fontes e premissas</summary><p id="rFontes"></p></details>
+      <div class="gate">
+        <h2 id="gate-t">Receba o cálculo completo</h2>
+        <p>Todos os números, as premissas e um link para refazer a conta. Grátis, no seu e-mail.</p>
+        <!-- calcform:inicio (build_site.py) -->
+      <form class="agro-form agro-form--dark" data-intent="calculo" data-produto="irrigacao" aria-labelledby="gate-t" novalidate>
+        <div class="agro-form__row"><div class="agro-form__field"><label for="calc-email">Seu e-mail</label><input id="calc-email" type="email" name="email" required autocomplete="email" placeholder="seu@email.com.br"></div><div class="agro-form__field"><label for="calc-municipio">Município e estado (opcional)</label><input id="calc-municipio" type="text" name="municipio" autocomplete="address-level2" placeholder="para a proposta, se você quiser uma"></div></div>
+        <p class="agro-form__purpose">A Regen Studio, representante comercial no Brasil, usa seu e-mail e as respostas da calculadora só para enviar o cálculo completo e responder a você. Não vai para a Dutch Flow Technology, a não ser que você peça uma proposta. Nada de lista de e-mails.</p>
+        <label class="agro-form__check"><input type="checkbox" name="privacy_policy_accepted" required>
+          <span>Li e concordo com a <a href="privacidade.html">Política de Privacidade</a> <span class="req">(obrigatório)</span></span></label>
 
-      <div class="r-grid">
-        <div class="r-stat"><div class="k" id="kFisica">Diesel queimado hoje</div><div class="v white"><span id="litrosVal">0</span> <span class="u" id="uFisicaVal">L/ano</span></div></div>
-        <div class="r-stat"><div class="k">Por hectare</div><div class="v blue" id="perHaVal">R$ 0</div></div>
-        <div class="r-stat"><div class="k">Economia em 15 anos</div><div class="v white" id="economia15Val">R$ 0</div></div>
-        <div class="r-stat so-comb"><div class="k">CO₂ evitado</div><div class="v blue"><span id="co2Val">0</span> <span class="u">t/ano</span></div></div>
-        <div class="r-stat so-rede" hidden><div class="k">Custo por kWh, já com desconto</div><div class="v blue" id="porKwhVal">R$ 0</div></div>
+        <button type="submit" class="cta agro-form__btn" data-track="calc-receber"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/> <rect x="2" y="4" width="20" height="16" rx="2"/></svg>Receber o cálculo completo</button>
+        <p class="agro-form__err" role="alert" hidden></p>
+        <div class="agro-form__ok" role="status" hidden></div>
+        <p class="agro-form__note">Seus dados ficam armazenados na UE e não são compartilhados com terceiros. <a href="privacidade.html">Política de Privacidade</a> · Ao enviar, você confirma que tem 16 anos ou mais (no Brasil, 12 anos ou mais com autorização dos pais).</p>
+      </form>
+        <!-- calcform:fim -->
       </div>
-
-      <div class="r-ganho so-ganho">
-        <p class="r-eyebrow">Para esta cultura, o ganho maior é a colheita</p>
-        <p class="r-ganho-big"><b id="ganhoKg">0</b> <span id="ganhoUn">kg</span> a mais por ano</p>
-        <p class="r-ganho-val" id="ganhoValLinha" hidden>Valem cerca de <b id="ganhoVal">R$ 0</b> por ano. Com esse ganho, o sistema se paga em <b id="paybackGanho">–</b>.</p>
-        <p class="r-ganho-fonte" id="ganhoFonte"></p>
-      </div>
-
-      <p class="r-note" id="rNote">O retorno considera só a economia de diesel. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.</p>
-
-      <div class="cta">
-        <p>Quer saber o preço e montar seu projeto?</p>
-        <a class="btn" id="ctaBtn" href="#">Peça um orçamento sem compromisso →</a>
-        <p class="cta-forms">
-          <a href="irrigacao-solar/#proposta" data-track="calc-proposta">Pedir a proposta pelo formulário</a>
-          <a href="irrigacao-solar/#ficha" data-track="calc-ficha">Receber a ficha técnica</a>
-        </p>
-        <div class="cta-mail" data-copy-scope>
-          Ou escreva direto para:
-          <div class="row">
-            <a href="mailto:info@agrotechdaholanda.com.br">info@agrotechdaholanda.com.br</a>
-            <button type="button" class="copybtn"
-                    data-copy="info@agrotechdaholanda.com.br"
-                    data-track="copiar-email"
-                    aria-label="Copiar o endereço de e-mail">
-              <span data-copy-label>Copiar</span>
-            </button>
-          </div>
-          <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
-        </div>
-      </div>
+      <p class="r-links"><a href="irrigacao-solar/#proposta" data-track="calc-proposta">Pedir uma proposta</a> · <a href="irrigacao-solar/#ficha" data-track="calc-ficha">Receber a ficha técnica</a></p>
     </aside>
   </div>
 
@@ -417,7 +379,7 @@
   <details class="method">
     <summary><span class="chev">›</span> Como calculamos</summary>
     <div class="method-body">
-      <p>A irrigação solar não queima combustível e não compra energia da rede. Então o que você gasta hoje com diesel, gasolina ou conta de luz para bombear água vira economia, todo ano. A calculadora estima esse gasto a partir da sua lavoura, ou usa o consumo que você informar.</p>
+      <p>A calculadora soma duas coisas: a energia que a irrigação solar deixa de comprar (diesel, gasolina ou conta de luz) e a colheita a mais que a água traz. O título é sempre o tempo de retorno potencial do conjunto, e o item que mais pesa aparece com estrela.</p>
       <h2>Estimativa pela lavoura</h2>
       <p>A partir da área, da cultura e da fonte de água, estimamos a energia de bombeamento e convertemos em litros de diesel:</p>
       <ul>
@@ -435,9 +397,15 @@
       </ul>
       <p>O desconto de irrigação deixa a energia da rede bem mais barata que o diesel. Por isso, para quem já tem rede com desconto, a economia de energia sozinha costuma levar mais tempo que a vida útil do sistema para pagá-lo. Nesse caso o motivo para o sol é outro: irrigar onde a distribuidora não libera carga nova, ou onde a rede não chega.</p>
       <h2>Se você informa o consumo</h2>
-      <p>Em opções avançadas você pode informar seu consumo real, em litros por ano ou em reais por ano. O cálculo passa a usar esse número e o resultado fica exato.</p>
-      <h2>Retorno do investimento</h2>
-      <p>O tempo de retorno é o custo do sistema dividido pela economia anual de combustível ou de energia elétrica. A conta considera só a energia, sem contar o ganho de safra, então o retorno real tende a ser mais rápido.</p>
+      <p>Em opções avançadas você pode informar seu consumo real, em litros por ano ou em reais por ano. O cálculo passa a usar esse número na parte da energia.</p>
+      <h2>Colheita a mais</h2>
+      <p>Colheita a mais por ano: área × (produtividade com irrigação − produtividade de hoje) × o preço que você recebe. Os três campos vêm preenchidos com referências pesquisadas para cada cultura e podem ser trocados pelos seus números.</p>
+      <ul>
+        <li>Área sem irrigação hoje: o ganho é o passo de sequeiro para irrigado. Como você ainda não gasta com bombeamento, a linha de energia compara com irrigar a diesel, gasolina ou na rede.</li>
+        <li>Área já irrigada: a energia é economia de verdade, e o ganho de colheita é só o que o manejo pela umidade do solo acrescenta. Só o café tem medição publicada para isso; nas outras culturas o ganho fica em zero.</li>
+      </ul>
+      <h2>Tempo de retorno potencial</h2>
+      <p>Custo do sistema dividido pelo ganho anual somado (energia + colheita). É uma estimativa: chuva, preço e manejo mudam o resultado de um ano para o outro.</p>
       <p>Custo do sistema, posto no Brasil com frete e importação: cerca de US$ 2.000 por hectare com água de rio ou represa e US$ 2.450 por hectare com poço, ao câmbio de R$ 5,10. É uma estimativa. A estrutura dos painéis está incluída. O poço, o reservatório e a instalação não estão.</p>
       <h2>Fontes</h2>
       <ul>
@@ -447,7 +415,8 @@
         <li>Consumo do motor a gasolina (0,50 L/kWh): a FAO dá de 25% a 30% de rendimento para motores a gasolina, e bem menos para os pequenos no campo. Usamos 25% e a gasolina brasileira, que leva 30% de etanol e tem menos energia por litro. É uma estimativa: ajuste se souber o consumo real.</li>
         <li>Altura manométrica: 40 m para poço e 20 m para rio são a base do gotejamento (FAO, Módulo 5). Pivô e aspersão pedem mais pressão, então o diesel real deles é maior.</li>
         <li>Necessidade de água por cultura: Embrapa e FAO. Cacau: déficit hídrico médio de 275 mm no período seco da Transamazônica (Morais, Revista Brasileira de Ciência do Solo, 1998), com 90% de eficiência na microaspersão: 300 mm por ano. Açaí de terra firme: 120 litros por touceira por dia, 400 touceiras por hectare, de agosto a novembro (Embrapa, Comunicado Técnico 317, 2019): 580 mm por ano.</li>
-        <li>Ganho de colheita, só no cacau e no açaí: cacau na Bahia, 600 para 1.500 kg/ha com irrigação (Siqueira 2018, citado em Silva, UFRB 2020), contado pela metade, mais 450 kg/ha, porque o Pará já colhe em média 901 kg/ha (IBGE, 2025); açaí, 10 a 12 t/ha irrigado, mais de 50% acima da terra firme sem irrigação (Embrapa, 2025), usado pelo piso. O preço é o seu: a calculadora não traz preço de cacau nem de açaí.</li>
+        <li>Produtividade com e sem irrigação, sempre pelo lado conservador (metade de um ganho medido em outro lugar, ou o piso de uma faixa). Cacau: Bahia, 600 para 1.500 kg/ha (Siqueira 2018, em Silva, UFRB 2020), contado pela metade. Açaí: Embrapa, 10 a 12 t/ha irrigado, mais de 50% acima da terra firme sem irrigação (2025), pelo piso. Café: Emater-MG (2018). Feijão: CONAB, feijão de inverno sob pivô em Goiás. Milho e banana: metade da diferença entre lavouras irrigadas e não irrigadas no Censo Agropecuário do IBGE. Soja e cana: metade do ganho de um ensaio (Rio Grande do Sul; Jaú, SP). Café já irrigado: Embrapa Cerrados, +13 sacas/ha com manejo da irrigação, contado como cerca de 10%. Arroz, manga, uva, melão e hortaliças ficam sem referência: preencha com os seus números.</li>
+        <li>Preço que você recebe: cacau no mercado do Pará, R$ 17,00/kg (Notícias Agrícolas, 2 de outubro de 2026); café pela cotação CEPEA de 2 de outubro de 2026; açaí pelo preço médio do Pará e as demais culturas pelo preço médio nacional da Produção Agrícola Municipal 2025 (IBGE).</li>
         <li>Tarifa de energia (R$ 0,82/kWh): mediana da tarifa rural de baixa tensão (subgrupo B2, TE + TUSD, sem impostos) das 81 distribuidoras nos dados abertos da ANEEL, lidos em 30 de setembro de 2026. Oito em cada dez distribuidoras ficam entre R$ 0,73 e R$ 1,01.</li>
         <li>Impostos: PIS e Cofins de cerca de 5% (CPFL, 2026). ICMS isento para o produtor rural em São Paulo (Sefaz-SP) e de 5% na irrigação em Mato Grosso do Sul (Sefaz-MS). Nos demais estados, confira na sua conta.</li>
         <li>Desconto de irrigação e aquicultura: 60% no Sul e Sudeste e 67% no Norte, Centro-Oeste e Minas Gerais, na baixa tensão (Neoenergia), e 73% no Nordeste. Vale para até 8,5 horas por dia, fora das 17h às 21h30, com outorga de água (Lei 10.438/2002, Resolução Normativa ANEEL 1.000/2021 e Portaria MME 137/2026).</li>
@@ -504,218 +473,12 @@
   </footer><!-- rodape:fim -->
 
 <script src="assets/js/calc-core.js"></script>
-<script>
-(function(){
-  "use strict";
-  /* Every number lives in assets/js/calc-core.js, shared with the mini calculator on the home page. */
-  var C = window.AgroCalc, K = C.K;
-  var HEAD = K.HEAD, LAMINA = K.LAMINA;
-  var CULTURA_NOME = { soja:"Soja", milho:"Milho", feijao:"Feijão", arroz:"Arroz irrigado", cafe:"Café", cana:"Cana-de-açúcar", manga:"Manga", uva:"Uva", melao:"Melão", banana:"Banana", hortalicas:"Hortaliças", cacau:"Cacau", acai:"Açaí", outro:"lavoura" };
-  var GANHO_TXT = {
-    cacau: { label:'Preço que você recebe pelo cacau', un:'kg de amêndoa',
-             fonte:'Na Bahia, cacau irrigado chegou a 1.500 kg/ha, contra 600 kg/ha sem irrigação (Siqueira 2018, citado em Silva, UFRB 2020). Contamos só metade desse ganho, 450 kg/ha, porque o Pará já colhe mais que a Bahia e ainda não há ensaio publicado no Pará. Referência, não promessa.' },
-    acai:  { label:'Preço que você recebe pelo açaí', un:'kg de fruto',
-             fonte:'Com irrigação, cultivares da Embrapa dão 10 a 12 t/ha, mais de 50% acima da terra firme sem irrigação (Embrapa, Cultivo do açaizeiro em terra firme, 2025). Usamos o piso: de 6,7 para 10 t/ha. Referência, não promessa.' } };
+<script src="assets/js/calculadora.js"></script>
+<script src="assets/js/tracker.js" defer></script>
+<script src="assets/js/agro-challenge.js" defer></script>
+<script src="assets/js/antibot.js" defer></script>
+<script src="assets/js/agro-form.js" defer></script>
 
-  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fmtR$ = new Intl.NumberFormat('pt-BR',{ style:'currency', currency:'BRL', maximumFractionDigits:0 });
-  var fmtN  = new Intl.NumberFormat('pt-BR',{ maximumFractionDigits:0 });
-  var fmtN1 = new Intl.NumberFormat('pt-BR',{ maximumFractionDigits:1 });
-  var fmtR$2 = new Intl.NumberFormat('pt-BR',{ style:'currency', currency:'BRL', minimumFractionDigits:2, maximumFractionDigits:2 });
-  var $ = function(id){ return document.getElementById(id); };
-  var state = { fonte:'poco', consumoUnit:'litros', energia:'diesel' };
-
-  var ha=$('ha'), haNum=$('haNum'), cultura=$('cultura'), diesel=$('diesel'), dieselNum=$('dieselNum');
-  var lamina=$('lamina'), head=$('head'), eta=$('eta'), cec=$('cec'), consumo=$('consumo');
-  var gasolina=$('gasolina'), gasolinaNum=$('gasolinaNum');
-  var precoKg=$('precoKg');
-  var tarifa=$('tarifa'), tarifaNum=$('tarifaNum'), imposto=$('imposto'), desconto=$('desconto'), etaMotor=$('etaMotor');
-
-  function num(el, dflt){ var v=parseFloat(String(el.value).replace(',','.')); return isNaN(v)?dflt:v; }
-  function rangeFill(el){ var min=+el.min,max=+el.max,v=+el.value; el.style.setProperty('--pct',((v-min)/(max-min))*100+'%'); }
-
-  function compute(){
-    var haV = Math.max(0, num(haNum, K.HA.padrao));
-    var conh = num(consumo, 0);
-    var lam=num(lamina,LAMINA.cafe), H=num(head,HEAD.poco), etaV=num(eta,K.ETA)||K.ETA;
-    var fisico, economia, porKwh=0, exato=false, rede = state.energia==='rede';
-
-    if(rede){
-      var tar = num(tarifaNum, K.TARIFA) || K.TARIFA;
-      var imp = K.IMPOSTO[imposto.value] || K.IMPOSTO.isento;
-      var desc = K.DESCONTO[desconto.value]; if(desc===undefined) desc = K.DESCONTO.sul;
-      porKwh = tar*imp*(1-desc);
-      if(conh > 0){
-        exato = true;
-        if(state.consumoUnit==='litros'){ fisico = conh; economia = fisico*porKwh; }
-        else { economia = conh; fisico = porKwh>0 ? economia/porKwh : 0; }
-      } else {
-        var r = C.estimarRede(haV, lam, H, etaV, num(etaMotor,K.ETA_MOTOR)||K.ETA_MOTOR, tar, imp, desc);
-        fisico = r.kwh; economia = r.economia;
-      }
-    } else {
-      var gas = state.energia==='gasolina';
-      var preco = gas ? (num(gasolinaNum, K.GASOLINA) || K.GASOLINA) : (num(dieselNum, K.DIESEL) || K.DIESEL);
-      if(conh > 0){
-        exato = true;
-        if(state.consumoUnit==='litros'){ fisico = conh; economia = fisico*preco; }
-        else { economia = conh; fisico = economia/preco; }
-      } else {
-        var est = C.estimar(haV, lam, H, etaV, num(cec, gas ? K.CEC_GASOLINA : K.CEC), preco);
-        fisico = est.litros; economia = est.economia;
-      }
-    }
-
-    var co2 = rede ? 0 : fisico*(state.energia==='gasolina' ? K.CO2_PER_L_GASOLINA : K.CO2_PER_L)/1000;
-    var economia15 = economia*K.LIFE_YEARS;
-    var payback = C.payback(C.custo(haV, state.fonte), economia);
-    var perHa = haV>0 ? economia/haV : 0;
-    var g = K.GANHO[cultura.value], ganhoKg = g ? haV*(g.com-g.sem) : 0;
-    var preco = num(precoKg, 0), ganhoVal = ganhoKg*preco;
-    var paybackG = ganhoVal>0 ? C.payback(C.custo(haV, state.fonte), economia+ganhoVal) : Infinity;
-
-    render({ economia:economia, fisico:fisico, co2:co2, economia15:economia15, payback:payback, perHa:perHa, ha:haV, exato:exato, rede:rede, porKwh:porKwh,
-             ganho:!!g, ganhoKg:ganhoKg, ganhoVal:ganhoVal, paybackG:paybackG });
-  }
-
-  function animateNumber(el, to, fmt, prefix){
-    prefix = prefix||'';
-    var from = el._cur||0;
-    if(prefersReduced || Math.abs(to-from)<1){ el._cur=to; el.textContent=prefix+fmt.format(to); return; }
-    var start=performance.now(), dur=500;
-    function step(now){ var t=Math.min(1,(now-start)/dur), e=1-Math.pow(1-t,3), v=from+(to-from)*e; el.textContent=prefix+fmt.format(v); if(t<1) requestAnimationFrame(step); else el._cur=to; }
-    requestAnimationFrame(step);
-  }
-
-  function paybackText(p){
-    if(!isFinite(p) || p<=0) return '–';
-    if(p>K.LIFE_YEARS) return 'mais de '+K.LIFE_YEARS+' anos, além da vida útil';
-    if(p<1) return 'menos de 1 ano';
-    return '~'+fmtN1.format(p)+(p<2?' ano':' anos');
-  }
-
-  function render(r){
-    animateNumber($('economiaVal'), r.economia, fmtR$);
-    $('cmpDiesel').textContent = fmtR$.format(r.economia);
-    animateNumber($('litrosVal'), r.fisico, fmtN);
-    $('porKwhVal').textContent = fmtR$2.format(r.porKwh);
-    animateNumber($('economia15Val'), r.economia15, fmtR$);
-    $('perHaVal').textContent = fmtR$.format(r.perHa);
-    $('co2Val').textContent = fmtN1.format(r.co2);
-    $('paybackVal').textContent = paybackText(r.payback);
-    Array.prototype.forEach.call(document.querySelectorAll('.so-ganho'), function(x){ x.hidden = !r.ganho; });
-    if(r.ganho){
-      var gt = GANHO_TXT[cultura.value];
-      $('precoLabel').textContent = gt.label;
-      $('ganhoUn').textContent = gt.un;
-      $('ganhoFonte').textContent = gt.fonte;
-      $('ganhoKg').textContent = fmtN.format(r.ganhoKg);
-      $('ganhoValLinha').hidden = !(r.ganhoVal>0);
-      $('ganhoVal').textContent = fmtR$.format(r.ganhoVal);
-      $('paybackGanho').textContent = paybackText(r.paybackG);
-    }
-
-    $('barDiesel').style.width = r.economia>0 ? '100%' : '4%';
-    $('barSolar').style.width = '2%';
-
-    var tag=$('estTag');
-    if(r.exato){ tag.textContent='Cálculo exato'; tag.classList.add('exato'); }
-    else { tag.textContent='Estimativa'; tag.classList.remove('exato'); }
-    document.querySelector('.r-payback').style.display = (isFinite(r.payback)&&r.payback>0)?'':'none';
-
-    $('rNote').textContent = r.rede
-      ? (r.payback>K.LIFE_YEARS
-          ? 'Com o desconto de irrigação, a energia da rede sai barata e a economia sozinha não paga o sistema. O motivo para o sol é outro: irrigar onde a distribuidora não libera carga nova, ou sem esperar a extensão da rede.'
-          : 'O retorno considera só a conta de energia que deixa de pagar. Onde a distribuidora não libera carga nova, o sol também é a forma de ampliar a irrigação sem esperar a rede. O equipamento dura mais de 15 anos.')
-      : (r.ganho
-          ? 'O primeiro retorno considera só a economia de '+(state.energia==='gasolina'?'gasolina':'diesel')+'. No cacau e no açaí, a água entra no período seco, e o que pesa é a colheita: veja o ganho acima. O equipamento dura mais de 15 anos.'
-          : 'O retorno considera só a economia de '+(state.energia==='gasolina'?'gasolina':'diesel')+'. A irrigação bem feita ainda traz ganho de safra, que não entra nesta conta. O equipamento dura mais de 15 anos.');
-
-    var culNome = CULTURA_NOME[cultura.value]||'lavoura';
-    var subject = 'Orçamento irrigação solar - '+fmtN.format(r.ha)+' ha';
-    var body = 'Olá, quero um orçamento de irrigação solar.\n\n'
-      + 'Área: '+fmtN.format(r.ha)+' hectares\n'
-      + 'Cultura: '+culNome+'\n'
-      + (r.rede ? 'Gasto com energia elétrica hoje: ' : (state.energia==='gasolina' ? 'Gasto com gasolina hoje: ' : 'Gasto com diesel hoje: '))+fmtR$.format(r.economia)+' por ano\n'
-      + 'Retorno estimado: '+paybackText(r.payback)+'\n\n'
-      + 'Meu nome:\nMunicípio/Estado:\nTelefone:';
-    $('ctaBtn').setAttribute('href','mailto:info@agrotechdaholanda.com.br?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body));
-  }
-
-  function syncPair(rangeEl, numEl){
-    rangeEl.addEventListener('input', function(){ numEl.value=rangeEl.value; rangeFill(rangeEl); compute(); });
-    numEl.addEventListener('input', function(){ var v=num(numEl,+rangeEl.value); if(v>=+rangeEl.min && v<=+rangeEl.max){ rangeEl.value=v; rangeFill(rangeEl); } compute(); });
-  }
-  syncPair(ha, haNum);
-  syncPair(diesel, dieselNum);
-  syncPair(tarifa, tarifaNum);
-  syncPair(gasolina, gasolinaNum);
-  [cultura,lamina,head,eta,cec,consumo,imposto,desconto,etaMotor,precoKg].forEach(function(el){ el.addEventListener('input', compute); });
-
-  var NOMES = { diesel:['o diesel','diesel','Diesel hoje','Diesel queimado hoje','L/ano'],
-                gasolina:['a gasolina','gasolina','Gasolina hoje','Gasolina queimada hoje','L/ano'],
-                rede:['a rede','energia elétrica','Rede hoje','Energia comprada hoje','kWh/ano'] };
-  function setEnergia(e){
-    if(!NOMES[e]) e='diesel';
-    var mudou = state.energia!==e;
-    state.energia=e; var rede = e==='rede', n = NOMES[e];
-    Array.prototype.forEach.call(document.querySelectorAll('#energia button'), function(x){ x.setAttribute('aria-pressed', x.getAttribute('data-energia')===e?'true':'false'); });
-    Array.prototype.forEach.call(document.querySelectorAll('.so-rede'), function(x){ x.hidden = !rede; });
-    Array.prototype.forEach.call(document.querySelectorAll('.so-comb'), function(x){ x.hidden = rede; });
-    Array.prototype.forEach.call(document.querySelectorAll('.so-diesel'), function(x){ x.hidden = e!=='diesel'; });
-    Array.prototype.forEach.call(document.querySelectorAll('.so-gasolina'), function(x){ x.hidden = e!=='gasolina'; });
-    $('rEyebrow').textContent = 'Trocando '+n[0]+' pelo sol';
-    $('rPer').textContent = 'por ano em '+n[1]+', todo ano';
-    $('cmpLabel').textContent = n[2];
-    $('kFisica').textContent = n[3];
-    $('uFisicaVal').textContent = n[4];
-    $('uFisica').textContent = n[4];
-    $('consumoLabel').textContent = rede ? 'Já sabe seu consumo real de energia?' : 'Já sabe seu consumo real de '+n[1]+'?';
-    $('cecLabel').textContent = e==='gasolina' ? 'Consumo do motor a gasolina' : 'Consumo do motor diesel';
-    if(mudou && !rede) cec.value = e==='gasolina' ? K.CEC_GASOLINA : K.CEC;
-  }
-  Array.prototype.forEach.call(document.querySelectorAll('#energia button'), function(b){
-    b.addEventListener('click', function(){ setEnergia(b.getAttribute('data-energia')); compute(); });
-  });
-  cultura.addEventListener('change', function(){ lamina.value = LAMINA[cultura.value]||600; compute(); });
-
-  function setFonte(f){
-    state.fonte=f;
-    Array.prototype.forEach.call(document.querySelectorAll('#fonte button'), function(x){ x.setAttribute('aria-pressed', x.getAttribute('data-fonte')===f?'true':'false'); });
-    head.value=HEAD[f];
-  }
-  Array.prototype.forEach.call(document.querySelectorAll('#fonte button'), function(b){
-    b.addEventListener('click', function(){ setFonte(b.getAttribute('data-fonte')); compute(); });
-  });
-  Array.prototype.forEach.call(document.querySelectorAll('#consumoUnit button'), function(b){
-    b.addEventListener('click', function(){
-      state.consumoUnit=b.getAttribute('data-u');
-      Array.prototype.forEach.call(document.querySelectorAll('#consumoUnit button'), function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
-      compute();
-    });
-  });
-
-  var advToggle=$('advToggle'), adv=$('adv');
-  advToggle.addEventListener('click', function(){ var o=adv.classList.toggle('open'); advToggle.setAttribute('aria-expanded', o?'true':'false'); });
-
-  /* Defaults from calc-core, then the home page's handoff (?ha=&cultura=&fonte=&diesel=), validated there. */
-  diesel.value = dieselNum.value = K.DIESEL; eta.value = K.ETA; cec.value = K.CEC;
-  tarifa.value = tarifaNum.value = K.TARIFA; etaMotor.value = K.ETA_MOTOR;
-  gasolina.value = gasolinaNum.value = K.GASOLINA;
-  lamina.value = LAMINA[cultura.value]; setFonte(state.fonte);
-  var q = C.lerParametros(location.search);
-  if(q.ha){ haNum.value = q.ha; ha.value = Math.min(+ha.max, q.ha); }
-  if(q.cultura && cultura.querySelector('option[value="'+q.cultura+'"]')){ cultura.value = q.cultura; lamina.value = LAMINA[q.cultura]; }
-  if(q.fonte) setFonte(q.fonte);
-  if(q.diesel){ dieselNum.value = q.diesel; diesel.value = q.diesel; }
-  setEnergia(q.energia || 'diesel');
-
-  rangeFill(ha); rangeFill(diesel); rangeFill(tarifa); rangeFill(gasolina);
-  compute();
-})();
-</script>
-
-<script src="assets/js/copy.js" defer></script>
 
 </body>
 </html>

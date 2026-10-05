@@ -1,0 +1,73 @@
+/* GERADO por build_site.py a partir das regras agro-form de style.css. Não edite aqui. */
+.gate{--azul:#38B6FF;--azul-ink:#0074B8;--campo:#838FA0;--cinza:#55677D;--laranja:#FF914D;--linha:#E8E4DB;--navy:#14263C;--papel:#FBFAF7}
+.cta{display:inline-block;font-weight:700;font-size:17px;padding:14px 26px;border-radius:999px;
+  background:var(--laranja);color:var(--navy);text-decoration:none}
+.agro-form{margin-top:18px;max-width:520px}
+.agro-form__field{margin-bottom:14px}
+.agro-form__field label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+.agro-form__field input,.agro-form__field select,.agro-form__field textarea{
+  width:100%;font:inherit;font-size:16px;padding:13px 16px;border:1px solid var(--campo);
+  border-radius:12px;background:var(--papel);color:var(--navy)}
+.agro-form__field textarea{resize:vertical;min-height:112px;line-height:1.5}
+.agro-form__hint{margin:-2px 0 6px;font-size:14px;color:var(--cinza)}
+.agro-form--dark .agro-form__hint{color:#B9C6D4}
+.agro-form__check{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--cinza);
+  margin:14px 0 18px;max-width:60ch}
+.agro-form__check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--navy)}
+.agro-form--dark .agro-form__check input{accent-color:var(--laranja)}
+.agro-form__check a{color:var(--azul-ink)}
+.agro-form__btn{border:0;cursor:pointer;font-family:inherit}
+.agro-form__btn:disabled{opacity:.7;cursor:default}
+.agro-form__err{margin-top:12px;color:#A3231B;font-weight:600;font-size:15px}
+.agro-form__ok{margin-top:14px;font-size:16px}
+.agro-form__ok ul{margin:10px 0 0;padding-left:18px}
+.agro-form__ok li{margin:6px 0}
+.agro-form__ok a{color:var(--navy);font-weight:700}
+.agro-form--dark .agro-form__field label{color:var(--papel)}
+.agro-form--dark .agro-form__field input{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
+.agro-form--dark .agro-form__check{color:#B9C6D4}
+.agro-form--dark .agro-form__check a{color:var(--azul)}
+.agro-form--dark .agro-form__err{color:#FFB4AC}
+.agro-form--dark .agro-form__ok{color:var(--papel)}
+.agro-form--dark .agro-form__ok a{color:var(--laranja)}
+.cta{display:inline-flex;align-items:center;gap:10px;min-height:48px}
+.faq__a a:hover,.prose a:hover,.naficha a:hover,.sobreposicoes a:hover,.sobreposicoes a:focus-visible,.faq__a a:focus-visible,.prose a:focus-visible,.naficha a:focus-visible,
+.form-direto a:hover,.agro-form a:hover,.form-direto a:focus-visible,.agro-form a:focus-visible{text-decoration-thickness:2px}
+.formbox .agro-form{max-width:none}
+.ficha2 .agro-form{max-width:none;margin-top:0}
+.agro-form__row{display:flex;gap:12px;flex-wrap:wrap}
+.agro-form__row > .agro-form__field{flex:1 1 220px}
+.agro-form__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,max(220px,calc(50% - 6px))),1fr));column-gap:12px}
+.agro-form__field--wide{grid-column:1/-1}
+.agro-form__mais-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin:0 0 8px;
+  padding:8px 4px;border:0;background:none;font:inherit;font-size:15px;font-weight:600;color:var(--navy);
+  cursor:pointer}
+.agro-form__mais-txt{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.agro-form__mais-btn:hover .agro-form__mais-txt{text-decoration-thickness:2px}
+.agro-form__mais-btn[hidden],.agro-form__mais[hidden]{display:none}
+.agro-form__mais-plus{display:inline-block;font-size:20px;line-height:1;text-decoration:none;transition:transform .15s}
+.agro-form__mais-btn[aria-expanded="true"] .agro-form__mais-plus{transform:rotate(45deg)}
+.agro-form__mais{margin:4px 0 0;padding:14px 0 0;border:0;border-top:1px solid var(--linha);min-width:0}
+.agro-form__mais legend{float:left;width:100%;padding:0;margin-bottom:12px;font-weight:600;font-size:15px;color:var(--cinza)}
+.agro-form__mais legend + *{clear:both}
+.agro-form--dark .agro-form__mais-btn{color:var(--papel)}
+.agro-form--dark .agro-form__mais{border-top-color:rgba(251,250,247,.25)}
+.agro-form--dark .agro-form__mais legend{color:#B9C6D4}
+.agro-form select{appearance:auto}
+.agro-form__purpose{font-size:14.5px;color:var(--cinza);margin:6px 0 4px;max-width:62ch}
+.agro-form__purpose a{color:var(--azul-ink)}
+.agro-form__check{min-height:44px;cursor:pointer;margin:10px 0}
+.agro-form__check[hidden]{display:none}
+.agro-form__check + .agro-form__check{margin-top:0}
+.agro-form__check small{display:block;font-size:13.5px;margin-top:3px}
+.agro-form__check .req{font-weight:700;color:var(--navy)}
+.agro-form__btn{margin-top:8px}
+.agro-form__note{font-size:13.5px;color:var(--cinza);margin:12px 0 0;max-width:62ch}
+.agro-form__note a{color:var(--azul-ink)}
+.agro-form__ok{background:rgba(56,182,255,.12);border-radius:12px;padding:12px 14px}
+.agro-form--dark{max-width:680px}
+.agro-form--dark .agro-form__field select,.agro-form--dark .agro-form__field textarea{background:rgba(251,250,247,.96);border-color:transparent;color:var(--navy)}
+.agro-form--dark .agro-form__purpose,.agro-form--dark .agro-form__note{color:#B9C6D4}
+.agro-form--dark .agro-form__check .req{color:var(--papel)}
+.agro-form--dark .agro-form__purpose a,.agro-form--dark .agro-form__note a{color:var(--azul)}
+.agro-form--dark .agro-form__ok{background:rgba(56,182,255,.16)}
