@@ -2,6 +2,7 @@
 .gate{--azul:#38B6FF;--azul-ink:#0074B8;--campo:#838FA0;--cinza:#55677D;--laranja:#FF914D;--linha:#E8E4DB;--navy:#14263C;--papel:#FBFAF7}
 .cta{display:inline-block;font-weight:700;font-size:17px;padding:14px 26px;border-radius:999px;
   background:var(--laranja);color:var(--navy);text-decoration:none}
+.antibot-hp{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
 .agro-form{margin-top:18px;max-width:520px}
 .agro-form__field{margin-bottom:14px}
 .agro-form__field label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
@@ -30,7 +31,9 @@
 .agro-form--dark .agro-form__err{color:#FFB4AC}
 .agro-form--dark .agro-form__ok{color:var(--papel)}
 .agro-form--dark .agro-form__ok a{color:var(--laranja)}
+.ic{width:24px;height:24px;flex:none}
 .cta{display:inline-flex;align-items:center;gap:10px;min-height:48px}
+.cta .ic{width:20px;height:20px}
 .faq__a a:hover,.prose a:hover,.naficha a:hover,.sobreposicoes a:hover,.sobreposicoes a:focus-visible,.faq__a a:focus-visible,.prose a:focus-visible,.naficha a:focus-visible,
 .form-direto a:hover,.agro-form a:hover,.form-direto a:focus-visible,.agro-form a:focus-visible{text-decoration-thickness:2px}
 .formbox .agro-form{max-width:none}

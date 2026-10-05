@@ -134,7 +134,9 @@
   .gate { margin-top:20px; padding-top:18px; border-top:1px solid var(--panel-line); }
   .gate h2 { font-size:1.1rem; margin:0; color:#fff; }
   .gate > p { margin:4px 0 0; font-size:0.86rem; color:var(--panel-soft); }
-  .gate .agro-form { margin-top:12px; }
+  .gate .agro-form { margin-top:12px; max-width:none; }
+  .gate .agro-form__row { display:block; }
+  .gate .agro-form__btn { width:100%; justify-content:center; }
   .r-links { margin-top:14px; font-size:0.85rem; }
   .r-links a { color:var(--blue); font-weight:700; }
   .trio { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
@@ -356,15 +358,15 @@
       <details class="r-fontes"><summary>Fontes e premissas</summary><p id="rFontes"></p></details>
       <div class="gate">
         <h2 id="gate-t">Receba o cálculo completo</h2>
-        <p>Todos os números, as premissas e um link para refazer a conta. Grátis, no seu e-mail.</p>
+        <p>Todos os números e um link para refazer a conta, no seu e-mail.</p>
         <!-- calcform:inicio (build_site.py) -->
       <form class="agro-form agro-form--dark" data-intent="calculo" data-produto="irrigacao" aria-labelledby="gate-t" novalidate>
-        <div class="agro-form__row"><div class="agro-form__field"><label for="calc-email">Seu e-mail</label><input id="calc-email" type="email" name="email" required autocomplete="email" placeholder="seu@email.com.br"></div><div class="agro-form__field"><label for="calc-municipio">Município e estado (opcional)</label><input id="calc-municipio" type="text" name="municipio" autocomplete="address-level2" placeholder="para a proposta, se você quiser uma"></div></div>
-        <p class="agro-form__purpose">A Regen Studio, representante comercial no Brasil, usa seu e-mail e as respostas da calculadora só para enviar o cálculo completo e responder a você. Não vai para a Dutch Flow Technology, a não ser que você peça uma proposta. Nada de lista de e-mails.</p>
+        <div class="agro-form__row"><div class="agro-form__field"><label for="calc-email">Seu e-mail</label><input id="calc-email" type="email" name="email" required autocomplete="email" placeholder="seu@email.com.br"></div><div class="agro-form__field"><label for="calc-municipio">Município (opcional)</label><input id="calc-municipio" type="text" name="municipio" autocomplete="address-level2" placeholder="cidade e estado"></div></div>
+        <p class="agro-form__purpose">Usamos seu e-mail só para enviar o cálculo e responder a você. Nada vai para a Dutch Flow Technology sem o seu pedido, e nada de lista de e-mails.</p>
         <label class="agro-form__check"><input type="checkbox" name="privacy_policy_accepted" required>
           <span>Li e concordo com a <a href="privacidade.html">Política de Privacidade</a> <span class="req">(obrigatório)</span></span></label>
 
-        <button type="submit" class="cta agro-form__btn" data-track="calc-receber"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/> <rect x="2" y="4" width="20" height="16" rx="2"/></svg>Receber o cálculo completo</button>
+        <button type="submit" class="cta agro-form__btn" data-track="calc-receber"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/> <rect x="2" y="4" width="20" height="16" rx="2"/></svg>Receber o cálculo</button>
         <p class="agro-form__err" role="alert" hidden></p>
         <div class="agro-form__ok" role="status" hidden></div>
         <p class="agro-form__note">Seus dados ficam armazenados na UE e não são compartilhados com terceiros. <a href="privacidade.html">Política de Privacidade</a> · Ao enviar, você confirma que tem 16 anos ou mais (no Brasil, 12 anos ou mais com autorização dos pais).</p>
