@@ -106,7 +106,7 @@
     "IMPOSTO": { "isento": 1.05, "reduzido": 1.11, "cheio": 1.30 },
     "DESCONTO": { "nenhum": 0, "sul": 0.60, "centro": 0.67, "nordeste": 0.73 },
     "ETA_MOTOR": 0.90,
-    "HA": { "min": 1, "max": 5000, "padrao": 50 },
+    "HA": { "min": 1, "max": 5000, "padrao": 10 },
     "DIESEL_FAIXA": { "min": 1, "max": 20 }
   }/*K*/;
 
@@ -208,6 +208,19 @@
     return "energia";
   }
 
+  /* Payback as a farmer says it (Yvo 05-10-2026): months under a year, then years and months, never a
+     decimal year; beyond the 15-year life, "mais de 15 anos". lang "pt" or "en". */
+  function tempo(anos, lang) {
+    var en = lang === "en";
+    if (!isFinite(anos) || anos <= 0) return "–";
+    if (anos > K.LIFE_YEARS) return en ? "over " + K.LIFE_YEARS + " years" : "mais de " + K.LIFE_YEARS + " anos";
+    var m = Math.max(1, Math.round(anos * 12)), a = Math.floor(m / 12), r = m % 12;
+    function mes(n) { return n + (en ? (n === 1 ? " month" : " months") : (n === 1 ? " mês" : " meses")); }
+    if (a === 0) return mes(m);
+    var ano = a + (en ? (a === 1 ? " year" : " years") : (a === 1 ? " ano" : " anos"));
+    return r ? ano + (en ? " and " : " e ") + mes(r) : ano;
+  }
+
   root.AgroCalc = { K: K, estimar: estimar, estimarRede: estimarRede, custo: custo, payback: payback, lerParametros: lerParametros,
-                    calcular: calcular, argumento: argumento, padroesColheita: padroesColheita };
+                    calcular: calcular, argumento: argumento, padroesColheita: padroesColheita, tempo: tempo };
 })(window);

@@ -110,24 +110,26 @@
   /* result */
   .result { position:sticky; top:20px; background:var(--panel); color:#fff; border-radius:22px; padding:30px 28px; box-shadow:0 20px 50px -24px rgba(20,38,60,.55); overflow:hidden; }
   @media (max-width:900px){ .result { position:static; } }
-  .estimativa-tag { display:inline-block; font-size:0.66rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--blue); border:1px solid rgba(56,182,255,.4); border-radius:6px; padding:2px 8px; }
-  /* Result card, lab calc-resultado r2 c6 (Yvo 04-10-2026): the title is always the combined
-     potential payback; the kicker names what weighs most; the receipt stars the winner. */
-  .r-kicker { margin:14px 0 4px; font-size:0.72rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); }
-  .r-label { margin:0; font-size:0.95rem; font-weight:600; color:#E9F1F8; }
-  .r-title { margin:2px 0 0; font-size:clamp(2.1rem,6vw,3rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; color:#fff; }
-  .r-sub { margin:8px 0 0; font-size:0.95rem; color:var(--panel-soft); }
-  .r-bar { margin:16px 0 4px; height:10px; border-radius:5px; background:rgba(255,255,255,.12); display:flex; overflow:hidden; }
-  .r-bar[hidden] { display:none; }
-  .r-bar i { display:block; height:100%; transition:width .5s cubic-bezier(.22,1,.36,1); }
-  .r-bar #barE { background:var(--blue); } .r-bar #barC { background:var(--orange); }
-  .r-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:0.95rem; }
-  .r-table td { padding:9px 0; border-top:1px dashed rgba(255,255,255,.2); vertical-align:top; }
-  .r-table td:last-child { text-align:right; font-weight:700; white-space:nowrap; padding-left:12px; }
-  .r-table tr.win td { font-weight:800; }
-  .r-table tr.win td:first-child::before { content:"★ "; color:var(--orange); }
-  .r-table tr.sum td { border-top:1px solid rgba(255,255,255,.5); }
-  .r-table tr.tot td { border-top:2px solid var(--blue); font-size:1.05rem; font-weight:800; color:var(--blue); }
+  /* Result, lab calc-resultado r4 c12 (Yvo 05-10-2026): the payback as a farmer says it, on a fixed
+     15-year ruler (the life of the system): orange while the system is being paid, green after. */
+  .r-lbl { margin:0; font-size:0.78rem; font-weight:600; color:var(--panel-soft); }
+  .r-lbl b { color:var(--blue); font-weight:700; }
+  .r-pre { margin:8px 0 0; font-size:0.95rem; font-weight:600; color:#E9F1F8; }
+  .r-when { margin:2px 0 0; font-size:clamp(1.65rem,7.6vw,2.4rem); font-weight:800; line-height:1.08; color:var(--orange); white-space:nowrap; letter-spacing:-0.01em; }
+  .r-axis { position:relative; margin:30px 0 4px; }
+  .r-bg { position:relative; height:22px; border-radius:11px; background:rgba(255,255,255,.08); overflow:hidden; }
+  .r-pay, .r-gain { position:absolute; top:0; bottom:0; width:0; transition:width 1s cubic-bezier(.22,1,.36,1); }
+  .r-pay { left:0; background:var(--orange); }
+  .r-gain { background:#5FBF7A; transition-delay:.6s; }
+  .r-mk { position:absolute; top:-8px; width:3px; height:38px; background:#fff; border-radius:2px; transition:left 1s cubic-bezier(.22,1,.36,1); }
+  .r-mkl { position:absolute; top:-30px; transform:translateX(-50%); font-size:0.75rem; font-weight:800; color:#fff; white-space:nowrap; transition:left 1s cubic-bezier(.22,1,.36,1); }
+  .r-ticks { position:relative; height:16px; font-size:0.7rem; color:var(--panel-soft); }
+  .r-ticks span { position:absolute; transform:translateX(-50%); white-space:nowrap; }
+  .r-leg { display:flex; flex-wrap:wrap; gap:4px 14px; font-size:0.75rem; color:var(--panel-soft); margin-top:6px; }
+  .r-leg span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+  .r-leg .lp::before { background:var(--orange); } .r-leg .lg::before { background:#5FBF7A; }
+  .r-line { margin:12px 0 0; font-size:0.98rem; color:#E9F1F8; }
+  .r-line b { color:#fff; }
   .r-fontes { margin-top:12px; font-size:0.78rem; color:var(--panel-soft); }
   .r-fontes summary { cursor:pointer; }
   .r-fontes p { margin:6px 0 0; line-height:1.5; }
@@ -198,8 +200,8 @@
       <div class="field">
         <label class="flabel" for="haNum">Área irrigada</label>
         <div class="row">
-          <input type="range" id="ha" min="1" max="300" step="1" value="50" aria-label="Hectares">
-          <span class="numbox"><input type="number" id="haNum" min="1" max="5000" value="50" aria-label="Hectares"><span class="unit">ha</span></span>
+          <input type="range" id="ha" min="1" max="300" step="1" value="10" aria-label="Hectares">
+          <span class="numbox"><input type="number" id="haNum" min="1" max="5000" value="10" aria-label="Hectares"><span class="unit">ha</span></span>
         </div>
       </div>
 
@@ -346,14 +348,17 @@
 
     <!-- ============ RESULT ============ -->
     <aside class="result" aria-labelledby="rLabel">
-      <div aria-live="polite">
-        <span class="estimativa-tag" id="estTag">Estimativa</span>
-        <p class="r-kicker" id="rKicker"></p>
-        <p class="r-label" id="rLabel">Tempo de retorno potencial</p>
-        <p class="r-title" id="rTitle">–</p>
-        <p class="r-sub" id="rSub"></p>
-        <div class="r-bar" id="rBar" aria-hidden="true"><i id="barE"></i><i id="barC"></i></div>
-        <table class="r-table"><tbody id="rRows"></tbody></table>
+      <div aria-live="polite" aria-atomic="true">
+        <p class="r-lbl" id="rLabel">Retorno potencial · <b>estimativa</b></p>
+        <p class="r-pre">Se paga em</p>
+        <p class="r-when" id="rWhen">–</p>
+        <div class="r-axis" aria-hidden="true">
+          <div class="r-mkl" id="rMkl">pago</div><div class="r-mk" id="rMk"></div>
+          <div class="r-bg"><i class="r-pay" id="rPay"></i><i class="r-gain" id="rGain"></i></div>
+        </div>
+        <div class="r-ticks" aria-hidden="true"><span style="left:0;transform:none">hoje</span><span style="left:33.333%">5 anos</span><span style="left:66.667%">10 anos</span><span style="left:100%;transform:translateX(-100%)">15 anos</span></div>
+        <div class="r-leg" aria-hidden="true"><span class="lp">pagando</span><span class="lg">lucro, até 15 anos de vida do sistema</span></div>
+        <p class="r-line" id="rLine"></p>
       </div>
       <details class="r-fontes"><summary>Fontes e premissas</summary><p id="rFontes"></p></details>
       <div class="gate">

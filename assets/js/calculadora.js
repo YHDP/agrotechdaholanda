@@ -1,10 +1,11 @@
 /* Calculadora de retorno (calculadora.html). The arithmetic lives in calc-core.js (AgroCalc.calcular),
    shared with the home mini calculator and, ported, with the agro-lead report; this file only reads the
-   inputs, fills the defaults and draws the result. The result follows lab calc-resultado r2, c6 (Yvo
-   04-10-2026): one dark card whose title is ALWAYS the combined potential payback, marked as an
-   estimate; the strongest argument (harvest, fuel, or the grid) only sets the kicker, the row order and
-   the star. The e-mail gate below it is a generated agro-form (intent "calculo"); window.AgroCalcPayload
-   hands it the answers, and the server recomputes everything itself. */
+   inputs, fills the defaults and draws the result. The result follows lab calc-resultado r4, c12 (Yvo
+   05-10-2026): "Se paga em" + the combined potential payback in years and months, marked as an
+   estimate, on a fixed 15-year ruler (orange while the system is being paid, green after), and one
+   line with the gain per hectare. It animates on load and on every change. The e-mail gate below it is
+   a generated agro-form (intent "calculo"); window.AgroCalcPayload hands it the answers, and the
+   server recomputes everything itself. */
 (function () {
   var C = window.AgroCalc, K = C.K;
   var $ = function (id) { return document.getElementById(id); };
@@ -13,7 +14,6 @@
   var fmt1 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
   var NOMES = { soja: 'soja', milho: 'milho', feijao: 'feijão', arroz: 'arroz', cafe: 'café', cana: 'cana', manga: 'manga',
                 uva: 'uva', melao: 'melão', banana: 'banana', hortalicas: 'hortaliças', cacau: 'cacau', acai: 'açaí', outro: 'lavoura' };
-  var ENERGIA = { diesel: 'o diesel', gasolina: 'a gasolina', rede: 'a conta de luz' };
   var state = { fonte: 'poco', energia: 'diesel', irrigado: false, consumoUnit: 'litros' };
 
   var ha = $('ha'), haNum = $('haNum'), cultura = $('cultura');
@@ -24,12 +24,6 @@
 
   function num(el, dflt) { var v = parseFloat(String(el.value).replace(',', '.')); return isNaN(v) ? dflt : v; }
   function rangeFill(el) { var min = +el.min, max = +el.max, v = +el.value; el.style.setProperty('--pct', ((v - min) / (max - min)) * 100 + '%'); }
-  function anos(p) {
-    if (!isFinite(p) || p <= 0) return '–';
-    if (p > K.LIFE_YEARS) return 'mais de ' + K.LIFE_YEARS + ' anos';
-    if (p < 1) return 'menos de 1 ano';
-    return 'cerca de ' + fmt1.format(p) + (p < 2 ? ' ano' : ' anos');
-  }
 
   /* The answers, in the shape calcular() and the agro-lead report both take. */
   function respostas() {
@@ -57,48 +51,25 @@
                         : 'Sem número de referência para esta cultura: preencha com a sua produtividade e o seu preço.');
   }
 
-  function linhaEnergia(r) {
-    var nome = { diesel: 'diesel', gasolina: 'gasolina', rede: 'luz' }[state.energia];
-    if (!state.irrigado) return state.energia === 'rede' ? 'Comparado a irrigar na rede, por ano' : 'Comparado a irrigar a ' + nome + ', por ano';
-    return state.energia === 'rede' ? 'Conta de luz que deixa de pagar, por ano' : 'Sem ' + nome + ', por ano';
-  }
-
   function compute() {
     var q = respostas(), r = C.calcular(q);
     render(q, r);
   }
 
   function render(q, r) {
-    var tag = $('estTag');
-    tag.textContent = r.exato ? 'Estimativa com o seu consumo' : 'Estimativa';
-    $('rKicker').textContent = r.argumento === 'colheita' ? 'O que mais pesa: a colheita'
-      : r.argumento === 'rede' ? 'Na rede, o sol é para irrigar sem esperar a distribuidora'
-      : 'O que mais pesa: ' + ENERGIA[state.energia];
-    $('rTitle').textContent = anos(r.payback);
-    $('rSub').textContent = r.colheita
-      ? fmtR.format(r.total) + ' por ano: ' + fmtR.format(r.ganhoVal) + ' de colheita a mais e ' + fmtR.format(r.economia) + ' em energia.'
-      : fmtR.format(r.economia) + ' por ano em energia.';
-    var tot = Math.max(r.total, 1), mostraBarra = r.colheita && r.argumento !== 'rede';
-    $('rBar').hidden = !mostraBarra;
-    $('barE').style.width = (100 * r.economia / tot) + '%';
-    $('barC').style.width = (100 * r.ganhoVal / tot) + '%';
-
-    var linhas = [];
-    var eRow = [r.argumento !== 'colheita', linhaEnergia(r), fmtR.format(r.economia)];
-    if (r.colheita) {
-      var cRow = [r.argumento === 'colheita', 'Colheita a mais, por ano (' + fmtN.format(r.ganhoKg) + ' kg)', fmtR.format(r.ganhoVal)];
-      linhas = r.argumento === 'colheita' ? [cRow, eRow] : [eRow, cRow];
-    } else linhas = [eRow];
-    var tb = $('rRows');
-    while (tb.firstChild) tb.removeChild(tb.firstChild);
-    function tr(cls, a, b) {
-      var t = document.createElement('tr'); if (cls) t.className = cls;
-      var x = document.createElement('td'); x.textContent = a; var y = document.createElement('td'); y.textContent = b;
-      t.appendChild(x); t.appendChild(y); tb.appendChild(t);
-    }
-    linhas.forEach(function (l) { tr(l[0] ? 'win' : '', l[1], l[2]); });
-    if (r.colheita) tr('sum', 'Total por ano', fmtR.format(r.total));
-    tr('tot', 'Tempo de retorno potencial', anos(r.payback));
+    $('rWhen').textContent = C.tempo(r.payback, 'pt');
+    var x = isFinite(r.payback) && r.payback > 0 ? Math.min(100, 100 * r.payback / K.LIFE_YEARS) : 100;
+    $('rPay').style.width = x + '%';
+    $('rGain').style.left = x + '%';
+    $('rGain').style.width = (100 - x) + '%';
+    $('rMk').style.left = 'calc(' + x + '% - 1px)';
+    $('rMkl').style.left = Math.max(6, Math.min(94, x)) + '%';
+    $('rMk').hidden = $('rMkl').hidden = x >= 100;
+    $('rLine').innerHTML = '';
+    var b = document.createElement('b');
+    b.textContent = '+' + fmtR.format(q.ha > 0 ? r.total / q.ha : 0);
+    $('rLine').appendChild(b);
+    $('rLine').appendChild(document.createTextNode(' por hectare, todo ano.'));
 
     var nomeCultura = NOMES[cultura.value] || 'lavoura';
     $('rFontes').textContent = 'Energia: ' + (q.rede ? 'tarifa rural da ANEEL com impostos e desconto escolhidos' : 'preço médio da ANP')
@@ -184,5 +155,7 @@
   if (q.consumo) consumo.value = q.consumo;
   if (q.consumoUnit) { state.consumoUnit = q.consumoUnit; pressed('consumoUnit', 'data-u', q.consumoUnit); }
   rangeFill(ha); rangeFill(diesel); rangeFill(tarifa); rangeFill(gasolina);
-  compute();
+  // Draw once at zero, then the real result on the next frames, so the ruler fills on arrival.
+  $('rPay').style.width = '0%'; $('rGain').style.width = '0%';
+  requestAnimationFrame(function () { requestAnimationFrame(compute); });
 })();
