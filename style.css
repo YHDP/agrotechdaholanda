@@ -426,6 +426,61 @@ img,video,svg{max-width:100%}
 /* Imagem gerada por IA: legenda clara, 4,87:1 no branco e 4,66:1 no papel. Nunca sobre navy. */
 .fig{margin:0}
 .fig img{display:block;width:100%;height:auto}
+/* A wide photo band inside a section (companies page): the photo is cropped to 2:1, centre kept. */
+.fig--faixa img{aspect-ratio:2/1;object-fit:cover;border-radius:18px}
+.fig--faixa{margin-top:26px}
+/* Companies page, round 4 (Yvo: boxed cards with a blue bar were "too basic").
+   .linhas: the story items as open rows, two per line, a rule above each, the icon the one accent
+   (orange ink 4.6:1 on paper). Same idea as .manchetes, with room for a sentence. */
+.linhas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:44px;list-style:none;margin:0;padding:0}
+.linhas li{display:flex;gap:14px;align-items:flex-start;padding:20px 0 22px;border-top:1px solid var(--linha)}
+.linhas .ic{flex:none;width:28px;height:28px;color:var(--orange-ink);margin-top:2px}
+.linhas b{display:block;font-size:18px;font-weight:700;line-height:1.3}
+.linhas span{display:block;font-size:15.5px;line-height:1.55;color:var(--cinza);margin-top:4px;max-width:46ch}
+@media (max-width:760px){.linhas{grid-template-columns:1fr}}
+/* .fluxo: on navy, the field record (white data chips) flows into three uses. Text on navy: paper
+   13.5:1, #B9C6D4 8.6:1; icons in --azul 6.8:1; the arrow is the one orange accent. */
+.fluxo{display:grid;grid-template-columns:minmax(0,5fr) auto minmax(0,7fr);gap:28px;align-items:center;margin-top:8px}
+.fluxo__fonte{border:1px solid rgba(251,250,247,.22);border-radius:18px;padding:24px 24px 22px}
+.fluxo__k{margin:0;font-size:12px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#B9C6D4}
+.fluxo__fonte h3{margin:6px 0 0;font-size:21px;color:var(--papel)}
+.fluxo__fonte .chips{margin-top:16px}
+.fluxo__fonte .chip{font-size:14px;padding:7px 12px}
+.fluxo__fonte .chip .ic{color:var(--azul-ink)}
+.fluxo__fonte p{margin:16px 0 0;font-size:14.5px;line-height:1.55;color:#B9C6D4}
+.fluxo__seta{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--laranja);color:var(--navy)}
+.fluxo__seta .ic{width:26px;height:26px}
+.fluxo__usos{list-style:none;margin:0;padding:0}
+.fluxo__usos > li{display:flex;gap:16px;align-items:flex-start;padding:18px 0}
+.fluxo__usos > li+li{border-top:1px solid rgba(251,250,247,.18)}
+.fluxo__usos > li > .ic{flex:none;width:28px;height:28px;color:var(--azul);margin-top:2px}
+.fluxo__usos h3{margin:0;font-size:18px;color:var(--papel)}
+.fluxo__usos p{margin:4px 0 0;font-size:15px;line-height:1.55;color:#B9C6D4;max-width:52ch}
+.quadros{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 22px}
+.quadros li{font-size:14.5px;line-height:1.45;color:#B9C6D4}
+.quadros b{display:block;color:var(--papel);font-weight:700}
+.dark .note{color:#B9C6D4}
+@media (max-width:860px){.fluxo{grid-template-columns:1fr;gap:16px;justify-items:stretch}
+  .fluxo__seta{justify-self:center;transform:rotate(90deg)}}
+@media (max-width:480px){.quadros{grid-template-columns:1fr}}
+/* .papeis3: the three roles as open, numbered columns with a rule between them (as .manchetes),
+   the number in orange ink is the one accent; the icon stays navy. */
+.papeis3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;margin:8px 0 0;padding:0;
+  border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.papeis3 li{position:relative;padding:24px 24px 26px 0}
+.papeis3 li+li{padding-left:24px;border-left:1px solid var(--linha)}
+.papeis3__n{display:block;font-size:40px;font-weight:800;line-height:1;color:var(--orange-ink);letter-spacing:-1px}
+.papeis3 .ic{position:absolute;top:26px;right:24px;width:26px;height:26px;color:var(--navy)}
+.papeis3 h3{margin:14px 0 0;font-size:19px}
+.papeis3 p{margin:8px 0 0;font-size:15px;line-height:1.55;color:var(--cinza)}
+@media (max-width:860px){.papeis3{grid-template-columns:1fr}
+  .papeis3 li+li{padding-left:0;border-left:0;border-top:1px solid var(--linha)}
+  .papeis3 .ic{right:0}}
+/* Photo credit inside the photo, bottom right (companies page, Yvo 07-10): small, white, no box; the
+   shadow keeps it legible on sand and sky. Stays HTML text. */
+.fig--credito{position:relative}
+.fig .fig__credito{position:absolute;right:12px;bottom:10px;left:12px;margin:0;text-align:right;font-size:11px;
+  line-height:1.3;color:rgba(255,255,255,.88);text-shadow:0 0 4px rgba(0,0,0,.85),0 1px 2px rgba(0,0,0,.7);pointer-events:none}
 .fig figcaption{font-size:13px;line-height:1.4;color:var(--legenda-ia);margin-top:8px}
 
 /* ── Página inicial: herói sem imagem, só texto e as duas portas ───────────── */
@@ -677,6 +732,8 @@ img,video,svg{max-width:100%}
    Contrast: paper on navy 13.5:1, #B9C6D4 on navy 8.6:1, navy on white 13.9:1, --cinza on white
    5.9:1. Orange only in the badge and the icon tile, never as text. */
 .form-toggle{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+/* Three choices (proposal, tech sheet, message) on the companies page; one column under 641px. */
+@media (min-width:641px){.form-toggle--3{grid-template-columns:repeat(3,1fr)}}
 .form-toggle[hidden],.form-toggle__panel[hidden]{display:none}
 .form-toggle__btn{position:relative;display:flex;align-items:center;gap:16px;min-height:88px;padding:18px 20px;
   border:2px solid var(--linha);border-radius:18px;background:var(--card);color:var(--navy);

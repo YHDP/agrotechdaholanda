@@ -8,7 +8,7 @@ Idiomas: português do Brasil; inglês nas páginas listadas em "Pages in Englis
 Área atendida: Brasil
 Contato: info@agrotechdaholanda.com.br
 Instagram: https://www.instagram.com/agrotech_da_holanda/
-Atualizado em 2026-10-03
+Atualizado em 2026-10-07
 
 ## Quem é quem
 
@@ -54,9 +54,10 @@ de vender com pressa. Pode ser comprada por uma cooperativa e compartilhada entr
 Página: https://agrotechdaholanda.com.br/camara-fria-solar/
 
 Especificações (fonte: ficha técnica da Dutch Flow Technology, 23/09/2026, com respostas do
-fabricante de 24/09/2026):
-- Faixa de temperatura, as duas versões: de +10 °C a −5 °C; mantém −5 °C com 8 a 10 h de operação
-  por dia. Isolamento em painel de poliuretano de 100 mm. Degelo por gás quente. Compressor de
+fabricante de 24/09/2026 e de 05/10/2026):
+- Faixa de temperatura, as duas versões: de −5 °C a +18 °C. Com o controle de umidade opcional, o
+  contêiner também atende a faixa de 12 a 18 °C do chocolate e da amêndoa de cacau. Mantém −5 °C
+  com 8 a 10 h de operação por dia. Isolamento em painel de poliuretano de 100 mm. Degelo por gás quente. Compressor de
   220 V, 50 ou 60 Hz (60 Hz opcional; é a versão para a rede elétrica e os geradores do Brasil),
   monofásico. Fluido R-404A ou R-507; opcional R-448A ou R-449A, de menor GWP. Bateria com
   garantia de 5 anos.
@@ -116,6 +117,7 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/faq.html: perguntas frequentes
 - https://agrotechdaholanda.com.br/calculadora.html: calculadora de retorno (diesel, gasolina ou rede)
 - https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html: risco hídrico por município
+- https://agrotechdaholanda.com.br/empresas-e-investidores/: para empresas e investidores (piloto de água nos fornecedores, registros por talhão)
 - https://agrotechdaholanda.com.br/privacidade.html: privacidade
 - https://agrotechdaholanda.com.br/acessibilidade.html: acessibilidade
 - https://agrotechdaholanda.com.br/noticias/: notícias
@@ -128,6 +130,7 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/en/cocoa/: cocoa
 - https://agrotechdaholanda.com.br/en/acai/: upland açaí
 - https://agrotechdaholanda.com.br/en/faq/: FAQ
+- https://agrotechdaholanda.com.br/en/companies-and-investors/: for companies and investors: water pilots at suppliers, records per plot
 - https://agrotechdaholanda.com.br/en/privacy/: privacy
 - https://agrotechdaholanda.com.br/en/accessibility/: accessibility
 - https://agrotechdaholanda.com.br/en/news/: news

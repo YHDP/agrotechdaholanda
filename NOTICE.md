@@ -79,6 +79,25 @@ with the files. It does not require attribution on the rendered page.
   - Music: "Festa Boa" by InácioDantas, Pixabay (Pixabay Content License, AI-generated), https://pixabay.com/music/latin-festa-boa-552873/ (spec-card info reel soundtrack, edited)
   - Music: "Sunlight Over The Tree" by Mohamed_hassan, Pixabay (Pixabay Content License), https://pixabay.com/music/samba-latin-sunlight-over-the-tree-548487/ (spec-card energia reel soundtrack, edited)
 
+## Photos (website, /empresas-e-investidores/ and /en/companies-and-investors/)
+
+- **Pexels** stock photos. License: Pexels License <https://www.pexels.com/license/> (free for commercial
+  use, no attribution required; credited anyway, as a small credit line inside each photo, and here).
+  Downloaded 2026-10-07, cropped, resized to 900 and 1600 px wide, recompressed, metadata stripped,
+  self-hosted in `assets/agua/`. No recognisable people, no third-party logos. Locations as stated on
+  the source page; the drip photo has no stated location and is labelled "Foto ilustrativa".
+
+  - `rio-amazonas-seca-*.jpg`: "Aerial View of Amazon River Bend with Lush Rainforest", Gustavo Denuncio,
+    Pexels #29759408, Brazil. <https://www.pexels.com/photo/aerial-view-of-amazon-river-bend-with-lush-rainforest-29759408/>
+    Cropped from portrait to 4:3.
+  - `aspersao-pasto-*.jpg`: "A vibrant green field in Brazil with irrigation sprinklers", Carlos Henrique,
+    Pexels #10605816, location stated: Brazil. <https://www.pexels.com/photo/10605816/>
+  - `gotejamento-raiz-*.jpg`: "Young vegetable plants growing with drip irrigation system in a fertile
+    field", Anil Sharma, Pexels #10606633, no location stated. <https://www.pexels.com/photo/green-plant-on-brown-soil-10606633/>
+  - `tapajos-alter-do-chao-*.jpg`: "Peaceful scene with boats moored on serene water at Alter do Chão,
+    Brazil", Lucia Barreiros Silva, Pexels #8184084, location stated: Alter do Chão, Santarém, Brazil
+    (Santarém is in Pará). <https://www.pexels.com/photo/8184084/> Cropped to 2:1, lower part kept.
+
 ## Product imagery (Instagram reels)
 
 - **Cooling-container cutaway render** — artwork supplied by **Dutch Flow Technology / Technimex**
