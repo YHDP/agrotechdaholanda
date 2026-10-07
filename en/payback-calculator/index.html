@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self' https://uemspezaqxmkhenimwuf.supabase.co; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Return on investment in solar irrigation · Agrotech da Holanda</title>
+<meta name="description" content="What is your return on investment in solar irrigation? Extra harvest and energy per hectare, and how long the system takes to pay for itself. Cocoa, açaí, coffee and more.">
+<link rel="canonical" href="https://agrotechdaholanda.com.br/en/payback-calculator/">
+<meta property="og:url" content="https://agrotechdaholanda.com.br/en/payback-calculator/">
+<link rel="alternate" hreflang="pt-BR" href="https://agrotechdaholanda.com.br/calculadora.html">
+<link rel="alternate" hreflang="en" href="https://agrotechdaholanda.com.br/en/payback-calculator/">
+<link rel="alternate" hreflang="x-default" href="https://agrotechdaholanda.com.br/calculadora.html">
+<link rel="icon" type="image/svg+xml" href="../../assets/brand/favicon.svg">
+<link rel="icon" type="image/x-icon" href="../../assets/brand/favicon.ico">
+<link rel="apple-touch-icon" href="../../assets/brand/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/css/rodape.css">
+<link rel="stylesheet" href="../../assets/css/agro-form.css">
+<style>
+  @font-face { font-family:'Poppins'; font-weight:400; font-display:swap; src:url('../../assets/fonts/poppins-400.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:600; font-display:swap; src:url('../../assets/fonts/poppins-600.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:700; font-display:swap; src:url('../../assets/fonts/poppins-700.woff2') format('woff2'); }
+  @font-face { font-family:'Poppins'; font-weight:800; font-display:swap; src:url('../../assets/fonts/poppins-800.woff2') format('woff2'); }
+  :root {
+    --orange:#FF914D; --blue:#38B6FF; --navy:#14263C; --paper:#FBFAF7;
+    /* Text-only variants. Same hue, dark enough to read: 4.5:1 on paper and on white.
+       Blue ink is style.css --azul-ink: 4.80:1 on paper, 5.01:1 on white.
+       As type on paper the bright pair lands at 2.13:1 and 2.16:1, which is also what the
+       brandbook already says about orange on a light field. Bright stays for fills,
+       borders and focus rings; these two are for type ON THE LIGHT HALF ONLY. Inside .result,
+       which is navy, the bright pair reaches 6.8:1 and these fall to 3.2:1, so the dark panel
+       keeps --orange and --blue. */
+    --orange-ink:#C74C00; --blue-ink:#0074B8;
+    --soft:#55677D; --line:#E8E4DB; --card:#FFFFFF;
+    --panel:#14263C; --panel-line:rgba(255,255,255,0.12); --panel-soft:#9DB2C9;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--paper); color:var(--navy); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  /* hero */
+  header.hero { padding:40px 0 8px; }
+  .hero-top { display:flex; align-items:center; gap:14px; }
+  /* Same logo, same size and the same link home as the generated header (style.css .nav__logo). */
+  .nav__logo { display:inline-flex; align-items:center; min-height:44px; flex:none; }
+  .nav__logo img { display:block; height:40px; width:auto; }
+  @media (max-width:560px){ .nav__logo img { height:36px; } }
+  .hero-back { margin-left:auto; font-size:0.85rem; font-weight:600; color:var(--navy); text-decoration:none; border-bottom:2px solid var(--orange); padding-bottom:2px; }
+  /* Title wide and balanced over two lines, the intro beside it at a reading measure, so the form
+     and the result card start right under the hero instead of below a half-empty screen. */
+  .hero-body { padding:30px 0 4px; display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); column-gap:48px; align-items:end; }
+  .hero-body .eyebrow { grid-column:1 / -1; }
+  @media (max-width:900px){ .hero-body { grid-template-columns:1fr; } }
+  .eyebrow { font-size:0.76rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--orange-ink); }
+  .hero h1 { font-size:clamp(2rem,5.2vw,3.1rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin-top:12px; text-wrap:balance; }
+  .hero p.thesis { margin-top:16px; font-size:clamp(1rem,2.1vw,1.15rem); color:var(--soft); max-width:34em; text-wrap:pretty; }
+
+  /* shell */
+  .calc { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:28px; align-items:start; }
+  @media (max-width:900px){ .calc { grid-template-columns:1fr; } }
+
+  [hidden] { display:none !important; }
+  .field { margin-bottom:22px; }
+  .r-ganho { margin:18px 0 6px; padding:14px 16px; border-radius:14px; background:rgba(56,182,255,.12); }
+  .r-ganho .r-eyebrow { margin:0 0 4px; }
+  .r-ganho-big { margin:0; font-size:1.05rem; }
+  .r-ganho-big b { font-size:1.5rem; }
+  .r-ganho-val { margin:6px 0 0; }
+  .r-ganho-fonte { margin:8px 0 0; font-size:.8rem; opacity:.85; }
+  .flabel { display:block; font-weight:700; font-size:0.9rem; margin-bottom:4px; }
+  .fhint { font-size:0.78rem; color:var(--soft); margin-bottom:10px; }
+  .row { display:flex; align-items:center; gap:14px; }
+  input[type="range"] { -webkit-appearance:none; appearance:none; flex:1 1 auto; min-width:0; width:100%; height:6px; border-radius:999px; background:linear-gradient(90deg,var(--orange) 0%,var(--orange) var(--pct,30%),#EBE7DE var(--pct,30%),#EBE7DE 100%); outline:none; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none; width:22px; height:22px; border-radius:50%; background:var(--navy); border:3px solid #fff; box-shadow:0 1px 4px rgba(20,38,60,.3); cursor:pointer; }
+  input[type="range"]::-moz-range-thumb { width:18px; height:18px; border-radius:50%; background:var(--navy); border:3px solid #fff; cursor:pointer; }
+  .numbox { display:inline-flex; align-items:baseline; gap:4px; background:var(--card); border:1.5px solid var(--line); border-radius:11px; padding:8px 12px; min-width:112px; }
+  .numbox input { font:inherit; font-weight:700; font-size:1.05rem; color:var(--navy); border:none; outline:none; width:100%; background:transparent; text-align:right; }
+  #dieselNum { min-width:3.4em; }  /* "6.97" was clipped to "6.9" in a 47 px box */
+  .row > .numbox { flex:none; }    /* the slider gives way on a phone, not the number */
+  .numbox .unit { font-size:0.82rem; font-weight:600; color:var(--soft); flex:none; }
+  .numbox .pre { font-size:0.9rem; font-weight:700; color:var(--soft); flex:none; }
+  .numbox:focus-within { border-color:var(--blue); box-shadow:0 0 0 3px rgba(56,182,255,.16); }
+
+  select { font:inherit; font-weight:700; font-size:1rem; color:var(--navy); width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:11px; background:var(--card); cursor:pointer; }
+  select:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(56,182,255,.16); }
+
+  .seg { display:flex; gap:8px; }
+  .seg button { flex:1; font:inherit; font-weight:700; font-size:0.9rem; color:var(--navy); background:var(--card); border:1.5px solid var(--line); border-radius:11px; padding:12px 10px; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; transition:border-color .15s,background .15s; }
+  .seg button small { font-weight:500; font-size:0.72rem; color:var(--soft); }
+  .seg button[aria-pressed="true"] { border-color:var(--navy); background:#F3F6FA; }
+  .seg button[aria-pressed="true"] small { color:var(--navy); }
+
+  .unit-seg { display:inline-flex; border:1.5px solid var(--line); border-radius:10px; overflow:hidden; flex:none; }
+  .unit-seg button { font:inherit; font-weight:700; font-size:0.8rem; padding:9px 13px; background:var(--card); color:var(--soft); border:none; cursor:pointer; }
+  .unit-seg button[aria-pressed="true"] { background:var(--navy); color:#fff; }
+
+  .adv-toggle { font:inherit; font-weight:700; font-size:0.86rem; color:var(--navy); background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:7px; padding:6px 0; }
+  .adv-toggle .chev { transition:transform .2s; }
+  .adv-toggle[aria-expanded="true"] .chev { transform:rotate(90deg); }
+  .adv { display:none; margin-top:14px; padding:18px; background:#F5F2EB; border:1px solid var(--line); border-radius:14px; }
+  .adv.open { display:block; }
+  .adv .field { margin-bottom:16px; }
+  .adv .field:last-child { margin-bottom:0; }
+  .adv .flabel { font-size:0.86rem; }
+  .adv-divider { border-top:1px dashed var(--line); margin:4px 0 16px; padding-top:16px; }
+  .adv-known { background:#EEF6FC; border:1px solid #CFE7F7; border-radius:11px; padding:14px 15px; margin-bottom:16px; }
+  .adv-known .flabel { color:var(--navy); }
+
+  /* result */
+  .result { position:sticky; top:20px; background:var(--panel); color:#fff; border-radius:22px; padding:30px 28px; box-shadow:0 20px 50px -24px rgba(20,38,60,.55); overflow:hidden; }
+  @media (max-width:900px){ .result { position:static; } }
+  /* Result, lab calc-resultado r4 c12 (Yvo 05-10-2026): the payback as a farmer says it, on a fixed
+     15-year ruler (the life of the system): orange while the system is being paid, green after. */
+  .r-lbl { margin:0; font-size:0.78rem; font-weight:600; color:var(--panel-soft); }
+  .r-lbl b { color:var(--blue); font-weight:700; }
+  .r-pre { margin:8px 0 0; font-size:0.95rem; font-weight:600; color:#E9F1F8; }
+  .r-when { margin:2px 0 0; font-size:clamp(1.65rem,7.6vw,2.4rem); font-weight:800; line-height:1.08; color:var(--orange); white-space:nowrap; letter-spacing:-0.01em; }
+  .r-axis { position:relative; margin:30px 0 4px; }
+  .r-bg { position:relative; height:22px; border-radius:11px; background:rgba(255,255,255,.08); overflow:hidden; }
+  .r-pay, .r-gain { position:absolute; top:0; bottom:0; width:0; transition:width 1s cubic-bezier(.22,1,.36,1); }
+  .r-pay { left:0; background:var(--orange); }
+  .r-gain { background:#5FBF7A; transition-delay:.6s; }
+  .r-mk { position:absolute; top:-8px; width:3px; height:38px; background:#fff; border-radius:2px; transition:left 1s cubic-bezier(.22,1,.36,1); }
+  .r-mkl { position:absolute; top:-30px; transform:translateX(-50%); font-size:0.75rem; font-weight:800; color:#fff; white-space:nowrap; transition:left 1s cubic-bezier(.22,1,.36,1); }
+  .r-ticks { position:relative; height:16px; font-size:0.7rem; color:var(--panel-soft); }
+  .r-ticks span { position:absolute; transform:translateX(-50%); white-space:nowrap; }
+  .r-leg { display:flex; flex-wrap:wrap; gap:4px 14px; font-size:0.75rem; color:var(--panel-soft); margin-top:6px; }
+  .r-leg span::before { content:""; display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
+  .r-leg .lp::before { background:var(--orange); } .r-leg .lg::before { background:#5FBF7A; }
+  .r-line { margin:12px 0 0; font-size:0.98rem; color:#E9F1F8; }
+  .r-line b { color:#fff; }
+  .r-fontes { margin-top:12px; font-size:0.78rem; color:var(--panel-soft); }
+  .r-fontes summary { cursor:pointer; }
+  .r-fontes p { margin:6px 0 0; line-height:1.5; }
+  .gate { margin-top:20px; padding-top:18px; border-top:1px solid var(--panel-line); }
+  .gate h2 { font-size:1.1rem; margin:0; color:#fff; }
+  .gate > p { margin:4px 0 0; font-size:0.86rem; color:var(--panel-soft); }
+  .gate .agro-form { margin-top:12px; max-width:none; }
+  .gate .agro-form__row { display:block; }
+  .gate .agro-form__btn { width:100%; justify-content:center; }
+  .r-links { margin-top:14px; font-size:0.85rem; }
+  .r-links a { color:var(--blue); font-weight:700; }
+  .trio { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+  .trio label { display:block; font-size:0.74rem; font-weight:600; color:var(--soft); margin-bottom:3px; }
+  .trio .numbox { min-width:0; width:100%; }
+  @media (max-width:520px){ .trio { grid-template-columns:1fr 1fr; } }
+
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+            overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+  /* method */
+  .method { margin:56px 0 20px; }
+  .method summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px; font-weight:700; font-size:1.05rem; padding:16px 0; border-top:1px solid var(--line); }
+  .method summary::-webkit-details-marker { display:none; }
+  .method summary .chev { transition:transform .2s; color:var(--orange-ink); }
+  .method[open] summary .chev { transform:rotate(90deg); }
+  .method-body { padding:6px 0 20px; max-width:52em; color:var(--soft); font-size:0.92rem; }
+  .method-body h2 { color:var(--navy); font-size:0.95rem; margin:18px 0 6px; }
+  .method-body code { font-family:ui-monospace,'SF Mono',Menlo,monospace; font-size:0.85rem; background:#F0EDE6; padding:2px 6px; border-radius:5px; color:var(--navy); }
+  .method-body ul { margin:6px 0 0 1.2em; }
+  .method-body li { margin-bottom:4px; }
+  .disc { margin-top:18px; padding:16px 18px; background:#F5F2EB; border-left:4px solid var(--blue); border-radius:10px; font-size:0.86rem; color:var(--navy); }
+
+
+  @media (max-width:900px){ .numbox { min-width:96px; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+  :focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+  /* Navegação compartilhada com o resto do site (build_site.py gera as outras páginas). */
+  .hero-top { flex-wrap:wrap; }
+  .tool-nav { margin-left:auto; display:flex; flex-wrap:wrap; align-items:center; gap:4px 18px; font-size:0.85rem; font-weight:600; }
+  .tool-nav a { color:var(--navy); text-decoration:none; min-height:44px; display:inline-flex; align-items:center; }
+  .tool-nav a:hover { text-decoration:underline; }
+  .tool-nav .hero-back { margin-left:0; min-height:0; padding-bottom:2px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-top">
+      <a class="nav__logo" href="../../en/"><img src="../../assets/brand/logo-horizontal.svg" alt="Agrotech da Holanda, home page" width="165" height="40"></a>
+      <nav class="tool-nav" aria-label="Site">
+        <a href="../../en/smart-solar-irrigation/">Smart solar irrigation</a>
+        <a href="../../en/cooling-containers/">Solar cold room</a>
+        <a class="hero-back" href="../../en/">Back to the site</a>
+        <a href="../../calculadora.html" hreflang="pt-BR" lang="pt-BR" aria-label="Português: versão desta página">Português</a>
+      </nav>
+    </div>
+    <div class="hero-body">
+      <p class="eyebrow">Payback calculator</p>
+      <h1>What is your return on investment in solar irrigation?</h1>
+      <p class="thesis">The extra harvest and the energy you no longer buy, per hectare, and how long the system takes to pay for itself. The result appears straight away.</p>
+    </div>
+  </header>
+
+<main>
+
+  <div class="calc">
+    <!-- ============ INPUTS ============ -->
+    <section class="inputs" aria-label="Your irrigation details">
+      <div class="field">
+        <label class="flabel" for="haNum">Irrigated area</label>
+        <div class="row">
+          <input type="range" id="ha" min="1" max="300" step="1" value="10" aria-label="Hectares">
+          <span class="numbox"><input type="number" id="haNum" min="1" max="5000" value="10" aria-label="Hectares"><span class="unit">ha</span></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="flabel" for="cultura">Crop</label>
+        <select id="cultura">
+          <option value="cacau" selected>Cocoa</option>
+          <option value="acai">Upland açaí</option>
+          <option value="cafe">Irrigated coffee</option>
+          <option value="manga">Mango</option>
+          <option value="uva">Grapes</option>
+          <option value="melao">Melon</option>
+          <option value="banana">Banana</option>
+          <option value="hortalicas">Vegetables</option>
+          <option value="cana">Sugarcane</option>
+          <option value="soja">Soybean</option>
+          <option value="milho">Maize</option>
+          <option value="feijao">Beans</option>
+          <option value="arroz">Irrigated rice</option>
+          <option value="outro">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Is your area already irrigated today?</span>
+        <div class="seg" id="irrigado" role="group" aria-label="Is your area already irrigated today?">
+          <button type="button" data-irrigado="nao" aria-pressed="true">No<small>rain only</small></button>
+          <button type="button" data-irrigado="sim" aria-pressed="false">Yes<small>I already pump water</small></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Harvest</span>
+        <div class="trio">
+          <div><label for="semKg">Today, kg/ha</label><span class="numbox"><input type="number" id="semKg" min="0" max="100000" step="10" inputmode="decimal"></span></div>
+          <div><label for="comKg">With solar irrigation, kg/ha</label><span class="numbox"><input type="number" id="comKg" min="0" max="100000" step="10" inputmode="decimal"></span></div>
+          <div><label for="precoKg">Price you receive, R$/kg</label><span class="numbox"><input type="number" id="precoKg" min="0" max="1000" step="0.01" inputmode="decimal"></span></div>
+        </div>
+        <p class="fhint" id="colheitaHint"></p>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Water source</span>
+        <div class="seg" id="fonte" role="group" aria-label="Water source">
+          <button type="button" data-fonte="rio" aria-pressed="false">River or surface water<small>light pumping</small></button>
+          <button type="button" data-fonte="poco" aria-pressed="true">Well<small>deep pumping</small></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="flabel">Pump power today</span>
+        <div class="seg" id="energia" role="group" aria-label="Pump power today">
+          <button type="button" data-energia="diesel" aria-pressed="true">Diesel<small>motor pump</small></button>
+          <button type="button" data-energia="gasolina" aria-pressed="false">Petrol<small>small motor pump</small></button>
+          <button type="button" data-energia="rede" aria-pressed="false">Grid<small>power bill</small></button>
+        </div>
+      </div>
+      <div class="field so-diesel">
+        <label class="flabel" for="dieselNum">Diesel price</label>
+        <div class="row">
+          <input type="range" id="diesel" min="5" max="10" step="0.05" value="7.33" aria-label="Diesel price">
+          <span class="numbox"><span class="pre">R$</span><input type="number" id="dieselNum" min="1" max="20" step="0.01" value="7.33" aria-label="Diesel price"><span class="unit">/L</span></span>
+        </div>
+        <p class="fhint">Diesel S-10, national average in ANP&#x27;s weekly price survey, week of 20 to 26 September 2026. Adjust it to your filling station.</p>
+      </div>
+      <div class="field so-gasolina" hidden>
+        <label class="flabel" for="gasolinaNum">Petrol price</label>
+        <div class="row">
+          <input type="range" id="gasolina" min="5" max="10" step="0.05" value="6.55" aria-label="Petrol price">
+          <span class="numbox"><span class="pre">R$</span><input type="number" id="gasolinaNum" min="1" max="20" step="0.01" value="6.55" aria-label="Petrol price"><span class="unit">/L</span></span>
+        </div>
+        <p class="fhint">Regular petrol, national average in ANP&#x27;s weekly price survey, week of 20 to 26 September 2026. Petrol motor pumps are small and serve only a few hectares.</p>
+      </div>
+      <div class="field so-rede" hidden>
+        <label class="flabel" for="tarifaNum">Power tariff</label>
+        <div class="row">
+          <input type="range" id="tarifa" min="0.5" max="1.6" step="0.01" value="0.82" aria-label="Power tariff">
+          <span class="numbox"><span class="pre">R$</span><input type="number" id="tarifaNum" min="0.1" max="3" step="0.01" value="0.82" aria-label="Power tariff"><span class="unit">/kWh</span></span>
+        </div>
+        <p class="fhint">Rural low-voltage tariff (TE + TUSD), before taxes: the median of 81 distributors in ANEEL&#x27;s tariff data, read on 30 September 2026. Your distributor&#x27;s rate is on your power bill.</p>
+      </div>
+
+
+      <button class="adv-toggle" id="advToggle" aria-expanded="false" aria-controls="adv">
+        <span class="chev">›</span> Advanced options
+      </button>
+      <div class="adv" id="adv">
+        <div class="adv-known">
+          <label class="flabel" for="consumo" id="consumoLabel">Do you know your actual diesel consumption?</label>
+          <p class="fhint">Enter it and the calculation becomes exact. Leave it blank and we estimate it from your crop.</p>
+          <div class="row">
+            <span class="numbox" style="flex:1"><input type="number" id="consumo" min="0" step="100" placeholder="0" aria-label="Actual diesel consumption"></span>
+            <div class="unit-seg" id="consumoUnit" role="group" aria-label="Consumption unit">
+              <button type="button" data-u="litros" aria-pressed="true" id="uFisica">L/year</button>
+              <button type="button" data-u="reais" aria-pressed="false">R$/year</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="adv-divider"></div>
+        <div class="field so-rede" hidden>
+        <label class="flabel" for="imposto">Taxes on the bill</label>
+        <select id="imposto">
+          <option value="isento" selected>ICMS exempt for rural producers (e.g. São Paulo)</option>
+          <option value="reduzido">ICMS reduced for irrigation (e.g. 5%)</option>
+          <option value="cheio">Full ICMS (about 18%)</option>
+        </select>
+        <p class="fhint">PIS and Cofins always apply, about 5%. Rural ICMS varies from state to state.</p>
+      </div>
+        <div class="field so-rede" hidden>
+        <label class="flabel" for="desconto">Irrigation discount on the tariff</label>
+        <select id="desconto">
+          <option value="sul" selected>60%, South and Southeast</option>
+          <option value="centro">67%, North, Centre-West and Minas Gerais</option>
+          <option value="nordeste">73%, Northeast</option>
+          <option value="nenhum">I do not have the discount</option>
+        </select>
+        <p class="fhint">Applies to up to 8.5 hours a day, outside 17:00 to 21:30, and requires a water-use permit (outorga) (Portaria MME 137/2026). If you irrigate within those hours, the discount covers all of the pumping.</p>
+      </div>
+
+        <div class="field">
+          <label class="flabel" for="lamina">Irrigation depth per year</label>
+          <div class="row"><span class="numbox"><input type="number" id="lamina" min="50" max="2500" step="10" value="1000" aria-label="Irrigation depth in millimetres per year"><span class="unit">mm/year</span></span></div>
+          <p class="fhint">The water you actually pump. It depends on the rain in your region.</p>
+        </div>
+        <div class="field">
+          <label class="flabel" for="head">Total head</label>
+          <div class="row"><span class="numbox"><input type="number" id="head" min="5" max="200" step="1" value="40" aria-label="Total head in metres"><span class="unit">m</span></span></div>
+          <p class="fhint">Lift + well depth + pressure. Well about 40 m, river about 20 m, for drip; pivots and sprinklers need more pressure.</p>
+        </div>
+        <div class="field">
+          <label class="flabel" for="eta">Pump set efficiency</label>
+          <div class="row"><span class="numbox"><input type="number" id="eta" min="0.3" max="0.85" step="0.01" value="0.60" aria-label="Pump set efficiency"></span></div>
+        </div>
+        <div class="field so-rede" hidden>
+          <label class="flabel" for="etaMotor">Electric motor efficiency</label>
+          <div class="row"><span class="numbox"><input type="number" id="etaMotor" min="0.6" max="0.97" step="0.01" value="0.90" aria-label="Electric motor efficiency"></span></div>
+        </div>
+        <div class="field so-comb">
+          <label class="flabel" for="cec" id="cecLabel">Diesel engine consumption</label>
+          <div class="row"><span class="numbox"><input type="number" id="cec" min="0.15" max="0.4" step="0.01" value="0.28" aria-label="Engine specific consumption"><span class="unit">L/kWh</span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RESULT ============ -->
+    <aside class="result" aria-labelledby="rLabel">
+      <div aria-live="polite" aria-atomic="true">
+        <p class="r-lbl" id="rLabel">Potential payback · <b>estimate</b></p>
+        <p class="r-pre">Pays for itself in</p>
+        <p class="r-when" id="rWhen">–</p>
+        <div class="r-axis" aria-hidden="true">
+          <div class="r-mkl" id="rMkl">paid</div><div class="r-mk" id="rMk"></div>
+          <div class="r-bg"><i class="r-pay" id="rPay"></i><i class="r-gain" id="rGain"></i></div>
+        </div>
+        <div class="r-ticks" aria-hidden="true"><span style="left:0;transform:none">today</span><span style="left:33.333%">5 years</span><span style="left:66.667%">10 years</span><span style="left:100%;transform:translateX(-100%)">15 years</span></div>
+        <div class="r-leg" aria-hidden="true"><span class="lp">paying off</span><span class="lg">profit, up to the system&#x27;s 15-year life</span></div>
+        <p class="r-line" id="rLine"></p>
+      </div>
+      <details class="r-fontes"><summary>Sources and assumptions</summary><p id="rFontes"></p></details>
+      <div class="gate">
+        <h2 id="gate-t">Get the full calculation</h2>
+        <p>The full calculation as a PDF, with the sources, in your inbox.</p>
+        <!-- calcform:inicio (build_site.py) -->
+      <form class="agro-form agro-form--dark" data-intent="calculo" data-produto="irrigacao" aria-labelledby="gate-t" novalidate>
+        <div class="agro-form__row"><div class="agro-form__field"><label for="calc-email">Your e-mail</label><input id="calc-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com"></div><div class="agro-form__field"><label for="calc-municipio">Municipality (optional)</label><input id="calc-municipio" type="text" name="municipio" autocomplete="address-level2" placeholder="city and state"></div></div>
+        <p class="agro-form__purpose">We use your e-mail only to send the calculation and reply to you. Nothing goes to Dutch Flow Technology without your request, and no mailing list.</p>
+        <label class="agro-form__check"><input type="checkbox" name="privacy_policy_accepted" required>
+          <span>I have read and agree to the <a href="../../en/privacy/">Privacy Policy</a> <span class="req">(required)</span></span></label>
+
+        <button type="submit" class="cta agro-form__btn" data-track="calc-receber"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/> <rect x="2" y="4" width="20" height="16" rx="2"/></svg>Get the calculation</button>
+        <p class="agro-form__err" role="alert" hidden></p>
+        <div class="agro-form__ok" role="status" hidden></div>
+        <p class="agro-form__note">Your data is stored in the EU and not shared with third parties. <a href="../../en/privacy/">Privacy Policy</a> · By sending, you confirm that you are 16 or older (in Brazil, 12 or older with parental consent).</p>
+      </form>
+        <!-- calcform:fim -->
+      </div>
+      <p class="r-links"><a href="../../en/smart-solar-irrigation/#proposta" data-track="calc-proposta">Request a proposal</a> · <a href="../../en/smart-solar-irrigation/#ficha" data-track="calc-ficha">Get the tech sheet</a></p>
+    </aside>
+  </div>
+
+  <!-- ============ COMO CALCULAMOS ============ -->
+  <details class="method">
+    <summary><span class="chev">›</span> How we calculate</summary>
+    <div class="method-body">
+      <p>The calculator adds up two things: the energy that solar irrigation saves you buying (diesel, petrol or the power bill) and the extra harvest the water brings. The title is always the potential payback of the two together.</p>
+      <h2>Estimate from your crop</h2>
+      <p>From the area, the crop and the water source, we estimate the pumping energy and convert it into litres of diesel:</p>
+      <ul>
+        <li>Water volume: <code>ha × depth(mm) × 10</code> (1 mm = 10 m³/ha)</li>
+        <li>Hydraulic energy: <code>0.002725 × volume × total head</code></li>
+        <li>Diesel or petrol: energy ÷ pump efficiency × engine consumption</li>
+        <li>Yearly saving: litres × fuel price</li>
+      </ul>
+      <h2>If your pump runs on the grid today</h2>
+      <p>The same hydraulic energy passes through the efficiency of the pump and of the electric motor and becomes kilowatt-hours bought from the grid:</p>
+      <ul>
+        <li>Energy bought: hydraulic energy ÷ (pump efficiency × motor efficiency)</li>
+        <li>Price per kWh: tariff × taxes × (1 − irrigation discount)</li>
+        <li>Yearly saving: kWh × price per kWh</li>
+      </ul>
+      <p>The irrigation discount makes grid power much cheaper than diesel. So for a farm that already has the grid with the discount, the energy saving alone usually takes longer than the system's life to pay for it. There the reason for solar is a different one: irrigating where the distributor grants no new load, or where the grid does not reach.</p>
+      <h2>If you enter your consumption</h2>
+      <p>Under advanced options you can enter your actual consumption, in litres a year or in reais a year. The energy part of the calculation then uses that figure.</p>
+      <h2>Extra harvest</h2>
+      <p>Extra harvest per year: area × (yield with irrigation − yield today) × the price you receive. The three fields come filled in with researched references for each crop, and you can replace them with your own figures.</p>
+      <ul>
+        <li>Area not irrigated today: the gain is the step from rainfed to irrigated. Since you do not pay for pumping yet, the energy line compares with irrigating on diesel, petrol or the grid.</li>
+        <li>Area already irrigated: the energy is a real saving, and the harvest gain is only what management by soil moisture adds. Only coffee has a published measurement for this; for the other crops the gain stays at zero.</li>
+      </ul>
+      <h2>Potential payback</h2>
+      <p>System cost divided by the combined yearly gain (energy + harvest). It is an estimate: rain, prices and management change the result from one year to the next.</p>
+      <p>System cost, landed in Brazil with freight and import: about US$ 2,000 per hectare with river or reservoir water and US$ 2,450 per hectare with a well, at R$ 5.10 to the dollar. It is an estimate. The panel rack is included. The well, the reservoir and the installation are not.</p>
+      <h2>Sources</h2>
+      <ul>
+        <li>Price of S-10 diesel and regular petrol: national average in ANP's weekly price survey (Levantamento de Preços de Combustíveis), week of 20 to 26 September 2026.</li>
+        <li>Pump set efficiency (0.60): the FAO manual on pumping for irrigation (Module 5, Savva and Frenken, 2001) gives about 0.69 for a good pump and up to 5% loss in the drive. On centre pivots in Brazil, field measurements found 59% to 63% (Lima et al., Revista Brasileira de Engenharia Agrícola e Ambiental, 2009).</li>
+        <li>Diesel engine consumption (0.28 L/kWh): FAO, Module 5, which uses 0.25 L/kWh as a rule of thumb.</li>
+        <li>Petrol engine consumption (0.50 L/kWh): FAO gives 25% to 30% efficiency for petrol engines, and far less for small ones in the field. We use 25% and Brazilian petrol, which contains 30% ethanol and has less energy per litre. It is an estimate: adjust it if you know the actual consumption.</li>
+        <li>Total head: 40 m for a well and 20 m for a river are the base for drip irrigation (FAO, Module 5). Pivots and sprinklers need more pressure, so their actual diesel use is higher.</li>
+        <li>Water need per crop: Embrapa and FAO. Cocoa: mean water deficit of 275 mm in the dry season on the Transamazônica (Morais, Revista Brasileira de Ciência do Solo, 1998), with 90% microsprinkler efficiency: 300 mm a year. Upland açaí: 120 litres per clump per day, 400 clumps per hectare, from August to November (Embrapa, Comunicado Técnico 317, 2019): 580 mm a year.</li>
+        <li>Yield with and without irrigation, always on the conservative side (half of a gain measured elsewhere, or the floor of a range). Cocoa: Bahia, 600 to 1,500 kg/ha (Siqueira 2018, in Silva, UFRB 2020), counted at half. Açaí: Embrapa, 10 to 12 t/ha irrigated, more than 50% above rainfed upland açaí (2025), at the floor. Coffee: Emater-MG (2018). Beans: CONAB, winter beans under pivot in Goiás. Maize and banana: half the gap between irrigated and rainfed farms in the IBGE Agricultural Census. Soybean and sugarcane: half the gain of one trial (Rio Grande do Sul; Jaú, SP). Coffee already irrigated: Embrapa Cerrados, +13 bags/ha with irrigation management, counted as about 10%. Rice, mango, grapes, melon and vegetables have no reference: fill in your own figures.</li>
+        <li>Price you receive: cocoa on the Pará market, R$ 17.00/kg (Notícias Agrícolas, 2 October 2026); coffee at the CEPEA quote of 2 October 2026; açaí at the Pará average price and the other crops at the national average price of the Produção Agrícola Municipal 2025 (IBGE).</li>
+        <li>Power tariff (R$ 0.82/kWh): median rural low-voltage tariff (subgroup B2, TE + TUSD, before taxes) of the 81 distributors in ANEEL's open data, read on 30 September 2026. Eight in ten distributors fall between R$ 0.73 and R$ 1.01.</li>
+        <li>Taxes: PIS and Cofins of about 5% (CPFL, 2026). ICMS exempt for rural producers in São Paulo (Sefaz-SP) and 5% for irrigation in Mato Grosso do Sul (Sefaz-MS). In other states, check your bill.</li>
+        <li>Irrigation and aquaculture discount: 60% in the South and Southeast and 67% in the North, Centre-West and Minas Gerais, on low voltage (Neoenergia), and 73% in the Northeast. It applies to up to 8.5 hours a day, outside 17:00 to 21:30, with a water-use permit (outorga) (Lei 10.438/2002, Resolução Normativa ANEEL 1.000/2021 and Portaria MME 137/2026).</li>
+        <li>Electric motor efficiency (0.90): a typical value for motors of 5 to 15 kW. It is an assumption; adjust it if you know your motor's.</li>
+        <li>Pivots on medium voltage (Group A) pay contracted demand and a time-of-use tariff. The calculator does not cover that case: use the average price per kWh on your bill.</li>
+        <li>CO₂ from petrol: 1.56 kg of fossil CO₂ per litre of regular petrol, counting only the fossil part (70%) and the IPCC factor (2006).</li>
+        <li>CO₂ from diesel: 2.24 kg of fossil CO₂ per litre of the diesel sold at the pump, which contains 15% biodiesel (B15). The sum uses the diesel density and heating value published by ANP (Anuário Estatístico 2023) and the IPCC emission factor (2006). Biodiesel does not count as a fossil emission.</li>
+      </ul>
+      <div class="disc">
+        The pre-filled values are reference averages and can be adjusted. The result is an estimate, not a quote. The exact sizing of the solar system comes with the detailed proposal, made for your area.
+      </div>
+    </div>
+  </details>
+  </main>
+</div>
+
+<!-- rodape:inicio (build_site.py) -->
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <h2>Products</h2>
+        <ul>
+          <li><a href="../../en/cooling-containers/">Solar cold room</a></li>
+          <li><a href="../../en/smart-solar-irrigation/">Smart solar irrigation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Tools</h2>
+        <ul>
+          <li><a aria-current="page" href="../../en/payback-calculator/">Payback calculator</a></li>
+          <li><a hreflang="pt-BR" href="../../risco-hidrico-por-municipio.html">Water risk by municipality (in Portuguese)</a></li>
+          <li><a href="../../en/companies-and-investors/">Companies and investors</a></li>
+          <li><a href="../../en/faq/">FAQ</a></li>
+          <li><a href="../../en/news/">News</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact us</h2>
+        <ul>
+          <li><a href="mailto:info@agrotechdaholanda.com.br">info@agrotechdaholanda.com.br</a></li>
+          <li><a href="https://www.instagram.com/agrotech_da_holanda/" rel="noopener">Instagram @agrotech_da_holanda</a></li>
+          <li><a href="../../en/privacy/">Privacy</a></li>
+          <li><a href="../../en/accessibility/">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer__bottom assina">
+      <a class="assina__logo" href="../../en/" aria-label="Agrotech da Holanda, back to the home page"><img src="../../assets/brand/logo-horizontal.svg" alt="" width="149" height="36" loading="lazy"></a>
+      <div class="assina__txt">
+        <p>© 2026 Agrotech da Holanda</p>
+        <p class="footer__legal">Agrotech da Holanda · technology by Dutch Flow Technology PTE LTD (Singapore) · commercial agent in Brazil: Regen Studio Consultoria LTDA, CNPJ 57.579.114/0001-55, Av. Washington Luís, 1527, 174B, São Paulo/SP, CEP 04662-002, Brazil · info@agrotechdaholanda.com.br</p>
+        <p class="footer__ia">Text and images on this site were made with the help of AI and are always reviewed by a person.</p>
+      </div>
+    </div>
+  </footer><!-- rodape:fim -->
+
+<script src="../../assets/js/calc-core.js"></script>
+<script src="../../assets/js/calculadora.js"></script>
+<script src="../../assets/js/tracker.js" defer></script>
+<script src="../../assets/js/agro-challenge.js" defer></script>
+<script src="../../assets/js/antibot.js" defer></script>
+<script src="../../assets/js/agro-form.js" defer></script>
+
+
+</body>
+</html>

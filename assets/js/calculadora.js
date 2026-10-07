@@ -9,11 +9,49 @@
 (function () {
   var C = window.AgroCalc, K = C.K;
   var $ = function (id) { return document.getElementById(id); };
-  var fmtR = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
-  var fmtN = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 });
-  var fmt1 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 });
-  var NOMES = { soja: 'soja', milho: 'milho', feijao: 'feijão', arroz: 'arroz', cafe: 'café', cana: 'cana', manga: 'manga',
-                uva: 'uva', melao: 'melão', banana: 'banana', hortalicas: 'hortaliças', cacau: 'cacau', acai: 'açaí', outro: 'lavoura' };
+  /* The page exists in PT (calculadora.html) and EN (/en/payback-calculator/), both from one template
+     (site-build/calculadora.tpl.html); the words this script writes itself follow <html lang>. */
+  var LANG = C.idioma();
+  var T = {
+    pt: {
+      nomes: { soja: 'soja', milho: 'milho', feijao: 'feijão', arroz: 'arroz', cafe: 'café', cana: 'cana', manga: 'manga',
+               uva: 'uva', melao: 'melão', banana: 'banana', hortalicas: 'hortaliças', cacau: 'cacau', acai: 'açaí', outro: 'lavoura' },
+      hintManejo: 'Área já irrigada: o ganho é só o que o manejo pelo solo acrescenta. Ajuste com os seus números.',
+      hintSem: 'Sem número de referência para esta cultura: preencha com a sua produtividade e o seu preço.',
+      porHa: ' por hectare, todo ano.',
+      fontes: function (q, r, nome) {
+        return 'Energia: ' + (q.rede ? 'tarifa rural da ANEEL com impostos e desconto escolhidos' : 'preço médio da ANP')
+          + '; lâmina de ' + fmtN.format(q.lamina) + ' mm por ano para ' + nome + '; altura manométrica de ' + fmtN.format(q.head)
+          + ' m. Colheita: ' + (r.colheita ? fmtN.format(q.semKg) + ' para ' + fmtN.format(q.comKg) + ' kg/ha a R$ ' + fmt1.format(q.precoKg) + '/kg' : 'não entra') + '. '
+          + 'O retorno usa uma estimativa de custo por hectare do sistema posto no Brasil. Estimativa, não é orçamento.';
+      },
+      energia: { diesel: ['Diesel queimado hoje', 'L/ano', 'Consumo do motor diesel'],
+                 gasolina: ['Gasolina queimada hoje', 'L/ano', 'Consumo do motor a gasolina'],
+                 rede: ['Energia comprada hoje', 'kWh/ano', ''] },
+      consumo: { diesel: 'Já sabe seu consumo real de diesel?', gasolina: 'Já sabe seu consumo real de gasolina?',
+                 rede: 'Já sabe seu consumo real de energia?' }
+    },
+    en: {
+      nomes: { soja: 'soybean', milho: 'maize', feijao: 'beans', arroz: 'rice', cafe: 'coffee', cana: 'sugarcane', manga: 'mango',
+               uva: 'grapes', melao: 'melon', banana: 'banana', hortalicas: 'vegetables', cacau: 'cocoa', acai: 'açaí', outro: 'your crop' },
+      hintManejo: 'Area already irrigated: the gain is only what management by soil moisture adds. Adjust it with your own figures.',
+      hintSem: 'No reference figure for this crop: fill in your own yield and your price.',
+      porHa: ' per hectare, every year.',
+      fontes: function (q, r, nome) {
+        return 'Energy: ' + (q.rede ? 'ANEEL rural tariff with the taxes and discount you chose' : 'ANP average price')
+          + '; irrigation depth of ' + fmtN.format(q.lamina) + ' mm a year for ' + nome + '; total head of ' + fmtN.format(q.head)
+          + ' m. Harvest: ' + (r.colheita ? fmtN.format(q.semKg) + ' to ' + fmtN.format(q.comKg) + ' kg/ha at R$ ' + fmt1.format(q.precoKg) + '/kg' : 'not counted') + '. '
+          + 'The payback uses an estimate of the system cost per hectare, landed in Brazil. An estimate, not a quote.';
+      },
+      energia: { diesel: ['Diesel burned today', 'L/year', 'Diesel engine consumption'],
+                 gasolina: ['Petrol burned today', 'L/year', 'Petrol engine consumption'],
+                 rede: ['Energy bought today', 'kWh/year', ''] },
+      consumo: { diesel: 'Do you know your actual diesel consumption?', gasolina: 'Do you know your actual petrol consumption?',
+                 rede: 'Do you know your actual energy consumption?' }
+    }
+  }[LANG];
+  var fmtN = new Intl.NumberFormat(C.LOCALE[LANG], { maximumFractionDigits: 0 });
+  var fmt1 = new Intl.NumberFormat(C.LOCALE[LANG], { maximumFractionDigits: 1 });
   var state = { fonte: 'poco', energia: 'diesel', irrigado: false, consumoUnit: 'litros' };
 
   var ha = $('ha'), haNum = $('haNum'), cultura = $('cultura');
@@ -44,11 +82,10 @@
   function preencherColheita() {
     var d = C.padroesColheita(cultura.value, state.irrigado);
     semKg.value = d.semKg || ''; comKg.value = d.comKg || ''; precoKg.value = d.precoKg || '';
-    var fonte = (K.GANHO_FONTE || {})[state.irrigado ? cultura.value + '_manejo' : cultura.value];
+    var fonte = ((LANG === 'en' ? K.GANHO_FONTE_EN : K.GANHO_FONTE) || {})[state.irrigado ? cultura.value + '_manejo' : cultura.value];
     var temPadrao = d.comKg > d.semKg;
     $('colheitaHint').textContent = temPadrao && fonte ? fonte
-      : (state.irrigado ? 'Área já irrigada: o ganho é só o que o manejo pelo solo acrescenta. Ajuste com os seus números.'
-                        : 'Sem número de referência para esta cultura: preencha com a sua produtividade e o seu preço.');
+      : (state.irrigado ? T.hintManejo : T.hintSem);
   }
 
   function compute() {
@@ -57,7 +94,7 @@
   }
 
   function render(q, r) {
-    $('rWhen').textContent = C.tempo(r.payback, 'pt');
+    $('rWhen').textContent = C.tempo(r.payback, LANG);
     var x = isFinite(r.payback) && r.payback > 0 ? Math.min(100, 100 * r.payback / K.LIFE_YEARS) : 100;
     $('rPay').style.width = x + '%';
     $('rGain').style.left = x + '%';
@@ -67,15 +104,11 @@
     $('rMk').hidden = $('rMkl').hidden = x >= 100;
     $('rLine').innerHTML = '';
     var b = document.createElement('b');
-    b.textContent = '+' + fmtR.format(q.ha > 0 ? r.total / q.ha : 0);
+    b.textContent = '+' + C.brl(q.ha > 0 ? r.total / q.ha : 0, LANG);
     $('rLine').appendChild(b);
-    $('rLine').appendChild(document.createTextNode(' por hectare, todo ano.'));
+    $('rLine').appendChild(document.createTextNode(T.porHa));
 
-    var nomeCultura = NOMES[cultura.value] || 'lavoura';
-    $('rFontes').textContent = 'Energia: ' + (q.rede ? 'tarifa rural da ANEEL com impostos e desconto escolhidos' : 'preço médio da ANP')
-      + '; lâmina de ' + fmtN.format(q.lamina) + ' mm por ano para ' + nomeCultura + '; altura manométrica de ' + fmtN.format(q.head)
-      + ' m. Colheita: ' + (r.colheita ? fmtN.format(q.semKg) + ' para ' + fmtN.format(q.comKg) + ' kg/ha a R$ ' + fmt1.format(q.precoKg) + '/kg' : 'não entra') + '. '
-      + 'O retorno usa uma estimativa de custo por hectare do sistema posto no Brasil. Estimativa, não é orçamento.';
+    $('rFontes').textContent = T.fontes(q, r, T.nomes[cultura.value] || T.nomes.outro);
   }
 
   /* Pairs of slider + number box. */
@@ -91,9 +124,7 @@
       x.setAttribute('aria-pressed', x.getAttribute(attr) === value ? 'true' : 'false');
     });
   }
-  var NOMES_E = { diesel: ['Diesel queimado hoje', 'L/ano', 'Consumo do motor diesel'],
-                  gasolina: ['Gasolina queimada hoje', 'L/ano', 'Consumo do motor a gasolina'],
-                  rede: ['Energia comprada hoje', 'kWh/ano', ''] };
+  var NOMES_E = T.energia;
   function setEnergia(e) {
     if (!NOMES_E[e]) e = 'diesel';
     var mudou = state.energia !== e;
@@ -104,7 +135,7 @@
     Array.prototype.forEach.call(document.querySelectorAll('.so-diesel'), function (x) { x.hidden = e !== 'diesel'; });
     Array.prototype.forEach.call(document.querySelectorAll('.so-gasolina'), function (x) { x.hidden = e !== 'gasolina'; });
     $('uFisica').textContent = NOMES_E[e][1];
-    $('consumoLabel').textContent = rede ? 'Já sabe seu consumo real de energia?' : 'Já sabe seu consumo real de ' + e + '?';
+    $('consumoLabel').textContent = T.consumo[e];
     if (NOMES_E[e][2]) $('cecLabel').textContent = NOMES_E[e][2];
     if (mudou && !rede) cec.value = e === 'gasolina' ? K.CEC_GASOLINA : K.CEC;
   }

@@ -98,6 +98,17 @@
       "banana": "Metade da diferença entre lavouras irrigadas e não irrigadas no Censo Agropecuário (IBGE).",
       "cafe_manejo": "Embrapa Cerrados: +13 sacas/ha com manejo da irrigação; contamos cerca de 10%."
     },
+    "GANHO_FONTE_EN": {
+      "cacau": "Bahia: 600 kg/ha without irrigation, 1,500 with (Siqueira 2018, in Silva, UFRB 2020); we count half the gain.",
+      "acai": "Embrapa: 10 to 12 t/ha irrigated, more than 50% above rainfed upland açaí (2025); we use the floor.",
+      "soja": "Half the gain of one trial in Rio Grande do Sul (2021). On the national average, irrigation is insurance against dry spells.",
+      "milho": "Half the gap between irrigated and rainfed farms in the Agricultural Census (IBGE).",
+      "feijao": "CONAB: winter beans under pivot against rainy-season beans, five-year average in Goiás.",
+      "cafe": "Emater-MG: irrigated against rainfed coffee in Minas Gerais (2018), the lowest of three sources.",
+      "cana": "Half the gain of one drip trial in Jaú (SP).",
+      "banana": "Half the gap between irrigated and rainfed farms in the Agricultural Census (IBGE).",
+      "cafe_manejo": "Embrapa Cerrados: +13 bags/ha with irrigation management; we count about 10%."
+    },
     "PRECO_KG": { "cacau": 17.00, "acai": 4.44, "soja": 1.91, "milho": 0.86, "feijao": 3.36, "arroz": 1.55,
                   "cafe": 26.20, "cana": 0.142, "manga": 1.93, "uva": 4.09, "melao": 1.90, "banana": 2.25 },
     "PRECO_LIDO": { "cacau": "2026-10-02", "acai": "2026-09-17", "cafe": "2026-10-02", "outras": "2026-09-17" },
@@ -221,6 +232,18 @@
     return r ? ano + (en ? " and " : " e ") + mes(r) : ano;
   }
 
+  /* Reais as the server's brl() in agro-lead/calc.ts writes them: "R$ 8.769" in Portuguese, "R$ 8,769" in
+     English (en-GB separators, like the English PDF). Intl's own currency style drops the space in English.
+     The space is a no-break space, as Intl's pt-BR one was, so "R$" never ends a line on its own. */
+  var LOCALE = { pt: "pt-BR", en: "en-GB" };
+  function brl(n, lang, dec) {
+    dec = dec || 0;
+    return "R$\u00a0" + new Intl.NumberFormat(LOCALE[lang] || LOCALE.pt, { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+  }
+  /* "pt" or "en" from <html lang>, the same test as agro-form.js. */
+  function idioma() { return /^en/i.test(document.documentElement.lang || "") ? "en" : "pt"; }
+
   root.AgroCalc = { K: K, estimar: estimar, estimarRede: estimarRede, custo: custo, payback: payback, lerParametros: lerParametros,
-                    calcular: calcular, argumento: argumento, padroesColheita: padroesColheita, tempo: tempo };
+                    calcular: calcular, argumento: argumento, padroesColheita: padroesColheita, tempo: tempo,
+                    brl: brl, LOCALE: LOCALE, idioma: idioma };
 })(window);

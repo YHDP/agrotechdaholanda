@@ -93,6 +93,18 @@
   </url>
   <url>
     <loc>https://agrotechdaholanda.com.br/calculadora.html</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://agrotechdaholanda.com.br/calculadora.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrotechdaholanda.com.br/en/payback-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://agrotechdaholanda.com.br/calculadora.html"/>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://agrotechdaholanda.com.br/en/payback-calculator/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://agrotechdaholanda.com.br/calculadora.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrotechdaholanda.com.br/en/payback-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://agrotechdaholanda.com.br/calculadora.html"/>
     <lastmod>2026-10-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

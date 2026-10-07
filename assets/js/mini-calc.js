@@ -11,8 +11,7 @@
   if (!form || !window.AgroCalc) return;
   var C = window.AgroCalc, K = C.K;
   var txt = JSON.parse(form.getAttribute("data-txt"));
-  var lang = document.documentElement.lang || "pt-BR";
-  var fmtR = new Intl.NumberFormat(lang, { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+  var lang = C.idioma();
   var ha = document.getElementById("mini-ha"), cultura = document.getElementById("mini-cultura");
   var pb = document.getElementById("mini-pb"), sub = document.getElementById("mini-sub");
   var cta = document.getElementById("mini-cta"), base = cta.getAttribute("href").split("?")[0];
@@ -30,8 +29,8 @@
       lamina: K.LAMINA[cultura.value], head: K.HEAD[fonte], eta: K.ETA, etaMotor: K.ETA_MOTOR,
       cec: energia === "gasolina" ? K.CEC_GASOLINA : K.CEC, consumo: 0, consumoUnit: "litros",
       semKg: d.semKg, comKg: d.comKg, precoKg: d.precoKg });
-    pb.textContent = C.tempo(r.payback, lang.slice(0, 2) === "en" ? "en" : "pt");
-    sub.textContent = txt.sub.replace("{porha}", fmtR.format(r.total / haV));
+    pb.textContent = C.tempo(r.payback, lang);
+    sub.textContent = txt.sub.replace("{porha}", C.brl(r.total / haV, lang));
     cta.setAttribute("href", base + "?ha=" + encodeURIComponent(haV) + "&cultura=" + encodeURIComponent(cultura.value)
       + "&fonte=" + encodeURIComponent(fonte) + "&energia=" + encodeURIComponent(energia));
   }

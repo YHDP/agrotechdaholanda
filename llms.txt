@@ -3,8 +3,8 @@
 > Agrotech da Holanda é a marca brasileira da tecnologia Dutch Flow Technology para irrigação solar inteligente e câmara fria solar; a representação comercial no Brasil é da Regen Studio Consultoria LTDA.
 
 Site: https://agrotechdaholanda.com.br
-Idiomas: português do Brasil; inglês nas páginas listadas em "Pages in English" (a calculadora e o
-  risco hídrico por município só em português)
+Idiomas: português do Brasil; inglês nas páginas listadas em "Pages in English" (o risco hídrico
+  por município só em português)
 Área atendida: Brasil
 Contato: info@agrotechdaholanda.com.br
 Instagram: https://www.instagram.com/agrotech_da_holanda/
@@ -88,7 +88,7 @@ Embrapa, CEPLAC.
 - Calculadora de retorno: calcula o retorno do investimento em irrigação solar, somando a colheita
   a mais (produtividade com e sem irrigação, por cultura, com fontes) e a energia que deixa de
   comprar (diesel, gasolina ou rede elétrica, com tarifa, impostos e desconto de irrigação), com os
-  números do próprio produtor. https://agrotechdaholanda.com.br/calculadora.html
+  números do próprio produtor. https://agrotechdaholanda.com.br/calculadora.html (em inglês: https://agrotechdaholanda.com.br/en/payback-calculator/)
 - Risco hídrico por município: dados climáticos dos 5.570 municípios brasileiros, com fonte
   Lobelia Earth ("Brasil in a +2ºC World"). Dados de nível de triagem.
   https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html
@@ -129,6 +129,7 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/en/smart-solar-irrigation/: smart solar irrigation
 - https://agrotechdaholanda.com.br/en/cocoa/: cocoa
 - https://agrotechdaholanda.com.br/en/acai/: upland açaí
+- https://agrotechdaholanda.com.br/en/payback-calculator/: payback calculator
 - https://agrotechdaholanda.com.br/en/faq/: FAQ
 - https://agrotechdaholanda.com.br/en/companies-and-investors/: for companies and investors: water pilots at suppliers, records per plot
 - https://agrotechdaholanda.com.br/en/privacy/: privacy
