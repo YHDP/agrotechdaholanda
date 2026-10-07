@@ -283,25 +283,7 @@
         </div>
         <p class="fhint">Tarifa rural de baixa tensão (TE + TUSD), sem impostos: mediana das 81 distribuidoras nas tarifas da ANEEL, lidas em 30 de setembro de 2026. O valor da sua distribuidora está na conta de luz.</p>
       </div>
-      <div class="field so-rede" hidden>
-        <label class="flabel" for="imposto">Impostos na conta</label>
-        <select id="imposto">
-          <option value="isento" selected>ICMS isento para o produtor rural (ex.: São Paulo)</option>
-          <option value="reduzido">ICMS reduzido na irrigação (ex.: 5%)</option>
-          <option value="cheio">ICMS cheio (cerca de 18%)</option>
-        </select>
-        <p class="fhint">PIS e Cofins entram sempre, cerca de 5%. O ICMS rural muda de estado para estado.</p>
-      </div>
-      <div class="field so-rede" hidden>
-        <label class="flabel" for="desconto">Desconto de irrigação na tarifa</label>
-        <select id="desconto">
-          <option value="sul" selected>60%, Sul e Sudeste</option>
-          <option value="centro">67%, Norte, Centro-Oeste e Minas Gerais</option>
-          <option value="nordeste">73%, Nordeste</option>
-          <option value="nenhum">Não tenho o desconto</option>
-        </select>
-        <p class="fhint">Vale para até 8,5 horas por dia, fora das 17h às 21h30, e exige outorga de água (Portaria MME 137/2026). Irrigando dentro dessas horas, o desconto cobre todo o bombeamento.</p>
-      </div>
+
 
       <button class="adv-toggle" id="advToggle" aria-expanded="false" aria-controls="adv">
         <span class="chev">›</span> Opções avançadas
@@ -320,6 +302,25 @@
         </div>
 
         <div class="adv-divider"></div>
+        <div class="field so-rede" hidden>
+        <label class="flabel" for="imposto">Impostos na conta</label>
+        <select id="imposto">
+          <option value="isento" selected>ICMS isento para o produtor rural (ex.: São Paulo)</option>
+          <option value="reduzido">ICMS reduzido na irrigação (ex.: 5%)</option>
+          <option value="cheio">ICMS cheio (cerca de 18%)</option>
+        </select>
+        <p class="fhint">PIS e Cofins entram sempre, cerca de 5%. O ICMS rural muda de estado para estado.</p>
+      </div>
+        <div class="field so-rede" hidden>
+        <label class="flabel" for="desconto">Desconto de irrigação na tarifa</label>
+        <select id="desconto">
+          <option value="sul" selected>60%, Sul e Sudeste</option>
+          <option value="centro">67%, Norte, Centro-Oeste e Minas Gerais</option>
+          <option value="nordeste">73%, Nordeste</option>
+          <option value="nenhum">Não tenho o desconto</option>
+        </select>
+        <p class="fhint">Vale para até 8,5 horas por dia, fora das 17h às 21h30, e exige outorga de água (Portaria MME 137/2026). Irrigando dentro dessas horas, o desconto cobre todo o bombeamento.</p>
+      </div>
 
         <div class="field">
           <label class="flabel" for="lamina">Lâmina de irrigação por ano</label>
