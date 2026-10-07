@@ -437,6 +437,8 @@ img,video,svg{max-width:100%}
 .linhas .ic{flex:none;width:28px;height:28px;color:var(--orange-ink);margin-top:2px}
 .linhas b{display:block;font-size:18px;font-weight:700;line-height:1.3}
 .linhas span{display:block;font-size:15.5px;line-height:1.55;color:var(--cinza);margin-top:4px;max-width:46ch}
+/* three items fill one row of three instead of leaving one alone */
+.linhas:has(> li:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px}
 @media (max-width:760px){.linhas{grid-template-columns:1fr}}
 /* .fluxo: on navy, the field record (white data chips) flows into three uses. Text on navy: paper
    13.5:1, #B9C6D4 8.6:1; icons in --azul 6.8:1; the arrow is the one orange accent. */
