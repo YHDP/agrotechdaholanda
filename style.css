@@ -429,7 +429,7 @@ img,video,svg{max-width:100%}
 /* A wide photo band inside a section (companies page): the photo is cropped to 2:1, centre kept. */
 .fig--faixa img{aspect-ratio:2/1;object-fit:cover;border-radius:18px}
 .fig--faixa{margin-top:26px}
-/* Companies page, round 4 (Yvo: boxed cards with a blue bar were "too basic").
+/* Info items on every page (companies page round 4, sitewide 07-10: boxed cards with a blue bar were "too basic").
    .linhas: the story items as open rows, two per line, a rule above each, the icon the one accent
    (orange ink 4.6:1 on paper). Same idea as .manchetes, with room for a sentence. */
 .linhas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:44px;list-style:none;margin:0;padding:0}
@@ -897,12 +897,6 @@ img,video,svg{max-width:100%}
 @media (max-width:400px){.jeitos,.divide__grid{grid-template-columns:1fr}}
 
 /* Irrigação: o sistema, os sistemas de referência, as fases */
-.pecas{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:0;padding:0;list-style:none}
-.pecas li{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--linha);
-  border-top:6px solid var(--azul);border-radius:16px;padding:16px 18px}
-.pecas .ic{width:28px;height:28px;margin-top:2px}
-.pecas b{display:block;font-size:17px}
-.pecas span{display:block;font-size:14.5px;color:var(--cinza);margin-top:2px}
 .tabela-wrap{overflow-x:auto;border:1px solid var(--linha);border-radius:14px;background:var(--card)}
 .tabela{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
 .tabela caption{text-align:left;padding:12px 16px 0;font-size:13px;color:var(--cinza)}
