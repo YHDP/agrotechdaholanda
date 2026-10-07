@@ -84,9 +84,10 @@ Embrapa, CEPLAC.
 
 ## Ferramentas públicas
 
-- Calculadora de retorno: calcula quanto a energia custa à irrigação hoje, a diesel, gasolina ou
-  na rede elétrica (tarifa, impostos e desconto de irrigação), com os números do próprio produtor:
-  área, cultura, preço, consumo. https://agrotechdaholanda.com.br/calculadora.html
+- Calculadora de retorno: calcula o retorno do investimento em irrigação solar, somando a colheita
+  a mais (produtividade com e sem irrigação, por cultura, com fontes) e a energia que deixa de
+  comprar (diesel, gasolina ou rede elétrica, com tarifa, impostos e desconto de irrigação), com os
+  números do próprio produtor. https://agrotechdaholanda.com.br/calculadora.html
 - Risco hídrico por município: dados climáticos dos 5.570 municípios brasileiros, com fonte
   Lobelia Earth ("Brasil in a +2ºC World"). Dados de nível de triagem.
   https://agrotechdaholanda.com.br/risco-hidrico-por-municipio.html

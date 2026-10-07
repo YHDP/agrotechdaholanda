@@ -37,7 +37,7 @@
   'use strict';
 
   var FN = 'https://uemspezaqxmkhenimwuf.supabase.co/functions/v1/agro-lead'; // supabase.co edge function
-  var CONSENT_VERSION = 'agro-2026-10-05';
+  var CONSENT_VERSION = 'agro-2026-10-06';
   var PRODUTOS = ['irrigacao', 'camara-fria'];
   // 'ambos' (as três fichas de uma vez) só existe no pedido de ficha. No pedido de proposta, o
   // "Os dois" do <select> continua indo como texto dentro de `mensagem`, como antes.
