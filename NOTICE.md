@@ -98,6 +98,18 @@ with the files. It does not require attribution on the rendered page.
     Brazil", Lucia Barreiros Silva, Pexels #8184084, location stated: Alter do Chão, Santarém, Brazil
     (Santarém is in Pará). <https://www.pexels.com/photo/8184084/> Cropped to 2:1, lower part kept.
 
+## Photos (website, home crop segment, / and /en/)
+
+- **Pexels** stock photos, same licence as above (Pexels License, commercial use, no attribution
+  required; credited anyway, small and white inside each photo, and here). Chosen by Yvo in the design
+  lab agrotech-home-2026-10 (07-10-2026). Downloaded 2026-10-07, resized to 900 and 1600 px wide,
+  recompressed, metadata stripped, self-hosted in `assets/culturas/`. No recognisable people.
+
+  - `cacau-no-pe-*.jpg`: "Cocoa Tree Fruit", Gustavo Menezes, Pexels #15722363, location stated: Laje,
+    Bahia, Brazil. <https://www.pexels.com/photo/cocoa-tree-fruit-15722363/>
+  - `acai-cacho-*.jpg`: "Fruit Berries of an Acai Palm Tree", Saidis, Pexels #6741479, location stated:
+    Brazil. <https://www.pexels.com/photo/fruit-berries-of-an-acai-palm-tree-6741479/>
+
 ## Product imagery (Instagram reels)
 
 - **Cooling-container cutaway render** — artwork supplied by **Dutch Flow Technology / Technimex**

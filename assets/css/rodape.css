@@ -29,4 +29,5 @@
   .assina__logo img{height:32px}
   .assina__txt{border-left:0;padding-left:0}
 }
+.footer ul + h2{margin-top:24px}
 /* rodape:fim */

@@ -552,11 +552,56 @@
       return panel;
     }
 
-    function show(id, focusEl) {
+    // Modo fechado (data-collapsed, página inicial desde 08-10-2026, lab agrotech-home-2026-10): nenhum
+    // painel abre ao carregar sem um hash que aponte para ele, e um clique no cartão aberto fecha o
+    // painel. Abrir, fechar e trocar de painel é uma transição de altura suave (Web Animations), como
+    // água, sem saltos; com "reduzir movimento" a troca é imediata. A página de empresas não tem o
+    // atributo e continua como antes: um painel sempre aberto, o primeiro por padrão.
+    var collapsed = root.hasAttribute('data-collapsed');
+    var dica = root.querySelector('[data-toggle-dica]');
+    var reduz = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var atual = -1, rodando = [];
+
+    function morph(i, de, para, fim) {
+      var el = panels[i];
+      if (rodando[i]) rodando[i].cancel();
+      if (reduz || !el.animate) { if (fim) fim(); return; }
+      el.style.overflow = 'hidden';
+      var a = el.animate([
+        { height: de.h + 'px', opacity: de.o, marginTop: de.m },
+        { height: para.h + 'px', opacity: para.o, marginTop: para.m }
+      ], { duration: 560, easing: 'cubic-bezier(.22,.9,.24,1)' });
+      rodando[i] = a;
+      a.onfinish = function () { rodando[i] = null; el.style.overflow = ''; if (fim) fim(); };
+      a.oncancel = function () { el.style.overflow = ''; };
+    }
+
+    function show(id, focusEl, instant) {
       var n = ids.indexOf(id);
-      if (n === -1) return false;
+      if (n === -1 && !(collapsed && id === null)) return false;
+      var prev = atual;
+      atual = n;
       btns.forEach(function (b, i) { b.setAttribute('aria-pressed', i === n ? 'true' : 'false'); });
-      panels.forEach(function (p, i) { p.hidden = i !== n; });
+      if (dica) dica.hidden = !collapsed || n !== -1;
+      if (!collapsed || instant || reduz || prev === n) {
+        panels.forEach(function (p, i) { p.hidden = i !== n; });
+      } else if (prev === -1) {
+        var op = panels[n];
+        op.hidden = false;
+        var mt = getComputedStyle(op).marginTop;
+        morph(n, { h: 0, o: 0, m: '0px' }, { h: op.offsetHeight, o: 1, m: mt });
+      } else if (n === -1) {
+        var cl = panels[prev], mtc = getComputedStyle(cl).marginTop;
+        morph(prev, { h: cl.offsetHeight, o: 1, m: mtc }, { h: 0, o: 0, m: '0px' },
+              function () { if (atual !== prev) cl.hidden = true; });
+      } else {
+        var h0 = panels[prev].offsetHeight, mts = getComputedStyle(panels[prev]).marginTop;
+        if (rodando[prev]) rodando[prev].cancel();
+        panels[prev].hidden = true;
+        panels[n].hidden = false;
+        morph(n, { h: h0, o: 0.35, m: mts }, { h: panels[n].offsetHeight, o: 1, m: mts });
+      }
+      if (n === -1) return true;
       if (focusEl === 'field') target(panels[n]).focus({ preventScroll: true });
       if (focusEl === 'panel') {
         panels[n].setAttribute('tabindex', '-1');
@@ -566,7 +611,12 @@
     }
 
     function syncHash(id) {
-      if (window.location.hash === '#' + id || !window.history.replaceState) return;
+      if (!window.history.replaceState) return;
+      if (id === null) {
+        if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return;
+      }
+      if (window.location.hash === '#' + id) return;
       window.history.replaceState(null, '', '#' + id);
     }
 
@@ -581,8 +631,9 @@
       b.addEventListener('click', function (e) {
         var viaTouch = touched && e.detail > 0;
         touched = false;
-        show(ids[i], viaTouch ? 'panel' : 'field');
-        syncHash(ids[i]);
+        var fecha = collapsed && b.getAttribute('aria-pressed') === 'true';
+        show(fecha ? null : ids[i], viaTouch ? 'panel' : 'field');
+        syncHash(fecha ? null : ids[i]);
       });
     });
 
@@ -619,13 +670,14 @@
     });
 
     // Link direto (/#proposta, ou de outra página): abre o lado certo e rola até o painel inteiro,
-    // com o seletor à vista. Qualquer outro hash (#contato, nenhum) fica na ficha técnica.
+    // com o seletor à vista. Qualquer outro hash (#contato, nenhum) fica na ficha técnica, ou, no
+    // modo fechado, com todos os cartões fechados.
     var start = decodeURIComponent(window.location.hash.slice(1));
-    if (show(start, null)) {
+    if (show(start, null, true)) {
       var go = function () { root.scrollIntoView({ block: 'start' }); };
       if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
     } else {
-      show(ids[0], null);
+      show(collapsed ? null : ids[0], null, true);
     }
   }
 
