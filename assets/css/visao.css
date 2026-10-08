@@ -1,0 +1,175 @@
+/* Comunidade da água + Visão e estratégia (design lab agrotech-water-community-2026-10, rounds 6 and 7).
+   Loaded only by the home and the vision page. Tokens come from style.css. */
+
+/* ── the animated stage (assets/js/comunidade.js) ── */
+.wc{position:relative;overflow:hidden;background:#EEF0DE;isolation:isolate;touch-action:pan-y}
+.wc__cv{position:absolute;inset:0;display:block}
+.wc__ui{position:absolute;left:16px;right:16px;bottom:16px;z-index:3;display:flex;flex-direction:column;gap:10px;align-items:flex-start;pointer-events:none}
+.wc__cap{margin:0;max-width:520px;background:rgba(251,250,247,.94);border-radius:14px;padding:12px 16px;font-size:15px;line-height:1.45;color:var(--navy);
+  box-shadow:0 1px 0 rgba(20,38,60,.06),0 8px 24px rgba(20,38,60,.10);pointer-events:auto}
+.wc__cap b{display:block;font-weight:700;font-size:16px;margin-bottom:2px}
+.wc__ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;pointer-events:auto}
+.wc__btns{display:flex;gap:6px;flex-wrap:wrap}
+.wc__btns button,.wc__pausa{font:600 13px/1 Poppins,system-ui,sans-serif;border:1px solid rgba(20,38,60,.16);background:rgba(251,250,247,.92);color:var(--navy);
+  border-radius:999px;padding:9px 13px;cursor:pointer;min-height:36px}
+.wc__btns button[aria-pressed=true],.wc__btns button[data-grupo][aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.wc__btns button:hover{border-color:var(--navy)}
+.wc__pausa{border-color:rgba(20,38,60,.3);background:rgba(251,250,247,.75)}
+.wc__btns button:focus-visible,.wc__pausa:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+.wc__tag{display:inline-block;font:700 11px/1 Poppins,system-ui,sans-serif;letter-spacing:.6px;text-transform:uppercase;border-radius:999px;padding:5px 9px;margin:0 0 8px;font-style:normal}
+.wc__tag:empty{display:none}
+.wc__tag--sem{background:#ECE7DD;color:#5B4A36}
+.wc__tag--com{background:var(--laranja);color:var(--navy)}
+.wc__passes{display:flex;border:1px solid rgba(20,38,60,.2);border-radius:999px;overflow:hidden;background:rgba(251,250,247,.94)}
+.wc__passes button{font:600 13px/1 Poppins,system-ui,sans-serif;border:0;background:transparent;color:var(--navy);padding:9px 13px;min-height:36px;cursor:pointer}
+.wc__passes button[data-passe=sem][aria-pressed=true]{background:#5B4A36;color:#fff}
+.wc__passes button[data-passe=com][aria-pressed=true]{background:var(--laranja);color:var(--navy)}
+.wc__passes button:focus-visible{outline:3px solid var(--azul);outline-offset:-3px}
+/* the scenario box sits top-left and stays compact (Yvo 08-10: it must not hide the big farm upstream) */
+.wc--captopo .wc__ui{top:var(--capTop,14px);justify-content:space-between}
+.wc--captopo .wc__cap{max-width:320px;padding:8px 12px;font-size:13px;line-height:1.4;border-radius:12px}
+.wc--captopo .wc__cap b{font-size:14px;margin-bottom:1px}
+.wc--captopo .wc__tag{font-size:10px;padding:3px 7px;margin:0 0 5px}
+/* the nexus that closes the home overview */
+.wc__nf{position:absolute;inset:0;z-index:4;container-type:size;display:grid;place-items:center;pointer-events:none;opacity:0;transition:opacity .9s ease}
+.wc__nf.on{opacity:1}
+.wc__nf-card{width:min(calc(86cqh * 548 / 640),92cqw);aspect-ratio:548/640;box-sizing:border-box;background:rgba(251,250,247,.9);border-radius:28px;padding:18px 22px;box-shadow:0 20px 50px rgba(20,38,60,.16);display:grid;place-items:center}
+.wc__nf-card .nf-svg{width:100%;height:auto}
+@media (max-width:600px){
+  .wc__ui{left:12px;right:12px;bottom:12px;gap:8px}
+  .wc__cap{font-size:14px;padding:10px 12px}.wc__cap b{font-size:15px}
+  .wc--captopo .wc__cap{font-size:12.5px;padding:7px 10px;max-width:none}.wc--captopo .wc__cap b{font-size:13.5px}
+  .wc__btns button,.wc__pausa{font-size:12px;padding:8px 10px;min-height:34px;white-space:nowrap;flex:none}
+  .wc__ctl{flex-wrap:nowrap;width:100%}
+  .wc__ctl--passes{flex-wrap:wrap}
+  .wc__btns{flex-wrap:nowrap;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:24px}
+  .wc__btns::-webkit-scrollbar{display:none}
+  .wc__passes{width:100%}.wc__passes button{flex:1;font-size:12px;padding:8px 6px}
+  .wc__nf-card{padding:10px;border-radius:20px}
+}
+
+/* ── the original nexus image, drawing itself in ── */
+.nf-svg{display:block;width:100%;height:auto;overflow:visible}
+.nf-svg text{font-family:Poppins,system-ui,sans-serif;text-anchor:middle;fill:#14263C}
+.nf-svg .nf-centro text{fill:#fff}.nf-svg .nf-centro text+text{fill:var(--laranja)}.nf-svg .nf-t--fim text:first-child{fill:var(--orange-ink-tinta)}
+.nf-g{font-size:16px;font-weight:700}.nf-m{font-size:13px;font-weight:700}.nf-s{font-size:12px}
+.nf-c{fill-opacity:0;stroke-width:3;stroke-dasharray:100;stroke-dashoffset:100;stroke-opacity:.9;
+  transition:stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1) calc(var(--i) * .35s),fill-opacity 1s ease calc(.9s + var(--i) * .35s),stroke-opacity 1s ease calc(1.6s + var(--i) * .35s)}
+.nf-t,.nf-centro{opacity:0;transform:translateY(6px);transform-box:fill-box;transition:opacity .7s ease calc(1.2s + (var(--i) - 3) * .3s),transform .7s ease calc(1.2s + (var(--i) - 3) * .3s)}
+.nf-centro{transform:scale(.6);transform-origin:center}
+.on .nf-c,.nf-on .nf-c{stroke-dashoffset:0;fill-opacity:var(--fo);stroke-opacity:0}
+.on .nf-t,.on .nf-centro,.nf-on .nf-t,.nf-on .nf-centro{opacity:1;transform:none}
+.nf-o{fill:#14263C;fill-opacity:0;transition:fill-opacity .6s ease}
+@media (max-width:719px){.nf-g{font-size:20px}.nf-m{font-size:18px}.nf-s{display:none}}
+
+/* ── home: the vision teaser ── */
+.visao-home__txt{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:end;margin:0 0 26px}
+.visao-home h2{margin:0;max-width:18ch}
+.visao-home__txt .lead{margin:0 0 16px}
+.visao-home__palco{border-radius:22px;aspect-ratio:16/8.4;box-shadow:0 1px 0 rgba(20,38,60,.05),0 18px 40px rgba(20,38,60,.10)}
+.visao-fonte{font-size:12.5px;color:var(--cinza);margin:12px 4px 0}
+.visao-home .cta{display:inline-flex;align-items:center;gap:8px}
+@media (max-width:860px){.visao-home__txt{grid-template-columns:1fr;gap:12px;margin-bottom:18px}.visao-home__palco{aspect-ratio:4/5.8;border-radius:16px}}
+
+/* ── vision page ── */
+.rl{position:relative;padding-left:96px}
+.rl__svg{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+.rl__leito{fill:none;stroke:rgba(56,182,255,.13);stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
+.rl__agua{fill:none;stroke:var(--azul);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.rl__fluxo{fill:none;stroke:rgba(255,255,255,.95);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:2 30}
+.rl__no{fill:#fff;stroke:var(--azul);stroke-width:3;transition:fill .6s ease}
+.rl__no--cheio{fill:var(--azul)}
+.rl--parado .rl__fluxo{display:none}
+.vis-hero{padding:56px 0 30px}
+.vis-hero h1{max-width:16ch}
+.vis-seg{padding:52px 0 60px;opacity:.001;transform:translateY(22px);transition:opacity .9s ease,transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.vis-seg.is-in{opacity:1;transform:none}
+.vis-seg > h2,.vis-seg > p{max-width:58ch}
+.vis-lado{margin-top:22px}
+.vis-ciclo{max-width:900px;margin:22px auto 0}
+.vis-ciclo .anel .no{transform-box:fill-box;transform-origin:center}
+.ciclo__gota,.ciclo__cauda{fill:var(--azul)}
+.ciclo__trilha{stroke:var(--azul);stroke-width:7;stroke-linecap:round}
+.vis-palco{border-radius:22px;aspect-ratio:16/9;box-shadow:0 18px 40px rgba(20,38,60,.10)}
+.vr-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);grid-template-areas:"t m" "p m";column-gap:40px;row-gap:10px;align-items:start}
+.vr-t{grid-area:t}.vr-m{grid-area:m}.vr-p{grid-area:p}
+.vr-m .mapa__img{max-width:600px;margin:0}
+.vr-img{position:relative}
+.vr-cv{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .8s ease}
+.vr.canvas .vr-img img{opacity:0}
+.vr.aparece .vr-cv{opacity:1}
+.vr .mapa__painel{transition:opacity .7s ease,transform .7s ease;margin-bottom:12px}
+.vr:not(.escolhido) .mapa__painel{opacity:0;transform:translateY(8px)}
+.vr .mapa__pino{opacity:0;transition:opacity .6s ease .3s}
+.vr.aparece .mapa__pino,.vr.pronto .mapa__pino{opacity:1}
+.vr-leg{font-size:13px}.vr-leg .mapa__rampa{margin-top:0}
+.vr .src{font-size:13px;color:var(--cinza);margin:10px 0 0}
+.vr .cta{margin-top:14px;display:inline-flex;align-items:center;gap:8px}
+.vis-ponte{font-weight:600;font-size:clamp(18px,1.8vw,21px);line-height:1.45;color:var(--azul-ink);max-width:40ch;margin:0 0 18px}
+.nexo-anim{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:28px;align-items:center}
+.nexo-anim__fig{max-width:560px}
+.nexo-anim__lista{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.nexo-anim__lista button{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1px solid var(--linha);border-radius:12px;padding:10px 14px;cursor:pointer;color:var(--navy);opacity:.62;transition:opacity .4s,box-shadow .4s,transform .4s}
+.nexo-anim__lista button[aria-pressed=true]{opacity:1;box-shadow:0 10px 26px rgba(20,38,60,.12);transform:translateX(4px)}
+.nexo-anim--todos .nexo-anim__lista button,.nexo-anim__fig.nexo-anim--todos ~ .nexo-anim__lista button{opacity:1}
+.nexo-anim__lista b{display:block;font-weight:700;font-size:15.5px}
+.nexo-anim__lista span{display:block;font-size:14.5px;color:#33475C;margin-top:2px}
+.nexo-anim__lista button:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+.nexo-anim__fig.pronto .nf-c{transition:fill-opacity .6s ease}
+.nexo-anim__fig.pronto .nf-t,.nexo-anim__fig.pronto .nf-centro{transition:opacity .5s ease,transform .5s ease}
+.nexo-anim__fig[data-p] .nf-t{opacity:.28}
+.nexo-anim__fig[data-p=agua] .nf-t--agua,.nexo-anim__fig[data-p=comida] .nf-t--comida,.nexo-anim__fig[data-p=energia] .nf-t--energia,
+.nexo-anim__fig[data-p=ae] .nf-t--ae,.nexo-anim__fig[data-p=ac] .nf-t--ac,.nexo-anim__fig[data-p=ce] .nf-t--ce,.nexo-anim__fig[data-p=centro] .nf-t--fim{opacity:1}
+.nexo-anim__fig[data-p=agua] .nf-c:not(.nf-c--agua),.nexo-anim__fig[data-p=comida] .nf-c:not(.nf-c--comida),.nexo-anim__fig[data-p=energia] .nf-c:not(.nf-c--energia),
+.nexo-anim__fig[data-p=ae] .nf-c--comida,.nexo-anim__fig[data-p=ac] .nf-c--energia,.nexo-anim__fig[data-p=ce] .nf-c--agua{fill-opacity:.08}
+.nexo-anim__fig[data-p=ae] .nf-o--ae,.nexo-anim__fig[data-p=ac] .nf-o--ac,.nexo-anim__fig[data-p=ce] .nf-o--ce{fill-opacity:.2}
+.nexo-anim__fig[data-p=centro] .nf-centro{transform:scale(1.12)}
+.vis-tap{margin:0}
+.vis-tap__img{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:2/1}
+.vis-tap__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vis-tap .seco{opacity:0;animation:visSeca 16s ease-in-out infinite;animation-play-state:paused}
+.vis-tap.em-tela .seco,.vis-tap.em-tela .e-m,.vis-tap.em-tela .e-s{animation-play-state:running}
+@keyframes visSeca{0%,22%{opacity:0}42%,64%{opacity:1}84%,100%{opacity:0}}
+@keyframes visSecaInv{0%,22%{opacity:1}42%,64%{opacity:0}84%,100%{opacity:1}}
+.vis-estado{position:absolute;left:12px;bottom:12px;display:grid}
+.vis-estado b{grid-area:1/1;background:rgba(9,18,30,.72);color:#fff;font-size:13px;padding:5px 10px;border-radius:999px}
+.vis-estado .e-s{opacity:0;animation:visSeca 16s ease-in-out infinite;animation-play-state:paused;background:rgba(150,62,10,.88)}
+.vis-estado .e-m{animation:visSecaInv 16s ease-in-out infinite;animation-play-state:paused}
+.vis-tap figcaption{font-size:13px;color:var(--cinza);margin-top:8px}
+.vis-linha{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative}
+.vis-linha::before{content:"";position:absolute;left:12%;right:12%;top:22px;height:3px;background:var(--azul);transform-origin:0 50%;transform:scaleX(0);transition:transform 2.4s cubic-bezier(.3,.6,.2,1) .2s}
+.vis-conf.is-in .vis-linha::before{transform:scaleX(1)}
+.vis-linha li{text-align:center;position:relative}
+.vis-linha .bola{display:grid;place-items:center;width:46px;height:46px;margin:0 auto;border-radius:50%;background:#fff;border:3px solid var(--linha);color:transparent;transition:background .4s,border-color .4s,color .4s;transition-delay:calc(.4s + var(--i) * .6s)}
+.vis-conf.is-in .bola{background:var(--azul);border-color:var(--azul);color:var(--navy)}
+.vis-linha b{display:block;margin-top:8px;font-size:14.5px}
+.vis-provas{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vis-provas li{display:flex;gap:10px;background:#fff;border:1px solid var(--linha);border-radius:14px;padding:12px 14px;font-size:15px}
+.vis-provas b{display:block}.vis-provas span{color:var(--cinza)}
+.vis-provas .ic{flex:none;color:var(--azul-ink)}
+.vis-foto{margin:16px 0 0}
+.vis-foto img{display:block;width:100%;height:auto;border-radius:16px;aspect-ratio:21/9;object-fit:cover}
+.vis-foto figcaption{font-size:13px;color:var(--cinza);margin-top:6px}
+.vis-convite{background:var(--navy);color:var(--papel);border-radius:24px;padding:44px}
+.vis-convite h2{color:var(--papel);max-width:22ch}
+.vis-convite p{color:#C8D3DF;max-width:58ch}
+.vis-convite .kicker{color:#FFB585}
+.vis-convite .ctarow{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.vis-convite .cta{display:inline-flex;align-items:center;gap:8px}
+.vis-convite .cta--ghost{background:transparent;border:2px solid var(--papel);color:var(--papel)}
+@media (max-width:860px){
+  .rl{padding-left:34px}
+  .vis-hero{padding:36px 0 18px}.vis-seg{padding:36px 0 44px}
+  .vis-palco{aspect-ratio:4/5.6;border-radius:16px}
+  .vr-grid{grid-template-columns:1fr;grid-template-areas:"t" "m" "p"}
+  .nexo-anim{grid-template-columns:1fr;gap:14px}.nexo-anim__fig{max-width:380px;margin:0 auto}.nexo-anim__lista button{transform:none!important}
+  .vis-linha{grid-template-columns:repeat(2,1fr);gap:16px 8px}.vis-linha::before{display:none}.vis-provas{grid-template-columns:1fr}
+  .vis-convite{padding:28px 20px}
+}
+@media (prefers-reduced-motion:reduce){
+  .vis-seg{opacity:1;transform:none;transition:none}
+  .nf-c,.nf-t,.nf-centro,.wc__nf{transition:none}
+  .vr-cv{display:none}.vr .mapa__painel,.vr .mapa__pino,.nexo-anim__lista button{transition:none}
+  .vis-tap .seco,.vis-estado b{animation:none}
+  .vis-linha::before{transform:none;transition:none}.vis-linha .bola{transition:none;background:var(--azul);border-color:var(--azul);color:var(--navy)}
+}

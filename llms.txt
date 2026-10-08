@@ -122,6 +122,7 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/acessibilidade.html: acessibilidade
 - https://agrotechdaholanda.com.br/noticias/: notícias
 - https://agrotechdaholanda.com.br/sobre/: sobre e contato (quem é quem: a marca, o representante e o fabricante)
+- https://agrotechdaholanda.com.br/visao-e-estrategia/: visão e estratégia (o produtor no centro da água, da energia e da comida; o piloto)
 
 ## Pages in English
 
@@ -134,6 +135,7 @@ propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
 - https://agrotechdaholanda.com.br/en/faq/: FAQ
 - https://agrotechdaholanda.com.br/en/companies-and-investors/: for companies and investors: water pilots at suppliers, records per plot
 - https://agrotechdaholanda.com.br/en/about/: about and contact: who is who
+- https://agrotechdaholanda.com.br/en/vision-and-strategy/: vision and strategy: the farmer at the centre of water, energy and food
 - https://agrotechdaholanda.com.br/en/privacy/: privacy
 - https://agrotechdaholanda.com.br/en/accessibility/: accessibility
 - https://agrotechdaholanda.com.br/en/news/: news

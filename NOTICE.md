@@ -98,6 +98,21 @@ with the files. It does not require attribution on the rendered page.
     Brazil", Lucia Barreiros Silva, Pexels #8184084, location stated: Alter do Chão, Santarém, Brazil
     (Santarém is in Pará). <https://www.pexels.com/photo/8184084/> Cropped to 2:1, lower part kept.
 
+## Vision page (/visao-e-estrategia/ and /en/vision-and-strategy/) and the home vision teaser
+
+- `tapajos-alter-do-chao-*.jpg`: the Pexels photo by Lucia Barreiros Silva listed above, shown as it is.
+- `tapajos-alter-do-chao-seco-ia-*.jpg`: a **digital simulation** of the same view in a drought (riverbed
+  exposed, boats on dry land), made with AI from that photo on 2026-10-07 in the design lab
+  agrotech-home-2026-10. Not a photograph of a real event. The page says so on the image ("Simulação da
+  seca" / "Drought simulation") and in the caption ("versão seca: simulação digital").
+- `assets/product/irrigacao-sistema-*.jpg`: Dutch Flow Technology's own installation in San José,
+  Philippines (principal's material, see "Product imagery" below), captioned with that location.
+- `assets/js/comunidade.js`, `assets/js/visao.js`, `assets/css/visao.css`: the animated water community,
+  the stream, the cycle ring, the map warming and the nexus. Our own work (design lab
+  agrotech-water-community-2026-10), drawn in canvas and SVG at runtime: no third-party code, image,
+  font or request. The rain map they animate is `assets/mapa/mapa-chuva-*.webp` (Lobelia Earth data,
+  see "Climate data" below); the source line under the map carries the attribution.
+
 ## Photos (website, home crop segment, / and /en/)
 
 - **Pexels** stock photos, same licence as above (Pexels License, commercial use, no attribution

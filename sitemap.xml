@@ -206,6 +206,24 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://agrotechdaholanda.com.br/visao-e-estrategia/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://agrotechdaholanda.com.br/visao-e-estrategia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrotechdaholanda.com.br/en/vision-and-strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://agrotechdaholanda.com.br/visao-e-estrategia/"/>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://agrotechdaholanda.com.br/en/vision-and-strategy/</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://agrotechdaholanda.com.br/visao-e-estrategia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://agrotechdaholanda.com.br/en/vision-and-strategy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://agrotechdaholanda.com.br/visao-e-estrategia/"/>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://agrotechdaholanda.com.br/noticias/</loc>
     <xhtml:link rel="alternate" hreflang="pt-BR" href="https://agrotechdaholanda.com.br/noticias/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://agrotechdaholanda.com.br/en/news/"/>
