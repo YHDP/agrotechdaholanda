@@ -113,6 +113,15 @@ with the files. It does not require attribution on the rendered page.
   font or request. The rain map they animate is `assets/mapa/mapa-chuva-*.webp` (Lobelia Earth data,
   see "Climate data" below); the source line under the map carries the attribution.
 
+## AI illustration (website, microsprinkler segment on /cacau/, /irrigacao-solar/ and their EN pages)
+
+- `assets/ilustracoes/microaspersor-cacau-ia-{900,1254}.jpg`: an **AI illustration made by Yvo Hunink**
+  (ChatGPT, 07-10-2026) of a micro-sprinkler on a stake in a cocoa agroforestry plot. It is **not a
+  photograph and not a Dutch Flow Technology installation**: always captioned "Imagem ilustrativa" /
+  "Illustrative image". Source in Proton `6-projects/dutch-flow-tech-brazil/assets/ilustracoes-ia/
+  microaspersor-cacau-saf-ia-2026-10-07.png` (1254×1254); resized to 900 px, recompressed, metadata
+  stripped, self-hosted.
+
 ## Photos (website, home crop segment, / and /en/)
 
 - **Pexels** stock photos, same licence as above (Pexels License, commercial use, no attribution
