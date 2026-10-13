@@ -41,7 +41,7 @@ fabricante de 24/09/2026):
   irrigação e gateway.
 - Opcionais: válvulas solenoides, hidrociclone, fertirrigação de 4 canais, inversor para rede
   elétrica, bateria para irrigar à noite.
-- Sistemas de referência de 1 a 10 ha; áreas maiores, até 30 ha por bomba, dimensionadas caso a caso.
+- Sistemas de referência de 1 a 30 ha por bomba; acima disso, a área é dividida em setores, sem teto de área.
 - Prazo: 12 a 16 semanas até o porto no Brasil; o desembaraço aduaneiro vem à parte.
 - Custo: a calculadora usa uma estimativa de custo por hectare do sistema posto no Brasil, com frete
   e importação, diferente para água de rio ou represa e para poço. Poço, reservatório e instalação

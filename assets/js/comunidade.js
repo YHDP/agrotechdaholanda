@@ -95,7 +95,7 @@
     chuvaCai: C("Chuva prevista", "A chuva rega a lavoura. A bomba fica parada e a represa recebe a água.", { irr: 0, sua: 1, chuva: 0.8, nuvem: 1, previsao: 0.4, res: 0.85, smart: 1, fruto: 0.8 }, "com", "chuva"),
     frioCom: C("Frio pós-colheita", "Você colhe o cacau e leva direto para a câmara fria solar. A colheita dura mais e você vende na hora certa.", { irr: 0.5, sua: 1, fruto: 0.5, frio: 1, smart: 1, res: 0.5 }, "com", "colheita"),
     intro0: C("Conheça a fazenda", "Um só sistema, movido a sol, da captação até a venda.", { irr: 0.8, sua: 1, fert: 0.6, smart: 1, res: 0.6, poco: 0.4, fruto: 0.8, qual: 1 }),
-    intro1: C("Energia solar e bomba", "Os painéis movem a bomba. Sem diesel e sem esperar a rede.", { irr: 0.8, sua: 1, smart: 1, res: 0.6, fruto: 0.8, qual: 1 }),
+    intro1: C("Energia solar e bomba", "Os painéis movem a bomba, sem esperar a rede.", { irr: 0.8, sua: 1, smart: 1, res: 0.6, fruto: 0.8, qual: 1 }),
     intro2: C("Captação medida", "O medidor mostra quanta água sai do rio. Um sensor na captação vigia a qualidade da água.", { irr: 0.8, sua: 1, smart: 1, res: 0.6, fruto: 0.8, qual: 1 }),
     intro3: C("Poço e represa", "Um poço com bomba submersa e uma represa, do projeto da fazenda, guardam água para a seca.", { irr: 0.8, sua: 1, smart: 1, res: 0.6, poco: 1, fruto: 0.8, qual: 1 }),
     intro4: C("Gotejamento e sensores de solo", "Os sensores medem a umidade do solo. O gotejamento leva a água até a raiz.", { irr: 1, sua: 1, smart: 1, res: 0.6, fruto: 0.8, qual: 1 }),
