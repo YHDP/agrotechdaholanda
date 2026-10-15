@@ -7,10 +7,9 @@
    - DIESEL 7.33 and GASOLINA 6.55 R$/L: national average resale price of óleo diesel S10 and gasolina
      comum in ANP's weekly survey, week of 20 to 26 September 2026 (resumo_semanal_lpc_2026-09-20_
      2026-09-26.xlsx, sheet BRASIL; 3,147 and 4,480 stations). Was 6.97 (week of 5 to 11 July 2026).
-   - CUSTO_USD_POR_HA: landed estimate per hectare, surface water 2,000 and well 2,450 (Tom's e-mail
-     to Yvo, 24-09-2026; product-docs-pt/ficha-sistema-irrigacao-solar-fontes.md). Excludes well,
-     reservoir and installation.
-   - FX: R$ 5.10 per US$, mid-July 2026 (calculadora-research.md, TradingEconomics).
+   - CUSTO_USD_POR_HA: landed estimate per hectare, surface water 2,000 and well 2,450 (estimativa do
+     fabricante, 24-09-2026). Excludes well, reservoir and installation.
+   - FX: R$ 5.10 per US$, mid-July 2026 (TradingEconomics).
    - COEF: rho*g/3.6e6 = 1000*9.81/3,600,000 kWh per m3 per m of head.
    - ETA 0.60, pump set (pump x drive): FAO Irrigation Manual Module 5, Irrigation Pumping Plant
      (Savva & Frenken, 2001), pp. 31-33: best pump 0.69, V-belt or gear drive loses at most 5%, so
@@ -27,12 +26,12 @@
    - HEAD river 20 m / well 40 m: drip-irrigation baseline (FAO Module 5 pp. 34-35 assumes 20 m of
      operating pressure plus losses for localized irrigation, plus the lift). Pivot and sprinkler
      need more pressure (FAO Example 6: 30 m operating + 6 m friction), so for them these are floors.
-   - LAMINA mm/year per crop: calculadora-research.md (Embrapa for soy, maize, beans, cane; FAO Kc
+   - LAMINA mm/year per crop: Embrapa for soy, maize, beans, cane; FAO Kc
      for fruit and vegetables, flagged there as an editable assumption). cacau 300: the 275 mm mean
      dry-season deficit of the Transamazonica (Morais, R. Bras. Ci. Solo 1998) / 0.9 microsprinkler
      efficiency; upper bound 640 (3.5 mm/day, Leite 2013 CEPLAC, over June-November, no rain).
      acai 580: 120 L per clump per day x 400 clumps/ha = 4.8 mm/day over August-November, 122 days
-     (Embrapa Comunicado Tecnico 317, 2019). Research: research-packs/cacau-para.md, acai-para.md.
+     (Embrapa Comunicado Tecnico 317, 2019).
    - GANHO harvest gain per ha, cacau and acai only, where the value of irrigation is the harvest,
      not the fuel. cacau 600 -> 1500 kg/ha dry beans: Bahia, Siqueira 2018 cited in Silva, UFRB 2020
      thesis (no Para trial exists), counted at half that gain, 600 -> 1050, because Para already
@@ -62,7 +61,7 @@
      Pumping within 8.5 h fits the window whole, so the discount applies to all of it.
    - ETA_MOTOR 0.90: electric motor efficiency on top of ETA. Assumption, typical of IR3 motors in the
      5 to 15 kW range; not verified at a source. Editable on the page.
-   Research: Proton research-packs/combustivel-irrigacao-brasil.md and calculadora-research.md. */
+   Sources: ANP, ANEEL, Embrapa, FAO, IBGE, as cited above. */
 (function (root) {
   "use strict";
   var K = /*K*/{

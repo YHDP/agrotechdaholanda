@@ -8,7 +8,7 @@ Idiomas: português do Brasil; inglês nas páginas listadas em "Pages in Englis
 Área atendida: Brasil
 Contato: info@agrotechdaholanda.com.br
 Instagram: https://www.instagram.com/agrotech_da_holanda/
-Atualizado em 2026-10-08
+Atualizado em 2026-10-15
 
 ## Quem é quem
 
@@ -33,7 +33,7 @@ fabricante de 24/09/2026):
 - Painéis solares de 720 W com estrutura de fixação (incluída), de 3 a 12 painéis conforme o
   sistema.
 - Bomba solar para irrigação: submersa em aço inox (poço) ou de superfície, centrífuga monobloco
-  (rio ou açude); de 8 a 60 m³/h, com cerca de 30 m de altura manométrica.
+  (rio ou açude); de 8 a 150 m³/h, com altura manométrica de 30 a 60 m.
 - Inversor para bombeamento solar, que aciona a bomba com a energia dos painéis; a partir de 4 ha,
   com conexão celular (GPRS) e aplicativo.
 - Nos sistemas completos: sensor de solo multiparâmetro (umidade, temperatura, condutividade
@@ -43,9 +43,8 @@ fabricante de 24/09/2026):
   elétrica, bateria para irrigar à noite.
 - Sistemas de referência de 1 a 30 ha por bomba; acima disso, a área é dividida em setores, sem teto de área.
 - Prazo: 12 a 16 semanas até o porto no Brasil; o desembaraço aduaneiro vem à parte.
-- Custo: a calculadora usa uma estimativa de custo por hectare do sistema posto no Brasil, com frete
-  e importação, diferente para água de rio ou represa e para poço. Poço, reservatório e instalação
-  não estão incluídos. Sem valores publicados aqui; o preço vem na proposta.
+- Não há tabela de preços. A calculadora dá uma indicação por hectare; o preço de verdade vem na
+  proposta. Poço, reservatório e instalação ficam fora dessa indicação.
 
 ### Câmara fria solar
 Câmara fria movida a energia solar, com bateria, num contêiner que chega pronto de caminhão e pode
@@ -63,8 +62,9 @@ fabricante de 24/09/2026 e de 05/10/2026):
   garantia de 5 anos.
 - Gestão de energia: o sol vem primeiro. De dia, os painéis resfriam a câmara e carregam a bateria.
   À noite, a bateria segura o frio por algumas horas (cerca de 5 h no pior caso, numa noite de
-  40 °C; mais em noites normais). Depois, a rede elétrica ou o gerador assume sozinho, por isso a
-  instalação inclui uma conexão com a rede ou com um gerador como reserva.
+  40 °C; mais em noites normais). Ainda não há dados no clima brasileiro; queremos medir isso num
+  piloto. Depois, a rede elétrica ou o gerador assume sozinho, por isso a instalação inclui uma
+  conexão com a rede ou com um gerador como reserva.
 - Linha nova da Dutch Flow Technology.
 - Contêiner de 12 m (40 pés): 12,192 × 2,438 × 2,591 m externos; refrigeração de 4 HP; 20 painéis de
   580 W (cerca de 11,6 kWp); inversor de 10 kW; bateria LiFePO4 de 20 kWh.
@@ -103,9 +103,10 @@ Página de notícias: https://agrotechdaholanda.com.br/noticias/
 
 ## O que não afirmamos
 
-Publicamos as especificações técnicas da ficha do fabricante, acima. Não publicamos preços, número
-de instalações nem percentuais de desempenho próprio: o preço vem sempre numa proposta feita para a
-propriedade, e o dimensionamento do sistema vem nessa mesma proposta.
+Publicamos as especificações técnicas da ficha do fabricante, acima. Não há tabela de preços. A
+calculadora dá uma indicação por hectare; o preço de verdade vem na proposta, feita para a
+propriedade, com o dimensionamento do sistema. Não publicamos número de instalações nem percentuais
+de desempenho próprio.
 
 ## Páginas
 
